@@ -1,0 +1,74 @@
+\documentclass[11pt,a4paper]{book}
+
+\input{preamble}
+
+\begin{document}
+
+\includepdf[pages=1]{cover_build.pdf}
+%\input{finalcheck}
+
+%---------------------------------------------------------
+\frontmatter
+%---------------------------------------------------------
+
+\selectlanguage{english}
+\include{acknowledgements}
+\tableofcontents
+\listoffigures
+\listoftables
+
+%\subimport{}{tableofsymbols}
+
+%\subimport{}{tableofacronyms}
+
+%---------------------------------------------------------
+\mainmatter
+\fancyhead[RE]{\bfseries\leftmark}      % Chapter in the right on even pages
+\fancyhead[LO]{\bfseries\rightmark}     % Section in the left on odd pages
+%---------------------------------------------------------
+
+%\subimport{}{introduction}
+
+%\subimport{}{preliminaries}
+
+%\subimport{data-and-storage/}{part}
+
+%\subimport{structural-index/}{part}
+
+%\subimport{engineering/}{part}
+
+%----------------------------------------------------------
+
+\include{chap1.introduction}
+
+\include{chap2.rol}
+
+
+
+\bookmarksetup{startatroot}
+\addtocontents{toc}{\bigskip}
+
+%\subimport{}{conclusions}
+
+%---------------------------------------------------------
+\backmatter
+%---------------------------------------------------------
+\fancyhead[LO]{\bfseries Bibliography}
+\fancyhead[RE]{\bfseries Bibliography}
+\bibliographystyle{IEEEtran}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{biblio}
+
+%\input{appendices}
+
+%\begin{otherlanguage*}{french}
+%\include{samenvatting}
+%\end{otherlanguage*}
+
+\fancyhead[LO]{\bfseries Index}
+\fancyhead[RE]{\bfseries Index}
+%\printindex
+
+\end{document}

@@ -1,0 +1,117 @@
+%----------------------------------------------------
+% A convenient package for the layout of a phd thesis
+%----------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{phdthesis}
+
+\RequirePackage{fancyhdr}
+\RequirePackage{url}
+\RequirePackage{color,colortbl}
+\RequirePackage{graphicx,subfigure,tikz,appendix}
+\RequirePackage{stmaryrd,amsmath,amssymb,amsfonts,latexsym,bm}
+\RequirePackage[thmmarks,amsmath,amsthm,hyperref]{ntheorem}
+\RequirePackage[pdfpagelabels]{hyperref}
+\RequirePackage{bookmark}
+
+%--------------------------------------------------------------------
+% Theorem-like environments
+%--------------------------------------------------------------------
+\theoremstyle{plain} %default
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{property}{Property}
+
+\theoremstyle{definition}
+\theorembodyfont{\upshape}
+\theoremseparator{}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{definition}
+\theorembodyfont{\upshape}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{proviso}[theorem]{Proviso}
+
+\theoremstyle{definition}
+\theorembodyfont{\upshape}
+\theoremsymbol{\ensuremath{\blacksquare}}
+\theoremseparator{}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{counterexample}[theorem]{Counterexample}
+
+
+%--------------------------------------------------------------------
+% Dimensions
+%--------------------------------------------------------------------
+\setlength{\textwidth}{13cm}
+\setlength{\textheight}{19.6cm}
+
+\setlength{\headheight}{14pt}
+
+\setlength{\topmargin}{4.1cm}
+\addtolength{\topmargin}{-1in}
+
+\setlength{\oddsidemargin}{4cm}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+%--------------------------------------------------------------------
+% Create fancy chapter titles
+%--------------------------------------------------------------------
+\DeclareFontShape{OT1}{cmr}{bx}{n}
+{ <5> <6> <7> <8> <9> gen * cmbx
+  <10><10.95> cmbx10
+  <12><14.4><17.28><20.74><24.88>cmbx12
+  <70> cmbx12
+}{}
+
+\def\@makechapterhead#1{%
+  \vspace*{30\p@}%
+  {\parindent \z@ \raggedright \reset@font
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+         \fontsize{70}{75}\bfseries \thechapter
+         \par
+         \vskip 10\p@
+         \hrule height 1pt
+         \vskip 10\p@
+       \fi
+     \fi
+    \Huge \bfseries #1\par
+    \nobreak
+%    \vskip 160\p@
+    \vskip 80\p@
+  }}
+
+%--------------------------------------------------------------------
+% Fine-tuning of fancy header
+%--------------------------------------------------------------------
+\pagestyle{fancy}                       % Sets fancy header and footer
+\fancyfoot{}                            % Delete current footer settings
+\renewcommand{\chaptermark}[1]{         % Lower Case Chapter marker style
+%  \markboth{\chaptername\ \thechapter.\ #1}{}} %
+  \markboth{#1}{}} %
+\renewcommand{\sectionmark}[1]{         % Lower case Section marker style
+  \markright{\thesection.\ #1}}         %
+\fancyhead[LE,RO]{\bfseries\thepage}    % Page number (boldface) in left on even
+                                        % pages and right on odd pages
+\fancyhead[RE]{\bfseries\leftmark}      % Chapter in the right on even pages
+\fancyhead[LO]{\bfseries\rightmark}     % Section in the left on odd pages
+%\renewcommand{\headrulewidth}{0.3pt}    % Width of head rule
+
+%%% Clear Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Clear Header Style on the Last Empty Odd pages
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
+    \hbox{}%
+    \thispagestyle{empty}%              % Empty header styles
+    \newpage%
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+

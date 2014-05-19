@@ -1,0 +1,381 @@
+%relation between facts
+\newcommand{\factrelsym}{\rightarrowtail}
+\newcommand{\factrel}[2]{\ensuremath{{#1} \factrelsym {#2}}}
+
+%compatibility
+\newcommand{\compat}{\bumpeq}
+
+%fact assignment
+\newcommand{\fa}{\ensuremath{\nu}}
+
+%Graph measures
+\DeclareMathOperator{\radius}{\textit{rad}}
+\DeclareMathOperator{\diameter}{\textit{diam}}
+\DeclareMathOperator{\eccentricity}{\textit{ecc}}
+
+% General math
+\DeclareMathOperator{\height}{\textit{height}}
+\DeclareMathOperator{\dom}{\textit{dom}}
+\DeclareMathOperator{\im}{\textit{im}}
+
+%Complexity classes
+\newcommand{\ptime}{{\sc PTime}\xspace}
+\newcommand{\pspace}{{\sc PSpace}\xspace}
+\newcommand{\np}{{\sc NP}\xspace}
+\newcommand{\conp}{{\sc coNP}\xspace}
+\newcommand{\ptimec}{{\sc PTime-complete}\xspace}
+\newcommand{\pspacec}{{\sc PSpace-complete}\xspace}
+\newcommand{\npc}{{\sc NP-complete}\xspace}
+\newcommand{\conpc}{{\sc coNP-complete}\xspace}
+
+% Relational Algebra
+\DeclareMathOperator{\outerjoin}{\ensuremath{\textrm{\tiny \textifsym{d|><|}}}}
+\DeclareMathOperator{\eqtp}{\textit{eqtp}}
+\newcommand{\maxarity}{\alpha}
+
+% Databases and queries
+\DeclareMathOperator{\valuation}{\ensuremath{\mu}}
+\newcommand{\sem}[2]{\ensuremath{\llbracket{#1}\rrbracket_{#2}}}
+
+\newcommand{\bplustree}{B$^+$-tree\xspace}
+\newcommand{\bplustrees}{B$^+$-trees\xspace}
+
+\newcommand{\sfact}[2]{\text{#1}(\ob{#2})}
+\newcommand{\atom}[1]{\ensuremath{\bm{#1}}}
+\newcommand{\fact}[1]{\ensuremath{\bm{#1}}}
+\DeclareMathOperator{\val}{\textit{terms}}
+\DeclareMathOperator{\var}{\textit{var}}
+\DeclareMathOperator{\cst}{\textit{val}}
+
+\DeclareMathOperator{\db}{\textit{db}}
+\DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\scope}{\textit{scope}}
+\DeclareMathOperator{\attr}{\textit{attr}}
+\DeclareMathOperator{\arity}{\textit{arity}}
+\newcommand{\ds}{\ensuremath{\mathcal{S}}}
+\newcommand{\universe}{\ensuremath{\mathcal{U}}}
+\newcommand{\vars}{\ensuremath{\mathcal{V}}}
+\DeclareMathOperator{\fv}{\var}
+\DeclareMathOperator{\body}{\textit{body}}
+\DeclareMathOperator{\head}{\textit{head}}
+\DeclareMathOperator{\ovars}{\textit{vars}}
+\DeclareMathOperator{\sidx}{\textsc{sim}}
+\newcommand{\ksidx}[1]{\ensuremath{\sidx_{#1}}}
+\newcommand{\variable}[1]{\ensuremath{?{\textit{#1}}}}
+\newcommand{\const}[1]{\ensuremath{\textsf{#1}}}
+\newcommand{\relation}[1]{\ensuremath{\textsf{#1}}}
+\newcommand{\field}[1]{\textit{#1}}
+
+\newcommand{\psacq}{PSACQ\xspace}
+\newcommand{\psacqs}{PSACQs\xspace}
+\newcommand{\psacqfull}{pure and strict acyclic conjunctive query\xspace}
+\newcommand{\cq}{conjunctive query\xspace}
+\newcommand{\cqs}{conjunctive queries\xspace}
+\newcommand{\Cq}{Conjunctive query\xspace}
+\newcommand{\Cqs}{Conjunctive queries\xspace}
+\newcommand{\acq}{acyclic \cq}
+\newcommand{\acqs}{acyclic \cqs}
+\newcommand{\semacq}{semantically acyclic \cq}
+\newcommand{\semacqs}{semantically acyclic \cqs}
+\newcommand{\semccq}{semantically cyclic \cq}
+\newcommand{\semccqs}{semantically cyclic \cqs}
+\newcommand{\bcq}{boolean \cq}
+\newcommand{\bcqs}{boolean \cqs}
+\newcommand{\Acq}{Acyclic \cq}
+\newcommand{\Acqs}{Acyclic \cqs}
+\newcommand{\Bcq}{Boolean \cq}
+\newcommand{\Bcqs}{Boolean \cqs}
+
+% Tuples
+\newcommand{\ov}[1]{\ensuremath{\overline{#1}}}  
+\newcommand{\ova}{\ov{a}}
+\newcommand{\ovb}{\ov{b}}
+\newcommand{\ovc}{\ov{c}}
+\newcommand{\ovd}{\ov{d}}
+\newcommand{\ovp}{\ov{p}}
+\newcommand{\ovq}{\ov{q}}
+\newcommand{\ovx}{\ov{x}}
+
+% RDF/SPARQL frequent keywords
+\newcommand{\rdf}{RDF\xspace}
+\newcommand{\sparql}{SPARQL\xspace}
+\newcommand{\iri}{IRI\xspace}
+\newcommand{\graphs}{\rdf graphs\xspace}
+
+\DeclareMathOperator{\preds}{\textit{preds}}
+
+% SPARQL statistics
+\newcommand{\cpf}{CPF\xspace}
+\newcommand{\qlog}{Log\xspace}
+\newcommand{\qulog}{ULog\xspace}
+
+%RDF resource sets
+\newcommand{\lits}{\ensuremath{\mathcal{L}}}
+\newcommand{\iris}{\ensuremath{\mathcal{I}}}
+\newcommand{\blanks}{\ensuremath{\mathcal{B}}}
+
+\newcommand{\ibl}{\ensuremath{\iris\blanks\lits}}
+\newcommand{\ib}{\ensuremath{\iris\blanks}}
+\newcommand{\vibl}{\ensuremath{\vars\iris\blanks\lits}}
+\newcommand{\vib}{\ensuremath{\vars\iris\blanks}}
+\newcommand{\vi}{\ensuremath{\vars\iris}}
+
+% Structural index
+\DeclareMathOperator{\structembedding}{\xi}
+\newcommand{\gindex}{guarded structural index}
+\newcommand{\Gindex}{Guarded structural index}
+\newcommand{\gindexs}{guarded structural indexes}
+\newcommand{\Gindexs}{Guarded structural indexes}
+
+% SPARQL algebra
+\DeclareMathOperator{\langmatches}{\text{\sc langmatches}}
+
+\newcommand{\bgp}{BGP\xspace}
+\newcommand{\bgps}{BGPs\xspace}
+\newcommand{\bgpq}[2]{\textsc{select } #1 \allowbreak \textsc { where } #2}
+\DeclareMathOperator{\ntp}{\textit{\textsf{\#}tp}}
+\DeclareMathOperator{\ops}{\textit{ops}}
+\DeclareMathOperator{\kand}{\text{\sc and}}
+\DeclareMathOperator{\graph}{\text{\sc graph}}
+\DeclareMathOperator{\union}{\text{\sc union}}
+\DeclareMathOperator{\filter}{\text{\sc filter}}
+\DeclareMathOperator{\kfilter}{\text{\sc filter}}
+\DeclareMathOperator{\opt}{\text{\sc opt}}
+\DeclareMathOperator{\ask}{\text{\sc ask}}
+\newcommand{\select}{\text{\sc select}\xspace}
+\newcommand{\where}{\text{\sc where}\xspace}
+\newcommand{\qask}{\text{\sc ask}\xspace}
+\newcommand{\construct}{\text{\sc construct}\xspace}
+\newcommand{\describe}{\text{\sc describe}\xspace}
+\newcommand{\distinct}{\text{\sc distinct}\xspace}
+\newcommand{\reduced}{\text{\sc reduced}\xspace}
+\newcommand{\orderby}{\text{\sc order by}\xspace}
+\newcommand{\limit}{\text{\sc limit}\xspace}
+\newcommand{\offset}{\text{\sc offset}\xspace}
+\newcommand{\from}{\text{\sc from}\xspace}
+\newcommand{\fromnamed}{\text{\sc from named}\xspace}
+\newcommand{\sparqlvar}[1]{\ensuremath{?{#1}}}
+
+%query statistics
+\newcommand{\dups}{\# in \qlog}
+\newcommand{\nodups}{\# in \qulog}
+\newcommand{\total}{3\,130\,177\xspace}
+\newcommand{\totalwithoutdup}{1\,343\,922\xspace}
+
+\newcommand{\evaluation}{\text{\sc Evaluation}\xspace}
+\newcommand{\optwd}{OWD\xspace}
+\newcommand{\unionwd}{UWD\xspace}
+
+% Query processing
+\newcommand{\saintdb}{SAINT-DB\xspace} %\textsc{saintdb}\xspace}
+\newcommand{\rdfthreex}{RDF-3X\xspace}
+\newcommand{\id}{\textit{id}}
+\newcommand{\naive}{(M1)\xspace}
+\newcommand{\allunion}{(M2)\xspace}
+\newcommand{\plangen}{(M3)\xspace}
+
+\newcommand{\rdfgen}{\textnormal{CHAIN}\xspace}
+\newcommand{\lubm}{\textnormal{LUBM}\xspace}
+\newcommand{\southampton}{\textnormal{SOUTHAMPTON}\xspace}
+
+\newcommand{\GFL}{\ensuremath{\mathsf{conjGF}}}
+\newcommand{\CSA}{\ensuremath{\mathsf{conjSA}}}
+\DeclareMathOperator{\depth}{\textit{depth}}
+
+\newcommand{\totuple}[1]{\ensuremath{\tsimrel[#1]}}
+\newcommand{\toguarded}[1]{\ensuremath{\gsimrel[#1]}}
+
+
+%Bisimulations
+\newcommand{\block}[2]{\ensuremath{[#1]_{#2}}}
+\newcommand{\gb}{guarded bisimulation\xspace}
+\newcommand{\gs}{guarded simulation\xspace}
+\newcommand{\gsy}{guarded similarity\xspace}
+\newcommand{\gsi}{guarded similarity\xspace}
+\newcommand{\efactbisim}{\emph{fact bisimulation}\xspace}
+\newcommand{\efactsim}{\emph{fact simulation}\xspace}
+\newcommand{\eFactbisim}{\emph{Fact bisimulation}\xspace}
+\newcommand{\eFactsim}{\emph{Fact simulation}\xspace}
+\newcommand{\factbisim}{fact bisimulation\xspace}
+\newcommand{\factsim}{fact simulation\xspace}
+\newcommand{\factsimi}{fact similar\xspace}
+\newcommand{\factsimiy}{fact similarity\xspace}
+\newcommand{\Factsimiy}{Fact similarity\xspace}
+\newcommand{\Factbisim}{Fact bisimulation\xspace}
+\newcommand{\Factsim}{Fact simulation\xspace}
+\newcommand{\factbisims}{fact bisimulation\xspace}
+\newcommand{\factsims}{fact simulation\xspace}
+\newcommand{\Factbisims}{Fact bisimulation\xspace}
+\newcommand{\Factsims}{Fact simulation\xspace}
+\newcommand{\kfactbisimilarity}[1]{fact #1-bisimilarity}
+\newcommand{\kfactbisimilar}[1]{fact #1-bisimilar}
+\newcommand{\kfactbisim}[1]{fact #1-bisimulation}
+\newcommand{\kfactbisims}[1]{fact #1-bisimulations}
+\newcommand{\ktb}{fact $k$-bisimulation\xspace}
+\newcommand{\kfactsimilarity}[1]{fact #1-similarity}
+\newcommand{\kfactsimilar}[1]{fact #1-similar}
+\newcommand{\kfactsim}[1]{fact #1-simulation}
+\newcommand{\kts}{\kfactsim{$k$}}
+
+\newcommand{\gblock}[3]{\block{#1}{#2}^{#3}}
+\DeclareMathOperator{\gbisimclass}{\textit{gbisim}}
+\DeclareMathOperator{\bisimclass}{\textit{bisim}}
+\DeclareMathOperator{\gsimclass}{\textit{gsim}}
+\DeclareMathOperator{\simclass}{\textit{sim}}
+\newcommand{\ktsimclass}[1]{{#1}\textit{-fsim}}
+\DeclareMathOperator{\blocks}{\textit{blocks}}
+\DeclareMathOperator{\gblocks}{\textit{gblocks}}
+\DeclareMathOperator{\gsimblocks}{\textit{gsblocks}}
+\newcommand{\bsimreduc}{bisimulation reduct\xspace}
+\newcommand{\simreduc}{simulation reduct\xspace}
+\newcommand{\reduct}{\textit{reduct}}
+\newcommand{\eqtps}{\mathsf{EQ}}
+\DeclareMathOperator{\tuplegraph}{FG} 
+\DeclareMathOperator{\sattuplegraph}{FG} 
+
+\newcommand{\factforth}{fact bisimulation forth\xspace}
+\newcommand{\factback}{fact bisimulation back\xspace}
+
+\newcommand{\simfactforth}{fact simulation forth\xspace}
+\newcommand{\SimFactForth}{Fact Simulation Forth\xspace}
+
+\newcommand{\gforth}{guarded bisimulation forth\xspace}
+\newcommand{\gback}{guarded bisimulation back\xspace}
+\newcommand{\GForth}{Guarded Bisimulation Forth\xspace}
+\newcommand{\GBack}{Guarded Bisimulation Back\xspace}
+
+\newcommand{\gsimforth}{guarded simulation forth\xspace}
+\newcommand{\GSimForth}{Guarded Simulation Forth\xspace}
+
+\newcommand{\rstepforth}{$\rstep$ forth\xspace}
+\newcommand{\rstepback}{$\rstep$-back\xspace}
+\newcommand{\sstepforth}{$\sstep$ forth\xspace}
+\newcommand{\fstepforth}{$\fstep$ forth\xspace}
+
+\newcommand{\bisim}{\approx}
+\newcommand{\kbisim}[1]{\bisim^{#1}}
+\newcommand{\tbisim}{\bisim_f}
+\newcommand{\ktbisim}[1]{\kbisim{#1}_f}
+\newcommand{\gbisim}{\bisim_g}
+
+\newcommand{\bisimrel}{\mathcal{R}}
+\newcommand{\gbisimrel}{\mathcal{I}}
+\newcommand{\tbisimrel}{\mathcal{T}}
+
+\newcommand{\Sim}{\preceq}
+\newcommand{\ksim}[1]{\Sim^{#1}}
+\newcommand{\tsim}{\Sim_f}
+\newcommand{\ktsim}[1]{\ksim{#1}_f}
+\newcommand{\gsim}{\Sim_g}
+
+\newcommand{\simi}{\sim}
+\newcommand{\ksimi}[1]{\simi^{#1}}
+\newcommand{\tsimi}{\simi_f}
+\newcommand{\ktsimi}[1]{\ksimi{#1}_f}
+\newcommand{\gsimi}{\simi_g}
+
+\newcommand{\simrel}{\mathcal{S}}
+\newcommand{\gsimrel}{\mathcal{J}}
+\newcommand{\tsimrel}{\mathcal{F}}
+\newcommand{\simirel}{\mathcal{S}}
+\newcommand{\gsimirel}{\mathcal{J}}
+\newcommand{\tsimirel}{\mathcal{F}}
+
+%Notations for the guarded bisimulation computation
+\newcommand{\restr}[2]{{#1}|_{#2}}
+\newcommand{\factrestr}[2]{\restr{#1}{\fact{#2}}}
+\DeclareMathOperator{\guardedlists}{\textit{gl}}
+\DeclareMathOperator{\guardedsublists}{\textit{gsl}} 
+\DeclareMathOperator{\rstep}{\textit{step}_{\bisim}}
+\DeclareMathOperator{\sstep}{\textit{step}_{\Sim}}
+\DeclareMathOperator{\fstep}{\textit{step}^{p}_{\sim}}
+
+\newcommand{\pos}[1]{\textit{pos}_{#1}}
+\newcommand{\minpos}[1]{\textit{minpos}_{#1}}
+\newcommand{\orient}[2]{{#2}|_{#1}}
+\newcommand{\comp}{\circ}
+\newcommand{\restrictions}{\textit{restr}}
+\newcommand{\proj}{\textit{proj}}
+
+\DeclareMathOperator{\fsg}{FSG}
+\newcommand{\FSfull}{Fact-Sublist\xspace}
+\newcommand{\FSGfull}{Fact-Sublist Graph\xspace}
+\newcommand{\efsgfull}{\emph{fact-sublist graph}\xspace}
+\newcommand{\fsgfull}{fact-sublist graph\xspace}
+\newcommand{\fsgsfull}{fact-sublist graphs\xspace}
+
+\DeclareMathOperator{\fpg}{FPG}
+\newcommand{\FPfull}{Fact-Projection\xspace}
+\newcommand{\FPGfull}{Fact-Projection Graph\xspace}
+\newcommand{\efpgfull}{\emph{fact-projection graph}\xspace}
+\newcommand{\fpgfull}{fact-projection graph\xspace}
+\newcommand{\fpgsfull}{fact-projection graphs\xspace}
+
+\newcommand{\eqtpity}{\ensuremath{\maxarity^2}}
+\newcommand{\subeqtpity}{\ensuremath{2^{\maxarity^2}}}
+\newcommand{\largity}{\ensuremath{\maxarity!\, 2^{\maxarity}}}
+\newcommand{\largityn}{\ensuremath{\largity n}}
+\newcommand{\verylargity}{\ensuremath{\maxarity!\, 2^{{\maxarity}^3}}}
+\newcommand{\verylargityn}{\ensuremath{\verylargity n}} 
+
+\DeclareMathOperator{\glg}{GLG}
+\newcommand{\efactgraph}{\emph{fact graph}\xspace}
+\newcommand{\factgraph}{fact graph\xspace}
+\newcommand{\factgraphs}{fact graphs\xspace}
+\newcommand{\Factgraph}{Fact graph\xspace}
+\newcommand{\FactGraph}{Fact Graph\xspace}
+\newcommand{\FactGraphs}{Fact Graphs\xspace}
+
+% Algorithms for guarded bisimulation
+\newcommand{\optguardedks}{\textsc{optGuardedKS}}
+\newcommand{\guardedks}{\textsc{GuardedKS}}
+\newcommand{\sig}[2]{\ensuremath{\text{sig}_{{#1}}^{{#2}}}}
+
+% Notation for the cyclic queries unrolling
+\newcommand{\fmax}{\ensuremath{F_{\cap}}}
+\newcommand{\fvu}[1]{\ensuremath{\rho_{#1}}}
+\newcommand{\fvx}[2]{\ensuremath{\restr{\rho_{#1}}{#2}}}
+\newcommand{\fwhite}[1]{\fvx{\var(B)}{#1}}
+\newcommand{\fbw}[1]{\fvx{A}{#1}}
+\newcommand{\white}[1]{\ensuremath{{#1}^\circ}}
+\newcommand{\black}[1]{\ensuremath{{#1}^\bullet}}
+
+\newcommand{\covers}{\sqsupseteq}
+\newcommand{\strictlycovers}{\sqsupset}
+\newcommand{\coveredby}{\sqsubseteq}
+
+\newcommand{\funcsfull}[2]{\ensuremath{\mathcal{I}_{{#2},{#1}}\xspace}}
+\newcommand{\funcs}{\funcsfull{F}{Q}}
+\newcommand{\unrolldbfull}[2]{\ensuremath{\text{unroll}_{#1}({#2})}\xspace}
+% \newcommand{\unrolldb}{\unrolldbfull{F}{Q}}
+\newcommand{\unrolldb}{\ensuremath{\textit{unrolldb}}}
+\DeclareMathOperator{\copydb}{\delta}
+\DeclareMathOperator{\canon}{\textit{canondb}}
+
+
+\DeclareMathOperator{\decopy}{decopy}
+\DeclareMathOperator{\recopy}{decopy\ensuremath{^{-1}}}
+
+%Graphs
+\DeclareMathOperator{\lab}{lab}
+\newcommand{\nodelabs}{\Sigma}
+\newcommand{\edgelabs}{\Delta}
+\newcommand{\edgearrow}[2]{\xrightarrow{#1}_{#2}}
+\newcommand{\edge}[4]{#1 \edgearrow{#2}{#4} #3}
+
+%Booleans
+\DeclareMathOperator{\true}{true}
+\DeclareMathOperator{\false}{false}
+
+%Colours! Teh grayscale version, the red todos, and whatnot.
+\definecolor{dimgray}{rgb}{0.7,0.7,0.7}
+
+\newcommand{\todo}[1]{{\textcolor{red}{\em TODO:} \textcolor{blue}{#1}}}
+\newcommand{\fixme}[1]{{\textcolor{red}{\em FIXME:} \textcolor{blue}{#1}}}
+\newcommand{\mynote}[2]{{\textcolor{red}{\em #1:} \textcolor{blue}{#2}}}
+\newcommand{\myremark}[1]{{\em Remark.} #1 {\em End Remark.}}
+\newcommand{\myignore}[1]{}
+
+\newcommand{\fulldetails}[2]{\myignore{#1}{#2}}
+%\newcommand{\fulldetails}[2]{{#1}\myignore{#2}}
+

@@ -1,0 +1,62 @@
+\chapter{Review of the literature}
+\label{cha:rol}
+
+\section{Integrated circuits design and 3D integration}
+\label{sec:rol.icdesign}
+
+\section{Multi-criteria decision aid}
+\label{sec:rol.mcda}
+
+In this section, we present briefly the general methodology of multi-criteria decision aid (MCDA) alongside the associated tools, in order to justify our choice to use such an optimization paradigm. As stated in Section \ref{sec:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major characteristics: several criteria and a huge solution space. When facing optimization problems, two main methods exist: the uni-criterion approach and the multi-criteria approach.
+
+\subsection{The uni-criterion approach}
+\label{subsec:rol.unicrit_approach}
+
+With a uni-criterion approach, the optimization of one criterion is generally performed while considering that the other criteria already satisfy an acceptable level. Most of the time, this methodology will try to give a solution which is supposed to be optimal. However, most problem encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases.
+
+For instance, when designing ICs, a manufacturer will try to simultaneously maximize the performance while minimize the cost of the circuit. However, we can already guess that those two objectives are conflicting. Also, producing high-end ICs can be subject to more difficulties in terms of thermal dissipation. In addition, a criterion based on ecological standards may have impacts on the cost and the performance of an IC.
+
+This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum. A solution that optimizes a criterion will likely to affect another.
+
+\subsection{The multi-criteria approach}
+\label{subsex:rol.multicrit_approach}
+
+In order to deal with the multiple objectives of a problem, a more recent approach consists in taking into account all the criteria simultaneously. This is the aim of multi-criteria decision aid which goal is to provide support to a decision maker facing several conflicting solutions. MCDA allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
+
+The first step to find compromise solutions is to identify the Pareto optimal frontier which is the set of non-dominated solutions. This dominance principle is defined as follows:
+
+\begin{definition}[Dominance]
+A solution $a$ dominates a solution $b$ if:
+\begin{itemize}
+\item $a$ is as least as good as $b$ on all criteria;
+\item $a$ is strictly better than $b$ on at least one criterion.
+\end{itemize}
+\end{definition}
+
+Two approaches can be used to establish this set~\cite{Vin92}:
+\begin{itemize}
+\item \textit{Exact methods} which aims to compute the Pareto frontier directly~\cite{EhrgottGandibleuxbook02,steuer86a}.
+\item \textit{Approximate methods} which are based on metaheuristics to quickly explore the solution space and approach as best as possible the Pareto optimal frontier\cite{talbi09}.
+\end{itemize}
+As explained, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used.
+
+\subsubsection{Metaheuristics for multi-objective optimization}
+Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}.
+
+\subsubsection{Multi-criteria decision aid}
+Once the Pareto frontier is obtained or approximated, the compromise solutions can be found by establishing a preference model of the decision maker facing several conflicting solutions. Those models can be classified into three broad categories \cite{Vin92, beltstew}:
+
+\begin{enumerate}
+\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. One of the most known aggregation method is the multi-attribute value theory \cite{MMAUT}.
+\item \textit{Interactive methods}: it is a sequential process composed by alternating computation steps and dialogue with the decision maker. A first compromise is submitted to the decision maker who can accept or deny it. If the solution is denied, the DM can give extra information about his preferences (dialogue) and a new solution can be calculated, so a new decision process begins. Otherwise, no better solution can be found and the process stops. Among the most known interactive methods, the STEP Method (STEM) \cite{benayoun71} or the Satisficing Trade-Off Method (STOM) \cite{nakayama84} can be cited.
+\item \textit{Outranking methods}: the solutions are compared pairwise, initially for each criterion, which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. ELECTRE \cite{Roy66}, AHP \cite{MAHP} or PROMETHEE \cite{Brans1} are among the most known outranking methods.
+\end{enumerate}
+
+%Those methods will not be described further here, as they can be found in reference books such as \cite{Vin92}, \cite{BraMar2002, EhrgottFigueiraGreco2005, beltstew, Sch85}.
+
+Generally, the purpose of MCDA is to give answers for three main problematics \cite{EhrgottFigueiraGreco2005}:
+\begin{enumerate}
+\item \textit{The choice problematic (P.$\alpha$)}: the aid aims the selection of a small number of good solutions in such way that a single solution can be chosen.
+\item \textit{The sorting problematic (P.$\beta$)}: the aid aims the assignment of each solution to a predefined category.
+\item \textit{The ranking problematic (P.$\gamma$)}: the aid aims the complete or partial preorder of all the solutions.
+\end{enumerate}

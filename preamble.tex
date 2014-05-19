@@ -1,0 +1,52 @@
+%--------------------------------------------------------------------
+% $Id: preamble.tex,v 1.6 2005/03/30 16:01:06 stijn Exp $
+%--------------------------------------------------------------------
+\usepackage{phdthesis}
+\usepackage{appendix}
+\usepackage{makeidx}
+\usepackage{changepage}
+\usepackage[english,french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage{xspace}
+\usepackage{cite} %sorted citation lists
+\usepackage{comment}
+\usepackage{ifsym} %for outerjoins
+\usepackage{amsmath}
+\usepackage{import}
+\usepackage{lmodern}
+\usepackage{hyphenat}
+\usepackage{longtable}
+\usepackage{cleveref}
+\usepackage{rotating}  % for sidewaystable, which allows rotated tables
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage[final]{pdfpages}
+\usetikzlibrary{arrows,automata,calc,shapes}
+
+\hyphenation{data-base}
+\hyphenation{bi-sim-u-la-tion}
+
+\selectlanguage{english}
+
+\newcommand{\footnoteremember}[2]{
+    \footnote{\label{fn:#1}#2}
+    %\newcounter{#1}
+    %\setcounter{#1}{\value{footnote}}
+}
+\newcommand{\footnoterecall}[1]{
+    \labelcref{fn:#1}
+}
+
+\input{macros}
+\input{abbrev}
+
+%titlepage stuff
+\title{Guarded Structural Indexes\\\small{Theory and Application to
+Relational RDF Databases}}
+\author{Francois Picalausa}
+
+\makeindex
+\input{indxaliasing}

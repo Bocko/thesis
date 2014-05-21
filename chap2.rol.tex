@@ -23,13 +23,14 @@ This example shows that a uni-criterion approach cannot always be applied since 
 
 In order to deal with the multiple objectives of a problem, a more recent approach consists in taking into account all the criteria simultaneously. This is the aim of multi-criteria decision aid which goal is to provide support to a decision maker facing several conflicting solutions. MCDA allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
 
-The first step to find compromise solutions is to identify the Pareto optimal frontier which is the set of non-dominated solutions. This dominance principle is defined as follows:
+
+In a multi-criteria analysis, the first step is to identify the set of alternatives, denoted $\mathcal{A}=\{a_1, a_2, \ldots, a_n\}$ and evaluation criteria, denoted $\mathcal{F}=\{f_1,f_2,\ldots, f_m\}$. From this set, the Pareto frontier, which is the set of non-dominated solutions, can be identified. This dominance principle is defined as follows:
 
 \begin{definition}[Dominance]
-A solution $a$ dominates a solution $b$ if:
+A solution $a_1$ dominates a solution $a_2$ if:
 \begin{itemize}
-\item $a$ is as least as good as $b$ on all criteria;
-\item $a$ is strictly better than $b$ on at least one criterion.
+\item $a_1$ is as least as good as $a_2$ on all criteria;
+\item $a_1$ is strictly better than $a_2$ on at least one criterion.
 \end{itemize}
 \end{definition}
 
@@ -41,15 +42,16 @@ Two approaches can be used to establish this set~\cite{Vin92}:
 As explained, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used.
 
 \subsubsection{Metaheuristics for multi-objective optimization}
-Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}.
+Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}.\\
+TODO
 
 \subsubsection{Multi-criteria decision aid}
 Once the Pareto frontier is obtained or approximated, the compromise solutions can be found by establishing a preference model of the decision maker facing several conflicting solutions. Those models can be classified into three broad categories \cite{Vin92, beltstew}:
 
 \begin{enumerate}
-\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. One of the most known aggregation method is the multi-attribute value theory \cite{MMAUT}.
+\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. One of the most known aggregation method is the multi-attribute value theory (MAUT) \cite{MMAUT}.
 \item \textit{Interactive methods}: it is a sequential process composed by alternating computation steps and dialogue with the decision maker. A first compromise is submitted to the decision maker who can accept or deny it. If the solution is denied, the DM can give extra information about his preferences (dialogue) and a new solution can be calculated, so a new decision process begins. Otherwise, no better solution can be found and the process stops. Among the most known interactive methods, the STEP Method (STEM) \cite{benayoun71} or the Satisficing Trade-Off Method (STOM) \cite{nakayama84} can be cited.
-\item \textit{Outranking methods}: the solutions are compared pairwise, initially for each criterion, which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. ELECTRE \cite{Roy66}, AHP \cite{MAHP} or PROMETHEE \cite{Brans1} are among the most known outranking methods.
+\item \textit{Outranking methods}: the solutions are compared pairwise, initially for each criterion, which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. PROMETHEE \cite{Brans1}, ELECTRE \cite{Roy66} or Analytic Hierarchy Process \cite{MAHP} are among the most known outranking methods.
 \end{enumerate}
 
 %Those methods will not be described further here, as they can be found in reference books such as \cite{Vin92}, \cite{BraMar2002, EhrgottFigueiraGreco2005, beltstew, Sch85}.
@@ -59,4 +61,208 @@ Generally, the purpose of MCDA is to give answers for three main problematics \c
 \item \textit{The choice problematic (P.$\alpha$)}: the aid aims the selection of a small number of good solutions in such way that a single solution can be chosen.
 \item \textit{The sorting problematic (P.$\beta$)}: the aid aims the assignment of each solution to a predefined category.
 \item \textit{The ranking problematic (P.$\gamma$)}: the aid aims the complete or partial preorder of all the solutions.
+\end{enumerate}
+
+\paragraph{Multi-Attribute Value Theory}~\\
+TODO
+
+\paragraph{STEP Method (STEM)}~\\
+TODO
+
+\paragraph{Satisficing Trade-Off Method (STOM)}~\\
+TODO
+
+\paragraph{The PROMETHEE methods}~\\
+PROMETHEE (Preference Ranking Organisation METHod for Enrichment Evaluations) has been developed by Brans \cite{Brans1}. In this section, we will only describe the basics of PROMETHEE. More details can be found in \cite{Beh2010}.\\
+The PROMETHEE methods are based on the three following steps:
+\begin{itemize}
+\item Enriching the preference structure: a preference function is introduced.
+\item Enriching the dominance relation: a valuated outranking relation is determined.
+\item Decision aid: the valuated outranking relation are exploited.
+\end{itemize}
+
+\begin{enumerate}
+\item \textit{\underline{Preference function}}\\
+Since the dominance relation is really poor (binary relation), a preference function $P_k(a_1,a_2)$ will be introduce to enrich it. This function gives the preference degree of an alternative $a_1$ over an alternative $a_2$ with respect to the function $d_k(a_1,a_2) = f_k(a_1) - f_k(a_2)$ which is the difference between the evaluation of $a_1$ and $a_2$ for the criterion $j$.\\
+Consequently, it is therefore possible several types of preference functions based on preference ($P$) or indifference ($Q$) thresholds. Below the indifference threshold, the decision maker will consider having no preference while above the preference threshold, the decision maker will have no more difference in its preference.
+
+\item \textit{\underline{Valuated outranking relation}}\\
+\textit{Multi-criteria preference index}
+
+The multi-criteria preference index is defined as follows:
+\begin{equation}
+\pi (a_1, a_2) = \sum_{k=1}^{m} P_{k}(a_1, a_2).w_{k} \text{ with $\sum_{k=1}^{k} w_{k} = 1$}
+\end{equation}
+where $w_{k}>0, k=1, 2, ..., m$ are the weights on each criterion. $\pi (a_1, a_2)$ represents a measure of the preference of $a_1$ over $a_2$ on all the criteria.
+
+\textit{Outranking flow}
+
+An \og outranking flow \fg is then defined on the basis of the preference index. That allows to compare alternatives with each others. Three types of flow are formulated:
+\begin{itemize}
+\item The positive outranking flow: $\phi^ {+} = \frac{1}{n-1} \sum_{j \neq i} \pi (a_i, a_j)$. This flow expresses how $a_i$ outranks all the other alternatives.
+\item The negative outranking flow:$\phi^ {-} = \frac{1}{n-1} \sum_{j \neq i} \pi (a_j, a_i)$. This flow expresses how $a_i$ is outranked by all the other alternatives.
+\item The net flow: $\phi(a) = \phi^{+}(a_i) - \phi^{-}(a_i)$. This flow expresses the balance between the positive and negative flows of $a_i$
+\end{itemize}
+Based on these flows, the PROMETHEE methods will establish an outranking.
+
+\item \textit{\underline{PROMETHEE I}}
+
+The positive and negative flows allow to sort the alternatives of $A$. Let $(S^{+}, I^{+})$ and $(S^{-}, I^{-})$ be the two complete pre-orders obtained from these flows:
+\begin{equation}
+\begin{cases}
+a_iS^{+}a_j \Leftrightarrow \phi^{+}(a_i) > \phi^{+}(a_j)\\
+a_iI^{+}a_j \Leftrightarrow \phi^{+}(a_i) = \phi^{+}(a_j)
+\end{cases}
+\end{equation}
+This means that the higher the positive flow is, the better the alternative.
+
+\begin{equation}
+\begin{cases}
+a_iS^{-}a_j \Leftrightarrow \phi^{-}(a_i) < \phi^{-}(a_j)\\
+a_iI^{-}a_j \Leftrightarrow \phi^{-}(a_i) = \phi^{-}(a_j)
+\end{cases}
+\end{equation}
+This means that the lower the negative flow is, the better the alternative.
+
+PROMETHEE I establishes partial ranking by taking the intersection of these two pre-orders:
+\begin{equation}
+\begin{cases}
+a_iP^{(1)}a_j \Leftrightarrow \begin{cases}
+	a_iS^{+}a_j \text{ and } a_iS^{-}a_j\\
+	a_iS^{+}a_j \text{ and } a_iI^{-}a_j\\
+	a_iI^{+}a_j \text{ and } a_iS^{-}a_j
+	\end{cases}\\
+a_iI^{(1)}a_j \Leftrightarrow a_iI^{+}a_j \text{ and } a_iI^{-}a_j\\
+a_iR^{(1)}a_j \text{ otherwise}
+\end{cases}
+\end{equation}
+where $(P^{(1)}, I^{(1)}, R^{(1)})$ represent respectively the preference, the indifference and the incomparability in PROMETHEE I.
+\begin{itemize}
+\item $a_iP^{(1)}a_j$ (\og $a_i$ is prefered to $a_j$ \fg): $a_i$ is simultaneously better and less worse than $a_j$.
+\item $a_iI^{(1)}a_j$ (\og $a_i$ and $a_j$ are indifferent \fg): $a_i$ is neither better nor worse than $a_j$.
+\item $a_iR^{(1)}a_j$ (\og $a_i$ and $a_j$ are incomparable \fg): $a_i$ is better than $a_j$ on some criteria while $a_j$ is better than $a_i$ on other criteria.
+\end{itemize}
+
+\item \textit{\underline{PROMETHEE II}}
+
+In order to obtain a complete ranking, the net flow will be considered:
+\begin{equation}
+\begin{cases}
+a_iP^{(2)}a_j \Leftrightarrow \phi(a_i) > \phi(a_j)\\
+a_iI^{(2)}a_j \Leftrightarrow \phi(a_i) = \phi(a_j)\\
+\end{cases}
+\end{equation}
+where $P^{(2)}$ et $I^{(2)}$ represent respectively the preference and the indifference in PROMETHEE II. This means that the higher the net flow is, the better the alternative.
+
+On remarque que, par rapport à PROMETHEE I, PROMETHEE II ne donne pas lieu à l'incomparabilité et on obtient directement un rangement complet.
+
+\item \textit{\underline{The GAIA plane}}
+
+While it is impossible to have a visual representation of the solution space when there are more than three criteria, the GAIA (Geometrical Analysis for Interactive Assistance) plane can give a visualization even if there are more than three criteria, by means of the computation of the net flows on the decision maker's preferences for each criterion.
+
+The representation is based on the principal component analysis of the net flows, which allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
+\end{enumerate}
+
+\paragraph{The ELECTRE methods}~\\
+ELECTRE (\textit{ELimination Et Choix Traduisant la REalité}, or ELimination and Choice Expressing REality) has been developed by Roy \cite{Roy66}. In this section, we will only described the basics of ELECTRE. More details can be found in \cite{electre}.
+
+\begin{enumerate}
+\item \textit{\underline{ELECTRE I}}
+
+ELECTRE I is a method linked to the $P.\alpha$ problematic that aims to obtain a subset $N$ of alternatives such that all the solutions that do not belong to this set is outranked by at least one alternative of $N$. $N$ is threfore not the set of good alternatives but rather the set where the best compromise can certainly be found.
+
+The outranking relation is obtained by establishing a weight $w_k$ for each criterion. A concordance index is the associated to each pair $(a_i, a_j)$ of alternatives:
+\begin{equation}
+c(a_i, a_j) = \frac{1}{P} \sum_{j:f_{k}(a_i) \geq f_{k}(a_j)}{w_{k}}, \text{ where } P = \sum_{k=1}^{m} w_{k}
+\end{equation}
+The concordance index represents a measure of the arguments favourable to the statement \og \textit{$a_i$ outranks $a_j$} \fg.
+
+A discordance index can also be defined:
+\begin{equation}
+d(a_i, a_j) = \begin{cases}
+	0& \text{if $f_{k}(a_i) \geq f_{k}(a_j), \forall k$}\\
+	\frac{1}{\delta} \max_{k} [f_{k}(a_j) - f_{k}(a_i)]& \text{otherwise}
+	\end{cases}
+\end{equation}
+The discordance index is therefore higher if the preference of $a_j$ over $a_i$ is strong on at least one criterion.
+
+Then concordance $\hat{c}$ and discordance $\hat{d}$ thresholds are defined alongside the outranking relation $S$:
+\begin{equation}
+a_iSa_j \text{ iff } \begin{cases}
+	c(a_i, a_j) \geq \hat{c}\\
+	d(a_i, a_j) \leq \hat{d}
+	\end{cases}
+\end{equation}
+
+From this definition, a subset $N$ of alternatives is established such that:
+\begin{equation}
+\begin {cases}
+\forall b \in A\setminus N, \exists a \in N : aSb\\
+\forall a, b \in N, aSb
+\end{cases}
+\end{equation}
+
+A subset $N$ of alternatives is established such that all the alternatives that do not belong to this set is outranked by at least one alternative of $N$ and the alternatives of $N$ are incomparable. The decision process will therefore take place within the set $N$.
+
+\item \textit{\underline{ELECTRE II}}
+
+Cette méthode vise à ranger les solutions de la meilleure à la moins bonne (problématique $P.\beta$). La relation de surclassement s'établit en fixant deux seuils de concordance $\hat{c}_{1}$ et $\hat{c}_{2}$ tels que $\hat{c}_{1} > \hat{c}_{2}$ et en construisant une relation de surclassement fort $S^{F}$ et une relation de surclassement faible $S^{f}$ sur base de ces deux seuils :
+\begin{equation}
+aS^{F}b \text{ ssi } \begin{cases}
+	c(a, b) \geq \hat{c}_{1}\\
+	\sum_{j : g_{j}(a)>g_{j}(b)} p_{j} > \sum_{j : g_{j}(a)<g_{j}(b)} p_{j}\\
+	(g_{j}(a), g_{j}(b)) \not\in D_{j}, \forall j
+	\end{cases}
+\end{equation}
+\begin{equation}
+aS^{f}b \text{ ssi } \begin{cases}
+	c(a, b) \geq \hat{c}_{2}\\
+	\sum_{j : g_{j}(a)>g_{j}(b)} p_{j} > \sum_{j : g_{j}(a)<g_{j}(b)} p_{j}\\
+	(g_{j}(a), g_{j}(b)) \not\in D_j, \forall j
+	\end{cases}
+\end{equation}
+La discordance peut également donner lieu à deux niveaux de sévérité en construisant pour chaque critère deux ensembles de discordance.
+
+Pour obtenir le rangement, on détermine, à partir de $S^ {F}$, l'ensemble $B$ des solutions qui ne sont surclassées fortement par aucune autre action. À partir de $B$ et de $S^{f}$, on détermine l'ensemble $A^{1}$ de solutions qui ne sont surclassées faiblement par aucune autre action de $B$. L'ensemble $A^{1}$ constitue la classe des meilleures solutions. On recommence le processus jusqu'à obtenir un pré-ordre complet.
+
+On obtient un deuxième pré-ordre complet en effectuant le processus en commençant par la classe des moins bonnes actions et en finissant sur les meilleures.
+
+\item \textit{\underline{ELECTRE III}}
+
+Cette méthode, qui est relative à la problématique $P.\beta$, prend en compte les seuils d'indifférence et de préférence. Elle se base sur une relation de surclassement valuée qui a le mérite, par rapport à une relation ordinaire (sans poids sur les critères), d'être moins sensible aux variations des données et des paramètres introduits.
+
+Dans ELECTRE III, on définit un degré de surclassement $S(a, b)$ associé à chaque couple $(a, b)$ de solutions. On peut le comprendre comme un \og degré de crédibilité de surclassement \fg de $a$ sur $b$.
+
+On commence par associer un poids $p_{j}$ à chaque critère $g_{j}$ et on calcule pour chaque couple $(a, b)$ de solutions l'indice de concordance suivant :
+\begin{equation}
+c(a, b) = \frac{1}{P} \sum_{j=1}^{n} p_{j} c_{j}(a, b), \text{ où } P = \sum_{j=1}^{n} p_{j}
+\end{equation}
+avec
+\begin{equation}
+c_{j}(a,b) = \begin{cases}
+	1& \text{si $g_{j}(a)+q_{j}(g_{j}(a)) \geq g_{j}(b)$}\\
+	0& \text{si $g_{j}(a)+p_{j}(g_{j}(a)) \leq g_{j}(b)$}\\
+	\text{linéaire entre les deux}
+	\end{cases}
+\end{equation}
+où $q_{j}$ et $p_{j}$ représentent respectivement les seuils d'indifférence et de préférence.
+
+On détermine alors un rangement à partir d'un indice $Q(a)$ de qualification de chaque solution $a$ qui représente la différence entre le nombre d'actions surclassées par $a$ et le nombre d'actions qui surclassent $a$. On obtient un pré-ordre total en rangeant les solutions selon leur qualification.
+
+\item \textit{\underline{ELECTRE IV}}
+
+Cette méthode vise, à l'instar de ELECTRE III, à ranger les solutions, mais sans introduire de pondération des critères car il existe des cas où la connaissance de l'importance des critères est difficile voire inexistante. Elle se base sur des considérations de \og bon sens \fg compatibles avec la non-connaissance des importances relatives des critères. ELECTRE IV est analogue à ELECTRE III, si ce n'est qu'elle ne fait pas intervenir de pondération.
+\end{enumerate}
+
+\paragraph{AHP (Analytical Hierarchy Process)}~\\
+AHP (Analytical Hierarchy Process) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
+
+\begin{enumerate}
+\item State the problem
+\item Broaden the objectives of the problem or consider all actors, objectives and its outcome.
+\item Identify the criteria that influence the behaviour.
+\item Structure the problem in a hierarchy of different levels constituting goal, criteria, sub-criteria and alternatives.
+\item Compare each element in the corresponding level and calibrate them on the numerical scale. Consequently build the comparison matrix with the computed valued based on the comparisons.
+\item Compute the highest eigenvalue of the matrix, the consistecy index (CI), the consistency ration (CR) and the normalized values for each criterion/alternative.
+\item If the maximum eigenvalue, CI and CR are satisfactory, the decision is taken based on the normalized values. Otherwise, the procedure is repeated until these values reach an acceptable range.
 \end{enumerate}

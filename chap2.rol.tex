@@ -3,6 +3,7 @@
 
 \section{Integrated circuits design and 3D integration}
 \label{sec:rol.icdesign}
+TODO
 
 \section{Multi-criteria decision aid}
 \label{sec:rol.mcda}
@@ -173,7 +174,7 @@ ELECTRE I is a method linked to the $P.\alpha$ problematic that aims to obtain a
 
 The outranking relation is obtained by establishing a weight $w_k$ for each criterion. A concordance index is the associated to each pair $(a_i, a_j)$ of alternatives:
 \begin{equation}
-c(a_i, a_j) = \frac{1}{P} \sum_{j:f_{k}(a_i) \geq f_{k}(a_j)}{w_{k}}, \text{ where } P = \sum_{k=1}^{m} w_{k}
+c(a_i, a_j) = \frac{1}{W} \sum_{j:f_{k}(a_i) \geq f_{k}(a_j)}{w_{k}}, \text{ where } W = \sum_{k=1}^{m} w_{k}
 \end{equation}
 The concordance index represents a measure of the arguments favourable to the statement \og \textit{$a_i$ outranks $a_j$} \fg.
 
@@ -188,7 +189,7 @@ The discordance index is therefore higher if the preference of $a_j$ over $a_i$ 
 
 Then concordance $\hat{c}$ and discordance $\hat{d}$ thresholds are defined alongside the outranking relation $S$:
 \begin{equation}
-a_iSa_j \text{ iff } \begin{cases}
+\forall i \neq j, a_iSa_j \text{ iff } \begin{cases}
 	c(a_i, a_j) \geq \hat{c}\\
 	d(a_i, a_j) \leq \hat{d}
 	\end{cases}
@@ -197,8 +198,8 @@ a_iSa_j \text{ iff } \begin{cases}
 From this definition, a subset $N$ of alternatives is established such that:
 \begin{equation}
 \begin {cases}
-\forall b \in A\setminus N, \exists a \in N : aSb\\
-\forall a, b \in N, aSb
+\forall a_j \in A\setminus N, \exists a_i \in N : a_iSa_j\\
+\forall a_i, a_j \in N, a_i \overline{S} a_j
 \end{cases}
 \end{equation}
 
@@ -206,52 +207,52 @@ A subset $N$ of alternatives is established such that all the alternatives that 
 
 \item \textit{\underline{ELECTRE II}}
 
-Cette méthode vise à ranger les solutions de la meilleure à la moins bonne (problématique $P.\beta$). La relation de surclassement s'établit en fixant deux seuils de concordance $\hat{c}_{1}$ et $\hat{c}_{2}$ tels que $\hat{c}_{1} > \hat{c}_{2}$ et en construisant une relation de surclassement fort $S^{F}$ et une relation de surclassement faible $S^{f}$ sur base de ces deux seuils :
+This method aims to rank the alternatives. The outranking relation is defined by fixing two concordance thresholds $\hat{c}_{1}$ and $\hat{c}_{2}$ such that $\hat{c}_{1} > \hat{c}_{2}$ and by building a strong outranking relation $S^{F}$ and a weak outranking relation $S^{f}$ based on these two thresholds:
 \begin{equation}
-aS^{F}b \text{ ssi } \begin{cases}
-	c(a, b) \geq \hat{c}_{1}\\
-	\sum_{j : g_{j}(a)>g_{j}(b)} p_{j} > \sum_{j : g_{j}(a)<g_{j}(b)} p_{j}\\
-	(g_{j}(a), g_{j}(b)) \not\in D_{j}, \forall j
+a_iS^{F}a_j \text{ iff } \begin{cases}
+	c(a_i, a_j) \geq \hat{c}_{1}\\
+	\sum_{, : f_{k}(a_i)>f_{k}(a_j)} w_{k} > \sum_{k : g_{k}(a)<g_{k}(b)} w_{k}\\
+	(f_{k}(a_i), f_{k}(a_j)) \not\in D_{k}, \forall k
 	\end{cases}
 \end{equation}
 \begin{equation}
-aS^{f}b \text{ ssi } \begin{cases}
-	c(a, b) \geq \hat{c}_{2}\\
-	\sum_{j : g_{j}(a)>g_{j}(b)} p_{j} > \sum_{j : g_{j}(a)<g_{j}(b)} p_{j}\\
-	(g_{j}(a), g_{j}(b)) \not\in D_j, \forall j
+a_iS^{f}a_j \text{ iff } \begin{cases}
+	c(a_i, a_j) \geq \hat{c}_{2}\\
+	\sum_{k : f_{k}(a_i)>f_{k}(a_j)} w_{k} > \sum_{k : f_{k}(a_i)<f_{k}(a_j)} w_{k}\\
+	(f_{k}(a_i), f_{k}(a_j)) \not\in D_k, \forall k
 	\end{cases}
 \end{equation}
-La discordance peut également donner lieu à deux niveaux de sévérité en construisant pour chaque critère deux ensembles de discordance.
+The discordance can also induce two levels of relations by building two sets of discordance for each criterion.
 
-Pour obtenir le rangement, on détermine, à partir de $S^ {F}$, l'ensemble $B$ des solutions qui ne sont surclassées fortement par aucune autre action. À partir de $B$ et de $S^{f}$, on détermine l'ensemble $A^{1}$ de solutions qui ne sont surclassées faiblement par aucune autre action de $B$. L'ensemble $A^{1}$ constitue la classe des meilleures solutions. On recommence le processus jusqu'à obtenir un pré-ordre complet.
+In order to obtain the ranking, a set is determined from $S^ {F}$. This set $B$ contains the alternatives that are not strongly outranked by any others. From $B$ and $S^{f}$, the set $A^{1}$ of alternatives that are not weakly outranked by any alternatives of $B$ is determined. The set $A^{1}$ constitutes the best alternatives class. The process is repeated until a complete pre-order is obtained.
 
-On obtient un deuxième pré-ordre complet en effectuant le processus en commençant par la classe des moins bonnes actions et en finissant sur les meilleures.
+A second complete pre-order can be obtained by applying the process first with the less good alternatives class and then the best ones.
 
 \item \textit{\underline{ELECTRE III}}
 
-Cette méthode, qui est relative à la problématique $P.\beta$, prend en compte les seuils d'indifférence et de préférence. Elle se base sur une relation de surclassement valuée qui a le mérite, par rapport à une relation ordinaire (sans poids sur les critères), d'être moins sensible aux variations des données et des paramètres introduits.
+This method takes into account the indifference and preference thresholds. It is based on a valuated outranking relation that is less sensible to data and parameters variabilities.
 
-Dans ELECTRE III, on définit un degré de surclassement $S(a, b)$ associé à chaque couple $(a, b)$ de solutions. On peut le comprendre comme un \og degré de crédibilité de surclassement \fg de $a$ sur $b$.
+In ELECTRE III, an outranking degree $S(a_i, a_j)$ associated to each pair $(a_i, a_j)$ of alternatives is defined. It can be understood as an \og degree of credibility of outranking \fg of $a_i$ over $a_j$.
 
-On commence par associer un poids $p_{j}$ à chaque critère $g_{j}$ et on calcule pour chaque couple $(a, b)$ de solutions l'indice de concordance suivant :
+A weight $w_{k}$ is associated to each criterion and for each pair $(a_i, a_j)$ of alternatives the concordance index is computed as follows:
 \begin{equation}
-c(a, b) = \frac{1}{P} \sum_{j=1}^{n} p_{j} c_{j}(a, b), \text{ où } P = \sum_{j=1}^{n} p_{j}
+c(a_i, a_j) = \frac{1}{W} \sum_{k=1}^{m} w_{k} c_{k}(a_i, a_j), \text{ where } W = \sum_{k=1}^{m} w_{k}
 \end{equation}
-avec
+with
 \begin{equation}
 c_{j}(a,b) = \begin{cases}
-	1& \text{si $g_{j}(a)+q_{j}(g_{j}(a)) \geq g_{j}(b)$}\\
-	0& \text{si $g_{j}(a)+p_{j}(g_{j}(a)) \leq g_{j}(b)$}\\
-	\text{linéaire entre les deux}
+	1& \text{if $g_{k}(a)+q_{k}(g_{k}(a)) \geq g_{k}(b)$}\\
+	0& \text{if $g_{k}(a)+p_{k}(g_{k}(a)) \leq g_{k}(b)$}\\
+	\text{linear in between}
 	\end{cases}
 \end{equation}
-où $q_{j}$ et $p_{j}$ représentent respectivement les seuils d'indifférence et de préférence.
+where $q_{k}$ et $p_{k}$ represent respectively the indifference and preference thresholds.
 
-On détermine alors un rangement à partir d'un indice $Q(a)$ de qualification de chaque solution $a$ qui représente la différence entre le nombre d'actions surclassées par $a$ et le nombre d'actions qui surclassent $a$. On obtient un pré-ordre total en rangeant les solutions selon leur qualification.
+A ranking can be determined from a qualification index $Q(a)$ for each alternative $a$ that represents the difference between the number of outranked alternatives by $a$ and the number of alternatives that outrank $a$. A total pre-order is obtain by ranking the alternative following their qualification.
 
 \item \textit{\underline{ELECTRE IV}}
 
-Cette méthode vise, à l'instar de ELECTRE III, à ranger les solutions, mais sans introduire de pondération des critères car il existe des cas où la connaissance de l'importance des critères est difficile voire inexistante. Elle se base sur des considérations de \og bon sens \fg compatibles avec la non-connaissance des importances relatives des critères. ELECTRE IV est analogue à ELECTRE III, si ce n'est qu'elle ne fait pas intervenir de pondération.
+This method is similar to ELECTRE III and aims to sort alternatives but without considering weights on the criteria.
 \end{enumerate}
 
 \paragraph{AHP (Analytical Hierarchy Process)}~\\

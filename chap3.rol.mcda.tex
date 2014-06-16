@@ -1,28 +1,82 @@
-\chapter{Review of the literature}
-\label{cha:rol}
+\Chapter{Review of the literature}{Part II: Operations research}
+\label{cha:rol2.mcda}
 
-\section{Integrated circuits design and 3D integration}
-\label{sec:rol.icdesign}
-TODO
+\begin{summary}
+\lipsum[1]
+\end{summary}
 
-\section{Multi-criteria decision aid}
-\label{sec:rol.mcda}
 
-In this section, we present briefly the general methodology of multi-criteria decision aid (MCDA) alongside the associated tools, in order to justify our choice to use such an optimization paradigm. As stated in Section \ref{sec:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major characteristics: several criteria and a huge solution space. When facing optimization problems, two main methods exist: the uni-criterion approach and the multi-criteria approach.
+\section{Introduction}
+\label{sec:rol2.intro}
+In this chapter, we briefly present the major tools from the operations research, in particular the multi-objective optimization and the multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing optimization problems, two main methods exist: the mono-objective approach and the multi-objective approach.
 
-\subsection{The uni-criterion approach}
-\label{subsec:rol.unicrit_approach}
+\section{The mono-objective/uni-criterion approach}
+\label{sec:rol2.monoobj_approach}
 
-With a uni-criterion approach, the optimization of one criterion is generally performed while considering that the other criteria already satisfy an acceptable level. Most of the time, this methodology will try to give a solution which is supposed to be optimal. However, most problem encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases.
+\subsection{Problem formulation}
+An optimization problem can be formulated, without loss of generality, as:
+\begin{equation}
+\label{eqn:optiprob}
+\begin{gathered}
+\min f(x)\\
+x \in A
+\end{gathered}
+\end{equation}
+where $f$ is a real-valued function evaluating the solutions denoted $x$, $f$ is also called the \emph{criterion} on which $x$ is evaluated. Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
+$$
+\max_{x \in A} f(x) = - \min_{x \in A} (-f(x))
+$$
+so that there is no loss of generality by using only \emph{minimization} formulation.
+
+In order to give a more precise idea of what an optimization problem is, we will describe in the next section some typical examples taken from the reference book \cite{talbi09}.
+
+\subsection{Examples of typical optimization problems}
+\subsubsection{Linear programming}
+Linear programming (LP) is a method that aims to optimize a linear function, subject to linear equality and inequality constraints. This can be formulated as follows:
+\begin{equation}
+\min \mathbf{c}^\intercal\mathbf{x}
+\end{equation}
+subject to
+\begin{equation*}
+\begin{gathered}
+A\mathbf{x} \leq \mathbf{b}\\
+\mathbf{x} \geq \mathbf{0}
+\end{gathered}
+\end{equation*}
+where $\mathbf{x}$ is a vector of continuous variables to be determined, $\mathbf{c}$ and $\mathbf{b}$ are vectors of coefficients, $A$ is a matrix of coefficient.
+
+Efficient exact methods for solving LP problem exist such as, among the most knowns, the simplex algorithm \cite{dantzig51} or the interior point method \cite{Karmarkar84}.
+
+\begin{example}[Linear programming]
+A given company produces two boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and for each board $Board_i$ the used amount of memories and the profit. 
+\end{example}
+
+
+\subsubsection{Non-linear programming}
+
+
+\subsubsection{Dynamic programming}
+
+
+\subsubsection{Integer programming}
+
+
+\subsubsection{Mixed integer programming}
+
+
+\subsubsection{Assignment problem}
+
+
+\section{The multi-objective/multi-criteria approach}
+\label{sec:rol2.multiobj_approach}
+
+With a mono-objective approach, the optimization of one criterion is generally performed while considering that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases.
 
 For instance, when designing ICs, a manufacturer will try to simultaneously maximize the performance while minimize the cost of the circuit. However, we can already guess that those two objectives are conflicting. Also, producing high-end ICs can be subject to more difficulties in terms of thermal dissipation. In addition, a criterion based on ecological standards may have impacts on the cost and the performance of an IC.
 
 This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum. A solution that optimizes a criterion will likely to affect another.
 
-\subsection{The multi-criteria approach}
-\label{subsex:rol.multicrit_approach}
-
-In order to deal with the multiple objectives of a problem, a more recent approach consists in taking into account all the criteria simultaneously. This is the aim of multi-criteria decision aid which goal is to provide support to a decision maker facing several conflicting solutions. MCDA allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
+In order to deal with the multiple objectives of a problem, another approach consists in taking into account all the criteria simultaneously. This is the aim of multi-criteria decision aid which goal is to provide support to a decision maker facing several conflicting solutions. MCDA allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
 
 
 In a multi-criteria analysis, the first step is to identify the set of alternatives, denoted $\mathcal{A}=\{a_1, a_2, \ldots, a_n\}$ and evaluation criteria, denoted $\mathcal{F}=\{f_1,f_2,\ldots, f_m\}$. From this set, the Pareto frontier, which is the set of non-dominated solutions, can be identified. This dominance principle is defined as follows:
@@ -42,11 +96,13 @@ Two approaches can be used to establish this set~\cite{Vin92}:
 \end{itemize}
 As explained, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used.
 
-\subsubsection{Metaheuristics for multi-objective optimization}
+\section{Metaheuristics for multi-objective optimization}
+\label{subsec:metaheuristics}
 Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}.\\
 TODO
 
-\subsubsection{Multi-criteria decision aid}
+\section{Multi-criteria decision aid}
+\label{subsec:mcda}
 Once the Pareto frontier is obtained or approximated, the compromise solutions can be found by establishing a preference model of the decision maker facing several conflicting solutions. Those models can be classified into three broad categories \cite{Vin92, beltstew}:
 
 \begin{enumerate}
@@ -64,16 +120,16 @@ Generally, the purpose of MCDA is to give answers for three main problematics \c
 \item \textit{The ranking problematic (P.$\gamma$)}: the aid aims the complete or partial preorder of all the solutions.
 \end{enumerate}
 
-\paragraph{Multi-Attribute Value Theory}~\\
+\subsection{Multi-Attribute Value Theory}
 TODO
 
-\paragraph{STEP Method (STEM)}~\\
+\subsection{STEP Method (STEM)}
 TODO
 
-\paragraph{Satisficing Trade-Off Method (STOM)}~\\
+\subsection{Satisficing Trade-Off Method (STOM)}
 TODO
 
-\paragraph{The PROMETHEE methods}~\\
+\subsection{The PROMETHEE methods}
 PROMETHEE (Preference Ranking Organisation METHod for Enrichment Evaluations) has been developed by Brans \cite{Brans1}. In this section, we will only describe the basics of PROMETHEE. More details can be found in \cite{Beh2010}.\\
 The PROMETHEE methods are based on the three following steps:
 \begin{itemize}
@@ -164,7 +220,7 @@ While it is impossible to have a visual representation of the solution space whe
 The representation is based on the principal component analysis of the net flows, which allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
 \end{enumerate}
 
-\paragraph{The ELECTRE methods}~\\
+\subsection{The ELECTRE methods}
 ELECTRE (\textit{ELimination Et Choix Traduisant la REalité}, or ELimination and Choice Expressing REality) has been developed by Roy \cite{Roy66}. In this section, we will only described the basics of ELECTRE. More details can be found in \cite{electre}.
 
 \begin{enumerate}
@@ -250,12 +306,12 @@ where $q_{k}$ et $p_{k}$ represent respectively the indifference and preference 
 
 A ranking can be determined from a qualification index $Q(a)$ for each alternative $a$ that represents the difference between the number of outranked alternatives by $a$ and the number of alternatives that outrank $a$. A total pre-order is obtain by ranking the alternative following their qualification.
 
-\item \textit{\underline{ELECTRE IV}}
-
-This method is similar to ELECTRE III and aims to sort alternatives but without considering weights on the criteria.
+%\item \textit{\underline{ELECTRE IV}}
+%
+%This method is similar to ELECTRE III and aims to sort alternatives but without considering weights on the criteria.
 \end{enumerate}
 
-\paragraph{AHP (Analytical Hierarchy Process)}~\\
+\subsection{AHP (Analytical Hierarchy Process)}
 AHP (Analytical Hierarchy Process) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
 
 \begin{enumerate}

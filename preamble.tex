@@ -24,6 +24,7 @@
 \usepackage{rotating}  % for sidewaystable, which allows rotated tables
 \usepackage[linesnumbered,ruled]{algorithm2e}
 \usepackage[final]{pdfpages}
+\usepackage{lipsum}
 \usetikzlibrary{arrows,automata,calc,shapes}
 
 \hyphenation{data-base}
@@ -40,15 +41,29 @@
     \labelcref{fn:#1}
 }
 
+\newcommand\Chapter[2]{
+  \chapter[#1: {\itshape#2}]{#1\\[2ex]\LARGE\itshape#2}
+}
+
+\makeatletter
+\newenvironment{summary}
+               {\begin{center}\textbf{Chapter abstract}\end{center}
+                 \small\list{}{\listparindent 1em%
+                        %\setlength{\leftmargin}{<value>} adjust if you need
+                        \itemindent\listparindent
+                        \rightmargin\leftmargin
+                        \parsep\z@ \@plus\p@}%
+                \item\relax}
+               {\endlist}
+
 %\setcounter{secnumdepth}{3}
 
 \input{macros}
 \input{abbrev}
 
 %titlepage stuff
-\title{Guarded Structural Indexes\\\small{Theory and Application to
-Relational RDF Databases}}
-\author{Francois Picalausa}
+\title{Multi-Objective Optimization and Multi-Criteria Decision Aid Applied to the Design of 3D-Stacked Integrated Circuits}
+\author{\textsc{Doan} Nguyen Anh Vu}
 
 \makeindex
 \input{indxaliasing}

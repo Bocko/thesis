@@ -5,7 +5,6 @@
 \lipsum[1]
 \end{summary}
 
-
 \section{Introduction}
 \label{sec:rol2.intro}
 In this chapter, we briefly present the major tools from the operations research, in particular the multi-objective optimization and the multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing optimization problems, two main methods exist: the mono-objective approach and the multi-objective approach.
@@ -22,17 +21,18 @@ An optimization problem can be formulated, without loss of generality, as:
 x \in A
 \end{gathered}
 \end{equation}
-where $f$ is a real-valued function evaluating the solutions denoted $x$, $f$ is also called the \emph{criterion} on which $x$ is evaluated. Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
+where $f$ is a real-valued function evaluating the solutions denoted $x$. Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
 $$
 \max_{x \in A} f(x) = - \min_{x \in A} (-f(x))
 $$
 so that there is no loss of generality by using only \emph{minimization} formulation.
+% , $f$ is also called the \emph{criterion} on which $x$ is evaluated
 
 In order to give a more precise idea of what an optimization problem is, we will describe in the next section some typical examples taken from the reference book \cite{talbi09}.
 
 \subsection{Examples of typical optimization problems}
 \subsubsection{Linear programming}
-Linear programming (LP) is a method that aims to optimize a linear function, subject to linear equality and inequality constraints. This can be formulated as follows:
+Linear programming (LP) is a method that aims to optimize a linear function, subject to linear equality and linear inequality constraints. This can be formulated as follows:
 \begin{equation}
 \min \mathbf{c}^\intercal\mathbf{x}
 \end{equation}
@@ -43,28 +43,62 @@ A\mathbf{x} \leq \mathbf{b}\\
 \mathbf{x} \geq \mathbf{0}
 \end{gathered}
 \end{equation*}
-where $\mathbf{x}$ is a vector of continuous variables to be determined, $\mathbf{c}$ and $\mathbf{b}$ are vectors of coefficients, $A$ is a matrix of coefficient.
+where $\mathbf{x}$ is a vector of continuous variables to be determined, $\mathbf{c}$ and $\mathbf{b}$ are vectors of coefficients, $A$ is a matrix of coefficients.
 
 Efficient exact methods for solving LP problem exist such as, among the most knowns, the simplex algorithm \cite{dantzig51} or the interior point method \cite{Karmarkar84}.
 
 \begin{example}[Linear programming]
-A given company produces two boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and for each board $Board_i$ the used amount of memories and the profit. 
+A given company produces two electronic boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and for each board $Board_i$ the used amount of memories and the profit. 
 \end{example}
 
+\subsubsection{Integer linear programming}
+Integer linear programming deals with linear problems where the variables are restricted to be integers:
+\begin{equation}
+\min \mathbf{c}^\intercal\mathbf{x}
+\end{equation}
+subject to
+\begin{equation*}
+\begin{gathered}
+A\mathbf{x} \leq \mathbf{b}\\
+\mathbf{x} \geq \mathbf{0}\\
+\mathbf{x} \in \mathbb{Z}
+\end{gathered}
+\end{equation*}
+where $\mathbf{c}$ and $\mathbf{b}$ are vectors having integers values and $A$ is a matrix of coefficients having integer values.
+
+When the decision variables are both discrete en continuous, the problem refers to \textbf{mixed integer programming} (MILP).
+
+Other particular ILP problems which deals with variables that are restricted to be either O or 1 are called \textbf{0-1 linear programming}.
+
+\begin{example}[Travelling salesman problem (TSP)]
+This problem is probably the most known optimization problem. It can be formulated as follows: given $n$ cities and the distance between each pari of cities, we have to find the shortest tour that visits each city once and returns to the origin city. This problem can be formulated as an ILP problem.
+\end{example}
 
 \subsubsection{Non-linear programming}
+Non-linear programming (NLP) models deal with mathematical problems where some of the constraints and/or the objective function are non linear:
+\begin{equation}
+\min \mathbf{c}^\intercal\mathbf{x}
+\end{equation}
+where
+\begin{equation*}
+\begin{gathered}
+f: \mathbb{R}^n \rightarrow \mathbb{R}\\
+x \in \mathbb{R}^n
+\end{gathered}
+\end{equation*}
+subject to
+\begin{equation*}
+\begin{gathered}
+g_i(x) \leq 0, i \in J = 1, \dots, m\\
+h_j(x) = 0, j \in I = 1, \dots, p
+\end{gathered}
+\end{equation*}
+where $g_i : X \rightarrow \mathbb{R}^n$ are the inequality constraints and $h_j : X \rightarrow \mathbb{R}^n$ are the equality constraints.
+
+%\subsubsection{Dynamic programming}
 
 
-\subsubsection{Dynamic programming}
-
-
-\subsubsection{Integer programming}
-
-
-\subsubsection{Mixed integer programming}
-
-
-\subsubsection{Assignment problem}
+%\subsubsection{Assignment problem}
 
 
 \section{The multi-objective/multi-criteria approach}

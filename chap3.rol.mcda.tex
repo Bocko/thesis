@@ -7,10 +7,12 @@
 
 \section{Introduction}
 \label{sec:rol2.intro}
-In this chapter, we briefly present the major tools from the operations research, in particular the multi-objective optimization and the multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing optimization problems, two main methods exist: the mono-objective approach and the multi-objective approach.
+In this chapter, we briefly present the major tools from the operations research, in particular the multi-objective optimization and the multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing such problems, two main methods exist: the uni-criterion paradigm and the multi-criteria paradigm. For optimization problems, these paradigm will refer to the terminology mono-objective/multi-objective optimization while for decision aid, the terminology uni-criterion/multi-criteria will be used.
 
-\section{The mono-objective/uni-criterion approach}
-\label{sec:rol2.monoobj_approach}
+In the following, we will briefly describe each paradigm, showing the some of the main approaches alongside illustrative examples.
+
+\section{The uni-criterion paradigm}
+\label{sec:rol2.unicrit_paradigm}
 
 \subsection{Problem formulation}
 An optimization problem can be formulated, without loss of generality, as:
@@ -21,14 +23,13 @@ An optimization problem can be formulated, without loss of generality, as:
 x \in A
 \end{gathered}
 \end{equation}
-where $f$ is a real-valued function evaluating the solutions denoted $x$. Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
+where $f$ is a real-valued function evaluating the solutions denoted $x$, $f$ is also called the \emph{criterion} on which $x$ is evaluated. Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
 $$
 \max_{x \in A} f(x) = - \min_{x \in A} (-f(x))
 $$
 so that there is no loss of generality by using only \emph{minimization} formulation.
-% , $f$ is also called the \emph{criterion} on which $x$ is evaluated
 
-In order to give a more precise idea of what an optimization problem is, we will describe in the next section some typical examples taken from the reference book \cite{talbi09}.
+In order to give a more precise idea of what an optimization problem is, we will describe in the next section some typical examples taken from the reference book \cite{talbi09, BraMar2002}.
 
 \subsection{Examples of typical optimization problems}
 \subsubsection{Linear programming}
@@ -71,7 +72,7 @@ When the decision variables are both discrete en continuous, the problem refers 
 Other particular ILP problems which deals with variables that are restricted to be either O or 1 are called \textbf{0-1 linear programming}.
 
 \begin{example}[Travelling salesman problem (TSP)]
-This problem is probably the most known optimization problem. It can be formulated as follows: given $n$ cities and the distance between each pari of cities, we have to find the shortest tour that visits each city once and returns to the origin city. This problem can be formulated as an ILP problem.
+This problem is probably the most known optimization problem. It can be formulated as follows: given $n$ cities and the distance between each pair of cities, we have to find the shortest tour that visits each city once and returns to the origin city. This problem can be formulated as an ILP problem.
 \end{example}
 
 \subsubsection{Non-linear programming}
@@ -101,21 +102,45 @@ where $g_i : X \rightarrow \mathbb{R}^n$ are the inequality constraints and $h_j
 %\subsubsection{Assignment problem}
 
 
-\section{The multi-objective/multi-criteria approach}
-\label{sec:rol2.multiobj_approach}
+\section{From the uni-criterion paradigm to the multi-criteria paradigm}
 
-With a mono-objective approach, the optimization of one criterion is generally performed while considering that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases.
+With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the parameters of the problems or that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal according to this criterion and unique. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Section \ref{}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached, there may be cases where several solutions share the same evaluations on all the criteria.
 
 For instance, when designing ICs, a manufacturer will try to simultaneously maximize the performance while minimize the cost of the circuit. However, we can already guess that those two objectives are conflicting. Also, producing high-end ICs can be subject to more difficulties in terms of thermal dissipation. In addition, a criterion based on ecological standards may have impacts on the cost and the performance of an IC.
 
-This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum. A solution that optimizes a criterion will likely to affect another.
+This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum. A solution that optimizes one criterion will likely to affect another.
 
-In order to deal with the multiple objectives of a problem, another approach consists in taking into account all the criteria simultaneously. This is the aim of multi-criteria decision aid which goal is to provide support to a decision maker facing several conflicting solutions. MCDA allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
+In order to deal with the multiple criteria of a problem, another paradigm consists in taking into account all the criteria simultaneously. This is the aim of the multi-criteria paradigm which aim to:
+\begin{enumerate}
+\item find the solutions that optimizes all the criteria simultaneously with the multi-objective optimization;
+\item provide support to a decision maker facing several conflicting solutions with multi-criteria decision aid (MCDA) that allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
+\end{enumerate}
+
+\section{The multi-criteria paradigm}
+\label{sec:rol2.multicrit_paradigm}
+
+% In order to deal with the multiple objectives of a problem, another approach consists in taking into account all the criteria simultaneously. This is the aim of multi-criteria decision aid which goal is to provide support to a decision maker facing several conflicting solutions. MCDA allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
+
+\subsection{Problem formulation}
+A multi-criteria problem can be formulated without loss of generality as follows \cite{BraMar2002}:
+\begin{equation}
+\begin{gathered}
+\min {f_1(x), f_2(x), \dots, f_m(x)}\\
+x \in A
+\end{gathered}
+\end{equation}
+where ${f_1(x), f_2(x), \dots, f_m(x)}$ is a set of $m$ criteria that needs to be minimized.
+
+\subsubsection{Ill-posed problem}
+
+\subsubsection{Dominance principle}
+
+\subsubsection{Pareto-dominance}
 
 
-In a multi-criteria analysis, the first step is to identify the set of alternatives, denoted $\mathcal{A}=\{a_1, a_2, \ldots, a_n\}$ and evaluation criteria, denoted $\mathcal{F}=\{f_1,f_2,\ldots, f_m\}$. From this set, the Pareto frontier, which is the set of non-dominated solutions, can be identified. This dominance principle is defined as follows:
+In a multi-criteria paradigm, the first step is to identify the set of alternatives, denoted $\mathcal{A}=\{a_1, a_2, \ldots, a_n\}$ and evaluation criteria, denoted $\mathcal{F}=\{f_1,f_2,\ldots, f_m\}$. From this set, the Pareto frontier, which is the set of non-dominated solutions, can be identified. This dominance principle is defined as follows:
 
-\begin{definition}[Dominance]
+\begin{definition}[Dominance \cite{BraMar2002}]
 A solution $a_1$ dominates a solution $a_2$ if:
 \begin{itemize}
 \item $a_1$ is as least as good as $a_2$ on all criteria;
@@ -130,19 +155,19 @@ Two approaches can be used to establish this set~\cite{Vin92}:
 \end{itemize}
 As explained, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used.
 
-\section{Metaheuristics for multi-objective optimization}
+\subsection{Metaheuristics for multi-objective optimization}
 \label{subsec:metaheuristics}
 Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}.\\
 TODO
 
-\section{Multi-criteria decision aid}
+\subsection{Multi-criteria decision aid}
 \label{subsec:mcda}
 Once the Pareto frontier is obtained or approximated, the compromise solutions can be found by establishing a preference model of the decision maker facing several conflicting solutions. Those models can be classified into three broad categories \cite{Vin92, beltstew}:
 
 \begin{enumerate}
-\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. One of the most known aggregation method is the multi-attribute value theory (MAUT) \cite{MMAUT}.
+\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. The most known aggregation methods are the multi-attribute value theory (MAUT) \cite{MMAUT} and the Analytic Hierarchy Process \cite{MAHP}.
 \item \textit{Interactive methods}: it is a sequential process composed by alternating computation steps and dialogue with the decision maker. A first compromise is submitted to the decision maker who can accept or deny it. If the solution is denied, the DM can give extra information about his preferences (dialogue) and a new solution can be calculated, so a new decision process begins. Otherwise, no better solution can be found and the process stops. Among the most known interactive methods, the STEP Method (STEM) \cite{benayoun71} or the Satisficing Trade-Off Method (STOM) \cite{nakayama84} can be cited.
-\item \textit{Outranking methods}: the solutions are compared pairwise, initially for each criterion, which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. PROMETHEE \cite{Brans1}, ELECTRE \cite{Roy66} or Analytic Hierarchy Process \cite{MAHP} are among the most known outranking methods.
+\item \textit{Outranking methods}: the solutions are compared pairwise, initially for each criterion, which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. PROMETHEE \cite{Brans1} and ELECTRE \cite{Roy66} are among the most known outranking methods.
 \end{enumerate}
 
 %Those methods will not be described further here, as they can be found in reference books such as \cite{Vin92}, \cite{BraMar2002, EhrgottFigueiraGreco2005, beltstew, Sch85}.
@@ -154,16 +179,16 @@ Generally, the purpose of MCDA is to give answers for three main problematics \c
 \item \textit{The ranking problematic (P.$\gamma$)}: the aid aims the complete or partial preorder of all the solutions.
 \end{enumerate}
 
-\subsection{Multi-Attribute Value Theory}
+\subsubsection{Multi-Attribute Value Theory}
 TODO
 
-\subsection{STEP Method (STEM)}
+\subsubsection{STEP Method (STEM)}
 TODO
 
-\subsection{Satisficing Trade-Off Method (STOM)}
+\subsubsection{Satisficing Trade-Off Method (STOM)}
 TODO
 
-\subsection{The PROMETHEE methods}
+\subsubsection{The PROMETHEE methods}
 PROMETHEE (Preference Ranking Organisation METHod for Enrichment Evaluations) has been developed by Brans \cite{Brans1}. In this section, we will only describe the basics of PROMETHEE. More details can be found in \cite{Beh2010}.\\
 The PROMETHEE methods are based on the three following steps:
 \begin{itemize}
@@ -254,7 +279,7 @@ While it is impossible to have a visual representation of the solution space whe
 The representation is based on the principal component analysis of the net flows, which allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
 \end{enumerate}
 
-\subsection{The ELECTRE methods}
+\subsubsection{The ELECTRE methods}
 ELECTRE (\textit{ELimination Et Choix Traduisant la REalité}, or ELimination and Choice Expressing REality) has been developed by Roy \cite{Roy66}. In this section, we will only described the basics of ELECTRE. More details can be found in \cite{electre}.
 
 \begin{enumerate}
@@ -345,7 +370,7 @@ A ranking can be determined from a qualification index $Q(a)$ for each alternati
 %This method is similar to ELECTRE III and aims to sort alternatives but without considering weights on the criteria.
 \end{enumerate}
 
-\subsection{AHP (Analytical Hierarchy Process)}
+\subsubsection{AHP (Analytical Hierarchy Process)}
 AHP (Analytical Hierarchy Process) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
 
 \begin{enumerate}

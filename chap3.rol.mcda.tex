@@ -150,12 +150,33 @@ Two approaches can be used to establish this set~\cite{Vin92}:
 \item \textit{Exact methods} which aims to compute the Pareto frontier directly~\cite{EhrgottGandibleuxbook02,steuer86a}.
 \item \textit{Approximate methods} which are based on metaheuristics to quickly explore the solution space and approach as best as possible the Pareto optimal frontier\cite{talbi09}.
 \end{itemize}
-As explained, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to show the applicability of a multi-criteria paradigm to the design of 3D circuits.
+As explained in Section \ref{}, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to show the applicability of a multi-criteria paradigm to the design of 3D circuits.
 
 \subsection{Metaheuristics for multi-objective optimization}
 \label{subsec:metaheuristics}
-Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}.\\
-TODO
+Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}. As stated previously, the optimal solution of a multi-objective optimization problem (MOP) is not a single solution as for mono-objective optimization problem, but a set of solutions defined as Pareto optimal solutions. The main goal is therefore to obtain these compromise solutions.
+
+In our study, there are few hopes to find the exact Pareto optimal solutions. In such cases, metaheuristics are commonly used and the goal is then to find an approximation of this set. Two properties has to be respected in order to ensure good approximations: convergence to the Pareto optimal front and uniform diversity. The first property allows to have solutions that are closed to the Pareto set whereas the second property shows a good distribution around the Pareto front.
+
+Numerous metaheuristics have been developed since the 50s. Among the most known, let us cite genetic algorithm \cite{holland1975adaptation}, scatter search \cite{Glover77}, simulated annealing \cite{KirkpatrickGelattVecchi83}, tabu search \cite{Glover86}, memetic algorithms \cite{moscato89on} and ant colony optimization \cite{Dor92a.phd}.
+
+In this work, we will focus on genetic algorithms (GA) as they are quick to implement for a first approach and are suitable to heterogeneous variables problems. More details about other metaheuristics can be found in reference books such as \cite{talbi09,dreo06metaheuristics,8125462}.
+
+\subsection{Genetic algorithm}
+Genetic algorithm is metaheuristic that reproduces the properties of natural selection as described by Charles Darwin. It is based on the principle of the improvement of the gene pool of a population over generations. GAs will mimics the natural evolution with techniques such as selection, crossover and mutation.
+
+\subsubsection{Initialization}
+
+\subsubsection{Selection}
+
+\subsubsection{Crossover}
+
+\subsubsection{Mutation}
+
+\subsubsection{Termination}
+
+\subsection{Multi-objective genetic algorithm: NSGA-II}
+\cite{Srinivas94multiobjectiveoptimization, Deb00afast}
 
 \subsection{Multi-criteria decision aid}
 \label{subsec:mcda}
@@ -181,6 +202,19 @@ Generally, the purpose of MCDA is to give answers for three main problematics \c
 
 \subsubsection{Multi-Attribute Value Theory}
 TODO
+
+\subsubsection{AHP (Analytical Hierarchy Process)}
+AHP (Analytical Hierarchy Process) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
+
+\begin{enumerate}
+\item State the problem
+\item Broaden the objectives of the problem or consider all actors, objectives and its outcome.
+\item Identify the criteria that influence the behaviour.
+\item Structure the problem in a hierarchy of different levels constituting goal, criteria, sub-criteria and alternatives.
+\item Compare each element in the corresponding level and calibrate them on the numerical scale. Consequently build the comparison matrix with the computed valued based on the comparisons.
+\item Compute the highest eigenvalue of the matrix, the consistecy index (CI), the consistency ration (CR) and the normalized values for each criterion/alternative.
+\item If the maximum eigenvalue, CI and CR are satisfactory, the decision is taken based on the normalized values. Otherwise, the procedure is repeated until these values reach an acceptable range.
+\end{enumerate}
 
 \subsubsection{STEP Method (STEM)}
 TODO
@@ -368,17 +402,4 @@ A ranking can be determined from a qualification index $Q(a)$ for each alternati
 %\item \textit{\underline{ELECTRE IV}}
 %
 %This method is similar to ELECTRE III and aims to sort alternatives but without considering weights on the criteria.
-\end{enumerate}
-
-\subsubsection{AHP (Analytical Hierarchy Process)}
-AHP (Analytical Hierarchy Process) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
-
-\begin{enumerate}
-\item State the problem
-\item Broaden the objectives of the problem or consider all actors, objectives and its outcome.
-\item Identify the criteria that influence the behaviour.
-\item Structure the problem in a hierarchy of different levels constituting goal, criteria, sub-criteria and alternatives.
-\item Compare each element in the corresponding level and calibrate them on the numerical scale. Consequently build the comparison matrix with the computed valued based on the comparisons.
-\item Compute the highest eigenvalue of the matrix, the consistecy index (CI), the consistency ration (CR) and the normalized values for each criterion/alternative.
-\item If the maximum eigenvalue, CI and CR are satisfactory, the decision is taken based on the normalized values. Otherwise, the procedure is repeated until these values reach an acceptable range.
 \end{enumerate}

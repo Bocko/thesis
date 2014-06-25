@@ -126,6 +126,7 @@ In order to deal with the multiple criteria of a problem, another paradigm consi
 \subsection{Problem formulation}
 A multi-criteria problem can be formulated without loss of generality as follows \cite{BraMar2002}:
 \begin{equation}
+\label{multicrit_formulation}
 \begin{gathered}
 \min \{f_1(x), f_2(x), \dots, f_m(x)\}\\
 x \in A
@@ -163,17 +164,33 @@ Numerous metaheuristics have been developed since the 50s. Among the most known,
 In this work, we will focus on genetic algorithms (GA) as they are quick to implement for a first approach and are suitable to heterogeneous variables problems. More details about other metaheuristics can be found in reference books such as \cite{talbi09,dreo06metaheuristics,8125462}.
 
 \subsection{Genetic algorithm}
-Genetic algorithm is metaheuristic that reproduces the properties of natural selection as described by Charles Darwin. It is based on the principle of the improvement of the gene pool of a population over generations. GAs will mimics the natural evolution with techniques such as selection, crossover and mutation.
+Genetic algorithm has been developed by Holland in the 1970s \cite{holland1975adaptation}. It is a metaheuristic that reproduces the properties of natural selection as described by Charles Darwin. GA is based on the principle of the improvement of the gene pool of a population over generations. GAs will mimics the natural evolution with techniques such as selection, crossover and mutation.
+
+The methodology rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with a randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitutes the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied.
+
+\subsubsection{Representation of a solution}
+The representation or encoding of a solution is called a chromosome and depends on the problem. Several examples of problems show binary encodings however, in our study we will use a real-valued matrix that will be detailed in Section \ref{}. Nevertheless, without loss of generality, we will illustrate the principles of a genetic algorithm by using binary-coded solutions.
 
 \subsubsection{Initialization}
+Initially many solutions are generated, usually randomly to form the initial population. The number of produced individuals range from hundreds to thousands. Depending on the problem, the generation of the initial population can be guided (seeded) to areas where optimal solutions are likely to be found.
 
 \subsubsection{Selection}
+The selection is a stochastic process usually planned so that the fitter solutions have a higher probability of being selected. This aims to ensure the convergence of the algorithm.
 
 \subsubsection{Crossover}
+Once a pair of individuals has been selected, they will be crossed-over. Typically, two children are created from each set of parents. One method of crossover will be explained here but other approaches exists \cite{}. A random crossover point will be selected on both parents. Beyond that point, the data will be swapped with the information of the other parent, as shown in Figure \ref{}.
 
 \subsubsection{Mutation}
+Mutation is a genetic operation used to ensure diversity in the generated populations. It changed one or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Figure \ref{}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Section \ref{}).
 
 \subsubsection{Termination}
+The generational process is repeated until a termination condition has been encountered. Common conditions are:
+\begin{itemize}
+\item a certain level of fitness reached;
+\item fixed number of generations reached;
+\item simulation elapsed time reached;
+\item no better results produced after several generations.
+\end{itemize}
 
 \subsection{Multi-objective genetic algorithm: NSGA-II}
 \cite{Srinivas94multiobjectiveoptimization, Deb00afast}
@@ -183,7 +200,7 @@ Genetic algorithm is metaheuristic that reproduces the properties of natural sel
 Once the Pareto frontier is obtained or approximated, the compromise solutions can be found by establishing a preference model of the decision maker facing several conflicting solutions. Those models can be classified into three broad categories \cite{Vin92, beltstew} whose methods will be detailed in Section \ref{subsec:mcdamethods}:
 
 \begin{enumerate}
-\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. The most known aggregation methods are the multi-attribute value theory (MAUT) \cite{MMAUT} and the Analytic Hierarchy Process \cite{MAHP}.
+\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. The most known aggregation methods are the Multi-Attribute Utility Theory (MAUT) \cite{MMAUT} and the Analytic Hierarchy Process \cite{MAHP}.
 \item \textit{Interactive methods}: it is a sequential process composed by alternating computation steps and dialogue with the decision maker. A first compromise is submitted to the decision maker who can accept or deny it. If the solution is denied, the DM can give extra information about his preferences (dialogue) and a new solution can be calculated, so a new decision process begins. Otherwise, no better solution can be found and the process stops. Among the most known interactive methods, the STEP Method (STEM) \cite{benayoun71} or the Satisficing Trade-Off Method (STOM) \cite{nakayama84} can be cited.
 \item \textit{Outranking methods}: the solutions are compared pairwise, initially for each criterion, which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. PROMETHEE \cite{Brans1} and ELECTRE \cite{Roy66} are among the most known outranking methods.
 \end{enumerate}
@@ -200,11 +217,28 @@ Generally, the purpose of MCDA is to give answers for three main problematics \c
 \subsection{Some important multi-criteria methods}
 \label{subsec:mcdamethods}
 
-\subsubsection{Multi-Attribute Value Theory}
-TODO
+\subsubsection{Multi-Attribute Utility Theory}
+Multi-Attribute Utility Theory (MAUT) has been introduced by Fishburn \cite{Fishburn70} and Keeney and Raiffa \cite{KeeneyRaiffa76}. This method belongs to the family of aggregation methods that consist in substituting the initial multi-criteria problem
+\begin{equation}
+\min \{f_1(x), f_2(x), \dots, f_m(x) | x \in \mathcal{A}\}
+\end{equation}
+the following uni-criterion problem:
+\begin{equation}
+min \{U(x) | x \in \mathcal{A}\}
+\end{equation}
+where $U(x)$ is called the utility function that aggregates all the criteria to a single criterion:
+\begin{equation}
+U(x) = U[f_1(x), f_2(x), \dots, f_m(x)]
+\end{equation}
 
-\subsubsection{AHP (Analytical Hierarchy Process)}
-AHP (Analytical Hierarchy Process) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
+One of the most used utility function is the weighted sum:
+\begin{equation}
+U(x) = \sum_{j=1}^{m} w_j f_j(x)
+\end{equation}
+
+
+\subsubsection{Analytical Hierarchy Process (AHP)}
+Analytical Hierarchy Process (AHP) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
 
 \begin{enumerate}
 \item State the problem
@@ -217,10 +251,30 @@ AHP (Analytical Hierarchy Process) has been developed by Saaty \cite{MAHP}. This
 \end{enumerate}
 
 \subsubsection{STEP Method (STEM)}
-TODO
+The STEP Method has been proposed by Benayoun \cite{benayoun71}. STEM is an interactive and iterative exploration procedure that aims to reach the best compromise according the decision maker after a certain number of cycles. Each cycle is composed of a calculation phase and a decision-making phase (discussion with the decision maker):
+\begin{enumerate}
+\item An efficient compromise solution is determined.
+\item This solution is submitted to the decision maker. Three cases can then happen:
+	\begin{enumerate}
+	\item \label{stem2} The decision maker is satisfied and the procedure ends;
+	\item The decision maker wants to simultaneously improve all the evaluations. This is impossible since the proposed solution is efficient. The procedure ends and cannot help the decision maker.
+	\item The decision maker identifies a particular criterion on which a concession can be made in order to improve other criteria. A new efficient solution can then be determined.
+	\item This new solution is submitted. Go to step \ref{stem2}.
+	\end{enumerate}
+\end{enumerate}
 
 \subsubsection{Satisficing Trade-Off Method (STOM)}
-TODO
+The STOM method has been proposed by Nakayama \cite{nakayama84}. Similarly to STEM, it relies on a discussion with the decision maker but is based on the setting of an ideal defined as follows:
+\begin{definition}[Ideal point]
+The ideal point $f^*=(f_1^*, f_2^*, \dots, f_m^*)$ is defined such that $f_i^* = \min \{f_i(x), \forall i=1, 2, \dots, m, \forall x \in \mathcal{A}\}$. The ideal point possesses as coordinates the best values that can be achieved for each criterion separately.
+\end{definition}
+STOM can be summarized in four steps:
+\begin{enumerate}
+\item The first step is to set the ideal point.
+\item Then the aspiration level for each criterion is asked to the decision maker.
+\item \label{stom3} A Pareto solution nearest to the aspiration level is determined.
+\item This solution is submitted to the decision maker. If it is satisfactory, the procedure ends. Otherwise, the decision maker is asked to trade off to define another aspiration level. Go to step \ref{stom3}.
+\end{enumerate}
 
 \subsubsection{The PROMETHEE methods}
 PROMETHEE (Preference Ranking Organisation METHod for Enrichment Evaluations) has been initiated by Brans \cite{Brans1}. In this section, we will only describe the basics of PROMETHEE. More details can be found in \cite{Beh2010}.\\

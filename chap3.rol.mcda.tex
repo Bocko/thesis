@@ -164,9 +164,9 @@ Numerous metaheuristics have been developed since the 50s. Among the most known,
 In this work, we will focus on genetic algorithms (GA) as they are quick to implement for a first approach and are suitable to heterogeneous variables problems. More details about other metaheuristics can be found in reference books such as \cite{talbi09,dreo06metaheuristics,8125462}.
 
 \subsection{Genetic algorithm}
-Genetic algorithm has been developed by Holland in the 1970s \cite{holland1975adaptation}. It is a metaheuristic that reproduces the properties of natural selection as described by Charles Darwin. GA is based on the principle of the improvement of the gene pool of a population over generations. GAs will mimics the natural evolution with techniques such as selection, crossover and mutation.
+Genetic algorithm has been developed by Holland in the 1970s \cite{holland1975adaptation}. It is a metaheuristic that reproduces the properties of natural selection as described by Charles Darwin. GA is based on the principle of the improvement of the gene pool of a population over generations. GAs will mimics the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm).
 
-The methodology rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with a randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitutes the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied.
+Genetic algorithms rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with a randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitutes the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied.
 
 \subsubsection{Representation of a solution}
 The representation or encoding of a solution is called a chromosome and depends on the problem. Several examples of problems show binary encodings however, in our study we will use a real-valued matrix that will be detailed in Section \ref{}. Nevertheless, without loss of generality, we will illustrate the principles of a genetic algorithm by using binary-coded solutions.
@@ -193,7 +193,20 @@ The generational process is repeated until a termination condition has been enco
 \end{itemize}
 
 \subsection{Multi-objective genetic algorithm: NSGA-II}
-\cite{Srinivas94multiobjectiveoptimization, Deb00afast}
+%\cite{Srinivas94multiobjectiveoptimization, Deb00afast}
+NSGA-II stands for Non-dominated Sorting Genetic Algorithm and has been developed by Deb \cite{Deb00afast} to provide a multi-objective version for genetic algorithms. It is an evolution of the original NSGA proposed in \cite{Srinivas94multiobjectiveoptimization}. NSGA-II follows the same steps as a classical GA and additionally implements techniques, particularly in the selection step, to take into account several objectives simultaneously.
+
+\subsubsection{NSGA-II selection}
+The selection is based on the Pareto dominance principle, particularly the Pareto rank and the crowding distance.
+\begin{definition}[Pareto rank]
+From a given pool of solutions, the Pareto optimal ones are of rank 1. For the higher ranks the following process is repeated iteratively: to find the solutions of rank $i \geq 2$, the solutions of rank $i-1$ are removed and the Pareto solutions from this subset are of rank $i$.
+\end{definition}
+
+\begin{definition}[Crowding distance]
+The crowding distance is a measure of the density of solutions surrounding a particular solution.
+\end{definition}
+
+The number of solutions per generation is defined as fixed. Between two solutions with different Pareto ranks, the lower rank will be preferred. Otherwise, if both solutions have the same Pareto rank then the one located in a lesser crowded region will be preferred.
 
 \subsection{Multi-criteria decision aid}
 \label{subsec:mcda}
@@ -210,8 +223,18 @@ Once the Pareto frontier is obtained or approximated, the compromise solutions c
 Generally, the purpose of MCDA is to give answers for three main problematics \cite{EhrgottFigueiraGreco2005}:
 \begin{enumerate}
 \item \textit{The choice problematic (P.$\alpha$)}: the aid aims the selection of a small number of good solutions in such way that one or several solutions can be chosen.
-\item \textit{The sorting problematic (P.$\beta$)}: the aid aims the assignment of each solution to a predefined ordered category.
+\begin{example}
+In circuit design, the objective would be to choose the best compromise CPU in terms of performance and price.
+\end{example}
+\item \textit{The sorting problematic (P.$\beta$)}: the aid aims the assignment of each solution to a predefined (ordered) category.
+\begin{example}
+%Usage pro, casual, gamer
+Depending on performance, price, radiation resistance, thermal operational range, electronic components can be sorted for commercial, industrial or military and spatial purposes.
+\end{example}
 \item \textit{The ranking problematic (P.$\gamma$)}: the aid aims the complete or partial preorder of all the solutions.
+\begin{example}
+With a preorder for CPUs based on an assessment of performance, it is possible to tag a price depending on the ranking.
+\end{example}
 \end{enumerate}
 
 \subsection{Some important multi-criteria methods}
@@ -236,19 +259,36 @@ One of the most used utility function is the weighted sum:
 U(x) = \sum_{j=1}^{m} w_j f_j(x)
 \end{equation}
 
+With this utility function, it is then possible to compute an aggregated score for each solutions and rank them in order to choose among the best ones.
 
 \subsubsection{Analytical Hierarchy Process (AHP)}
-Analytical Hierarchy Process (AHP) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP also proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. This methods can be summarized in seven key steps \cite{Vaidya20061}
+Analytical Hierarchy Process (AHP) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. 
 
-\begin{enumerate}
-\item State the problem
-\item Broaden the objectives of the problem or consider all actors, objectives and its outcome.
-\item Identify the criteria that influence the behaviour.
-\item Structure the problem in a hierarchy of different levels constituting goal, criteria, sub-criteria and alternatives.
-\item Compare each element in the corresponding level and calibrate them on the numerical scale. Consequently build the comparison matrix with the computed valued based on the comparisons.
-\item Compute the highest eigenvalue of the matrix, the consistecy index (CI), the consistency ration (CR) and the normalized values for each criterion/alternative.
-\item If the maximum eigenvalue, CI and CR are satisfactory, the decision is taken based on the normalized values. Otherwise, the procedure is repeated until these values reach an acceptable range.
-\end{enumerate}
+In order to illustrate AHP, we will give more details on a particular case where only the criteria are compared. The decision maker will make pairwise comparisons and give an ordinal scale of preference for the criteria. The following matrix can be obtained:
+\begin{equation}
+A=\begin{pmatrix}
+1 & a_{12} & \dots & a_{1j} & \dots & a_{1m}\\
+\frac{1}{a_{12}} & 1 & \dots & a{2j} & \dots & a_{2m}\\
+\vdots \\
+\frac{1}{a_{1j}} & \frac{1}{a_{2j}} & \dots & a_{ij} & \dots & a_{im}\\
+\vdots \\
+\frac{1}{a_{1m}} & \frac{1}{a_{2m}} & \dots & a_{im} & \dots & 1
+\end{pmatrix}
+\end{equation}
+where $a_{ij}$ is expresses the relative importance of the criterion $i$ over the criterion $j$.
+
+From this matrix, AHP uses a method based on eigenvector to extract the related weights of each criterion that can be used, for instance, as input data for MAUT in a weighted sum.
+
+%This methods can be summarized in seven key steps \cite{Vaidya20061}
+%\begin{enumerate}
+%\item State the problem
+%\item Broaden the objectives of the problem or consider all actors, objectives and its outcome.
+%\item Identify the criteria that influence the behaviour.
+%\item Structure the problem in a hierarchy of different levels constituting goal, criteria, sub-criteria and alternatives.
+%\item Compare each element in the corresponding level and calibrate them on the numerical scale. Consequently build the comparison matrix with the computed valued based on the comparisons.
+%\item Compute the highest eigenvalue of the matrix, the consistecy index (CI), the consistency ration (CR) and the normalized values for each criterion/alternative.
+%\item If the maximum eigenvalue, CI and CR are satisfactory, the decision is taken based on the normalized values. Otherwise, the procedure is repeated until these values reach an acceptable range.
+%\end{enumerate}
 
 \subsubsection{STEP Method (STEM)}
 The STEP Method has been proposed by Benayoun \cite{benayoun71}. STEM is an interactive and iterative exploration procedure that aims to reach the best compromise according the decision maker after a certain number of cycles. Each cycle is composed of a calculation phase and a decision-making phase (discussion with the decision maker):
@@ -264,7 +304,7 @@ The STEP Method has been proposed by Benayoun \cite{benayoun71}. STEM is an inte
 \end{enumerate}
 
 \subsubsection{Satisficing Trade-Off Method (STOM)}
-The STOM method has been proposed by Nakayama \cite{nakayama84}. Similarly to STEM, it relies on a discussion with the decision maker but is based on the setting of an ideal defined as follows:
+The STOM method has been proposed by Nakayama \cite{nakayama84}. Similarly to STEM, it relies on a discussion with the decision maker but is based on the setting of an ideal point defined as follows:
 \begin{definition}[Ideal point]
 The ideal point $f^*=(f_1^*, f_2^*, \dots, f_m^*)$ is defined such that $f_i^* = \min \{f_i(x), \forall i=1, 2, \dots, m, \forall x \in \mathcal{A}\}$. The ideal point possesses as coordinates the best values that can be achieved for each criterion separately.
 \end{definition}
@@ -277,36 +317,67 @@ STOM can be summarized in four steps:
 \end{enumerate}
 
 \subsubsection{The PROMETHEE methods}
-PROMETHEE (Preference Ranking Organisation METHod for Enrichment Evaluations) has been initiated by Brans \cite{Brans1}. In this section, we will only describe the basics of PROMETHEE. More details can be found in \cite{Beh2010}.\\
+PROMETHEE (Preference Ranking Organisation METHod for Enrichment Evaluations) has been initiated by Brans \cite{Brans1} and developed with Mareschal \cite{mares2ejor88} and Vincke \cite{BransMarechalVincke84}. In this section, we will only describe the basics of PROMETHEE. More details can be found in \cite{Beh2010}.\\
 The PROMETHEE methods are based on the three following steps:
 \begin{itemize}
 \item Enriching the preference structure: a preference function is introduced.
 \item Enriching the dominance relation: a valued outranking relation is determined.
-\item Decision aid: the valued outranking relation are exploited.
+\item Decision aid: the valued outranking relations are exploited.
 \end{itemize}
 
 \begin{enumerate}
 \item \textit{\underline{Preference function}}\\
-Since the dominance relation is really poor (binary relation), a preference function $P_k(a_1,a_2)$ will be introduce to enrich it. This function gives the preference degree of an alternative $a_1$ over an alternative $a_2$ with respect to the function $d_k(a_1,a_2) = f_k(a_1) - f_k(a_2)$ which is the difference between the evaluation of $a_1$ and $a_2$ for the criterion $j$.\\
-Consequently, it is therefore possible several types of preference functions based on preference ($P$) or indifference ($Q$) thresholds. Below the indifference threshold, the decision maker will consider having no preference while above the preference threshold, the decision maker will have no more difference in its preference.
+Since the dominance relation is really poor (binary relation), a preference function $P_k(a_i,a_j)$ will be introduce to enrich it. This function gives the preference degree of an alternative $a_i$ over an alternative $a_j$ with respect to the function $d_k(a_i,a_j) = f_k(a_i) - f_k(a_j)$ which is the difference between the evaluation of $a_i$ and $a_j$ for the criterion $k$, assuming a monotonic function.\\
+Consequently, it is therefore possible to define several types of preference functions based on preference ($P$) or indifference ($Q$) thresholds, as shown in Table \ref{tab:pref_func}. Below the indifference threshold, the decision maker will consider having no preference while above the preference threshold, the decision maker will have no more difference in its preference.
 
-\item \textit{\underline{valued outranking relation}}\\
+\begin{table}[h!]
+\caption{Preference functions}
+\begin{center}
+\begin{tabular}{|l|c|b{4.2cm}|}
+\hline Usual & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_usual_pdf} & Strict preference\\
+\hline U-shape & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_ushape_pdf} & Q: indifference threshold\\
+\hline V-shape & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_vshape_pdf} & P: preference threshold\\
+\hline Level & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_level_pdf} & Q: indifference threshold \newline P: preference threshold\\
+\hline Linear & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_linear_pdf} & Q: indifference threshold \newline P: preference threshold\\
+\hline Gaussian & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_gaussian_pdf} & S: preference threshold\\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:pref_func}
+\end{table}
+
+\item \textit{\underline{Valued outranking relation}}\\
 \textit{Multi-criteria preference index}
 
 The multi-criteria preference index is defined as follows:
 \begin{equation}
-\pi (a_1, a_2) = \sum_{k=1}^{m} P_{k}(a_1, a_2).w_{k} \text{ with $\sum_{k=1}^{k} w_{k} = 1$}
+\pi (a_i, a_j) = \sum_{k=1}^{m} P_{k}(a_i, a_j).w_{k}, \forall i \neq j \text{ with $\sum_{k=1}^{k} w_{k} = 1$}
 \end{equation}
-where $w_{k}>0, k=1, 2, ..., m$ are the weights on each criterion. $\pi (a_1, a_2)$ represents a measure of the preference of $a_1$ over $a_2$ on all the criteria.
+where $w_{k}>0, k=1, 2, ..., m$ are the weights on each criterion. $\pi (a_i, a_j)$ represents a measure of the preference of $a_i$ over $a_j$ on all the criteria.
+
+Let us note the following properties of the preference index:
+\begin{eqnarray}
+&\pi(a_i,a_i) = 0&\\
+&0 \leq \pi(a_i,a_j) \leq 1&
+\end{eqnarray}
+%\begin{equation}
+%\pi(a_i, a_j) + \pi(a_j,a_i)
+%\end{equation}
 
 \textit{Outranking flow}
 
 An \og outranking flow \fg is then defined on the basis of the preference index. That allows to compare alternatives with each others. Three types of flow are formulated:
 \begin{itemize}
-\item The positive outranking flow: $\phi^ {+} = \frac{1}{n-1} \sum_{j \neq i} \pi (a_i, a_j)$. This flow expresses how $a_i$ outranks all the other alternatives.
-\item The negative outranking flow:$\phi^ {-} = \frac{1}{n-1} \sum_{j \neq i} \pi (a_j, a_i)$. This flow expresses how $a_i$ is outranked by all the other alternatives.
+\item The positive outranking flow: $\phi^{+} = \frac{1}{n-1} \sum_{j \neq i} \pi (a_i, a_j)$. This flow expresses how $a_i$ outranks all the other alternatives.
+\item The negative outranking flow:$\phi^{-} = \frac{1}{n-1} \sum_{j \neq i} \pi (a_j, a_i)$. This flow expresses how $a_i$ is outranked by all the other alternatives.
 \item The net flow: $\phi(a) = \phi^{+}(a_i) - \phi^{-}(a_i)$. This flow expresses the balance between the positive and negative flows of $a_i$
 \end{itemize}
+Let us note the following properties for these flows:
+\begin{eqnarray}
+&\phi^{+}, \phi^{-} \in [0;1]&\\
+&\phi \in [-1;1]&
+\end{eqnarray}
+
 Based on these flows, the PROMETHEE methods will establish an outranking.
 
 \item \textit{\underline{PROMETHEE I}}
@@ -365,6 +436,8 @@ Let us note that, unlike PROMETHEE I, PROMETHEE II does not suffer from incompar
 While it is impossible to have a visual representation of the solution space when there are more than three criteria, the GAIA (Geometrical Analysis for Interactive Assistance) plane can give a visualization even if there are more than three criteria, by means of the computation of the net flows on the decision maker's preferences for each criterion.
 
 The representation is based on the principal component analysis of the net flows, which allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
+
+This plan allows to have a visual descriptive analysis with several criteria. It can highlight the conflict between criteria and show the profiles of the alternatives. This will help to identify the potential compromise solutions.
 \end{enumerate}
 
 \subsubsection{The ELECTRE methods}
@@ -373,11 +446,11 @@ ELECTRE (\textit{ELimination Et Choix Traduisant la REalité}, or ELimination an
 \begin{enumerate}
 \item \textit{\underline{ELECTRE I}}
 
-ELECTRE I is a method linked to the $P.\alpha$ problematic that aims to obtain a subset $N$ of alternatives such that all the solutions that do not belong to this set is outranked by at least one alternative of $N$. $N$ is threfore not the set of good alternatives but rather the set where the best compromise can certainly be found.
+ELECTRE I is a method linked to the $P.\alpha$ problematic that aims to obtain a subset $N$ of alternatives such that all the solutions that do not belong to this set is outranked by at least one alternative of $N$ and the solutions of $N$ do not dominate each other. $N$ is therefore not the set of good alternatives but rather the set where the best compromise can certainly be found.
 
 The outranking relation is obtained by establishing a weight $w_k$ for each criterion. A concordance index is the associated to each pair $(a_i, a_j)$ of alternatives:
 \begin{equation}
-c(a_i, a_j) = \frac{1}{W} \sum_{j:f_{k}(a_i) \geq f_{k}(a_j)}{w_{k}}, \text{ where } W = \sum_{k=1}^{m} w_{k}
+c(a_i, a_j) = \frac{1}{W} \sum_{j:f_{k}(a_i) \geq f_{k}(a_j)}{w_{k}}, \text{ where } W = \sum_{k=1}^{m} w_{k}, w_k > 0
 \end{equation}
 The concordance index represents a measure of the arguments favourable to the statement \og \textit{$a_i$ outranks $a_j$} \fg.
 
@@ -427,9 +500,9 @@ a_iS^{f}a_j \text{ iff } \begin{cases}
 \end{equation}
 The discordance can also induce two levels of relations by building two sets of discordance for each criterion.
 
-In order to obtain the ranking, a set is determined from $S^ {F}$. This set $B$ contains the alternatives that are not strongly outranked by any others. From $B$ and $S^{f}$, the set $A^{1}$ of alternatives that are not weakly outranked by any alternatives of $B$ is determined. The set $A^{1}$ constitutes the best alternatives class. The process is repeated until a complete pre-order is obtained.
+In order to obtain the ranking, a set is determined from $S^ {F}$. This set $B$ contains the alternatives that are not strongly outranked by any others. From $B$ and $S^{f}$, the set $A^{1}$ of alternatives that are not weakly outranked by any alternatives of $B$ is determined. The set $A^{1}$ constitutes the best alternatives class. $A^{1}$ is then removed and the process is repeated to find $A^{2}$ and so on until a complete pre-order is obtained.
 
-A second complete pre-order can be obtained by applying the process first with the less good alternatives class and then the best ones.
+Let us note that a second complete pre-order can be obtained by applying the process first with the less good alternatives class and then the best ones.
 
 \item \textit{\underline{ELECTRE III}}
 
@@ -443,17 +516,47 @@ c(a_i, a_j) = \frac{1}{W} \sum_{k=1}^{m} w_{k} c_{k}(a_i, a_j), \text{ where } W
 \end{equation}
 with
 \begin{equation}
-c_{j}(a,b) = \begin{cases}
-	1& \text{if $g_{k}(a)+q_{k}(g_{k}(a)) \geq g_{k}(b)$}\\
-	0& \text{if $g_{k}(a)+p_{k}(g_{k}(a)) \leq g_{k}(b)$}\\
-	\text{linear in between}
+c_{k}(a_i,a_j) = \begin{cases}
+	1& \text{if } f_{k}(a_i)+q_{k}(f_{k}(a_i)) \geq f_{k}(a_j)\\
+	0& \text{if } f_{k}(a_i)+p_{k}(f_{k}(a_i)) \leq f_{k}(a_j)\\
+	\text{linear}& \text{if } \begin{array}{rr} f_{k}(a_i)+q_{k}(f_{k}(a_i)) \leq f_{k}(a_j)\\
+	\leq f_{k}(a_i)+p_{k}(f_{k}(a_i)) \end{array}
 	\end{cases}
 \end{equation}
 where $q_{k}$ et $p_{k}$ represent respectively the indifference and preference thresholds.
 
-A ranking can be determined from a qualification index $Q(a)$ for each alternative $a$ that represents the difference between the number of outranked alternatives by $a$ and the number of alternatives that outrank $a$. A total pre-order is obtain by ranking the alternative following their qualification.
+The definition of discordance is then enriched by the introduction of a veto threshold $v_k(f_k(a_i))$ for each criterion $k$ such that any credibility for the outranking of $a_j$ by $a_i$ is refused if $f_k(a_j) \geq f_k(a_i) + v_k(f_k(a_i))$.
+
+A discordance index is then defined:
+\begin{equation}
+D_k(a_i, a_j) = \begin{cases}
+	0 & \text{if } f_k(a_j) \leq f_k(a_i) + p_k(f_k(a_i))\\
+	1 & \text{if } f_k(a_j) \geq f_k(a_i) + v_k(f_k(a_i))\\
+	\text{linear} & \text{if } \begin{array}{rr} f_k(a_i) + p_k(f_k(a_i)) \leq f_k(a_j)\\
+	\leq f_k(a_i) + v_k(f_k(a_i)) \end{array}
+	\end{cases}
+\end{equation}
+
+The degree of outranking is finally defined:
+\begin{equation}
+S(a_i,a_j) = \begin{cases}
+	c(a_i,a_j) & \text{if } \begin{array}{rr}D_k(a_i,a_j) \leq c(a_i,a_j)\\
+		\forall k \end{array}\\
+	c(a_i,a_j) \prod_{k \in \mathcal{F}(a_i,a_j)} \frac{1-D_k(a_i,a_j)}{1-c(a_i,a_j)} & \text{otherwise}
+	\end{cases}
+\end{equation}
+where $\mathcal{F}(a_i,a_j)$ is the set of criteria for which $D_k(a_i,a_j) > c(a_i,a_j)$. The degree of outranking is thus equal to the concordance index when no criterion is discordant, otherwise the concordance index is decreased depending on the importance of the discordances.
+
+A value $\lambda = \max_{a_i,a_j \in \mathcal{A}, i \neq j} S(a_i, a_j)$ is determined and only the outranking degree that have a value greater or equal to $\lambda - s(\lambda)$, where $s(\lambda)$ is a threshold to be determined, are considered. A ranking can then be determined from a qualification index $Q(a)$ for each alternative $a$ that represents the difference between the number of outranked alternatives by $a$ and the number of alternatives that outrank $a$. The set of actions having the largest qualification will be called the first distillate $D_1$.
+
+If $D_1$ contains only one alternative, the previous procedure is repeated with $A \setminus D_1$. Otherwise the same procedure is applied for $D_1$ and if the obtained distillate $D_2$ contains only one alternative, the procedure is repeated with $D_1 \setminus D_2$. Otherwise, it is applied for $D_2$, and so on until $D_1$ is completely used, before starting with $A \setminus D_1$. This procedure produces a first complete preorder.
+
+A second complete preorder can be obtained by applying the opposite procedure where the alternatives with the smallest qualification are first used.
 
 %\item \textit{\underline{ELECTRE IV}}
 %
 %This method is similar to ELECTRE III and aims to sort alternatives but without considering weights on the criteria.
 \end{enumerate}
+
+\section{Conclusion}
+TODO

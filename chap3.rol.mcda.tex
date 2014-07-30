@@ -7,9 +7,9 @@
 
 \section{Introduction}
 \label{sec:rol2.intro}
-In this chapter, we briefly present the major tools from the operations research, in particular the multi-objective optimization and the multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing such problems, two main methods exist: the uni-criterion paradigm and the multi-criteria paradigm. For optimization problems, these paradigm will refer to the terminology mono-objective/multi-objective optimization while for decision aid, the terminology uni-criterion/multi-criteria will be used.
+In this chapter, we briefly present the basics of multi-objective optimization and multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing such problems, two main methods exist: the uni-criterion paradigm and the multi-criteria paradigm. For optimization problems, these paradigm will refer to the terminology mono-objective/multi-objective optimization while for decision aid, the terminology uni-criterion/multi-criteria will be used.
 
-In the following, we will briefly describe each paradigm, showing some of the main approaches alongside illustrative examples. We will first present the uni-criterion methodology, show why it can be limited and explain how a multi-criteria paradigm can be more suitable.
+In the following, we will briefly describe each paradigm, showing some of the main approaches alongside illustrative examples. We will first present the uni-criterion methodology, show why it can be limited in our contect and explain why a multi-criteria paradigm can be more suitable.
 
 \section{The uni-criterion paradigm}
 \label{sec:rol2.unicrit_paradigm}
@@ -23,7 +23,7 @@ An optimization problem can be formulated, without loss of generality, as \cite{
 x \in A
 \end{gathered}
 \end{equation}
-where $f$ is a real-valued function evaluating the solutions denoted $x$, $f$ is also called the \emph{criterion} on which $x$ is evaluated. Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
+where $f$ is a real-valued function evaluating the solutions denoted $x$, and $A$ is the set of solutions, $f$ is also called the \emph{criterion} on which $x$ is evaluated. Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
 $$
 \max_{x \in A} f(x) = - \min_{x \in A} (-f(x))
 $$
@@ -33,7 +33,7 @@ In order to give a more precise idea of what an optimization problem is, we will
 
 \subsection{Examples of typical optimization problems}
 \subsubsection{Linear programming}
-Linear programming (LP) is a method that aims to optimize a linear function, subject to linear equality and linear inequality constraints. This can be formulated as follows:
+Linear programming (LP) is a problem formulation where the aim is to optimize a linear function, subject to linear inequality constraints. This can be formulated as follows:
 \begin{equation}
 \min \mathbf{c}^\intercal\mathbf{x}
 \end{equation}
@@ -44,13 +44,39 @@ A\mathbf{x} \leq \mathbf{b}\\
 \mathbf{x} \geq \mathbf{0}
 \end{gathered}
 \end{equation*}
-where $\mathbf{x}$ is a vector of continuous variables to be determined, $\mathbf{c}$ and $\mathbf{b}$ are vectors of coefficients, $A$ is a matrix of coefficients.
+where $\mathbf{x}$ is a vector of continuous, integer or boolean variables to be determined, $\mathbf{c}$ and $\mathbf{b}$ are vectors of coefficients, $A$ is a matrix of coefficients.
 
 Efficient exact methods for solving LP problem exist such as, among the most knowns, the simplex algorithm \cite{dantzig51} or the interior point method \cite{Karmarkar84}.
 
 \begin{example}[Linear programming]
-A given company produces two electronic boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and for each board $Board_i$ the used amount of memories and the profit. 
+A given company produces two electronic boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and for each board $Board_i$ the used amount of memories and the profit, as shown in Table \ref{tab:ex_lp}. The decision variables are $x_1$ and $x_2$ that represent respectively the amount of $Board_1$ and $Board_2$. The objective is to maximize the profit.\\
+The problem can be formulated as an LP:
+\begin{equation*}
+\text{max profit } = 5x_1 + 4x_2
+\end{equation*}
+subject to the constraints
+\begin{eqnarray*}
+192x_1 + 128 x_2 &\leq& 1024\\
+32x_1 + 64_x2 &\leq& 192\\
+x_1, x_2 &\geq& 0
+\end{eqnarray*}
 \end{example}
+
+\begin{table}[h!]
+\begin{center}
+\caption{Data associated with the LP problem}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& Usage for $Board_1$ & Usage for $Board_2$ & Availability\\
+\hline
+$M_1$ & 192 & 128 & 1024 \\
+$M_2$ & 32 & 64 & 192 \\
+Profit per unit & \euro 5 & \euro 4 & \\
+\hline
+\end{tabular}
+\label{tab:ex_lp}
+\end{center}
+\end{table}
 
 \subsubsection{Integer linear programming}
 Integer linear programming deals with linear problems where the variables are restricted to be integers:
@@ -62,23 +88,47 @@ subject to
 \begin{gathered}
 A\mathbf{x} \leq \mathbf{b}\\
 \mathbf{x} \geq \mathbf{0}\\
-\mathbf{x} \in \mathbb{Z}
+\mathbf{x} \in \mathbb{N}
 \end{gathered}
 \end{equation*}
-where $\mathbf{c}$ and $\mathbf{b}$ are vectors having integers values and $A$ is a matrix of coefficients having integer values.
+where $\mathbf{c}$ and $\mathbf{b}$ are vectors and $A$ is a matrix of coefficients.
 
 When the decision variables are both discrete en continuous, the problem refers to \textbf{mixed integer programming} (MILP).
 
 Other particular ILP problems which deals with variables that are restricted to be either 0 or 1 are called \textbf{0-1 linear programming}.
 
-\begin{example}[Travelling salesman problem (TSP)]
-This is one of the most known optimization problem. It can be formulated as follows: given $n$ cities and the distance between each pair of cities, we have to find the shortest tour that visits each city once and returns to the origin city. This problem can be formulated as an ILP problem.
+\begin{example}[Travelling salesman problem (TSP) \cite{talbi09}]
+This is one of the most known optimization problem. It can be formulated as follows: given $n$ cities and the distance between each pair of cities, we have to find the shortest tour that visits each city once and returns to the origin city. This problem can be formulated as an ILP problem.\\
+Let $d_{ij}$ be the distance between the city $i$ and the city $j$, $S$ be the set of solutions (tours) and define:
+\begin{equation*}
+x_{ij} = \left\{
+	\begin{array}{l l}
+	1 & \text{if the path goes from city $i$ to city $j$}\\
+	0 & \text{otherwise}
+	\end{array}
+\right.
+\end{equation*}
+The ILP formulation is then:
+\begin{equation*}
+\min \sum\limits_{i=0}^{n} \sum\limits_{j=0, j \neq i}^{n} d_{ij} x_{ij}
+\end{equation*}
+s.t.
+\begin{equation*}
+\begin{array}{l l}
+\sum\limits_{i=0, i \neq j}^{n} x_{ij} = 1 & \quad j = 0, \dots, n\\
+\sum\limits_{j=0, j \neq i}^{n} x_{ij} = 1 & \quad i = 0, \dots, n\\
+\sum\limits_{i \in S, j \notin S} x_{ij} \geq 1 & \quad \forall S \subset \{1, \dots, n\}\\
+0 \leq x_{ij} \leq 1 & \quad \forall i,j\\
+x_{ij} \in \mathbb{N} & \quad \forall i,j
+\end{array}
+\end{equation*}
+
 \end{example}
 
 \subsubsection{Non-linear programming}
 Non-linear programming (NLP) models deal with mathematical problems where some of the constraints and/or the objective function are non linear:
 \begin{equation}
-\min \mathbf{c}^\intercal\mathbf{x}
+\min f(x)
 \end{equation}
 where
 \begin{equation*}
@@ -90,11 +140,10 @@ x \in \mathbb{R}^n
 subject to
 \begin{equation*}
 \begin{gathered}
-g_i(x) \leq 0, i \in J = 1, \dots, m\\
-h_j(x) = 0, j \in I = 1, \dots, p
+g_i(x) \leq 0, i \in J = 1, \dots, m
 \end{gathered}
 \end{equation*}
-where $g_i : X \rightarrow \mathbb{R}^n$ are the inequality constraints and $h_j : X \rightarrow \mathbb{R}^n$ are the equality constraints.
+where $g_i : X \rightarrow \mathbb{R}^n$ are the inequality constraints.
 
 NLP are generally more difficult to solve than LP \cite{talbi09} and metaheuristics (see Section \ref{subsec:metaheuristics}) are commonly used to solve this class of problems.
 %\subsubsection{Dynamic programming}
@@ -106,15 +155,16 @@ NLP are generally more difficult to solve than LP \cite{talbi09} and metaheurist
 \section{From the uni-criterion paradigm to the multi-criteria paradigm}
 \label{sec:rol2.unicritmulticrit}
 
-With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the parameters of the problems or that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal according to this criterion and unique. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Section \ref{}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached, there may be cases where several solutions share the same evaluations on all the criteria.
+With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the characteristics of the problems or that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal according to this criterion. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Section \ref{}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached.
+%, there may be cases where several solutions share the same evaluations on all the criteria.
 
 For instance, when designing ICs, a manufacturer will try to simultaneously maximize the performance while minimize the cost of the circuit. However, we can already guess that those two objectives are conflicting. Also, producing high-end ICs can be subject to more difficulties in terms of thermal dissipation. In addition, a criterion based on ecological standards may have impacts on the cost and the performance of an IC.
 
-This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum. A solution that optimizes one criterion will likely to affect another.
+This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum as several criteria have to be simultaneously taken into account. A solution that optimizes one criterion will likely to affect another.
 
 In order to deal with the multiple criteria of a problem, another paradigm consists in taking into account all the criteria simultaneously. This is the aim of the multi-criteria paradigm which aim to:
 \begin{enumerate}
-\item find the solutions that optimizes all the criteria simultaneously with the multi-objective optimization;
+\item find the solutions that are efficient on all the criteria simultaneously with the multi-objective optimization;
 \item provide support to a decision maker facing several conflicting solutions with multi-criteria decision aid (MCDA) that allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
 \end{enumerate}
 
@@ -129,12 +179,12 @@ A multi-criteria problem can be formulated without loss of generality as follows
 \label{multicrit_formulation}
 \begin{gathered}
 \min \{f_1(x), f_2(x), \dots, f_m(x)\}\\
-x \in A
+x \in \mathcal{A}
 \end{gathered}
 \end{equation}
 where $\{f_1(x), f_2(x), \dots, f_m(x)\}$ is a set denoted $\mathcal{F}$ of $m$ evaluation criteria that needs to be minimized and $x$ is a solution of the set $\mathcal{A} = \{a_1, a_2, \dots, a_n\}$.
 
-As explained in Section \ref{sec:rol2.unicritmulticrit}, an optimal solution can be impossible to find for a multi-criteria problem. However, compromise solutions exists and in order to identify them, a dominance relation has been defined \cite{BraMar2002}:
+As explained in Section \ref{sec:rol2.unicritmulticrit}, an optimal solution can be impossible to find for a multi-criteria problem. However, compromise solutions can exist and in order to identify them, a dominance relation has been defined \cite{BraMar2002}:
 
 \begin{definition}[Dominance]
 A solution $a_1$ dominates a solution $a_2$ if:
@@ -144,44 +194,108 @@ A solution $a_1$ dominates a solution $a_2$ if:
 \end{itemize}
 \end{definition}
 
-From this dominance relation, it is then possible to filter the solutions in order to keep only the non-dominated ones. This set of \emph{efficient} solutions is called the Pareto frontier and the solutions that belong to this set are incomparable.
+From this dominance relation, it is then possible to filter the solutions in order to keep only the non-dominated ones. This set of \emph{efficient} solutions is called the Pareto frontier. Let us note that the \emph{efficient} solutions refer to the decision space while the Pareto frontier refers to the evaluation space.
 
 Two approaches can be used to establish this set~\cite{Vin92}:
 \begin{itemize}
 \item \textit{Exact methods} which aims to compute the Pareto frontier directly~\cite{EhrgottGandibleuxbook02,steuer86a}.
 \item \textit{Approximate methods} which are based on metaheuristics to quickly explore the solution space and approach as best as possible the Pareto optimal frontier\cite{talbi09}.
 \end{itemize}
-As explained in Section \ref{}, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to show the applicability of a multi-criteria paradigm to the design of 3D circuits.
+As explained in Section \ref{}, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to show the applicability of a multi-criteria paradigm to the design of 3D circuits. Therefore developing exact methods has been kept out of the scope of this work.
 
 \subsection{Metaheuristics for multi-objective optimization}
 \label{subsec:metaheuristics}
-Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}. As stated previously, the optimal solution of a multi-objective optimization problem (MOP) is not a single solution as for mono-objective optimization problem, but a set of solutions defined as Pareto optimal solutions. The main goal is therefore to obtain these compromise solutions.
+Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}. As stated previously, the optimal solution of a multi-objective optimization problem (MOP) is not a single solution but a set of solutions defined as Pareto optimal solutions. The main goal is therefore to obtain this set.
 
-In our study, there are few hopes to find the exact Pareto optimal solutions. In such cases, metaheuristics are commonly used and the goal is then to find an approximation of this set. Two properties has to be respected in order to ensure good approximations: convergence to the Pareto optimal front and uniform diversity. The first property allows to have solutions that are closed to the Pareto set whereas the second property shows a good distribution around the Pareto front.
+In our study, due to the heterogeneous nature of the criteria, there are few hopes to find the exact Pareto optimal solutions. In such cases, metaheuristics are commonly used and the goal is then to find an approximation of this set. Two properties has to be respected in order to ensure good approximations: convergence to the Pareto optimal front and uniform diversity. The first property allows to have solutions that are closed to the Pareto set whereas the second property shows a good distribution around the Pareto front.
 
 Numerous metaheuristics have been developed since the 50s. Among the most known, let us cite genetic algorithm \cite{holland1975adaptation}, scatter search \cite{Glover77}, simulated annealing \cite{KirkpatrickGelattVecchi83}, tabu search \cite{Glover86}, memetic algorithms \cite{moscato89on} and ant colony optimization \cite{Dor92a.phd}.
 
 In this work, we will focus on genetic algorithms (GA) as they are quick to implement for a first approach and are suitable to heterogeneous variables problems. More details about other metaheuristics can be found in reference books such as \cite{talbi09,dreo06metaheuristics,8125462}.
 
 \subsection{Genetic algorithm}
-Genetic algorithm has been developed by Holland in the 1970s \cite{holland1975adaptation}. It is a metaheuristic that reproduces the properties of natural selection as described by Charles Darwin. GA is based on the principle of the improvement of the gene pool of a population over generations. GAs will mimics the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm).
+Genetic algorithm has been developed by Holland in the 1970s \cite{holland1975adaptation}. It is a metaheuristic that reproduces the properties of a natural selection process as described by Charles Darwin. GA is based on the principle of the improvement of the gene pool of a population over generations. GAs will mimics the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm).
 
-Genetic algorithms rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with a randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitutes the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied.
+Genetic algorithms rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with a randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitutes the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied. The general pseudo-code for genetic algorithms is shown in Algorithm \ref{alg:ga}.
+
+\begin{algorithm}[h!]
+\caption{General pseudo-code for genetic algorithms}
+\label{alg:ga}
+CHOOSE initial population;\\
+EVALUATE each individual's fitness;\\
+\Repeat{TERMINATION CONDITION satisfied}{
+	SELECT parents;\\
+	CROSSOVER pairs of parents;\\
+	MUTATE the resulting offspring;\\
+	EVALUATE the new candidates;\\
+	SELECT individuals for the next generation;
+}
+\end{algorithm}
 
 \subsubsection{Representation of a solution}
 The representation or encoding of a solution is called a chromosome and depends on the problem. Several examples of problems show binary encodings however, in our study we will use a real-valued matrix that will be detailed in Section \ref{}. Nevertheless, without loss of generality, we will illustrate the principles of a genetic algorithm by using binary-coded solutions.
 
 \subsubsection{Initialization}
-Initially many solutions are generated, usually randomly to form the initial population. The number of produced individuals range from hundreds to thousands. Depending on the problem, the generation of the initial population can be guided (seeded) to areas where optimal solutions are likely to be found.
+Initially many solutions are generated, usually randomly to form the initial population. Depending on the problem, the generation of the initial population can be guided (seeded) to areas where optimal solutions are likely to be found.
 
 \subsubsection{Selection}
 The selection is a stochastic process usually planned so that the fitter solutions have a higher probability of being selected. This aims to ensure the convergence of the algorithm.
 
+In particular, one can mention the roulette wheel selection method where the fitness level is used to associate a probability of selection to each candidate. If $f_i$ is the fitness of the individual $i$, its probability to be selected is $p_i = \frac{f_i}{\sum_{j=0}^{n}f_j}$ where $n$ is the number of individuals in the population.
+
 \subsubsection{Crossover}
-Once a pair of individuals has been selected, they will be crossed-over. Typically, two children are created from each set of parents. One method of crossover will be explained here but other approaches exists \cite{}. A random crossover point will be selected on both parents. Beyond that point, the data will be swapped with the information of the other parent, as shown in Figure \ref{}.
+Once a pair of individuals has been selected, they will be crossed-over. Typically, two children are created from each set of parents. One method of crossover (one-point crossover) will be explained here but other approaches exists \cite{}. A random crossover point will be selected on both parents. Beyond that point, the data will be swapped with the information of the other parent as show in Example \ref{ex:crossover}.
+
+\begin{example}[Crossover example]
+\label{ex:crossover}
+Let us consider two individuals $x$ and $y$ of the population:
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{cccccccccc}
+$x$ & = & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 0\\
+$y$ & = & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 0
+\end{tabular}
+\end{center}
+\end{table}
+
+\noindent
+If the randomly-chosen crossover point is 2 then the obtained offspring is:
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{cccc|cccccc}
+$x'$ & = & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0\\
+$y'$ & = & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 0
+\end{tabular}
+\end{center}
+\end{table}
+\end{example}
 
 \subsubsection{Mutation}
-Mutation is a genetic operation used to ensure diversity in the generated populations. It changed one or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Figure \ref{}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Section \ref{}).
+Mutation is a genetic operation used to ensure diversity in the generated populations. It changed one or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Example \ref{ex:mutation}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Section \ref{}).
+
+\begin{example}[Mutation example]
+\label{ex:mutation}
+Let us consider one individual $x'$ of the population:
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{cccccccccc}
+$x'$ & = & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0\\
+\end{tabular}
+\end{center}
+\end{table}
+\end{example}
+
+\noindent
+If the randomly-chosen mutation point is 3 then $x'$ becomes:
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{cccc|c|ccccc}
+\cline{5-5}
+$x'$ & = & 0 & 1 & 1 & 0 & 1 & 0 & 1 & 0\\
+\cline{5-5}
+\end{tabular}
+\end{center}
+\end{table}
 
 \subsubsection{Termination}
 The generational process is repeated until a termination condition has been encountered. Common conditions are:
@@ -194,35 +308,53 @@ The generational process is repeated until a termination condition has been enco
 
 \subsection{Multi-objective genetic algorithm: NSGA-II}
 %\cite{Srinivas94multiobjectiveoptimization, Deb00afast}
+While the original genetic algorithms have been developed for mono-objective purposes, they have also been extended to multi-objective optimization and among the most known, one can cite NSGA-II.
+
 NSGA-II stands for Non-dominated Sorting Genetic Algorithm and has been developed by Deb \cite{Deb00afast} to provide a multi-objective version for genetic algorithms. It is an evolution of the original NSGA proposed in \cite{Srinivas94multiobjectiveoptimization}. NSGA-II follows the same steps as a classical GA and additionally implements techniques, particularly in the selection step, to take into account several objectives simultaneously.
 
 \subsubsection{NSGA-II selection}
-The selection is based on the Pareto dominance principle, particularly the Pareto rank and the crowding distance.
-\begin{definition}[Pareto rank]
+The selection is based on the Pareto dominance principle, particularly the Pareto rank which allows to sort all the solutions of a set following an extended Pareto principle and the crowding distance which estimates how dense the surrounding of a solution is.
+\begin{definition}[Pareto rank \cite{Deb00afast}]
 From a given pool of solutions, the Pareto optimal ones are of rank 1. For the higher ranks the following process is repeated iteratively: to find the solutions of rank $i \geq 2$, the solutions of rank $i-1$ are removed and the Pareto solutions from this subset are of rank $i$.
 \end{definition}
 
-\begin{definition}[Crowding distance]
-The crowding distance is a measure of the density of solutions surrounding a particular solution.
+\begin{definition}[Crowding distance \cite{Deb00afast}]
+The crowding distance is a measure of the density of solutions surrounding a particular point in the population. It is computed by taking the average distance of the two points on either side of this point along each of the objectives (see. Algorithm \ref{alg:crowding_dist}).
 \end{definition}
 
-The number of solutions per generation is defined as fixed. Between two solutions with different Pareto ranks, the lower rank will be preferred. Otherwise, if both solutions have the same Pareto rank then the one located in a lesser crowded region will be preferred.
+\begin{algorithm}[h!]
+\caption{Crowding distance for the set of solutions $A$}
+\label{alg:crowding_dist}
+$l = |A|$;\\
+\ForEach{i}{
+	set $A[i]_{distance} = 0$;
+	}
+\ForEach{objective $m$}{
+	$A$ = sort($A$,m);\\
+	$A[1]_{distance} = A[l]_{distance} = \infty$;\\
+	\For{$i = 2$ to $(l-1)$}{
+		$A[i]_{distance} = A[i]_{distance} + (A[i+1] \cdot m - A[i-1] \cdot m)$
+		}
+	}
+\end{algorithm}
+
+The number of solutions per generation is fixed as constant. Between two solutions with different Pareto ranks, the lower rank will be preferred. Otherwise, if both solutions have the same Pareto rank then the one located in a lesser crowded region will be preferred.
 
 \subsection{Multi-criteria decision aid}
 \label{subsec:mcda}
 Once the Pareto frontier is obtained or approximated, the compromise solutions can be found by establishing a preference model of the decision maker facing several conflicting solutions. Those models can be classified into three broad categories \cite{Vin92, beltstew} whose methods will be detailed in Section \ref{subsec:mcdamethods}:
 
 \begin{enumerate}
-\item \textit{Aggregation methods}: numerical scores are calculated in relationship with the criteria to determine the level of preference for a solution. The most known aggregation methods are the Multi-Attribute Utility Theory (MAUT) \cite{MMAUT} and the Analytic Hierarchy Process \cite{MAHP}.
-\item \textit{Interactive methods}: it is a sequential process composed by alternating computation steps and dialogue with the decision maker. A first compromise is submitted to the decision maker who can accept or deny it. If the solution is denied, the DM can give extra information about his preferences (dialogue) and a new solution can be calculated, so a new decision process begins. Otherwise, no better solution can be found and the process stops. Among the most known interactive methods, the STEP Method (STEM) \cite{benayoun71} or the Satisficing Trade-Off Method (STOM) \cite{nakayama84} can be cited.
-\item \textit{Outranking methods}: the solutions are compared pairwise, initially for each criterion, which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. PROMETHEE \cite{Brans1} and ELECTRE \cite{Roy66} are among the most known outranking methods.
+\item \textit{Aggregation methods}: numerical scores are calculated by aggregating the criteria to determine the level of preference for a solution. The most known aggregation methods are the Multi-Attribute Utility Theory (MAUT) \cite{MMAUT} and the Analytic Hierarchy Process \cite{MAHP}.
+\item \textit{Interactive methods}: it is a sequential process composed by alternating computation steps and dialogue with the decision maker. A first compromise is submitted to the decision maker who can accept or deny it. If the solution is denied, the DM can give extra information (e.g. releasing a constraint) about his preferences (dialogue) and a new solution can be calculated, so a new decision process begins. Otherwise, no better solution can be found and the process stops. Among the most known interactive methods, the STEP Method (STEM) \cite{benayoun71} or the Satisficing Trade-Off Method (STOM) \cite{nakayama84} can be cited.
+\item \textit{Outranking methods}: the solutions are compared pairwise which enables the possibility to identify the relationship between the solutions. This shows the preference for a solution in comparison to another one. PROMETHEE \cite{Brans1} and ELECTRE \cite{Roy66} are among the most known outranking methods.
 \end{enumerate}
 
 %Those methods will not be described further here, as they can be found in reference books such as \cite{Vin92}, \cite{BraMar2002, EhrgottFigueiraGreco2005, beltstew, Sch85}.
 
-Generally, the purpose of MCDA is to give answers for three main problematics \cite{EhrgottFigueiraGreco2005}:
+Generally, the purpose of MCDA is to provide answers for three main problematic \cite{EhrgottFigueiraGreco2005}:
 \begin{enumerate}
-\item \textit{The choice problematic (P.$\alpha$)}: the aid aims the selection of a small number of good solutions in such way that one or several solutions can be chosen.
+\item \textit{The choice problematic (P.$\alpha$)}: the aid aims the selection of a small number of good solutions in such way that one or several compromise solutions can be chosen.
 \begin{example}
 In circuit design, the objective would be to choose the best compromise CPU in terms of performance and price.
 \end{example}
@@ -233,9 +365,44 @@ Depending on performance, price, radiation resistance, thermal operational range
 \end{example}
 \item \textit{The ranking problematic (P.$\gamma$)}: the aid aims the complete or partial preorder of all the solutions.
 \begin{example}
-With a preorder for CPUs based on an assessment of performance, it is possible to tag a price depending on the ranking.
+With a preorder for CPUs based on an assessment of their performance, it is possible to associate a price to each processor depending on their ranking.
 \end{example}
 \end{enumerate}
+
+\subsection{Preference modelling definitions}
+Before introducing some important MCDA methods, let us first define some definitions about preference modelling in order to ease the understanding of the following sections.
+
+When modelling the decision maker's preferences, three binary relations which result from the comparison of two alternatives $a_i$ and $a_j \in \mathcal{A}$ are defined \cite{Vin92}:
+\begin{equation}
+\left\{
+\begin{array}{ll}
+a_iPa_j & \text{ if $a_i$ is prefered to $a_j$}\\
+a_iIa_j & \text{ if $a_i$ is indifferent to $a_j$}\\
+a_iRa_j & \text{ if $a_i$ is incomparable to $a_j$}\\
+\end{array}
+\right.
+\end{equation}
+
+These relations translate situations of preference, indifference and incomparability and it can be assumed that they satisfy the following properties:
+
+\begin{equation}
+\forall a_i, a_j \in \mathcal{A} \left\{
+	\begin{array}{ll}
+	a_iPa_j \Rightarrow a_i \neg P a_j : & \text{: $P$ is asymmetric}\\
+	a_iIa_i & \text{: $I$ is reflexive}\\
+	a_iIa_j \Rightarrow a_jIa_i & \text{: $I$ is symmetric}\\
+	a_i \neg R a_i & \text{: $R$ is irreflexive}\\
+	a_iRa_j \Rightarrow a_jRa_i & \text{: $R$ is symmetric}
+	\end{array}
+\right.
+\end{equation}
+
+Intuitively:
+\begin{itemize}
+\item aPb corresponds to the existence of clear and positive reasons that justify significant preference in favour of a
+\item aIb corresponds to the existence of clear and positive reasons that justify equivalence between the two alternatives
+\item aRb corresponds to an absence of clear and positive reasons that justify any of the two preceding relations
+\end{itemize}
 
 \subsection{Some important multi-criteria methods}
 \label{subsec:mcdamethods}
@@ -258,11 +425,14 @@ One of the most used utility function is the weighted sum:
 \begin{equation}
 U(x) = \sum_{j=1}^{m} w_j f_j(x)
 \end{equation}
+where $w_j$ is the weight associated to the criterion $j$.
 
 With this utility function, it is then possible to compute an aggregated score for each solutions and rank them in order to choose among the best ones.
 
+MAUT has been applied in numerous cases and developments have been provided to axiomatize this method and justify its use \cite{MMAUT}.
+
 \subsubsection{Analytical Hierarchy Process (AHP)}
-Analytical Hierarchy Process (AHP) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP proceeds by making pairwise comparisons of the alternatives, but on basis of eigenvectors. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. 
+Analytical Hierarchy Process (AHP) has been developed by Saaty \cite{MAHP}. This multi-criteria method is based on mathematics and psychology and allows to face structurally complex choices by decomposing the problem in several sub-problems that can be analysed independently and are easier to understand. Similarly to PROMETHEE and ELECTRE, AHP proceeds by making pairwise comparisons of the alternatives, but on basis of a ordinal scale from 1 to 9. Indeed, one of the distinctive features of this methods is to build a matrix by asking the decision maker to compare all pairs of alternatives and criteria. Therefore, the input for AHP is not an evaluation table but the DM's preference matrix. The normalized right-hand eigenvector of this matrix is then used to compute the score associated to each alternative and the weight associated to each criterion. 
 
 In order to illustrate AHP, we will give more details on a particular case where only the criteria are compared. The decision maker will make pairwise comparisons and give an ordinal scale of preference for the criteria. The following matrix can be obtained:
 \begin{equation}
@@ -278,6 +448,20 @@ A=\begin{pmatrix}
 where $a_{ij}$ is expresses the relative importance of the criterion $i$ over the criterion $j$.
 
 From this matrix, AHP uses a method based on eigenvector to extract the related weights of each criterion that can be used, for instance, as input data for MAUT in a weighted sum.
+
+A comparison matrix is said to be consistent if $a_{ij} a_{jk} = a_{ik} \forall i, j, k$. However, consistency cannot always be reached and AHP's developers have defined a Consistency Index (CI):
+\begin{equation}
+CI = \frac{\lambda_{max}-m}{m-1}
+\end{equation}
+where $\lambda_{max}$ is the largest eigenvalue of the matrix and $m$ is the matrix size.
+
+This Consistency Index is then compared to Random (consistency) Index (RI) which are considered to be appropriate CIs. These RIs are obtained by randomly generating matrices and taking the average CI values.
+
+A Consistency Ratio (CR) then is defined:
+\begin{equation}
+CR = \frac{CI}{RI}
+\end{equation}
+If the value of the Consistency Ratio is lower or equal to 10\%, the inconsistency is considered to be acceptable. Otherwise, the decision maker has to revise judgements.
 
 %This methods can be summarized in seven key steps \cite{Vaidya20061}
 %\begin{enumerate}
@@ -306,12 +490,14 @@ The STEP Method has been proposed by Benayoun \cite{benayoun71}. STEM is an inte
 \subsubsection{Satisficing Trade-Off Method (STOM)}
 The STOM method has been proposed by Nakayama \cite{nakayama84}. Similarly to STEM, it relies on a discussion with the decision maker but is based on the setting of an ideal point defined as follows:
 \begin{definition}[Ideal point]
-The ideal point $f^*=(f_1^*, f_2^*, \dots, f_m^*)$ is defined such that $f_i^* = \min \{f_i(x), \forall i=1, 2, \dots, m, \forall x \in \mathcal{A}\}$. The ideal point possesses as coordinates the best values that can be achieved for each criterion separately.
+The ideal point $f^*=(f_1^*, f_2^*, \dots, f_m^*)$ is defined such that $f_i^* = \min \{f_i(x), \forall i=1, 2, \dots, m, \forall x \in \mathcal{A}\}$.
 \end{definition}
+The ideal point possesses as coordinates the best values that can be achieved for each criterion separately.
+
 STOM can be summarized in four steps:
 \begin{enumerate}
 \item The first step is to set the ideal point.
-\item Then the aspiration level for each criterion is asked to the decision maker.
+\item Then the aspiration level for each criterion is asked to the decision maker; this is the reference point for each criterion of the decision maker.
 \item \label{stom3} A Pareto solution nearest to the aspiration level is determined.
 \item This solution is submitted to the decision maker. If it is satisfactory, the procedure ends. Otherwise, the decision maker is asked to trade off to define another aspiration level. Go to step \ref{stom3}.
 \end{enumerate}
@@ -327,7 +513,7 @@ The PROMETHEE methods are based on the three following steps:
 
 \begin{enumerate}
 \item \textit{\underline{Preference function}}\\
-Since the dominance relation is really poor (binary relation), a preference function $P_k(a_i,a_j)$ will be introduce to enrich it. This function gives the preference degree of an alternative $a_i$ over an alternative $a_j$ with respect to the function $d_k(a_i,a_j) = f_k(a_i) - f_k(a_j)$ which is the difference between the evaluation of $a_i$ and $a_j$ for the criterion $k$, assuming a monotonic function.\\
+Since the dominance relation is really poor (binary relation), a preference function $P_k(a_i,a_j)$ will be introduce to enrich it. This function gives the preference degree of an alternative $a_i$ over an alternative $a_j$ with respect to the function $d_k(a_i,a_j) = f_k(a_i) - f_k(a_j)$ which is the difference between the evaluation of $a_i$ and $a_j$ for the criterion $k$, assuming a non decreasing function.\\
 Consequently, it is therefore possible to define several types of preference functions based on preference ($P$) or indifference ($Q$) thresholds, as shown in Table \ref{tab:pref_func}. Below the indifference threshold, the decision maker will consider having no preference while above the preference threshold, the decision maker will have no more difference in its preference.
 
 \begin{table}[h!]
@@ -358,7 +544,8 @@ where $w_{k}>0, k=1, 2, ..., m$ are the weights on each criterion. $\pi (a_i, a_
 Let us note the following properties of the preference index:
 \begin{eqnarray}
 &\pi(a_i,a_i) = 0&\\
-&0 \leq \pi(a_i,a_j) \leq 1&
+&0 \leq \pi(a_i,a_j)&\\
+&\pi(a_i, a_j) + \pi(a_j,a_i) \leq 1&
 \end{eqnarray}
 %\begin{equation}
 %\pi(a_i, a_j) + \pi(a_j,a_i)
@@ -399,7 +586,7 @@ a_iI^{-}a_j \Leftrightarrow \phi^{-}(a_i) = \phi^{-}(a_j)
 \end{equation}
 This means that the lower the negative flow is, the better the alternative.
 
-PROMETHEE I establishes partial ranking by taking the intersection of these two pre-orders:
+PROMETHEE I establishes a partial ranking by taking the intersection of these two pre-orders:
 \begin{equation}
 \begin{cases}
 a_iP^{(1)}a_j \Leftrightarrow \begin{cases}
@@ -429,13 +616,13 @@ a_iI^{(2)}a_j \Leftrightarrow \phi(a_i) = \phi(a_j)\\
 \end{equation}
 where $P^{(2)}$ et $I^{(2)}$ represent respectively the preference and the indifference in PROMETHEE II. This means that the higher the net flow is, the better the alternative.
 
-Let us note that, unlike PROMETHEE I, PROMETHEE II does not suffer from incomparability and a complete ranking can directly be obtained.
+Let us note that, unlike PROMETHEE I, PROMETHEE II does not give place to incomparability and a complete ranking can directly be obtained.
 
 \item \textit{\underline{The GAIA plane}}
 
-While it is impossible to have a visual representation of the solution space when there are more than three criteria, the GAIA (Geometrical Analysis for Interactive Assistance) plane can give a visualization even if there are more than three criteria, by means of the computation of the net flows on the decision maker's preferences for each criterion.
+While it is impossible to have a visual representation of the solution space when there are more than three criteria, the GAIA (Geometrical Analysis for Interactive Assistance) plane can give a visualization even if there are more than three criteria, by means of the principal component analysis (PCA) of the net flows on the decision maker's preferences for each criterion.
 
-The representation is based on the principal component analysis of the net flows, which allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
+The PCA allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
 
 This plan allows to have a visual descriptive analysis with several criteria. It can highlight the conflict between criteria and show the profiles of the alternatives. This will help to identify the potential compromise solutions.
 \end{enumerate}
@@ -446,11 +633,11 @@ ELECTRE (\textit{ELimination Et Choix Traduisant la REalité}, or ELimination an
 \begin{enumerate}
 \item \textit{\underline{ELECTRE I}}
 
-ELECTRE I is a method linked to the $P.\alpha$ problematic that aims to obtain a subset $N$ of alternatives such that all the solutions that do not belong to this set is outranked by at least one alternative of $N$ and the solutions of $N$ do not dominate each other. $N$ is therefore not the set of good alternatives but rather the set where the best compromise can certainly be found.
+ELECTRE I is a method linked to the $P.\alpha$ problematic that aims to obtain a subset $N$ of alternatives such that all the solutions that do not belong to this set is outranked by at least one alternative of $N$ and the solutions of $N$ do not outrank each other. $N$ is therefore not the set of good alternatives but rather the set where the best compromise can certainly be found.
 
 The outranking relation is obtained by establishing a weight $w_k$ for each criterion. A concordance index is the associated to each pair $(a_i, a_j)$ of alternatives:
 \begin{equation}
-c(a_i, a_j) = \frac{1}{W} \sum_{j:f_{k}(a_i) \geq f_{k}(a_j)}{w_{k}}, \text{ where } W = \sum_{k=1}^{m} w_{k}, w_k > 0
+c(a_i, a_j) = \frac{1}{W} \sum_{j:f_{k}(a_i) \leq f_{k}(a_j)}{w_{k}}, \text{ where } W = \sum_{k=1}^{m} w_{k}, w_k > 0
 \end{equation}
 The concordance index represents a measure of the arguments favourable to the statement \og \textit{$a_i$ outranks $a_j$} \fg.
 
@@ -545,7 +732,7 @@ S(a_i,a_j) = \begin{cases}
 	c(a_i,a_j) \prod_{k \in \mathcal{F}(a_i,a_j)} \frac{1-D_k(a_i,a_j)}{1-c(a_i,a_j)} & \text{otherwise}
 	\end{cases}
 \end{equation}
-where $\mathcal{F}(a_i,a_j)$ is the set of criteria for which $D_k(a_i,a_j) > c(a_i,a_j)$. The degree of outranking is thus equal to the concordance index when no criterion is discordant, otherwise the concordance index is decreased depending on the importance of the discordances.
+where $\mathcal{F}(a_i,a_j)$ is the set of criteria for which $D_k(a_i,a_j) > c(a_i,a_j)$. The degree of outranking is thus equal to the concordance index when no criterion is discordant, otherwise the concordance index is decreased proportionally depending on the importance of the discordances.
 
 A value $\lambda = \max_{a_i,a_j \in \mathcal{A}, i \neq j} S(a_i, a_j)$ is determined and only the outranking degree that have a value greater or equal to $\lambda - s(\lambda)$, where $s(\lambda)$ is a threshold to be determined, are considered. A ranking can then be determined from a qualification index $Q(a)$ for each alternative $a$ that represents the difference between the number of outranked alternatives by $a$ and the number of alternatives that outrank $a$. The set of actions having the largest qualification will be called the first distillate $D_1$.
 

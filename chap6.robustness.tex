@@ -1,8 +1,8 @@
 \chapter{Robustness of the methodology}
 
-In chapter \ref{chap5}, we have shown how a 3D-SIC is modelled in order to apply a NSGA-II metaheuristics. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
+In chapter \ref{chap5:model}, we have shown how a 3D-SIC can be modelled in order to apply a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
 
-In this chapter we will take a deeper look at the results of the multi-objective optimization. We will thus analyze the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use classical indicators such as the contribution indicator, the spread indicator, the binary $\epsilon$-indicator, the unary hypervolume indicator and the density of the Pareto-front which are presented in \cite{talbi09, 1197687}. These indicators can be grouped in 3 categories defined in \cite{talbi09}:
+In this chapter we will take a deeper look at the results of the multi-objective optimization. We will analyze the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use classical performance indicators such as the contribution indicator, the spread indicator, the binary $\epsilon$-indicator, the unary hypervolume indicator and the density of the Pareto-front which are presented in \cite{talbi09, 1197687}. These indicators can be grouped in 3 categories defined in \cite{talbi09}:
 \begin{enumerate}
 	\item The convergence-based indicators:
 	\begin{quote}
@@ -223,17 +223,20 @@ Another indicator of the Pareto front structure is its density. Here we will mea
 %\subsection{Convexity indicator}
 %The convexity is also an indicator of the structure. Globally, the Pareto front is not convex, as one may expect since the heterogeneous nature of the criteria. However, the frontier appear to be partially convex and this convexity also depends on the set of criteria that are considered. This is probably due to some correlation between the criteria but this is still to be investigated more deeply since the convexity properties can have an impact on the choice of the multicriteria method to use.
 
-\section{General properties of the algorithm}
-With the several indicators that we have analyzed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
+%\section{General properties of the algorithm}
+\section{Conclusion}
+In this chapter, we have shown that the used methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With the several indicators that we have analysed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
 %For information purposes, we have also computed less state-of-the-art indicators: the contribution indicator and the spread indicator, as defined in \cite{talbi09}. These results are presented in Appendices \ref{app:cont} and \ref{app:spread} and we can see that they also reflects the good convergence and diversity of the algorithm.
 
 The methodology can thus be considered as robust even if the problem is not homogeneous (heterogeneous nature of the criteria) and this shows that a multi-criteria paradigm can be suitable for the design of 3D-SICs.
 
 Also, analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect since the heterogeneous nature of the criteria. This is probably due to some correlation between the criteria but this is still to be investigated.
 
-\section{Conclusion}
+%\section{Conclusion}
+%
+%In this chapter we have shown that the used methodology has proved to be robust even if the problem contains criteria of heterogeneous nature.
 
-%In this chapter we have shown that the used methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With these results, we believe that a multi-criteria paradigm can be applied to the design of 3D-SICs in order to produce them more efficiently than what can be done with the current tools.
+%With these results, we believe that a multi-criteria paradigm can be applied to the design of 3D-SICs in order to produce them more efficiently than what can be done with the current tools.
 
 %Globally, our methodology includes two steps:
 %\begin{itemize}

@@ -1,6 +1,6 @@
 \chapter{Robustness of the methodology}
 
-In chapter \ref{chap5:model}, we have shown how a 3D-SIC can be modelled in order to apply a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
+In Chapter \ref{chap5:model}, we have shown how a 3D-SIC can be modelled in order to apply a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
 
 In this chapter we will take a deeper look at the results of the multi-objective optimization. We will analyze the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use classical performance indicators such as the contribution indicator, the spread indicator, the binary $\epsilon$-indicator, the unary hypervolume indicator and the density of the Pareto-front which are presented in \cite{talbi09, 1197687}. These indicators can be grouped in 3 categories defined in \cite{talbi09}:
 \begin{enumerate}
@@ -100,16 +100,6 @@ A comparison of the binary $\epsilon$-indicators between each experiment is also
 
 Also, in Table \ref{tab:biepsiter} are given the $\epsilon$-indicator between iterations of an experiment (the same observations apply for the other runs). We can see that in the first iterations, the front is always improved ($I_\epsilon(A_i, A_{i-1}) > 1$ and $I_\epsilon(A_{i-1}, A_i) \leq 1$) while in the last iterations, it begins to converge ($I_\epsilon(A_i, A_{i-1}) > 1$ and $I_\epsilon(A_{i-1}, A_i) > 1$).
 
-\section{Unary hypervolume indicator}
-The hypervolume is an hybrid indicator. Since we already used a binary indicator (\textit{epsilon}), we will use the hypervolume indicator $I_H$ in its unary form. $I_H$, associated with an approximation set $A$ is given by the volume of the space portion that is weakly dominated by the set $A$ \cite{talbi09}.
-
-The evolution of the hypervolume (averaged values) is given in Table \ref{tab:hypervolref} and in Figure \ref{fig:hypervolref}. We can see that the value is (linearly) increasing over time.
-
-The result for each experiment is also given, in Table \ref{tab:hypervol} and the used reference point is the worst point computed from all the sets. As we can see, the values are rather consistent from one run to another.
-
-\section{Density of the Pareto front - gaps in the frontier}
-Another indicator of the Pareto front structure is its density. Here we will measure the density by finding gaps in the frontier. This will be done by counting the number of solutions in the neighborhood of another solution. Since the extreme distance between two solutions is 450.364 in average for the 5 runs (non-normalized), we consider that an acceptable neighborhood is twice the distance between two solutions if all the solutions were equidistant. We have thus a neighborhood of about 2. This test has shown that there was always at least one solution near another one, even for a neighborhood of 1, meaning that the algorithm can produce a sufficiently dense frontier.
-
 \begin{table}[h!]
 \begin{center}
 \begin{small}
@@ -171,6 +161,13 @@ Another indicator of the Pareto front structure is its density. Here we will mea
 \label{tab:biepsiter}
 \end{table}
 
+\section{Unary hypervolume indicator}
+The hypervolume is an hybrid indicator. Since we already used a binary indicator (\textit{epsilon}), we will use the hypervolume indicator $I_H$ in its unary form. $I_H$, associated with an approximation set $A$ is given by the volume of the space portion that is weakly dominated by the set $A$ \cite{talbi09}.
+
+The evolution of the hypervolume (averaged values) is given in Table \ref{tab:hypervolref} and in Figure \ref{fig:hypervolref}. We can see that the value is (linearly) increasing over time.
+
+The result for each experiment is also given, in Table \ref{tab:hypervol} and the used reference point is the worst point computed from all the sets. As we can see, the values are rather consistent from one run to another.
+
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|c|c|}
@@ -216,6 +213,9 @@ Another indicator of the Pareto front structure is its density. Here we will mea
 \caption{Hypervolume for each experiment}
 \label{tab:hypervol}
 \end{table}
+
+\section{Density of the Pareto front - gaps in the frontier}
+Another indicator of the Pareto front structure is its density. Here we will measure the density by finding gaps in the frontier. This will be done by counting the number of solutions in the neighborhood of another solution. Since the extreme distance between two solutions is 450.364 in average for the 5 runs (non-normalized), we consider that an acceptable neighborhood is twice the distance between two solutions if all the solutions were equidistant. We have thus a neighborhood of about 2. This test has shown that there was always at least one solution near another one, even for a neighborhood of 1, meaning that the algorithm can produce a sufficiently dense frontier.
 
 %\subsubsection*{Binary hypervolume indicator}
 %The binary hypervolume indicator $I_{H2}(A,B)$ is defined as the hypervolume of the subspace that is weakly dominated by $A$ but not by $B$. A value closer to 0 means that $B$ is a better approximation \cite{1197687}.

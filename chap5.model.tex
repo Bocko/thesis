@@ -12,7 +12,7 @@ As stated in Chapter \ref{}, the limitations of the current design flows can be 
 \end{itemize}
 In order to address these limitations, we propose in this thesis a methodology based on multi-objective/criteria tools and taking into account 3D-SIC specificities for an exploration of the design space.
 
-While this methodology could be applied at different levels in a design flow, we have focused our development in the logical design step and more specifically in the virtual prototyping flow with performance assessments.
+While this methodology could be applied at different levels in a design flow, we have focused our development in the logical design step and the virtual prototyping flow, more specifically the floorplanning with performance assessments.
 
 \subsection{Design an IC}
 In order to meet the specifications, a design has to first make choice at a physical level:
@@ -105,7 +105,7 @@ P_{dyn}=\alpha.C.V_{dd}^2.f.[tech]
 where $\alpha$ represents the toggle rate, $C$ the capacitance, $V_{dd}$ the voltage, $f$ the frequency and $[tech]$ a rectification factor due to the technology assigned.
 \end{enumerate}
 
-At first, we will focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a degree of freedom. This will be done while considering the three same criteria, in order to keep a visualization of how the flexibility of MOO will improve the information and the results. Then we will analyse our methodology with the five first criteria that have been presented. As stated, the sixth criterion is currently unused. Actually, it has been simulated and tested but we need data from the manufacturers which are not easily available.
+At first, we will focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a degree of freedom. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. Then we will analyse our methodology with the five first criteria that have been presented. As stated, the sixth criterion is currently unused. Actually, it has been simulated and tested but we need data from the manufacturers which are not easily available.
 %As for the thermal dissipation, simulations are possible (see Fig.~\ref{fig:thermalmap}) but due to its current development stage it is difficult to integrate it in the exploration process due to the computing time of finite elements.
 
 \section{Design methodology}

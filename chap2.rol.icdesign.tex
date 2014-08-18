@@ -1,7 +1,13 @@
 \Chapter{Review of the literature}{Part I: Microelectronics design}
 \label{cha:rol.icdesign}
 
+\begin{summary}
+\lipsum[1]
+\end{summary}
+
 \section{Introduction}
+
+\section{2D architecture and its limitations}
 
 \section{3D integration}
 
@@ -11,7 +17,9 @@ Currently different technologies for fabrication of 3D-SICs have been proposed i
 
 3D Integration is taken into account in the roadmaps of almost all key players in the field of integrated circuit design and manufacturing.
 
-\subsubsection*{Interconnection length}
+\subsection{3D-SIC advantages}
+
+\subsubsection{Interconnection length}
 
 The 3D integration allows to design circuits with components closer to each other. Wire of a few millimetres long can be replaced by TSV of a few tens of microns \cite{659500}, as shown in Fig. \ref{fig:wire}. These shorter interconnections will introduce shorter delays, hence allowing higher working frequencies.
 
@@ -24,7 +32,7 @@ The 3D integration allows to design circuits with components closer to each othe
 \label{fig:wire}
 \end{figure}
 
-\subsubsection*{Silicon efficiency and accessibility}
+\subsubsection{Silicon efficiency and accessibility}
 
 Adding a vertical dimension allows to increase the integration density. It is therefore possible to have more logic gates than a 2D-IC for the same footprint, hence a more efficient use of the silicon as shown in Fig. \ref{fig:footprint}. For instance, compared to the footprint of a 2D-IC, the 3D-SICs can double the integration for a 50\% use of a 2D footprint \cite{659500}.
 
@@ -48,7 +56,7 @@ In addition, the 3D integration allows a better accessibility for the components
 \label{fig:accessibility}
 \end{figure}
 
-\subsubsection*{Bandwidth}
+\subsubsection{Bandwidth}
 
 The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit. Indeed, as shown in Fig. \ref{fig:bandwidth}, the interconnections are not only limited to peripheral connections but can also make use of the circuit's surface. This increase of the bandwidth allows higher working frequencies so that it is easier to satisfy data-heavy applications.
 
@@ -61,11 +69,11 @@ The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit.
 \label{fig:bandwidth}
 \end{figure}
 
-\subsubsection*{Consumption and noise}
+\subsubsection{Consumption and noise}
 
 Shorter interconnections generally translates into lower capacitance and inductance parasites. This means a decrease of the numbers of repeaters, hence a better consumption, less noise and less jitter.
 
-\subsubsection*{Heterogeneous circuits}
+\subsubsection{Heterogeneous circuits}
 
 The 3D technologies allow truly heterogeneous designs. For instance, it is possible to integrate, in addition to traditional digital circuits of different technologies, analogical circuits such as sensors or antennas, as well as power supply, which give 3D-SIC a high degree diversity \cite{4299568}. The Fig. \ref{fig:heterogeneity} shows a schematic view of a 3D-SIC developed by IMEC for biomedical purposes that contains antennas, DSPs, EEG/ECG sensors, a power supply and solar cells \cite{4198870}.
 
@@ -78,7 +86,7 @@ The 3D technologies allow truly heterogeneous designs. For instance, it is possi
 \label{fig:heterogeneity}
 \end{figure}
 
-\subsection{Technologies de fabrication}
+\subsection{Manufacturing technologies}
 
 Several 3D manufacturing technologies have been proposed and have been used to implement complete systems. Among the existing possibilities, four major categories of methods that illustrate 3D integration can be cited \cite{659500,1652906}.
 
@@ -106,3 +114,14 @@ The use of mixed substrates is also possible, only limited by the process temper
 
 One drawback to wafer-level stacking is its efficiency, since the chips on a wafer are not all KGDs.
 
+\subsection{3D-SIC design challenges}
+
+\section{Design flow}
+
+\subsection{2D-IC design flow}
+
+\subsection{3D-SIC design flow}
+
+\section{Design space exploration}
+
+\section{Conclusion}

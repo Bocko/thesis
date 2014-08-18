@@ -67,44 +67,42 @@ Shorter interconnections generally translates into lower capacitance and inducta
 
 \subsubsection*{Heterogeneous circuits}
 
-The 3D technologies 
-Les technologies 3D-SIC permettent le design de systèmes vraiment hétérogènes. Il est par exemple possible d'intégrer, en plus des circuits numériques traditionnels de technologies différentes, des circuits analogiques tels que des capteurs ou des antennes, et également des alimentations, ce qui confère aux 3D-SIC la possibilité d'avoir une très grande diversité fonctionnelle \cite{4299568}. À titre d'exemple, la Fig. \ref{fig:heterogeneity} illustre la vue schématique d'un 3D-SIC développé pour le secteur biomédical par IMEC qui contient des antennes, des DSP, 19 canaux de capteurs EEG/ECG, une alimentation, ainsi que des cellules photovoltaïques \cite{4198870}.
+The 3D technologies allow truly heterogeneous designs. For instance, it is possible to integrate, in addition to traditional digital circuits of different technologies, analogical circuits such as sensors or antennas, as well as power supply, which give 3D-SIC a high degree diversity \cite{4299568}. The Fig. \ref{fig:heterogeneity} shows a schematic view of a 3D-SIC developed by IMEC for biomedical purposes that contains antennas, DSPs, EEG/ECG sensors, a power supply and solar cells \cite{4198870}.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=0.5\linewidth]{heterogeneity.png}
 \end{center}
 \vspace{-0.5cm}
-\caption{Illustration schématique d'un 3D-SIC hétérogène (développé par IMEC) \cite{4198870}}
+\caption{Schematic illustration of an heterogeneous 3D-SIC (developed by IMEC) \cite{4198870}}
 \label{fig:heterogeneity}
 \end{figure}
 
 \subsection{Technologies de fabrication}
 
-Différentes technologies de fabrication de 3D-SIC ont été proposées dans la littérature et ont été utilisées pour des implémentations de systèmes complets, démontrant ainsi les réelles possibilités offertes par les 3D-SIC.
+Several 3D manufacturing technologies have been proposed and have been used to implement complete systems. Among the existing possibilities, four major categories of methods that illustrate 3D integration can be cited \cite{659500,1652906}.
 
-Parmi les technologies existantes, on peut en retenir quatre majeures qui illustrent de façon générale les méthodes d'intégration en 3D \cite{659500}.
+\subsubsection{Chip stacking}
 
-\subsubsection*{\textit{Chip stacking}}
+This methods consists in stacking components that have been designed and tested separately to produce a system-in-package (SiP). The vertically-stacked chips are interconnected with traditional wirings. The principal advantage of this method is an improvement in terms of size. The wirings are shorter however the components integration density is not increased compared to a 2D system.
 
-Cette méthode consiste à empiler des composants conçus et testés séparément pour produire un \textit{system-in-package} (SiP). Les composants empilés verticalement sont reliés entre eux par des fils de câblage traditionnels. L'avantage principal de cette méthode consiste en une réduction en taille. Les fils de connexion sont plus courts, mais les composants ne sont pas intégrés de façon plus dense par rapport à un système en 2D et la façon dont transitent les signaux est inchangée.
+\subsubsection{Transistor stacking}
 
-\subsubsection*{\textit{Transistor stacking}}
+The transistor stacking consists in creating several transistors level on one substrate. This should be the better way to manufacture 3D circuits although the success rate are currently limited due to thermal issues. The required temperatures to create a layer of high-performance transistors would provoke the destruction of the copper and aluminium already laid down on the previous layer.
 
-Le \textit{transistor stacking} consiste à créer plusieurs niveaux de transistors sur un seul substrat. C'est la meilleure méthode pour la conception de circuits 3D, mais les succès sont fortement limités actuellement à cause de problèmes liés à la thermique. Les températures requises pour graver une couche de transistors de haute performance provoqueraient la destruction du cuivre et de l'aluminium déjà déposés.
+\subsubsection{Die-on-wafer stacking}
 
-\subsubsection*{\textit{Die-on-wafer stacking}}
+In this method, known good dies (KGD), which are functional tested chips, are connected to a host wafer containing other KGDs. These KGDs can be interconnected with organic glues, oxide or metal bonding. The wafer and the bonded KGDs are then shaped to create the interconnections. Different substrates can be combined if the required temperature is low enough to minimize non-homogeneous expansion effects.
 
-Dans cette méthode, des \textit{known good dies} (KGD, puce testée et fonctionnelle) sont reliés à un \textit{wafer} hôte contenant d'autres KGD. Les KGD peuvent être mis en connexion par des glues organiques, des liaisons d'oxyde ou métalliques. Le \textit{wafer} et les KGD qui y sont reliés sont ensuite affinés et mis en forme pour les interconnexions. Des substrats différents peuvent être combinés si la température de traitement est suffisamment basse pour minimiser les effets d'expansion non homogène.
+The die-on-wafer stacking can use interconnections on the edges of the chips or through-die. Depending on the interconnection type, this method can produce a better integration level than the chip stacking, with a better cost per connection ratio and a higher interconnection density, while holding the advantages of the KGDs.
 
-Le \textit{die-on-wafer stacking} peut utiliser des interconnexions au niveau des bords des chips, des faces reliées ou à travers les chips. Selon le type d'interconnexions, cette méthode peut produire un niveau d'intégration nettement plus élevé que le \textit{chip stacking}, avec un meilleur rapport coût par connexion et une plus grande densité d'interconnexions, tout en gardant les avantages que présentent les KGD.
+The quality of the stacking depends on the pick-and-place equipment which is used to position the dies on the wafer. The placement accuracy will determine the possible interconnection density. Also, current equipments are supposed to handle fully buffered chips, not naked circuits so it does not provide protection to static discharge. 
 
-La qualité du \textit{stacking} dépend des équipements qui positionnent chaque chip sur son \textit{wafer}. La précision du placement détermine la densité d'interconnexions possible. Il faut également tenir compte du fait que les équipements actuels sont prévus pour manipuler des chips déjà entièrement conçus, et non des circuits nus, ce qui n'assure pas une protection adéquate aux décharges statiques.
+\subsubsection{Wafer-level stacking}
 
-\subsubsection*{\textit{Wafer-level stacking}}
+This methods consists in bonding entire wafers into a stack. The vertical through-wafer connections are made directly trough each substrate to the next wafer and it transistors layer. Similarly to the previous method, the interconnection density rely on the precision of the alignment, which is however currently better than the die-on-wafer stacking. This greater accuracy implies a better cost per connection ratio and a higher interconnection density compared to the die-on-wafer stacking.
 
-Cette méthode consiste à relier des \textit{wafers} entiers entre eux pour former un \textit{stack}. Les connexions verticales passant à travers les \textit{wafers} sont établies directement à travers chaque substrat, vers le \textit{wafer} suivant et sa couche de transistors. Comme dans la méthode précédente, la densité d'interconnexions dépend fortement de la précision des équipements de placement, qui est cependant meilleure pour cette méthode, ce qui implique un coût moins élevé par interconnexion et une densité d'interconnexions plus grande par rapport au \textit{die-on-wafer stacking}.
+The use of mixed substrates is also possible, only limited by the process temperatures. All the processing is done at the wafer level so wafer handling equipments are used. Since these provide protection to static discharge so there is no need to include buffering between the layers. The methods to bind two wafers are the same that are available for the die-on-wafer method.
 
-Il est également possible de combiner des substrats différents, toujours en faisant attention à la température de traitement. Tous les procédés sont effectués au niveau du \textit{wafer}. Comme les équipements pour \textit{wafers} prévoient une protection aux décharges statiques, cela représente un avantage par rapport au \textit{die-on-wafer stacking}.
+One drawback to wafer-level stacking is its efficiency, since the chips on a wafer are not all KGDs.
 
-Il faut néanmoins faire attention au rendement des \textit{wafers} car toutes les puces présentes sur un \textit{wafer} ne sont pas forcément des KGD. Les méthodes pour relier deux \textit{wafers} ensemble sont les mêmes que celles pour relier deux KGD.

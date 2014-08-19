@@ -16,7 +16,7 @@ In order to continuously improve the performance of integrated circuits (IC), te
 \includegraphics[width=0.75\linewidth]{mooreslaw.png}
 \end{center}
 \vspace{-0.5cm}
-\caption{Moore's law}
+\caption{Moore's law \cite{mooreslawpic}}
 \label{fig:mooreslaw}
 \end{figure}
 
@@ -28,28 +28,41 @@ With the miniaturization, quantum effects such as quantum tunnelling will signif
 
 In addition to these physical aspects, economical considerations that will hinder the IC evolution beyond 20nm have to be taken into account \cite{5227192,PFF10}.
 
-In order to overcome these limitations, new technologies are emerging, and among them the 3D-Stacked Integrated Circuits (3D-SIC) proposed by the academic and industrial communities.
+In order to overcome these limitations, new technologies have been proposed such as the carbon nanotubes \cite{tans1998room}, the nanowire transistors \cite{doi:10.1021/nl025875l}, the single-electron transistors \cite{citeulike:4194929}, but also the 3D-Stacked Integrated Circuits (3D-SIC) proposed by the academic and industrial communities. The later has been often cited as the most prominent one~\cite{659500}.
 
 \section{3D integration}
 
-The benefits of using 3D-ICs are numerous and have been already pointed out in the literature very often over the past few years \cite{659500}. First, by adding vertical dimension to the construction of the physical IC we can increase the IC packaging density. This means more gates for the same circuit footprint, that is much higher functional complexity of the final circuit for the same packaging volume. Secondly, the 3D-SICs are expected to have much better computing/power dissipation ratio. The integration in the 3rd dimension allows the design of circuits with different parts being closer to each other, resulting in less and shorter wires \cite{981091}. Lowering wire delays and allowing higher operating frequencies will result in increased bandwidths between nodes satisfying data hungry applications. Also, less and shorter wires mean lower total parasitic capacitance and inductance of the circuit, resulting in lower power dissipation. Finally, the 3D-SICs will enable the design of really heterogeneous systems, embedding not only traditional digital circuits such as processors and memories, but also analogue circuits such as sensors, antennas and power supplies \cite{4299568}.
+Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar fashion~\cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections, known as \--- Through Silicon Vias (TSV), can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Fig.~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and micro-bump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
 
-Currently different technologies for fabrication of 3D-SICs have been proposed in the literature. Proposed methods have been used for implementation of complete systems going far beyond simple proof-of-concept or feasibility demonstrators. One can mention the implementation of a processor and memory in a single 3D chip dedicated for video coding applications \cite{1696226} and a processor with multiple levels of memory hierarchy dedicated for high-throughput server applications \cite{1168873}. Finally, the first commercial 3D-SIC products have been already announced by IBM \cite{1167715} and companies specialized in 3D semiconductor industry such as Tezzaron \cite{terra04}.
+\begin{figure}[h!]
+\begin{center}
+%\includegraphics[width=1\linewidth]{3D_SIC_SOC2010.png}
+\includegraphics[width=0.75\linewidth]{3DSIC.pdf}
+\end{center}
+\vspace{-0.5cm}
+\caption{Illustration of the wiring properties of a 3D-SIC}
+\label{fig:3D_SIC_SOC2010}
+\end{figure}
 
-3D Integration is taken into account in the roadmaps of almost all key players in the field of integrated circuit design and manufacturing.
+The benefits of using 3D-ICs are numerous and have been already pointed out in the literature very often over the past few years \cite{659500}. These advantages will be summarized in the next section.
+%First, by adding vertical dimension to the construction of the physical IC we can increase the IC packaging density. This means more gates for the same circuit footprint, that is much higher functional complexity of the final circuit for the same packaging volume. Secondly, the 3D-SICs are expected to have much better computing/power dissipation ratio. The integration in the 3rd dimension allows the design of circuits with different parts being closer to each other, resulting in less and shorter wires \cite{981091}. Lowering wire delays and allowing higher operating frequencies will result in increased bandwidths between nodes satisfying data hungry applications. Also, less and shorter wires mean lower total parasitic capacitance and inductance of the circuit, resulting in lower power dissipation. Finally, the 3D-SICs will enable the design of really heterogeneous systems, embedding not only traditional digital circuits such as processors and memories, but also analogue circuits such as sensors, antennas and power supplies \cite{4299568}.
+
+%Currently different technologies for fabrication of 3D-SICs have been proposed in the literature. Proposed methods have been used for implementation of complete systems going far beyond simple proof-of-concept or feasibility demonstrators. One can mention the implementation of a processor and memory in a single 3D chip dedicated for video coding applications \cite{1696226} and a processor with multiple levels of memory hierarchy dedicated for high-throughput server applications \cite{1168873}. Finally, the first commercial 3D-SIC products have been already announced by IBM \cite{1167715} and companies specialized in 3D semiconductor industry such as Tezzaron \cite{terra04}.
+
+%3D Integration is taken into account in the roadmaps of almost all key players in the field of integrated circuit design and manufacturing.
 
 \subsection{3D-SIC advantages}
 
 \subsubsection{Interconnection length}
 
-The 3D integration allows to design circuits with components closer to each other. Wire of a few millimetres long can be replaced by TSV of a few tens of microns \cite{659500}, as shown in Fig. \ref{fig:wire}. These shorter interconnections will introduce shorter delays, hence allowing higher working frequencies.
+The 3D integration allows to design circuits with components closer to each other. Wire of a few millimetres long can be replaced by TSV of a few tens of microns, as shown in Fig. \ref{fig:wire}. These shorter interconnections will introduce shorter delays, hence allowing higher working frequencies \cite{659500,981091}.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=0.75\linewidth]{wire.png}
 \end{center}
 \vspace{-0.5cm}
-\caption{Shorter interconnections}
+\caption{Shorter interconnections \cite{659500}}
 \label{fig:wire}
 \end{figure}
 
@@ -62,7 +75,7 @@ Adding a vertical dimension allows to increase the integration density. It is th
 \includegraphics[width=0.75\linewidth]{footprint.png}
 \end{center}
 \vspace{-0.5cm}
-\caption{Silicon efficiency}
+\caption{Silicon efficiency \cite{659500}}
 \label{fig:footprint}
 \end{figure}
 
@@ -73,7 +86,7 @@ In addition, the 3D integration allows a better accessibility for the components
 \includegraphics[width=0.75\linewidth]{accessibility.png}
 \end{center}
 \vspace{-0.5cm}
-\caption{Components accessibility}
+\caption{Components accessibility \cite{659500}}
 \label{fig:accessibility}
 \end{figure}
 
@@ -86,7 +99,7 @@ The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit.
 \includegraphics[width=0.75\linewidth]{bandwidth.png}
 \end{center}
 \vspace{-0.5cm}
-\caption{Bandwidth improvement}
+\caption{Bandwidth improvement \cite{659500}}
 \label{fig:bandwidth}
 \end{figure}
 
@@ -135,7 +148,20 @@ The use of mixed substrates is also possible, only limited by the process temper
 
 One drawback to wafer-level stacking is its efficiency, since the chips on a wafer are not all KGDs.
 
-\subsection{3D-SIC design challenges}
+\section{3D-SIC design challenges}
+
+As explained, 3D-SICs offer numerous design perspectives thanks to their advantages. However there are drawbacks that need to be taken into account and that will be discussed in the following subsections.
+
+\subsection{Limitations of the 3D integration}
+
+\subsubsection{Thermal dissipation}
+The power density has increased exponentially over the past decades for the 2D-ICs and it appears that this trend will continue in the near future. As for 3D-SICs, due to their higher component density, they will also be subject to higher power density so thermal management should be considered carefully \cite{659500}. 
+
+\subsubsection{Cost}
+With the appearance of a new technology, the involvement of a high cost should often be expected. In the case of 3D technology, the cost is currently high due to the lack of infrastructure and the reluctance of manufacturers who do not want to risk to change to new technologies \cite{659500}.
+
+\subsubsection{Design complexity and design software}
+A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, 3D dedicated software does not currently exist, and the "3D compatible" ones are developed for and owned by particular manufacturers and are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally.
 
 \section{Design flow}
 

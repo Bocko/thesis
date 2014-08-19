@@ -9,6 +9,27 @@
 
 \section{2D architecture and its limitations}
 
+In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Fig. \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' integration each 18 months and therefore increasing logic capacity of the circuit per unit area. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.75\linewidth]{mooreslaw.png}
+\end{center}
+\vspace{-0.5cm}
+\caption{Moore's law}
+\label{fig:mooreslaw}
+\end{figure}
+
+The improvements of 2D architectures are primarily driven by the reduction of the transistor size. By reducing transistor dimensions, the switching speed is increased thanks to the shorter distance between the source and the drain, implying an improvement of the overall speed of the designs.
+
+However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly increase the total delay (sum of gate and interconnection delays). Also, power consumption is also increased due to higher leakage and increasing interconnection wire length \cite{5227192}.
+
+With the miniaturization, quantum effects such as quantum tunnelling will significantly affect how a transistor behave \cite{1240081}.
+
+In addition to these physical aspects, economical considerations that will hinder the IC evolution beyond 20nm have to be taken into account \cite{5227192,PFF10}.
+
+In order to overcome these limitations, new technologies are emerging, and among them the 3D-Stacked Integrated Circuits (3D-SIC) proposed by the academic and industrial communities.
+
 \section{3D integration}
 
 The benefits of using 3D-ICs are numerous and have been already pointed out in the literature very often over the past few years \cite{659500}. First, by adding vertical dimension to the construction of the physical IC we can increase the IC packaging density. This means more gates for the same circuit footprint, that is much higher functional complexity of the final circuit for the same packaging volume. Secondly, the 3D-SICs are expected to have much better computing/power dissipation ratio. The integration in the 3rd dimension allows the design of circuits with different parts being closer to each other, resulting in less and shorter wires \cite{981091}. Lowering wire delays and allowing higher operating frequencies will result in increased bandwidths between nodes satisfying data hungry applications. Also, less and shorter wires mean lower total parasitic capacitance and inductance of the circuit, resulting in lower power dissipation. Finally, the 3D-SICs will enable the design of really heterogeneous systems, embedding not only traditional digital circuits such as processors and memories, but also analogue circuits such as sensors, antennas and power supplies \cite{4299568}.
@@ -122,6 +143,6 @@ One drawback to wafer-level stacking is its efficiency, since the chips on a waf
 
 \subsection{3D-SIC design flow}
 
-\section{Design space exploration}
+\section{Design space exploration tools}
 
 \section{Conclusion}

@@ -163,12 +163,46 @@ With the appearance of a new technology, the involvement of a high cost should o
 \subsubsection{Design complexity and design software}
 A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, 3D dedicated software does not currently exist, and the "3D compatible" ones are developed for and owned by particular manufacturers and are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally.
 
+In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits;
+
 \section{Design flow}
 
 \subsection{2D-IC design flow}
 
+
 \subsection{3D-SIC design flow}
 
+
 \section{Design space exploration tools}
+
+In order to cope with the increasing complexity of integrated circuits, numerous tools have been proposed, in particular works about design space exploration (DSE) that have been developed to quickly suggest possible solutions to a designer and speed up the design processes. In this section, we will describe different DSE tools that have been proposed in the literature.
+
+\subsection{MILAN}
+
+The MILAN (MModel based Integrated simuLAtioN) framework \cite{Mohanty02rapidsystem-level} aims to simplify the optimization and the exploration of design spaces for SoC platforms. This tool works on the component level and allows the users to choose a compromise between the simulation speed and the results accuracy. The exploration and optimization process is done in two phases: first it searches for possible combinations between the architecture, the application and the mapping and second it estimates the performances (power, latency) depending the precision asked by the users.
+
+\subsection{SoC Architecture Explorer}
+
+SoC Architecture Explorer \cite{ueda05architecture} is a multi-objective optimization and exploration tool that aims the design of SoC architectures by evaluating the compromises between the footprint and the execution time. The exploration process focuses on the application and the system architecture where the tool analyses the data flow and estimates the data transfers to determine a number of possible architectures.
+
+%http://www.esteco.com/index.jsp
+\subsection{modeFRONTIER (ESTECO)}
+
+modeFRONTIER \cite{esteco01} is a proprietary development environment developed by ESTECO. It is a multi-objective optimization tool that aims parallel SoC architectures. modeFRONTIER allows to deal with up to one million different design configurations thanks to statistical analysis tools and data mining techniques.
+
+%http://www.multicube.eu/
+\subsection{MULTICUBE}
+
+The MULTICUBE project (MULTI$^{3}$) \cite{multicube08, Silvanoetal09} is a European project started in 2008 and dedicated to the multi-objective exploration of MPSoC architectures for multimedia embedded systems. The aims is to developed a framework that allows a quick and automated exploration of the design space to improve the performances of a MPSoC with metrics such as power, latency, computing performance, bandwidth, QoS, etc. This project is based on several heuristics and optimization algorithms that reduce the exploration time and allow a quick selection of the best solutions of a Pareto-optimal frontier. In addition, MULTICUBE also aims to define an application-oriented framework based on the results of the multi-objective exploration to optimize the resources allocation and the tasks scheduling of the applications. The exploration is done at the system level, using the SystemC language. The project includes proprietary and open-source tools whose development targets the industry. Among the developed prototyping tools, Multicube explorer and Multicube-SCoPE can be cited.
+
+%http://home.dei.polimi.it/zaccaria/multicube_explorer_v1/Home.html
+\subsubsection{Multicube Explorer}
+
+Multicube Explorer \cite{m3explorer09} is a design space exploration framework for supporting platform-based design. This tools allows a fast optimization of a system with objective functions such as power, delays, surface, etc. by means of a system simulator. Multicube explorer proposes several multi-objective optimization methods that aim to propose the best compromises.
+
+%http://www.teisa.unican.es/gim/en/scope/multicube.html
+\subsubsection{Multicube-SCoPE}
+
+Multicube-SCoPE \cite{m3scope09} is an evolution of the SCoPE tool \cite{scope04} oriented to design space exploration. It is a fast system performance and power simulator providing metrics associated with a system in order to drive the DSE process.
 
 \section{Conclusion}

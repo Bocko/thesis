@@ -148,11 +148,9 @@ The use of mixed substrates is also possible, only limited by the process temper
 
 One drawback to wafer-level stacking is its efficiency, since the chips on a wafer are not all KGDs.
 
-\section{3D-SIC design challenges}
+\subsection{3D-SIC design challenges}
 
 As explained, 3D-SICs offer numerous design perspectives thanks to their advantages. However there are drawbacks that need to be taken into account and that will be discussed in the following subsections.
-
-\subsection{Limitations of the 3D integration}
 
 \subsubsection{Thermal dissipation}
 The power density has increased exponentially over the past decades for the 2D-ICs and it appears that this trend will continue in the near future. As for 3D-SICs, due to their higher component density, they will also be subject to higher power density so thermal management should be considered carefully \cite{659500}. 
@@ -161,48 +159,64 @@ The power density has increased exponentially over the past decades for the 2D-I
 With the appearance of a new technology, the involvement of a high cost should often be expected. In the case of 3D technology, the cost is currently high due to the lack of infrastructure and the reluctance of manufacturers who do not want to risk to change to new technologies \cite{659500}.
 
 \subsubsection{Design complexity and design software}
-A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, 3D dedicated software does not currently exist, and the "3D compatible" ones are developed for and owned by particular manufacturers and are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally.
+A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist and they are mainly developed for and owned by particular manufacturers and are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally.
 
 In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits;
 
-\section{Design flow}
-
-\subsection{2D-IC design flow}
-
-
-\subsection{3D-SIC design flow}
+\section{Current design flows and their limitations}
 
 
 \section{Design space exploration tools}
 
-In order to cope with the increasing complexity of integrated circuits, numerous tools have been proposed, in particular works about design space exploration (DSE) that have been developed to quickly suggest possible solutions to a designer and speed up the design processes. In this section, we will describe different DSE tools that have been proposed in the literature.
+In order to cope with the increasing complexity of integrated circuits and the limitations of the current design flows, numerous tools have been proposed, in particular works about design space exploration (DSE) that have been developed to quickly suggest possible solutions to a designer and speed up the design processes. In this section, we will describe different DSE tools that have been proposed in the literature.
 
-\subsection{MILAN}
+\subsection{2D-IC tools}
+
+\subsubsection{MILAN}
 
 The MILAN (MModel based Integrated simuLAtioN) framework \cite{Mohanty02rapidsystem-level} aims to simplify the optimization and the exploration of design spaces for SoC platforms. This tool works on the component level and allows the users to choose a compromise between the simulation speed and the results accuracy. The exploration and optimization process is done in two phases: first it searches for possible combinations between the architecture, the application and the mapping and second it estimates the performances (power, latency) depending the precision asked by the users.
 
-\subsection{SoC Architecture Explorer}
+\subsubsection{SoC Architecture Explorer}
 
 SoC Architecture Explorer \cite{ueda05architecture} is a multi-objective optimization and exploration tool that aims the design of SoC architectures by evaluating the compromises between the footprint and the execution time. The exploration process focuses on the application and the system architecture where the tool analyses the data flow and estimates the data transfers to determine a number of possible architectures.
 
 %http://www.esteco.com/index.jsp
-\subsection{modeFRONTIER (ESTECO)}
+\subsubsection{modeFRONTIER (ESTECO)}
 
 modeFRONTIER \cite{esteco01} is a proprietary development environment developed by ESTECO. It is a multi-objective optimization tool that aims parallel SoC architectures. modeFRONTIER allows to deal with up to one million different design configurations thanks to statistical analysis tools and data mining techniques.
 
 %http://www.multicube.eu/
-\subsection{MULTICUBE}
+\subsubsection{MULTICUBE}
 
 The MULTICUBE project (MULTI$^{3}$) \cite{multicube08, Silvanoetal09} is a European project started in 2008 and dedicated to the multi-objective exploration of MPSoC architectures for multimedia embedded systems. The aims is to developed a framework that allows a quick and automated exploration of the design space to improve the performances of a MPSoC with metrics such as power, latency, computing performance, bandwidth, QoS, etc. This project is based on several heuristics and optimization algorithms that reduce the exploration time and allow a quick selection of the best solutions of a Pareto-optimal frontier. In addition, MULTICUBE also aims to define an application-oriented framework based on the results of the multi-objective exploration to optimize the resources allocation and the tasks scheduling of the applications. The exploration is done at the system level, using the SystemC language. The project includes proprietary and open-source tools whose development targets the industry. Among the developed prototyping tools, Multicube explorer and Multicube-SCoPE can be cited.
 
 %http://home.dei.polimi.it/zaccaria/multicube_explorer_v1/Home.html
-\subsubsection{Multicube Explorer}
+\paragraph{Multicube Explorer}
 
 Multicube Explorer \cite{m3explorer09} is a design space exploration framework for supporting platform-based design. This tools allows a fast optimization of a system with objective functions such as power, delays, surface, etc. by means of a system simulator. Multicube explorer proposes several multi-objective optimization methods that aim to propose the best compromises.
 
 %http://www.teisa.unican.es/gim/en/scope/multicube.html
-\subsubsection{Multicube-SCoPE}
+\paragraph{Multicube-SCoPE}
 
 Multicube-SCoPE \cite{m3scope09} is an evolution of the SCoPE tool \cite{scope04} oriented to design space exploration. It is a fast system performance and power simulator providing metrics associated with a system in order to drive the DSE process.
 
+%\cite{5335663, 5763068, Xie:2006:DSE:1148015.1148016, 4735042, 1594713}
+\subsection{3D-SIC tools}
+
+
+\subsubsection{DSE for 3D-stacked DRAMs by Weis \textit{et al.}}
+
+
+\subsubsection{DSE for 3D integrated circuits by Xie \textit{et al.}}
+
+
+\subsubsection{Automated design flow for 3D microarchitecture evaluation by Cong \textit{et al.}}
+
+
+\subsubsection{PathFinding Flow}
+
+
 \section{Conclusion}
+To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses from a Pareto front. The goal of this research is to show that a more multicriteria-oriented optimization could be more suitable to take into account the many aspects of a design and provide more information.
+
+In the next chapter, we will describe a short overview of the tools coming from the operations research that will allow to take into account multiple criteria simultaneously.

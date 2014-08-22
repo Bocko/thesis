@@ -165,6 +165,20 @@ In the following section, we will have an overview about these software tools an
 
 \section{Current design flows and their limitations}
 
+Design flows are the combination of electronic design automation (EDA) tools used to produce an integrated circuit. These flows can generally be summarized in 4 main steps \cite{coursefred}, as shown in Fig. \ref{fig:designflow}.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.35\linewidth]{designflow.eps}
+\end{center}
+\vspace{-0.5cm}
+\caption{General classical design flow}
+\label{fig:designflow}
+\end{figure}
+
+As explained previously, designing ICs implies numerous choices. At the moment, with this growing complexity, the current design flows can already show their limits. For instance, most of the time, the designers will be likely to freeze a certain amount of choices on basis of their experience, and then begin the optimization process with the remaining parameters. This will therefore limit the exploration of the design space and good solutions may be ignored. In addition, the fixed choices can be questionable since they are based on the designer's experience though they could also be based on more objective facts.
+
+The current design flows, which already showed their limits with conventional 2D-ICs, may thus need improvements to be able to deal with the increased complexity of emerging 3D-SICs \cite{vanderbiest06, PFF10}.
 
 \section{Design space exploration tools}
 
@@ -174,7 +188,7 @@ In order to cope with the increasing complexity of integrated circuits and the l
 
 \subsubsection{MILAN}
 
-The MILAN (MModel based Integrated simuLAtioN) framework \cite{Mohanty02rapidsystem-level} aims to simplify the optimization and the exploration of design spaces for SoC platforms. This tool works on the component level and allows the users to choose a compromise between the simulation speed and the results accuracy. The exploration and optimization process is done in two phases: first it searches for possible combinations between the architecture, the application and the mapping and second it estimates the performances (power, latency) depending the precision asked by the users.
+The MILAN (Model based Integrated simuLAtioN) framework \cite{Mohanty02rapidsystem-level} aims to simplify the optimization and the exploration of design spaces for SoC platforms. This tool works on the component level and allows the users to choose a compromise between the simulation speed and the results accuracy. The exploration and optimization process is done in two phases: first it searches for possible combinations between the architecture, the application and the mapping and second it estimates the performances (power, latency) depending the precision asked by the users.
 
 \subsubsection{SoC Architecture Explorer}
 

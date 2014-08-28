@@ -4,9 +4,9 @@
 \lipsum[1]
 \end{summary}
 
-In Chapter \ref{chap5:model}, we have shown how a 3D-SIC can be modelled in order to apply a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
+In Chapter \ref{chap5:model}, we have shown how a 3D-SIC can be modelled as an optimization problem and we have applied a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
 
-In this chapter we will take a deeper look at the results of the multi-objective optimization. We will analyze the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use classical performance indicators such as the contribution indicator, the spread indicator, the binary $\epsilon$-indicator, the unary hypervolume indicator and the density of the Pareto-front which are presented in \cite{talbi09, 1197687}. These indicators can be grouped in 3 categories defined in \cite{talbi09}:
+In this chapter we will take a deeper look at the results of the multi-objective optimization steps. We will analyse the some properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use classical performance indicators such as the contribution indicator, the spread indicator, the binary $\epsilon$-indicator, the unary hypervolume indicator and the density of the Pareto-front which are presented in \cite{talbi09, 1197687}. These indicators can be grouped in 3 categories defined in \cite{talbi09}:
 \begin{enumerate}
 	\item The convergence-based indicators:
 	\begin{quote}
@@ -74,13 +74,13 @@ The Table \ref{tab:contrib} and the Fig. \ref{fig:contrib} show the evolution of
 \section{Spread indicator}
 \label{app:spread}
 
-The spread indicator $I_s$ combines the distribution and cardinality to measure the dispersion of the approximated set $A$:
+The spread indicator $I_s$ combines the distribution and cardinality to measure the dispersion of the approximated Pareto set $A$:
 \begin{equation}
 I_s = \frac{\sum_{u \in A}|\{u' \in A: \|F(u)-F(u')\|>\sigma\}|}{|A|-1}
 \end{equation}
 where $F(u)$ is a fitness function and $\sigma > 0$ a neighborhood parameter. The closer is the measure to 1, the better is the spread of the approximated set $A$.
 
-The Fig. \ref{fig:spread_indicator} shows the results of the spread indicator $I_s$ function of the neighborhood indicator $\sigma$ (all the 5 experiments share the same graph shape). We see that the Pareto front is well spread ($I_s \geq 0.9$) for $\sigma < 0.35$ in average for the 5 runs (normalized values), so we can consider that the algorithm produces a well-spread approximation of the Pareto front.
+The Fig. \ref{fig:spread_indicator} shows the results of the spread indicator $I_s$ function of the neighborhood indicator $\sigma$ (all the 5 experiments share the same graph shape). We see that the Pareto front is well spread: if  we consider $I_s \geq 0.9$ we have $\sigma < 0.35$ in average for the 5 runs (normalized values), so we can consider that the algorithm produces a well-spread approximation of the Pareto front.
 %Knowing that the extreme (Euclidean) distance between two solutions is equal to 332 (for normalized values), we can consider that the algorithm produces a well-spread approximation of the Pareto front.
 
 \begin{figure}[h!]
@@ -170,7 +170,7 @@ The hypervolume is an hybrid indicator. Since we already used a binary indicator
 
 The evolution of the hypervolume (averaged values) is given in Table \ref{tab:hypervolref} and in Figure \ref{fig:hypervolref}. We can see that the value is (linearly) increasing over time.
 
-The result for each experiment is also given, in Table \ref{tab:hypervol} and the used reference point is the worst point computed from all the sets. As we can see, the values are rather consistent from one run to another.
+The result for each experiment is also given, in Table \ref{tab:hypervol} and the used reference point is the worst point computed from all the sets for normalized data. As we can see, the values are rather consistent from one run to another.
 
 \begin{table}[h!]
 \begin{center}
@@ -229,10 +229,10 @@ Another indicator of the Pareto front structure is its density. Here we will mea
 
 %\section{General properties of the algorithm}
 \section{Conclusion}
-In this chapter, we have shown that the used methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With the several indicators that we have analysed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
+In this chapter, we have shown that the proposed methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With the several indicators that we have analysed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
 %For information purposes, we have also computed less state-of-the-art indicators: the contribution indicator and the spread indicator, as defined in \cite{talbi09}. These results are presented in Appendices \ref{app:cont} and \ref{app:spread} and we can see that they also reflects the good convergence and diversity of the algorithm.
 
-The methodology can thus be considered as robust even if the problem is not homogeneous (heterogeneous nature of the criteria) and this shows that a multi-criteria paradigm can be suitable for the design of 3D-SICs.
+The methodology can thus be considered as robust even if the problem is not homogeneous (heterogeneous nature of the criteria).
 
 Also, analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect since the heterogeneous nature of the criteria. This is probably due to some correlation between the criteria but this is still to be investigated.
 

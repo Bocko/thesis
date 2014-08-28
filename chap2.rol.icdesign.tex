@@ -22,7 +22,7 @@ In order to continuously improve the performance of integrated circuits (IC), te
 
 The improvements of 2D architectures are primarily driven by the reduction of the transistor size. By reducing transistor dimensions, the switching speed is increased thanks to the shorter distance between the source and the drain, implying an improvement of the overall speed of the designs.
 
-However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly increase the total delay (sum of gate and interconnection delays). Also, power consumption is also increased due to higher leakage and increasing interconnection wire length \cite{5227192}.
+However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly increase the total delay (sum of gate and interconnection delays). Also, power consumption is increased due to higher leakage and increasing interconnection wire length \cite{5227192}.
 
 With the miniaturization, quantum effects such as quantum tunnelling will significantly affect how a transistor behave \cite{1240081}.
 
@@ -53,7 +53,7 @@ The benefits of using 3D-ICs are numerous and have been already pointed out in t
 
 \subsection{3D-SIC advantages}
 
-\subsubsection{Interconnection length}
+\paragraph{Interconnection length}
 
 The 3D integration allows to design circuits with components closer to each other. Wire of a few millimetres long can be replaced by TSV of a few tens of microns, as shown in Fig. \ref{fig:wire}. These shorter interconnections will introduce shorter delays, hence allowing higher working frequencies \cite{659500,981091}.
 
@@ -66,7 +66,7 @@ The 3D integration allows to design circuits with components closer to each othe
 \label{fig:wire}
 \end{figure}
 
-\subsubsection{Silicon efficiency and accessibility}
+\paragraph{Silicon efficiency and accessibility}
 
 Adding a vertical dimension allows to increase the integration density. It is therefore possible to have more logic gates than a 2D-IC for the same footprint, hence a more efficient use of the silicon as shown in Fig. \ref{fig:footprint}. For instance, compared to the footprint of a 2D-IC, the 3D-SICs can double the integration for a 50\% use of a 2D footprint \cite{659500}.
 
@@ -79,7 +79,7 @@ Adding a vertical dimension allows to increase the integration density. It is th
 \label{fig:footprint}
 \end{figure}
 
-In addition, the 3D integration allows a better accessibility for the components, as shown in Fig. \ref{fig:accessibility}. Indeed, for a 2D structure, 8 accessible neighbours can be considered for a central element (Fig. \ref{fig:accessibility} (a)), whereas for a 3D structure, the number of accessible neighbours can reach 116 (Fig. \ref{fig:accessibility} (b)) \cite{659500}.
+In addition, the 3D integration allows a better accessibility for the components, as shown in Fig. \ref{fig:accessibility}. Indeed, for a 2D structure, 8 accessible neighbours can be considered for a central element (Fig. \ref{fig:accessibility} (a)), whereas for a 3D structure, the number of accessible neighbours can reach 116 with through-tiers interconnections (Fig. \ref{fig:accessibility} (b)) \cite{659500}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -90,7 +90,7 @@ In addition, the 3D integration allows a better accessibility for the components
 \label{fig:accessibility}
 \end{figure}
 
-\subsubsection{Bandwidth}
+\paragraph{Bandwidth}
 
 The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit. Indeed, as shown in Fig. \ref{fig:bandwidth}, the interconnections are not only limited to peripheral connections but can also make use of the circuit's surface. This increase of the bandwidth allows higher working frequencies so that it is easier to satisfy data-heavy applications.
 
@@ -103,11 +103,11 @@ The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit.
 \label{fig:bandwidth}
 \end{figure}
 
-\subsubsection{Consumption and noise}
+\paragraph{Consumption and noise}
 
 Shorter interconnections generally translates into lower capacitance and inductance parasites. This means a decrease of the numbers of repeaters, hence a better consumption, less noise and less jitter.
 
-\subsubsection{Heterogeneous circuits}
+\paragraph{Heterogeneous circuits}
 
 The 3D technologies allow truly heterogeneous designs. For instance, it is possible to integrate, in addition to traditional digital circuits of different technologies, analogical circuits such as sensors or antennas, as well as power supply, which give 3D-SIC a high degree diversity \cite{4299568}. The Fig. \ref{fig:heterogeneity} shows a schematic view of a 3D-SIC developed by IMEC for biomedical purposes that contains antennas, DSPs, EEG/ECG sensors, a power supply and solar cells \cite{4198870}.
 
@@ -124,15 +124,15 @@ The 3D technologies allow truly heterogeneous designs. For instance, it is possi
 
 Several 3D manufacturing technologies have been proposed and have been used to implement complete systems. Among the existing possibilities, four major categories of methods that illustrate 3D integration can be cited \cite{659500,1652906}.
 
-\subsubsection{Chip stacking}
+\paragraph{Chip stacking}
 
 This methods consists in stacking components that have been designed and tested separately to produce a system-in-package (SiP). The vertically-stacked chips are interconnected with traditional wirings. The principal advantage of this method is an improvement in terms of size. The wirings are shorter however the components integration density is not increased compared to a 2D system.
 
-\subsubsection{Transistor stacking}
+\paragraph{Transistor stacking}
 
 The transistor stacking consists in creating several transistors level on one substrate. This should be the better way to manufacture 3D circuits although the success rate are currently limited due to thermal issues. The required temperatures to create a layer of high-performance transistors would provoke the destruction of the copper and aluminium already laid down on the previous layer.
 
-\subsubsection{Die-on-wafer stacking}
+\paragraph{Die-on-wafer stacking}
 
 In this method, known good dies (KGD), which are functional tested chips, are connected to a host wafer containing other KGDs. These KGDs can be interconnected with organic glues, oxide or metal bonding. The wafer and the bonded KGDs are then shaped to create the interconnections. Different substrates can be combined if the required temperature is low enough to minimize non-homogeneous expansion effects.
 
@@ -140,7 +140,7 @@ The die-on-wafer stacking can use interconnections on the edges of the chips or 
 
 The quality of the stacking depends on the pick-and-place equipment which is used to position the dies on the wafer. The placement accuracy will determine the possible interconnection density. Also, current equipments are supposed to handle fully buffered chips, not naked circuits so it does not provide protection to static discharge. 
 
-\subsubsection{Wafer-level stacking}
+\paragraph{Wafer-level stacking}
 
 This methods consists in bonding entire wafers into a stack. The vertical through-wafer connections are made directly trough each substrate to the next wafer and it transistors layer. Similarly to the previous method, the interconnection density rely on the precision of the alignment, which is however currently better than the die-on-wafer stacking. This greater accuracy implies a better cost per connection ratio and a higher interconnection density compared to the die-on-wafer stacking.
 
@@ -150,15 +150,15 @@ One drawback to wafer-level stacking is its efficiency, since the chips on a waf
 
 \subsection{3D-SIC design challenges}
 
-As explained, 3D-SICs offer numerous design perspectives thanks to their advantages. However there are drawbacks that need to be taken into account and that will be discussed in the following subsections.
+As explained, 3D-SICs offer numerous design perspectives thanks to their advantages. However there are drawbacks that need to be taken into account and that will be discussed in the following paragraphs.
 
-\subsubsection{Thermal dissipation}
-The power density has increased exponentially over the past decades for the 2D-ICs and it appears that this trend will continue in the near future. As for 3D-SICs, due to their higher component density, they will also be subject to higher power density so thermal management should be considered carefully \cite{659500}. 
+\paragraph{Thermal dissipation}
+The power density has increased exponentially over the past decades for the 2D-ICs and it appears that this trend will continue in the near future. As for 3D-SICs, due to their higher component density, they will also be subject to higher power density so thermal management should be considered carefully \cite{659500}. A simplified model of thermal dissipation has been developed in this thesis and will presented in Chapter \ref{cha:model}.
 
-\subsubsection{Cost}
+\paragraph{Cost}
 With the appearance of a new technology, the involvement of a high cost should often be expected. In the case of 3D technology, the cost is currently high due to the lack of infrastructure and the reluctance of manufacturers who do not want to risk to change to new technologies \cite{659500}.
 
-\subsubsection{Design complexity and design software}
+\paragraph{Design complexity and design software}
 A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist and they are mainly developed for and owned by particular manufacturers and are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally.
 
 In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits;
@@ -186,50 +186,50 @@ In order to cope with the increasing complexity of integrated circuits and the l
 
 \subsection{2D-IC tools}
 
-\subsubsection{MILAN}
+\paragraph{MILAN}
 
 The MILAN (Model based Integrated simuLAtioN) framework \cite{Mohanty02rapidsystem-level} aims to simplify the optimization and the exploration of design spaces for SoC platforms. This tool works on the component level and allows the users to choose a compromise between the simulation speed and the results accuracy. The exploration and optimization process is done in two phases: first it searches for possible combinations between the architecture, the application and the mapping and second it estimates the performances (power, latency) depending the precision asked by the users.
 
-\subsubsection{SoC Architecture Explorer}
+\paragraph{SoC Architecture Explorer}
 
 SoC Architecture Explorer \cite{ueda05architecture} is a multi-objective optimization and exploration tool that aims the design of SoC architectures by evaluating the compromises between the footprint and the execution time. The exploration process focuses on the application and the system architecture where the tool analyses the data flow and estimates the data transfers to determine a number of possible architectures.
 
 %http://www.esteco.com/index.jsp
-\subsubsection{modeFRONTIER (ESTECO)}
+\paragraph{modeFRONTIER (ESTECO)}
 
 modeFRONTIER \cite{esteco01} is a proprietary development environment developed by ESTECO. It is a multi-objective optimization tool that aims parallel SoC architectures. modeFRONTIER allows to deal with up to one million different design configurations thanks to statistical analysis tools and data mining techniques.
 
 %http://www.multicube.eu/
-\subsubsection{MULTICUBE}
+\paragraph{MULTICUBE}
 
 The MULTICUBE project (MULTI$^{3}$) \cite{multicube08, Silvanoetal09} is a European project started in 2008 and dedicated to the multi-objective exploration of MPSoC architectures for multimedia embedded systems. The aims is to developed a framework that allows a quick and automated exploration of the design space to improve the performances of a MPSoC with metrics such as power, latency, computing performance, bandwidth, QoS, etc. This project is based on several heuristics and optimization algorithms that reduce the exploration time and allow a quick selection of the best solutions of a Pareto-optimal frontier. In addition, MULTICUBE also aims to define an application-oriented framework based on the results of the multi-objective exploration to optimize the resources allocation and the tasks scheduling of the applications. The exploration is done at the system level, using the SystemC language. The project includes proprietary and open-source tools whose development targets the industry. Among the developed prototyping tools, Multicube explorer and Multicube-SCoPE can be cited.
 
 %http://home.dei.polimi.it/zaccaria/multicube_explorer_v1/Home.html
-\paragraph{Multicube Explorer}
+\subparagraph{Explorer}
 
 Multicube Explorer \cite{m3explorer09} is a design space exploration framework for supporting platform-based design. This tools allows a fast optimization of a system with objective functions such as power, delays, surface, etc. by means of a system simulator. Multicube explorer proposes several multi-objective optimization methods that aim to propose the best compromises.
 
 %http://www.teisa.unican.es/gim/en/scope/multicube.html
-\paragraph{Multicube-SCoPE}
+\subparagraph{Multicube-SCoPE}
 
 Multicube-SCoPE \cite{m3scope09} is an evolution of the SCoPE tool \cite{scope04} oriented to design space exploration. It is a fast system performance and power simulator providing metrics associated with a system in order to drive the DSE process.
 
 %\cite{,, , 4735042, }
 \subsection{3D-SIC tools}
 
-\subsubsection{DSE for 3D-stacked DRAMs by Weis \textit{et al.}}
+\paragraph{DSE for 3D-stacked DRAMs by Weis \textit{et al.}}
 Design space exploration for 3D-stacked DRAMs has been developed by Weis \textit{et al.} \cite{5763068}. They defined a model for 3D-DRAM and evaluated the performance of different DRAM architectures and technologies. This allowed them to have a the trade-off analysis of horizontal wirings against vertical wirings in terms of energy and cell efficiency.
 
-\subsubsection{DSE for 3D architecture by Xie \textit{et al.}}
+\paragraph{DSE for 3D architecture by Xie \textit{et al.}}
 Design space exploration for 3D architecture is a work proposed by Xie \textit{et al.} \cite{Xie:2006:DSE:1148015.1148016}. They combined the use of an analysis tool for 3D cache design with an thermal-aware 3D floorplanner to perform the DSE. This allowed them to consider performance, power and thermal for a 3D design. 
 
-\subsubsection{DSE for 3D integrated circuits by Xie \textit{et al.}}
+\paragraph{DSE for 3D integrated circuits by Xie \textit{et al.}}
 Design space exploration for 3D architecture is another work proposed by Xie \textit{et al.} \cite{4735042}. They based this research on their previous one and extended it to add cost analysis.
 
-\subsubsection{Automated design flow for 3D microarchitecture evaluation by Cong \textit{et al.}}
+\paragraph{Automated design flow for 3D microarchitecture evaluation by Cong \textit{et al.}}
 An automated design flow for 3D microarchitecture evaluation has been proposed by Cong \textit{et al.} \cite{1594713}. They proposed an evaluation flow for performance assessment and thermal management. This allowed them to perform thermal-aware 3D floorplanning.
 
-\subsubsection{PathFinding flow}
+\paragraph{PathFinding flow}
 The PathFinding flow is a project led by IMEC and Milojevic \textit{et al.} \cite{5335663,DBLP:conf/3dic/MilojevicCCRRSAPM09}. The aim of this work is to be able to produce a specification for the architecture and for the technology with assessment of performance, power and cost. The methodology is divided in 3 steps:
 \begin{enumerate}
 \item 3D system level design exploration with a rough estimation of the performance, power and cost parameters. The designer will be able to focus on the 2D design issues while manually considering the 3D specificities.

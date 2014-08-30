@@ -1,5 +1,5 @@
 \Chapter{Review of the literature}{Part II: Operations research}
-\label{cha:rol2.mcda}
+\label{cha:rol.mcda}
 
 \begin{summary}
 \lipsum[1]
@@ -155,7 +155,7 @@ NLP are generally more difficult to solve than LP \cite{talbi09} and metaheurist
 \section{From the uni-criterion paradigm to the multi-criteria paradigm}
 \label{sec:rol2.unicritmulticrit}
 
-With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the characteristics of the problems or that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal according to this criterion. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Section \ref{}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached.
+With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the characteristics of the problems or that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal according to this criterion. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Chapter \ref{cha:model}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached.
 %, there may be cases where several solutions share the same evaluations on all the criteria.
 
 For instance, when designing ICs, a manufacturer will try to simultaneously maximize the performance while minimize the cost of the circuit. However, we can already guess that those two objectives are conflicting. Also, producing high-end ICs can be subject to more difficulties in terms of thermal dissipation. In addition, a criterion based on ecological standards may have impacts on the cost and the performance of an IC.
@@ -201,7 +201,7 @@ Two approaches can be used to establish this set~\cite{Vin92}:
 \item \textit{Exact methods} which aims to compute the Pareto frontier directly~\cite{EhrgottGandibleuxbook02,steuer86a}.
 \item \textit{Approximate methods} which are based on metaheuristics to quickly explore the solution space and approach as best as possible the Pareto optimal frontier\cite{talbi09}.
 \end{itemize}
-As explained in Section \ref{}, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Section \ref{}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to show the applicability of a multi-criteria paradigm to the design of 3D circuits. Therefore developing exact methods has been kept out of the scope of this work.
+As explained in Chapter \ref{cha:rol.icdesign}, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Chapter \ref{cha:model}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to show the applicability of a multi-criteria paradigm to the design of 3D circuits. Therefore developing exact methods has been kept out of the scope of this work.
 
 \subsection{Metaheuristics for multi-objective optimization}
 \label{subsec:metaheuristics}
@@ -233,7 +233,7 @@ EVALUATE each individual's fitness;\\
 \end{algorithm}
 
 \subsubsection{Representation of a solution}
-The representation or encoding of a solution is called a chromosome and depends on the problem. Several examples of problems show binary encodings however, in our study we will use a real-valued matrix that will be detailed in Section \ref{}. Nevertheless, without loss of generality, we will illustrate the principles of a genetic algorithm by using binary-coded solutions.
+The representation or encoding of a solution is called a chromosome and depends on the problem. Several examples of problems show binary encodings however, in our study we will use a real-valued matrix that will be detailed in Chapter \ref{cha:model}. Nevertheless, without loss of generality, we will illustrate the principles of a genetic algorithm by using binary-coded solutions.
 
 \subsubsection{Initialization}
 Initially many solutions are generated, usually randomly to form the initial population. Depending on the problem, the generation of the initial population can be guided (seeded) to areas where optimal solutions are likely to be found.
@@ -271,7 +271,7 @@ $y'$ & = & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 0
 \end{example}
 
 \subsubsection{Mutation}
-Mutation is a genetic operation used to ensure diversity in the generated populations. It changed one or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Example \ref{ex:mutation}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Section \ref{}).
+Mutation is a genetic operation used to ensure diversity in the generated populations. It changes one or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Example \ref{ex:mutation}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Chapter \ref{cha:model}).
 
 \begin{example}[Mutation example]
 \label{ex:mutation}

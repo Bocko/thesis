@@ -205,7 +205,7 @@ modeFRONTIER \cite{esteco01} is a proprietary development environment developed 
 The MULTICUBE project (MULTI$^{3}$) \cite{multicube08, Silvanoetal09} is a European project started in 2008 and dedicated to the multi-objective exploration of MPSoC architectures for multimedia embedded systems. The aims is to developed a framework that allows a quick and automated exploration of the design space to improve the performances of a MPSoC with metrics such as power, latency, computing performance, bandwidth, QoS, etc. This project is based on several heuristics and optimization algorithms that reduce the exploration time and allow a quick selection of the best solutions of a Pareto-optimal frontier. In addition, MULTICUBE also aims to define an application-oriented framework based on the results of the multi-objective exploration to optimize the resources allocation and the tasks scheduling of the applications. The exploration is done at the system level, using the SystemC language. The project includes proprietary and open-source tools whose development targets the industry. Among the developed prototyping tools, Multicube explorer and Multicube-SCoPE can be cited.
 
 %http://home.dei.polimi.it/zaccaria/multicube_explorer_v1/Home.html
-\subparagraph{Explorer}
+\subparagraph{Multicube Explorer}
 
 Multicube Explorer \cite{m3explorer09} is a design space exploration framework for supporting platform-based design. This tools allows a fast optimization of a system with objective functions such as power, delays, surface, etc. by means of a system simulator. Multicube explorer proposes several multi-objective optimization methods that aim to propose the best compromises.
 
@@ -214,20 +214,33 @@ Multicube Explorer \cite{m3explorer09} is a design space exploration framework f
 
 Multicube-SCoPE \cite{m3scope09} is an evolution of the SCoPE tool \cite{scope04} oriented to design space exploration. It is a fast system performance and power simulator providing metrics associated with a system in order to drive the DSE process.
 
-%\cite{,, , 4735042, }
 \subsection{3D-SIC tools}
 
 \paragraph{DSE for 3D-stacked DRAMs by Weis \textit{et al.}}
-Design space exploration for 3D-stacked DRAMs has been developed by Weis \textit{et al.} \cite{5763068}. They defined a model for 3D-DRAM and evaluated the performance of different DRAM architectures and technologies. This allowed them to have a the trade-off analysis of horizontal wirings against vertical wirings in terms of energy and cell efficiency.
+Design space exploration for 3D-stacked DRAMs has been developed by Weis \textit{et al.} \cite{5763068}. They defined a 3D-DRAM based on a SystemC model with a 3D channel controller and also considered a wiring model for the TSVs. The used metrics are area, performance and energy efficiency evaluated for different DRAM architectures and technologies. 3D thermal issues has been kept out of the scope of the study. The simulation results allowed them to have a trade-off analysis of horizontal wirings against vertical wirings in terms of energy and cell efficiency. They could show quantitatively how a 3D-DRAM can perform better than a classical DRAM.
 
-\paragraph{DSE for 3D architecture by Xie \textit{et al.}}
-Design space exploration for 3D architecture is a work proposed by Xie \textit{et al.} \cite{Xie:2006:DSE:1148015.1148016}. They combined the use of an analysis tool for 3D cache design with an thermal-aware 3D floorplanner to perform the DSE. This allowed them to consider performance, power and thermal for a 3D design. 
+\subparagraph{Observation}
+This work is really interesting as it shows the stakes of using the 3D technology for DRAM. However, since it is based on DRAMs, the tools work with a memory structure that is repeated in the 3D-DRAM, which does not take into consideration more heterogeneous architectures. Also, only trade-off analyses are performed, which does not give a more global multi-criteria insight of the results as it will be illustrated in Chapter \ref{cha:rol.mcda}.
 
-\paragraph{DSE for 3D integrated circuits by Xie \textit{et al.}}
-Design space exploration for 3D architecture is another work proposed by Xie \textit{et al.} \cite{4735042}. They based this research on their previous one and extended it to add cost analysis.
+\paragraph{DSE for 3D architecture and DSE for 3D integrated circuits by Xie \textit{et al.}}
+Design space exploration for 3D architecture and design space exploration for 3D integrated circuits are two works proposed by Xie \textit{et al.} \cite{Xie:2006:DSE:1148015.1148016,4735042}. In the first study, they combine several tools to perform a DSE:
+\begin{itemize}
+\item for the 3D cache partitioning, two strategies have been proposed at the subarrays granularity level
+\item the area, the delay and the energy of a 3D cache are assessed following a cost function
+\item 3DCacti, a tool developed to explore various 3D partitioning options of caches
+\item thermal-aware 3D floorplanning based on simulated annealing
+\end{itemize}
+With the DSE, they are able to propose different possible architectures for 3D microprocessor design by performing trade-off analyses of the criteria.
+The second study is an extension where a cost analysis is added.
+ 
+\subparagraph{Observation}
+These works seem to be among the most integrated study in the literature with cache partitioning and microprocessor floorplanning, and considering several criteria including thermal issues. However, the partitioning and the floorplanning are separated while a more 3D approach should consider both dimensions simultaneously. Also, the criteria are aggregated with a cost function which can lead to inconsistency as it will be explained in Chapter \ref{cha:rol.mcda} and only trade-off analyses are performed.
 
 \paragraph{Automated design flow for 3D microarchitecture evaluation by Cong \textit{et al.}}
-An automated design flow for 3D microarchitecture evaluation has been proposed by Cong \textit{et al.} \cite{1594713}. They proposed an evaluation flow for performance assessment and thermal management. This allowed them to perform thermal-aware 3D floorplanning.
+An automated design flow for 3D microarchitecture evaluation has been proposed by Cong \textit{et al.} \cite{1594713}. They propose an evaluation flow for performance assessment and thermal management. This allows them to perform thermal-aware 3D floorplanning.
+
+\subparagraph{Observation}
+This work is worth mentioning as it proposes a quick way to evaluate temperature issues. However, it only deals with the thermal criterion.
 
 \paragraph{PathFinding flow}
 The PathFinding flow is a project led by IMEC and Milojevic \textit{et al.} \cite{5335663,DBLP:conf/3dic/MilojevicCCRRSAPM09}. The aim of this work is to be able to produce a specification for the architecture and for the technology with assessment of performance, power and cost. The methodology is divided in 3 steps:
@@ -235,7 +248,10 @@ The PathFinding flow is a project led by IMEC and Milojevic \textit{et al.} \cit
 \item 3D system level design exploration with a rough estimation of the performance, power and cost parameters. The designer will be able to focus on the 2D design issues while manually considering the 3D specificities.
 \item RTL (Register Transfer Level) elaboration, which links the system level to the physical design by producing RTL models.
 \item 3D physical design prototyping, which allows fast exploration of the physical design impact of alternative design/technology options on the performance, power and cost parameters.
-\end{enumerate} 
+\end{enumerate}
+
+\subparagraph{Observation}
+This work is also among the most integrated study in the literature. However, the criteria optimization is done following a uni-criterion approach which does not allow to explore quickly several possibilities.
 
 \section{Conclusion}
 To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses from a Pareto front. The goal of this research is to show that a more multicriteria-oriented optimization could be more suitable to take into account the many aspects of a design and provide more information.

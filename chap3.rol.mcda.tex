@@ -213,7 +213,7 @@ Numerous metaheuristics have been developed since the 50s. Among the most known,
 
 In this work, we will focus on genetic algorithms (GA) as they are quick to implement for a first approach and are suitable to heterogeneous variables problems. More details about other metaheuristics can be found in reference books such as \cite{talbi09,dreo06metaheuristics,8125462}.
 
-\subsection{Genetic algorithm}
+\subsubsection{General description of genetic algorithms}
 Genetic algorithms have been developed by Holland in the 1970s \cite{holland1975adaptation}. They are metaheuristics that reproduce the properties of a natural selection process as described by Charles Darwin. GAs are based on the principle of the improvement of the gene pool of a population over generations. GAs will mimic the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm).
 
 Genetic algorithms rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with a randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitutes the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied. The general pseudo-code for genetic algorithms is shown in Algorithm \ref{alg:ga}.
@@ -232,18 +232,18 @@ EVALUATE each individual's fitness;\\
 }
 \end{algorithm}
 
-\subsubsection{Representation of a solution}
+\paragraph{Representation of a solution}
 The representation or encoding of a solution is called a chromosome and depends on the problem. Several examples of problems show binary encodings however, in our study we will use a real-valued matrix that will be detailed in Chapter \ref{cha:model}. Nevertheless, without loss of generality, we will illustrate the principles of a genetic algorithm by using binary-coded solutions.
 
-\subsubsection{Initialization}
+\paragraph{Initialization}
 Initially many solutions are generated, usually randomly to form the initial population. Depending on the problem, the generation of the initial population can be guided (seeded) to areas where optimal solutions are likely to be found.
 
-\subsubsection{Selection}
+\paragraph{Selection}
 The selection is a stochastic process usually planned so that the fitter solutions have a higher probability of being selected. This aims to ensure the convergence of the algorithm.
 
 In particular, one can mention the roulette wheel selection method where the fitness level is used to associate a probability of selection to each candidate. If $f_i$ is the fitness of the individual $i$, its probability to be selected is $p_i = \frac{f_i}{\sum_{j=0}^{n}f_j}$ where $n$ is the number of individuals in the population.
 
-\subsubsection{Crossover}
+\paragraph{Crossover}
 Once a pair of individuals has been selected, they will be crossed-over. Typically, two children are created from each set of parents. One method of crossover (one-point crossover) will be explained here but other approaches exists \cite{}. A random crossover point will be selected on both parents. Beyond that point, the data will be swapped with the information of the other parent as show in Example \ref{ex:crossover}.
 
 \begin{example}[Crossover example]
@@ -270,7 +270,7 @@ $y'$ & = & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 0
 \end{table}
 \end{example}
 
-\subsubsection{Mutation}
+\paragraph{Mutation}
 Mutation is a genetic operation used to ensure diversity in the generated populations. It changes one or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Example \ref{ex:mutation}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Chapter \ref{cha:model}).
 
 \begin{example}[Mutation example]
@@ -297,7 +297,7 @@ $x'$ & = & 0 & 1 & 1 & 0 & 1 & 0 & 1 & 0\\
 \end{center}
 \end{table}
 
-\subsubsection{Termination}
+\paragraph{Termination}
 The generational process is repeated until a termination condition has been encountered. Common conditions are:
 \begin{itemize}
 \item a certain level of fitness reached;
@@ -306,13 +306,13 @@ The generational process is repeated until a termination condition has been enco
 \item no better results produced after several generations.
 \end{itemize}
 
-\subsection{Multi-objective genetic algorithm: NSGA-II}
+\subsubsection{Multi-objective genetic algorithm: NSGA-II}
 %\cite{Srinivas94multiobjectiveoptimization, Deb00afast}
 While the original genetic algorithms have been developed for mono-objective purposes, they have also been extended to multi-objective optimization and among the most known, one can cite NSGA-II.
 
 NSGA-II stands for Non-dominated Sorting Genetic Algorithm and has been developed by Deb \cite{Deb00afast} to provide a multi-objective version for genetic algorithms. It is an evolution of the original NSGA proposed in \cite{Srinivas94multiobjectiveoptimization}. NSGA-II follows the same steps as a classical GA and additionally implements techniques, particularly in the selection step, to take into account several objectives simultaneously.
 
-\subsubsection{NSGA-II selection}
+\paragraph{NSGA-II selection}
 The selection is based on the Pareto dominance principle, particularly the Pareto rank which allows to sort all the solutions of a set following an extended Pareto principle and the crowding distance which estimates how dense the surrounding of a solution is.
 \begin{definition}[Pareto rank \cite{Deb00afast}]
 From a given pool of solutions, the Pareto optimal ones are of rank 1. For the higher ranks the following process is repeated iteratively: to find the solutions of rank $i \geq 2$, the solutions of rank $i-1$ are removed and the Pareto solutions from this subset are of rank $i$.

@@ -40,7 +40,7 @@ In order to overcome these limitations, new technologies have been proposed such
 
 \section{3D integration}
 
-Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar fashion~\cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections, known as \--- Through Silicon Vias (TSV), can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Fig.~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and micro-bump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
+Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar fashion~\cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV), micro bumps (µBump) or copper pads (CuPad) and they can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Fig.~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
 
 \begin{figure}[h!]
 \begin{center}
@@ -63,13 +63,13 @@ Most of the current ICs are designed with electronic components (i.e. transistor
 
 Several 3D manufacturing technologies have been proposed and have been used to implement complete systems. Among the existing possibilities, four major categories of methods that illustrate 3D integration can be cited \cite{659500,1652906}.
 
-\paragraph{Chip stacking}
-
-This methods consists in stacking components that have been designed and tested separately to produce a system-in-package (SiP). The vertically-stacked chips are interconnected with traditional wirings. The principal advantage of this method is an improvement in terms of size. The wirings are shorter however the components integration density is not increased compared to a 2D system.
-
 \paragraph{Transistor stacking}
 
-The transistor stacking consists in creating several transistors level on one substrate. This should be the better way to manufacture 3D circuits although the success rate are currently limited due to thermal issues. The required temperatures to create a layer of high-performance transistors would provoke the destruction of the copper and aluminium already laid down on the previous layer.
+The transistor stacking consists in creating several transistors level on one substrate. This should be the better way to manufacture 3D circuits although the success rate are currently limited due to thermal issues among the different limitations. The required temperatures to create a layer of high-performance transistors would provoke the destruction of the copper and aluminium already laid down on the previous layer \cite{659500}.
+
+\paragraph{Chip stacking}
+
+This methods consists in stacking components that have been designed and tested separately to produce a system-in-package (SiP). The vertically-stacked chips are interconnected with traditional wirings (lateral wire bondings). The principal advantage of this method is an improvement in terms of size. The wirings are shorter however the components integration density is not increased compared to a 2D system.
 
 \paragraph{Die-on-wafer stacking}
 
@@ -169,7 +169,28 @@ With the appearance of a new technology, the involvement of a high cost should o
 \paragraph{Design complexity and design software}
 A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist and they are mainly developed for and owned by particular manufacturers and are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally.
 
-In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits;
+% In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits.
+
+\section{2.5D-ICs by Xilinx}
+Now that the 3D integration has been introduced, let us give some notes that are worth mentioning about the 2.5D-ICs introduced by Xilinx \cite{bolsens2011}. 2.5D integration can be considered as a stepping stone to 3D design, as illustrated in Figure \ref{fig:2d5xilinx}. Dies are placed on a silicon interposer where are located the interconnections required to bind the dies, as shown in Figure \ref{fig:siliconinterposer}. Compared to classical 2D-ICs, this allow higher interconnect density while being less challenging than 3D-SICs in terms of design flow, thermal issues, reliability, testing and cost as the technology is already existing.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{2d5xilinx}
+\end{center}
+\caption{2.5D as a stepping stone to 3D integration \cite{bolsens2011}}
+\label{fig:2d5xilinx}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{siliconinterposer}
+\end{center}
+\caption{Illustration of the 2.5D integration with a silicon interposer \cite{bolsens2011}}
+\label{fig:siliconinterposer}
+\end{figure}
+
+In the following section, we will have an overview about these software tools and generally about the design flows used to design integrated circuits.
 
 \section{Current design flows and their limitations}
 
@@ -177,7 +198,7 @@ Design flows are the combination of electronic design automation (EDA) tools use
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.35\linewidth]{designflow.eps}
+\includegraphics[width=\linewidth]{designflow2.eps}
 \end{center}
 \vspace{-0.5cm}
 \caption{General classical design flow}

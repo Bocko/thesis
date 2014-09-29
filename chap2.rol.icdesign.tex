@@ -22,7 +22,15 @@ In order to continuously improve the performance of integrated circuits (IC), te
 
 The improvements of 2D architectures are primarily driven by the reduction of the transistor size. By reducing transistor dimensions, the switching speed is increased thanks to the shorter distance between the source and the drain, implying an improvement of the overall speed of the designs.
 
-However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly increase the total delay (sum of gate and interconnection delays). Also, power consumption is increased due to higher leakage and increasing interconnection wire length \cite{5227192}.
+However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly decrease the dynamic and increase the total delay (sum of gate and interconnection delays) at the level of the complete circuit. Also, power consumption is increased due to higher leakage and increasing interconnection wire length \cite{5227192}. In Figure \ref{fig:delaygateinterconnect} is shown the trends in transistor gate delay and interconnect delay with IC fabrication technology where the crossover point represents the interconnect bottleneck \cite{kirchain2007}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.75\linewidth]{delaygateinterconnect}
+\end{center}
+\caption{Trends in transistor gate delay and interconnect delay with IC fabrication technology \cite{kirchain2007}}
+\label{fig:delaygateinterconnect}
+\end{figure}
 
 With the miniaturization, quantum effects such as quantum tunnelling will significantly affect how a transistor behave \cite{1240081}.
 
@@ -37,19 +45,47 @@ Most of the current ICs are designed with electronic components (i.e. transistor
 \begin{figure}[h!]
 \begin{center}
 %\includegraphics[width=1\linewidth]{3D_SIC_SOC2010.png}
-\includegraphics[width=0.75\linewidth]{3DSIC.pdf}
+\includegraphics[width=0.5\linewidth]{3DSIC.pdf}
 \end{center}
 \vspace{-0.5cm}
 \caption{Illustration of the wiring properties of a 3D-SIC}
 \label{fig:3D_SIC_SOC2010}
 \end{figure}
 
-The benefits of using 3D-ICs are numerous and have been already pointed out in the literature very often over the past few years \cite{659500}. These advantages will be summarized in the next subsections.
+%The benefits of using 3D-ICs are numerous and have been already pointed out in the literature very often over the past few years \cite{659500}. These advantages will be summarized in the next subsections.
 %First, by adding vertical dimension to the construction of the physical IC we can increase the IC packaging density. This means more gates for the same circuit footprint, that is much higher functional complexity of the final circuit for the same packaging volume. Secondly, the 3D-SICs are expected to have much better computing/power dissipation ratio. The integration in the 3rd dimension allows the design of circuits with different parts being closer to each other, resulting in less and shorter wires \cite{981091}. Lowering wire delays and allowing higher operating frequencies will result in increased bandwidths between nodes satisfying data hungry applications. Also, less and shorter wires mean lower total parasitic capacitance and inductance of the circuit, resulting in lower power dissipation. Finally, the 3D-SICs will enable the design of really heterogeneous systems, embedding not only traditional digital circuits such as processors and memories, but also analogue circuits such as sensors, antennas and power supplies \cite{4299568}.
 
 %Currently different technologies for fabrication of 3D-SICs have been proposed in the literature. Proposed methods have been used for implementation of complete systems going far beyond simple proof-of-concept or feasibility demonstrators. One can mention the implementation of a processor and memory in a single 3D chip dedicated for video coding applications \cite{1696226} and a processor with multiple levels of memory hierarchy dedicated for high-throughput server applications \cite{1168873}. Finally, the first commercial 3D-SIC products have been already announced by IBM \cite{1167715} and companies specialized in 3D semiconductor industry such as Tezzaron \cite{terra04}.
 
 %3D Integration is taken into account in the roadmaps of almost all key players in the field of integrated circuit design and manufacturing.
+
+\subsection{Manufacturing technologies}
+
+Several 3D manufacturing technologies have been proposed and have been used to implement complete systems. Among the existing possibilities, four major categories of methods that illustrate 3D integration can be cited \cite{659500,1652906}.
+
+\paragraph{Chip stacking}
+
+This methods consists in stacking components that have been designed and tested separately to produce a system-in-package (SiP). The vertically-stacked chips are interconnected with traditional wirings. The principal advantage of this method is an improvement in terms of size. The wirings are shorter however the components integration density is not increased compared to a 2D system.
+
+\paragraph{Transistor stacking}
+
+The transistor stacking consists in creating several transistors level on one substrate. This should be the better way to manufacture 3D circuits although the success rate are currently limited due to thermal issues. The required temperatures to create a layer of high-performance transistors would provoke the destruction of the copper and aluminium already laid down on the previous layer.
+
+\paragraph{Die-on-wafer stacking}
+
+In this method, known good dies (KGD), which are functional tested chips, are connected to a host wafer containing other KGDs. These KGDs can be interconnected with organic glues, oxide or metal bonding. The wafer and the bonded KGDs are then shaped to create the interconnections. Different substrates can be combined if the required temperature is low enough to minimize non-homogeneous expansion effects.
+
+The die-on-wafer stacking can use interconnections on the edges of the chips or through-die. Depending on the interconnection type, this method can produce a better integration level than the chip stacking, with a better cost per connection ratio and a higher interconnection density, while holding the advantages of the KGDs.
+
+The quality of the stacking depends on the pick-and-place equipment which is used to position the dies on the wafer. The placement accuracy will determine the possible interconnection density. Also, current equipments are supposed to handle fully buffered chips, not naked circuits so it does not provide protection to static discharge. 
+
+\paragraph{Wafer-level stacking}
+
+This methods consists in bonding entire wafers into a stack. The vertical through-wafer connections are made directly trough each substrate to the next wafer and it transistors layer. Similarly to the previous method, the interconnection density rely on the precision of the alignment, which is however currently better than the die-on-wafer stacking. This greater accuracy implies a better cost per connection ratio and a higher interconnection density compared to the die-on-wafer stacking.
+
+The use of mixed substrates is also possible, only limited by the process temperatures. All the processing is done at the wafer level so wafer handling equipments are used. Since these provide protection to static discharge so there is no need to include buffering between the layers. The methods to bind two wafers are the same that are available for the die-on-wafer method.
+
+One drawback to wafer-level stacking is its efficiency, since the chips on a wafer are not all KGDs.
 
 \subsection{3D-SIC advantages}
 
@@ -92,7 +128,7 @@ In addition, the 3D integration allows a better accessibility for the components
 
 \paragraph{Bandwidth}
 
-The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit. Indeed, as shown in Fig. \ref{fig:bandwidth}, the interconnections are not only limited to peripheral connections but can also make use of the circuit's surface. This increase of the bandwidth allows higher working frequencies so that it is easier to satisfy data-heavy applications.
+The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit. Indeed, as shown in Fig. \ref{fig:bandwidth}, the interconnections are not only limited to peripheral connections but can also make use of the circuit's surface. At a same working frequencies, this allows more bandwidth while at lower frequencies, the same bandwidth usage will require less power.
 
 \begin{figure}[h!]
 \begin{center}
@@ -105,7 +141,7 @@ The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit.
 
 \paragraph{Consumption and noise}
 
-Shorter interconnections generally translates into lower capacitance and inductance parasites. This means a decrease of the numbers of repeaters, hence a better consumption, less noise and less jitter.
+Shorter interconnections generally translates into lower capacitance and inductance parasitics. This means a decrease of the numbers of repeaters, hence a better consumption, less noise and less jittern hence lower delays and power consumption.
 
 \paragraph{Heterogeneous circuits}
 
@@ -119,34 +155,6 @@ The 3D technologies allow truly heterogeneous designs. For instance, it is possi
 \caption{Schematic illustration of an heterogeneous 3D-SIC (developed by IMEC) \cite{4198870}}
 \label{fig:heterogeneity}
 \end{figure}
-
-\subsection{Manufacturing technologies}
-
-Several 3D manufacturing technologies have been proposed and have been used to implement complete systems. Among the existing possibilities, four major categories of methods that illustrate 3D integration can be cited \cite{659500,1652906}.
-
-\paragraph{Chip stacking}
-
-This methods consists in stacking components that have been designed and tested separately to produce a system-in-package (SiP). The vertically-stacked chips are interconnected with traditional wirings. The principal advantage of this method is an improvement in terms of size. The wirings are shorter however the components integration density is not increased compared to a 2D system.
-
-\paragraph{Transistor stacking}
-
-The transistor stacking consists in creating several transistors level on one substrate. This should be the better way to manufacture 3D circuits although the success rate are currently limited due to thermal issues. The required temperatures to create a layer of high-performance transistors would provoke the destruction of the copper and aluminium already laid down on the previous layer.
-
-\paragraph{Die-on-wafer stacking}
-
-In this method, known good dies (KGD), which are functional tested chips, are connected to a host wafer containing other KGDs. These KGDs can be interconnected with organic glues, oxide or metal bonding. The wafer and the bonded KGDs are then shaped to create the interconnections. Different substrates can be combined if the required temperature is low enough to minimize non-homogeneous expansion effects.
-
-The die-on-wafer stacking can use interconnections on the edges of the chips or through-die. Depending on the interconnection type, this method can produce a better integration level than the chip stacking, with a better cost per connection ratio and a higher interconnection density, while holding the advantages of the KGDs.
-
-The quality of the stacking depends on the pick-and-place equipment which is used to position the dies on the wafer. The placement accuracy will determine the possible interconnection density. Also, current equipments are supposed to handle fully buffered chips, not naked circuits so it does not provide protection to static discharge. 
-
-\paragraph{Wafer-level stacking}
-
-This methods consists in bonding entire wafers into a stack. The vertical through-wafer connections are made directly trough each substrate to the next wafer and it transistors layer. Similarly to the previous method, the interconnection density rely on the precision of the alignment, which is however currently better than the die-on-wafer stacking. This greater accuracy implies a better cost per connection ratio and a higher interconnection density compared to the die-on-wafer stacking.
-
-The use of mixed substrates is also possible, only limited by the process temperatures. All the processing is done at the wafer level so wafer handling equipments are used. Since these provide protection to static discharge so there is no need to include buffering between the layers. The methods to bind two wafers are the same that are available for the die-on-wafer method.
-
-One drawback to wafer-level stacking is its efficiency, since the chips on a wafer are not all KGDs.
 
 \subsection{3D-SIC design challenges}
 
@@ -243,7 +251,7 @@ An automated design flow for 3D microarchitecture evaluation has been proposed b
 This work is worth mentioning as it proposes a quick way to evaluate temperature issues. However, it only deals with the thermal criterion.
 
 \paragraph{PathFinding flow}
-The PathFinding flow is a project led by IMEC and Milojevic \textit{et al.} \cite{5335663,DBLP:conf/3dic/MilojevicCCRRSAPM09}. The aim of this work is to be able to produce a specification for the architecture and for the technology with assessment of performance, power and cost. The methodology is divided in 3 steps:
+The PathFinding flow is a project led by IMEC and Milojevic \textit{et al.} in collaboration with Atrenta \cite{5335663,DBLP:conf/3dic/MilojevicCCRRSAPM09}. The aim of this work is to be able to produce a specification for the architecture and for the technology with assessment of performance, power and cost. The methodology is divided in 3 steps:
 \begin{enumerate}
 \item 3D system level design exploration with a rough estimation of the performance, power and cost parameters. The designer will be able to focus on the 2D design issues while manually considering the 3D specificities.
 \item RTL (Register Transfer Level) elaboration, which links the system level to the physical design by producing RTL models.

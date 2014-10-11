@@ -50,7 +50,8 @@ The above mentioned parameters illustrate the numerous possibilities for designi
 
 \section{Model and criteria definition}
 \label{sec:crit}
-Typically, the criteria that have to be optimized simultaneously can be the performance, the power consumption, the cost, the package size, the heat dissipation, etc. In this model, we will define six criteria which are among the most important parameters while designing a circuit~\cite{DBLP:conf/3dic/MilojevicCCRRSAPM09}. Among the six presented criteria, the first five are actually implemented and the latter one is discussed:
+
+Typically, the criteria that have to be optimized simultaneously can be the performance, the power consumption, the cost, the package size, the heat dissipation, etc. In this model, we will define five criteria which are among the most important parameters while designing a circuit~\cite{DBLP:conf/3dic/MilojevicCCRRSAPM09}:
 \begin{enumerate}
 \item \textit{The interconnection global length}: this parameter can reflect the global performance of a system. The objective is to minimize it in order to have, for instance, a short delay and low power consumption. It will be calculated using the Manhattan distance \cite{mandist06}:
 \begin{equation}
@@ -80,12 +81,12 @@ A large appoximation of 200 $\mu$m will be made for the thickness of one tiers.
 Let us note that this criterion includes both discrete (number of tiers) and continuous variables (layer size).
 \item \textit{The clock tree position}: in this model, we consider a synchronous system so the objective is to minimize the distance between each block and the clock tree in order to have a high frequency. We choose arbitrarily to approximate the reference point as a fixed point located at the upper left corner of the middle tier of the 3D-SIC.
 % Another solution being worked on is to determine the best position for the clock tree for a given floorplan.
-\item \textit{The thermal dissipation}: thermal dissipation is one of the major issues when designing 3D-SICs. It can be more appropriate to place two blocks underneath each other in successive tiers but a high heat dissipation may happen in intensive computational process. This criterion is a research topic on its own~\cite{1112292, 1486402}. Here we will use a simplified evaluation model with finite elements. This model will consider that the dissipated power, intra- or inter- tiers, is inversely proportional to the distance to the heat source:
+\item \textit{The thermal dissipation}: thermal dissipation is one of the major issues when designing 3D-SICs. It can be more appropriate to place two blocks underneath each other in successive tiers but a high heat dissipation may happen in intensive computational process. This criterion is a research topic on its own \cite{1112292, 1486402}. Here we will use a simplified evaluation model with finite elements. This model will consider that the dissipated power, intra- or inter- tiers, is inversely proportional to the distance to the heat source:
 \begin{equation}
-P_{diss} = \sum_{i=1}^{n} \frac{1}{R_{th, i} \cdot r}
+P_{diss} = P_{comp} \sum_{i=1}^{n} \frac{1}{R_{th, i} \cdot r}
 \label{eqn:pdiss}
 \end{equation}
-where $r$ is the distance to the heat source and $R_{th, i}$ the thermal resistance depending on whether the dissipation is intra- or inter- tiers.
+where $r$ the distance to the heat source and $R_{th, i}$ the thermal resistance depending on whether the dissipation is intra- or inter- tiers.
 This criteria is still on early development stage and we can generate thermal maps of a floorplan as shown in Fig. \ref{fig:thermalmap} but this is currently based on finite elements \cite{4263187} which require quite a long computational time even for a simplified thermal model.
 This criterion in its current development stage is difficult to integrate to the exploration process, due to the computation time of finite elements methods. In the current work, we will simply compute the peak power of a circuit which can be done more quickly.
 
@@ -98,17 +99,17 @@ This criterion in its current development stage is difficult to integrate to the
 \label{fig:thermalmap}
 \end{figure}
 
-\item \textit{The power consumption}: the objective is to minimize the power consumption which can be a crucial criterion for embedded systems. Generally, the power consumption can be defined as the sum of a static ($P_{stat}$) (given data from the component datasheet) and a dynamic ($P_{dyn}$) consumption:
-\begin{equation}
-P=P_{stat}+P_{dyn}
-\end{equation}
-\begin{equation}
-P_{stat}=[given~data]
-\end{equation}
-\begin{equation}
-P_{dyn}=\alpha.C.V_{dd}^2.f.[tech]
-\end{equation}
-where $\alpha$ represents the toggle rate, $C$ the capacitance, $V_{dd}$ the voltage, $f$ the frequency and $[tech]$ a rectification factor due to the technology assigned.
+%\item \textit{The power consumption}: the objective is to minimize the power consumption which can be a crucial criterion for embedded systems. Generally, the power consumption can be defined as the sum of a static ($P_{stat}$) (given data from the component datasheet) and a dynamic ($P_{dyn}$) consumption:
+%\begin{equation}
+%P=P_{stat}+P_{dyn}
+%\end{equation}
+%\begin{equation}
+%P_{stat}=[given~data]
+%\end{equation}
+%\begin{equation}
+%P_{dyn}=\alpha.C.V_{dd}^2.f.[tech]
+%\end{equation}
+%where $\alpha$ represents the toggle rate, $C$ the capacitance, $V_{dd}$ the voltage, $f$ the frequency and $[tech]$ a rectification factor due to the technology assigned.
 \end{enumerate}
 
 At first, we will focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. Then we will analyse our methodology with the five first criteria that have been presented. As stated, the sixth criterion is currently unused. Actually, it has been simulated and tested but we need data from the manufacturers which are not easily available.
@@ -190,7 +191,7 @@ Details about the area required for each component is given in Table \ref{tab:sc
 \hline ADRES 1\texttildelow 6 & 1\texttildelow 6 & 18.6 mm$^2$ & 0.5 & 0.1\\
 FIFO & 7 & 0.54 mm$^2$ & 0.5 & 0.1\\
 L2D1-2 & 8-9 & 6.74 mm$^2$ & 0.5 & 0.1\\
-L2Is1-1 & 10-11 & 6.62 mm$^2$ & 0.5 & 0.1\\
+L2Is1-2 & 10-11 & 6.62 mm$^2$ & 0.5 & 0.1\\
 EMIF & 12 & 0.66 mm$^2$ & 0.5 & 0.1\\
 ARM & 13 & 0.89 mm$^2$ & 0.5 & 0.1\\
 \hline
@@ -694,6 +695,9 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 \end{center}
 \label{fig:ilcview_ff}
 \end{figure}
+
+\section{Validation with a more realist case study}
+In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimisation. This case study remains however simple as it contains only 12 blocks. In order to show the applicability of a multi-criteria methodology, we will use a more realist case study. It will still be based on the 3MF platform and we will apply a scale effect where we will consider 12 ADRES processors instead of 6 and also separate the L1 cache memory from each computing unit. We will also add 2 L2 data cache memories and 2 L2 instruction cache memories. This will thus increase the number of working blocks to **. In addition, we will also consider size variability.
 
 \section{Conclusion}
 

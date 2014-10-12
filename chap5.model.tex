@@ -87,7 +87,7 @@ P_{diss} = P_{comp} \sum_{i=1}^{n} \frac{1}{R_{th, i} \cdot r}
 \label{eqn:pdiss}
 \end{equation}
 where $r$ the distance to the heat source and $R_{th, i}$ the thermal resistance depending on whether the dissipation is intra- or inter- tiers.
-This criteria is still on early development stage and we can generate thermal maps of a floorplan as shown in Fig. \ref{fig:thermalmap} but this is currently based on finite elements \cite{4263187} which require quite a long computational time even for a simplified thermal model.
+This criteria is still on early development stage and we can generate thermal maps of a floorplan as shown in Figure \ref{fig:thermalmap} but this is currently based on finite elements \cite{4263187} which require quite a long computational time even for a simplified thermal model.
 This criterion in its current development stage is difficult to integrate to the exploration process, due to the computation time of finite elements methods. In the current work, we will simply compute the peak power of a circuit which can be done more quickly.
 
 \begin{figure}[h!]
@@ -113,14 +113,14 @@ This criterion in its current development stage is difficult to integrate to the
 \end{enumerate}
 
 At first, we will focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. Then we will analyse our methodology with the five first criteria that have been presented. As stated, the sixth criterion is currently unused. Actually, it has been simulated and tested but we need data from the manufacturers which are not easily available.
-%As for the thermal dissipation, simulations are possible (see Fig.~\ref{fig:thermalmap}) but due to its current development stage it is difficult to integrate it in the exploration process due to the computing time of finite elements.
+%As for the thermal dissipation, simulations are possible (see Figure~\ref{fig:thermalmap}) but due to its current development stage it is difficult to integrate it in the exploration process due to the computing time of finite elements.
 
 \section{Design methodology}
 In summary, the problem we are facing is to place several blocks that have to be assigned in many tiers while considering multiple conflicting criteria. Now that our model has been defined, we will present a proposition of a new design methodology based on multi-objective optimization.
 
 As explained in Chapter \ref{cha:rol.icdesign}, designing ICs implies numerous choices and designers are likely to freeze a certain amount of choices on basis of their experience. This will therefore limit the exploration of the design space and good solutions may be ignored.
 
-In order to enable an efficient design space exploration, we propose a method in four steps based on MCDA which is illustrated in Fig.~\ref{fig:mcdaflow}. The implementation will be briefly presented in the next section.
+In order to enable an efficient design space exploration, we propose a method in four steps based on MCDA which is illustrated in Figure~\ref{fig:mcdaflow}. The implementation will be briefly presented in the next section.
 
 \begin{figure}[h!]
 \begin{center}
@@ -135,7 +135,7 @@ For the problem we consider, the input data will contain the information about t
 \begin{itemize}
 \item Type and number of blocks: computational units, memories, etc.
 \item Size of the blocks: inherent to the block.
-\item Minimum aspect ratio: we consider a degree of freedom where a block can have its dimensions varying within an aspect ratio range. This means that a block does not have to be square, as shown in Fig. \ref{fig:ff_ex}. This parameter can influence the delay in a block.
+\item Minimum aspect ratio: we consider a degree of freedom where a block can have its dimensions varying within an aspect ratio range. This means that a block does not have to be square, as shown in Figure \ref{fig:ff_ex}. This parameter can influence the delay in a block.
 \item Size variability of a block: we add this degree of freedom considering that the specified size of a block can be fixed by the designer but this fixed size can restrict the design space exploration. The variability of a block's size can have effect on the performances and the global footprint.
 \end{itemize}
 In addition, the bandwidth requirements are needed as they will indicate which are the important interconnections and prevent two blocks that require a large bandwidth from being too far from each other. The available manufacturing technologies are also useful to enable the design of heterogeneous systems.
@@ -154,7 +154,7 @@ The combination of all the parameters described in the model are the possible al
 \item The geometrical coordinates for each block and the assigned layer.
 \item The size of each block (if it can vary from the specified size).
 \item The aspect ratio for each block.
-\item The technology assigned to each tier: this will reduce the size of each block. The size of a block will define the number of transistors inside using a given technology, for example 180 nm. For a constant number of transistors, if the block is manufactured with a smaller technology, let us say 45 nm, then its size will be divided by a (180/45)$^2$ factor, as shown in Fig.~\ref{fig:tech_ex}. Please note, that this factor is a rough approximation which is not always met with real physical design.
+\item The technology assigned to each tier: this will reduce the size of each block. The size of a block will define the number of transistors inside using a given technology, for example 180 nm. For a constant number of transistors, if the block is manufactured with a smaller technology, let us say 45 nm, then its size will be divided by a (180/45)$^2$ factor, as shown in Figure~\ref{fig:tech_ex}. Please note, that this factor is a rough approximation which is not always met with real physical design.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -171,7 +171,7 @@ In this section, we will briefly explain the implementation of our design method
 %This case study has been implemented using Matlab and all data were coded using matrices.
 
 \subsection{Description of the case study and modeling}
-The 3MF MPSoC is made of 13 blocks as shown on Fig. \ref{fig:imec3mf}:
+The 3MF MPSoC is made of 13 blocks as shown on Figure \ref{fig:imec3mf}:
 \begin{itemize}
 \item 6 ADRES processors (\cite{conf/fpl/VeredasSMM05})
 \item 2 data memories (L2D\#)
@@ -369,7 +369,7 @@ ID: component identification number; L: assigned layer;\\
 \label{tab:outputmat}
 \end{table}
 
-We implemented our design space exploration following the steps of the NSGA-II which can be summarized by the diagram shown in Fig. \ref{fig:ga_steps}.
+We implemented our design space exploration following the steps of the NSGA-II which can be summarized by the diagram shown in Figure \ref{fig:ga_steps}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -394,9 +394,9 @@ For the selection step, two solutions will be allowed to make a crossover depend
 \end{equation}
 where $A$ is the set of alternatives in the Pareto front with $a_j \in A$ and $g_i(a_j)$ is the evaluation of the alternative $a_j$ on the criterion $i$.
 
-%As we want to ensure that our algorithm has intensification properties, we vary the crossover probability between two solutions according to their distance. In particular, we choose a crossover probability proportional to the Euclidean distance between the solutions, as shown in Fig. \ref{fig:cross_proba}. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This requires us to define a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) on the probabilities: $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
+%As we want to ensure that our algorithm has intensification properties, we vary the crossover probability between two solutions according to their distance. In particular, we choose a crossover probability proportional to the Euclidean distance between the solutions, as shown in Figure \ref{fig:cross_proba}. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This requires us to define a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) on the probabilities: $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
 
-The probability for two solutions to do a crossover will vary linearly with the Euclidean distance between them, as shown in Fig. \ref{fig:cross_proba}. The distance between the two furthest alternatives ($d_furthest$) will be associated with a probability $P_{c, min}$ while the distance between the two closest alternatives ($d_closest$) will be associated with a probability $P_{c, max}$. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This is to ensure the intensification properties of our algorithm. Therefore, we will have to specify a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) for the crossover probability. $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
+The probability for two solutions to do a crossover will vary linearly with the Euclidean distance between them, as shown in Figure \ref{fig:cross_proba}. The distance between the two furthest alternatives ($d_furthest$) will be associated with a probability $P_{c, min}$ while the distance between the two closest alternatives ($d_closest$) will be associated with a probability $P_{c, max}$. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This is to ensure the intensification properties of our algorithm. Therefore, we will have to specify a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) for the crossover probability. $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
 
 These values will be fixed as $[P_{c, min} = 0.6; P_{c, max} = 1.0]$ since these seem to be common values~\cite{Davis1989}.
 
@@ -644,7 +644,7 @@ Three stop conditions have been implemented and are based on what is commonly us
 The maximum elapsed time has been chosen arbitrarily for quick testing purposes. Having a simulation time of a few hours would not be a problem either. Indeed, in practice, the optimization of one single architecture can take from several hours to several days with the current design tools. Also, due to the approximation in the model, trying to find a really accurate Pareto front would not have real added value.
 
 \section{Results and their use for a designer}
-The optimization was done for three criteria (so that we can visualize the design space) and the main results are given in Fig. \ref{fig:ds3dview} (3D plot) and Fig. \ref{fig:ilcview} (interconnection length-cost projection). Two conclusions can be drawn from that figure:
+The optimization was done for three criteria (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ds3dview} (3D plot) and Figure \ref{fig:ilcview} (interconnection length-cost projection). Two conclusions can be drawn from that figure:
 \begin{itemize}
 \item The [10; 20] range values for the IL criteria: a small enhancement of the IL value leads to a large increase of the cost so the interest for a design with more than 4 tiers seems low.
 \item The [260; 280] range values for the cost criteria: a small increase of the price can give a large enhancement of the performance. A designer might consider accepting a slightly higher price for a sensitively better performance, knowing that this information can be quantified with an accurate model. Indeed, with the estimate model that we propose, a small 10\% increase of the cost can decrease the IL by 60\%.
@@ -678,7 +678,7 @@ $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ 
 \label{fig:ilcview}
 \end{figure}
 
-These results did not take into account the degree of freedom of aspect ratio. If we go further by releasing a degree of freedom and allowing varying aspect ratios, we can have the Pareto front shown in Fig. \ref{fig:ilcview_ff}. This figure shows the Pareto front from Fig. \ref{fig:ilcview} (without aspect ratio, symbol: $\cdot$) alongside with a new Pareto front (with aspect ratio, symbol: +).
+These results did not take into account the degree of freedom of aspect ratio. If we go further by releasing a degree of freedom and allowing varying aspect ratios, we can have the Pareto front shown in Figure \ref{fig:ilcview_ff}. This figure shows the Pareto front from Figure \ref{fig:ilcview} (without aspect ratio, symbol: $\cdot$) alongside with a new Pareto front (with aspect ratio, symbol: +).
 
 As expected, the Pareto front given when considering varying aspect ratios is globally better. Furthermore, by comparing the two graphs, we can see an interesting area where the two frontiers begin to merge at the cost value 350. This means that, in that area, it is not necessary to take the aspect ratio into account. Once again, these kind of information can be important in the design of an IC and yet they would not be available with the current design flows since only a small number of possibilities are explored. Indeed, due to the sequential nature of the current design flows, such degrees of freedom are not even tried since they dramatically increase the duration of each optimization loop.
 

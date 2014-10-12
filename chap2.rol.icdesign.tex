@@ -9,7 +9,7 @@
 
 \section{2D architecture and its limitations}
 
-In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Fig. \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' integration each 18 months and therefore increasing logic capacity of the circuit per unit area. 
+In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Figure \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' integration each 18 months and therefore increasing logic capacity of the circuit per unit area. 
 
 \begin{figure}
 \begin{center}
@@ -40,7 +40,7 @@ In order to overcome these limitations, new technologies have been proposed such
 
 \section{3D integration}
 
-Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar fashion~\cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV), micro bumps (µBump) or copper pads (CuPad) and they can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Fig.~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
+Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar fashion~\cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV), micro bumps (µBump) or copper pads (CuPad) and they can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
 
 \begin{figure}[h!]
 \begin{center}
@@ -91,7 +91,7 @@ One drawback to wafer-level stacking is its efficiency, since the chips on a waf
 
 \paragraph{Interconnection length}
 
-The 3D integration allows to design circuits with components closer to each other. Wire of a few millimetres long can be replaced by TSV of a few tens of microns, as shown in Fig. \ref{fig:wire}. These shorter interconnections will introduce shorter delays, hence allowing higher working frequencies \cite{659500,981091}.
+The 3D integration allows to design circuits with components closer to each other. Wire of a few millimetres long can be replaced by TSV of a few tens of microns, as shown in Figure \ref{fig:wire}. These shorter interconnections will introduce shorter delays, hence allowing higher working frequencies \cite{659500,981091}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -104,7 +104,7 @@ The 3D integration allows to design circuits with components closer to each othe
 
 \paragraph{Silicon efficiency and accessibility}
 
-Adding a vertical dimension allows to increase the integration density. It is therefore possible to have more logic gates than a 2D-IC for the same footprint, hence a more efficient use of the silicon as shown in Fig. \ref{fig:footprint}. For instance, compared to the footprint of a 2D-IC, the 3D-SICs can double the integration for a 50\% use of a 2D footprint \cite{659500}.
+Adding a vertical dimension allows to increase the integration density. It is therefore possible to have more logic gates than a 2D-IC for the same footprint, hence a more efficient use of the silicon as shown in Figure \ref{fig:footprint}. For instance, compared to the footprint of a 2D-IC, the 3D-SICs can double the integration for a 50\% use of a 2D footprint \cite{659500}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -115,7 +115,7 @@ Adding a vertical dimension allows to increase the integration density. It is th
 \label{fig:footprint}
 \end{figure}
 
-In addition, the 3D integration allows a better accessibility for the components, as shown in Fig. \ref{fig:accessibility}. Indeed, for a 2D structure, 8 accessible neighbours can be considered for a central element (Fig. \ref{fig:accessibility} (a)), whereas for a 3D structure, the number of accessible neighbours can reach 116 with through-tiers interconnections (Fig. \ref{fig:accessibility} (b)) \cite{659500}.
+In addition, the 3D integration allows a better accessibility for the components, as shown in Figure \ref{fig:accessibility}. Indeed, for a 2D structure, 8 accessible neighbours can be considered for a central element (Figure \ref{fig:accessibility} (a)), whereas for a 3D structure, the number of accessible neighbours can reach 116 with through-tiers interconnections (Figure \ref{fig:accessibility} (b)) \cite{659500}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -128,7 +128,7 @@ In addition, the 3D integration allows a better accessibility for the components
 
 \paragraph{Bandwidth}
 
-The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit. Indeed, as shown in Fig. \ref{fig:bandwidth}, the interconnections are not only limited to peripheral connections but can also make use of the circuit's surface. At a same working frequencies, this allows more bandwidth while at lower frequencies, the same bandwidth usage will require less power.
+The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit. Indeed, as shown in Figure \ref{fig:bandwidth}, the interconnections are not only limited to peripheral connections but can also make use of the circuit's surface. At a same working frequencies, this allows more bandwidth while at lower frequencies, the same bandwidth usage will require less power.
 
 \begin{figure}[h!]
 \begin{center}
@@ -194,7 +194,7 @@ In the following section, we will have an overview about these software tools an
 
 \section{Current design flows and their limitations}
 
-Design flows are the combination of electronic design automation (EDA) tools used to produce an integrated circuit. These flows can generally be summarized in 4 main steps \cite{coursefred}, as shown in Fig. \ref{fig:designflow}.
+Design flows are the combination of electronic design automation (EDA) tools used to produce an integrated circuit. These flows can generally be summarized in 4 main steps \cite{coursefred}, as shown in Figure \ref{fig:designflow}.
 
 \begin{figure}[h!]
 \begin{center}

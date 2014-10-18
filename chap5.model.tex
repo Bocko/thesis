@@ -188,12 +188,12 @@ Details about the area required for each component is given in Table \ref{tab:sc
 \begin{scriptsize}
 \begin{tabular}{|c|c|c|c|c|}
 \hline Component & ID & Size (90 nm) & Min aspect ratio & Size variability\\
-\hline ADRES 1\texttildelow 6 & 1\texttildelow 6 & 18.6 mm$^2$ & 0.5 & 0.1\\
-FIFO & 7 & 0.54 mm$^2$ & 0.5 & 0.1\\
-L2D1-2 & 8-9 & 6.74 mm$^2$ & 0.5 & 0.1\\
-L2Is1-2 & 10-11 & 6.62 mm$^2$ & 0.5 & 0.1\\
+\hline ADRES 1\texttildelow 6 & 1\texttildelow 6 & 18.6 mm$^2$ & 0.5 & $\pm20\%$\\
+FIFO & 7 & 0.54 mm$^2$ & 0.5 & 0\\
+L2D1-2 & 8-9 & 6.74 mm$^2$ & 0.5 & $+30\%$\\
+L2Is1-2 & 10-11 & 6.62 mm$^2$ & 0.5 & $+30\%$\\
 EMIF & 12 & 0.66 mm$^2$ & 0.5 & 0.1\\
-ARM & 13 & 0.89 mm$^2$ & 0.5 & 0.1\\
+ARM & 13 & 0.89 mm$^2$ & 0.5 & 0\\
 \hline
 \end{tabular}
 \end{scriptsize}
@@ -644,25 +644,11 @@ Three stop conditions have been implemented and are based on what is commonly us
 The maximum elapsed time has been chosen arbitrarily for quick testing purposes. Having a simulation time of a few hours would not be a problem either. Indeed, in practice, the optimization of one single architecture can take from several hours to several days with the current design tools. Also, due to the approximation in the model, trying to find a really accurate Pareto front would not have real added value.
 
 \section{Results and their use for a designer}
-The optimization was done for three criteria (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ds3dview} (3D plot) and Figure \ref{fig:ilcview} (interconnection length-cost projection). Two conclusions can be drawn from that figure:
+The optimization was done for three criteria (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
 \begin{itemize}
 \item The [10; 20] range values for the IL criteria: a small enhancement of the IL value leads to a large increase of the cost so the interest for a design with more than 4 tiers seems low.
 \item The [260; 280] range values for the cost criteria: a small increase of the price can give a large enhancement of the performance. A designer might consider accepting a slightly higher price for a sensitively better performance, knowing that this information can be quantified with an accurate model. Indeed, with the estimate model that we propose, a small 10\% increase of the cost can decrease the IL by 60\%.
 \end{itemize}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{ultiplot.eps}
-\end{center}
-\vspace{-0.5cm}
-\caption{3D view (interconnection length-volume-cost) of the Pareto frontier}
-\begin{center}
-\begin{scriptsize}
-$\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ : 5 tiers
-\end{scriptsize}
-\end{center}
-\label{fig:ds3dview}
-\end{figure}
 
 \begin{figure}[h!]
 \begin{center}
@@ -676,6 +662,20 @@ $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ 
 \end{scriptsize}
 \end{center}
 \label{fig:ilcview}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{ultiplot.eps}
+\end{center}
+\vspace{-0.5cm}
+\caption{3D view (interconnection length-volume-cost) of the Pareto frontier}
+\begin{center}
+\begin{scriptsize}
+$\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ : 5 tiers
+\end{scriptsize}
+\end{center}
+\label{fig:ds3dview}
 \end{figure}
 
 These results did not take into account the degree of freedom of aspect ratio. If we go further by releasing a degree of freedom and allowing varying aspect ratios, we can have the Pareto front shown in Figure \ref{fig:ilcview_ff}. This figure shows the Pareto front from Figure \ref{fig:ilcview} (without aspect ratio, symbol: $\cdot$) alongside with a new Pareto front (with aspect ratio, symbol: +).
@@ -697,9 +697,9 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 \end{figure}
 
 \section{Validation with a more realistic case study}
-In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimisation. This case study remains however simple as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
+In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimisation and ran simulations based on the 3MF platform. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
 
-We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of heterogeneity, in terms of , to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput}.
+We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput} (the full matrix model can be found in Appendix \ref{}).
 
 \begin{table}[h!]
 \caption{Validation case input matrix}
@@ -725,7 +725,7 @@ ID: Component identification number
 \label{tab:validinput}
 \end{table}
 
-For the communication requirements, the only change compared to the original case is that the exchanges between the ADRES processors and the L2 cache memories will now transit through the L1 cache memories. In order to simplify the necessary bandwidth between the ADRES cores and the L1 memories, we will consider a bandwidth 64 times faster than for the L2. These data are summarized in Table \ref{tab:validbw}.
+For the communication requirements, the only change compared to the original case is that the exchanges between the ADRES processors and the L2 cache memories will now transit through the L1 cache memories. In order to simplify the necessary bandwidth between the ADRES cores and the L1 memories, we will assume a bandwidth 64 times bigger than for the L2. These data are summarized in Table \ref{tab:validbw} (the full matrix model can be found in Appendix \ref{}).
 
 \begin{table}[h!]
 \caption{Validation case bandwidth requirements}
@@ -763,8 +763,34 @@ L1Is22\texttildelow 24 & L2Is8 & 300\\
 \end{table}
 
 \subsection{Simulation and validation procedure}
-In order to validate the methodology, we will run the simulations of this case study to produce floorplans with 2 and 3 layers. First, we mimic the current design flow by performing a mono-objective optimization (minimizing the interconnection distance) for a 2-tiers circuit. Then we will compare the obtained solution to other 2 and 3-tiers circuits that have be produced with a multi-objective approach.
+In order to validate the methodology, we will run the simulations of this case study to produce floorplans with 1 to 3 layers. First, we will mimic the current design flow by performing a mono-objective optimization (minimizing the interconnection length). Then we will compare the obtained solution to other 2- and 3-tiers 3D-SIC that have been produced with a multi-objective approach.
 
+After simulations, we obtain the following results for the mono-objective optimization of a 2D-IC and a 2-tiers circuit (we will denote them by $A$, $B$ and $C$):
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Alternative & Layers & Interconnection length score\\
+\hline
+$A$ & 1 & \\
+$B$ & 2 & \\
+$C$ & 3 & 4.0438\\
+\hline
+\end{tabular}
+\end{center}
+
+Without surprise, we observe that the 3D-SICs perform better on that criterion than a 2D-IC, which validate the consistency of the model compare to what is expected in reality.
+
+Now let us examine the alternative $A$ for all the criteria:
+\begin{center}
+\begin{tabular}{|c|c|ccccc|}
+\hline
+Alternative & Layers & Interconnection & Cost & Volume & Clock & Power\\
+ & & length & & & position & \\
+\hline
+$A$ & 1 & & & & & \\
+\hline
+\end{tabular}
+\end{center}
 \section{Conclusion}
 
 The results have thus shown interesting analyses that can be relevant for a designer. First, using a multi-objective optimization methodology does not only consider all the criteria at the same time but also proceed to an extensive design space exploration which is rarely done with current tools. Second, the qualitative results shown here can give relevant information to the designer and they can be quantified with a more accurate model. Third, the flexibility of MOO allows to easily consider new degrees of freedom without having to change the paradigm. Finally, this methodology and the associated algorithms has shown positive indicators of convergence and robustness as it will be shown in the next chapter.

@@ -207,7 +207,7 @@ ID: Component identification number
 \begin{figure}[h!]
 \begin{center}
 %\includegraphics[width=7cm]{imec3mf.png}
-\includegraphics[width=7cm]{3MFMPSoC.pdf}
+\includegraphics[width=0.7\textwidth]{3MFMPSoC.pdf}
 \end{center}
 \vspace{-0.3cm}
 \caption{Architecture of the 3MF MPSoC platform~\cite{dmilojev08b}}
@@ -373,7 +373,7 @@ We implemented our design space exploration following the steps of the NSGA-II w
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=7cm]{GA_dia_en.pdf}
+\includegraphics[width=0.8\textwidth]{GA_dia_en.pdf}
 \end{center}
 \vspace{-0.5cm}
 \caption{General NSGA-II steps}
@@ -402,7 +402,7 @@ These values will be fixed as $[P_{c, min} = 0.6; P_{c, max} = 1.0]$ since these
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=8cm]{crossover_proba.eps}
+\includegraphics[width=\textwidth]{crossover_proba.eps}
 \end{center}
 \vspace{-0.5cm}
 \caption{Evolution of the crossover probability as a function of the distance between two solutions}
@@ -652,7 +652,7 @@ The optimization was done for three criteria (so that we can visualize the desig
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=8cm]{ultiplot.eps}
+\includegraphics[width=\textwidth]{ultiplot.eps}
 \end{center}
 \vspace{-0.5cm}
 \caption{3D view (interconnection length-volume-cost) of the Pareto frontier}
@@ -666,7 +666,7 @@ $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ 
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=8cm]{ultiplot1.pdf}
+\includegraphics[width=\textwidth]{ultiplot1.pdf}
 \end{center}
 \vspace{-0.5cm}
 \caption{IL-cost projection view of the Pareto frontier}
@@ -684,7 +684,7 @@ As expected, the Pareto front given when considering varying aspect ratios is gl
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=8cm]{ultiplot_ff.pdf}
+\includegraphics[width=\textwidth]{ultiplot_ff.pdf}
 \end{center}
 \vspace{-0.5cm}
 \caption{IL-cost projection view of the Pareto frontier (with and without aspect ratio)}
@@ -696,8 +696,74 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 \label{fig:ilcview_ff}
 \end{figure}
 
-\section{Validation with a more realist case study}
-In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimisation. This case study remains however simple as it contains only 12 blocks. In order to show the applicability of a multi-criteria methodology, we will use a more realist case study. It will still be based on the 3MF platform and we will apply a scale effect where we will consider 12 ADRES processors instead of 6 and also separate the L1 cache memory from each computing unit. We will also add 2 L2 data cache memories and 2 L2 instruction cache memories. This will thus increase the number of working blocks to **. In addition, we will also consider size variability.
+\section{Validation with a more realistic case study}
+In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimisation. This case study remains however simple as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
+
+We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of heterogeneity, in terms of , to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput}.
+
+\begin{table}[h!]
+\caption{Validation case input matrix}
+\begin{center}
+\begin{small}
+\begin{tabular}{|c|c|c|c|c|}
+\hline Component & ID & Size (90 nm) & Min aspect ratio & Size variability\\
+\hline ADRES core 1\texttildelow 24 & 1\texttildelow 24 & 17.27 mm$^2$ & 0.5 & $\pm30\%$\\
+L1D & 25\texttildelow 48 & 0.67 mm$^2$ & 0.5 & $+100\%$\\
+L1Is & 49\texttildelow 72 & 0.66 mm$^2$ & 0.5 & $+100\%$\\
+L2D1\#1\texttildelow 4 & 73\texttildelow 76 & 6.74 mm$^2$ & 0.5 & $+100\%$\\
+L2D2\#1\texttildelow 4 & 77\texttildelow 80 & 6.74 mm$^2$ & 0.5 & $+100\%$\\
+L2Is1\texttildelow 8 & 81\texttildelow 88 & 6.62 mm$^2$ & 0.5 & $+100\%$\\
+FIFO & 89 & 0.54 mm$^2$ & 0.5 & 0\\
+EMIF & 90 & 0.66 mm$^2$ & 0.5 & 0\\
+\hline
+\end{tabular}
+\end{small}
+\end{center}
+\begin{center}
+ID: Component identification number
+\end{center}
+\label{tab:validinput}
+\end{table}
+
+For the communication requirements, the only change compared to the original case is that the exchanges between the ADRES processors and the L2 cache memories will now transit through the L1 cache memories. In order to simplify the necessary bandwidth between the ADRES cores and the L1 memories, we will consider a bandwidth 64 times faster than for the L2. These data are summarized in Table \ref{tab:validbw}.
+
+\begin{table}[h!]
+\caption{Validation case bandwidth requirements}
+\begin{center}
+\begin{small}
+\begin{tabular}{|c|c|c|}
+\hline Source & Target & Bandwidth (MB/s)\\
+\hline FIFO & EMIF & 39.6\\
+EMIF & ADRES core 1\texttildelow 24 & 6.6\\
+ADRES core 1\texttildelow 24 & L1D1\texttildelow 24 & 1690\\
+ADRES core 1\texttildelow 24 & L1Is1\texttildelow 24 & 19200\\
+L2D1\#1 & L1D1\texttildelow 6 & 26.4\\
+L2D1\#2 & L1D7\texttildelow 12 & 26.4\\
+L2D1\#3 & L1D13\texttildelow 18 & 26.4\\
+L2D1\#4 & L1D19\texttildelow 24 & 26.4\\
+L2D2\#1\texttildelow 4 & L2D1\#1\texttildelow 4 & 52.7\\
+ADRES core 1\texttildelow 24 & FIFO & 1.2\\
+L1D1\texttildelow 6 & L2D2\#1 & 6.6\\
+L1D7\texttildelow 12 & L2D2\#2 & 6.6\\
+L1D13\texttildelow 18 & L2D2\#3 & 6.6\\
+L1D19\texttildelow 24 & L2D2\#4 & 6.6\\
+L1Is1\texttildelow 3 & L2Is1 & 300\\
+L1Is4\texttildelow 6 & L2Is2 & 300\\
+L1Is7\texttildelow 9 & L2Is3 & 300\\
+L1Is10\texttildelow 12 & L2Is4 & 300\\
+L1Is13\texttildelow 15 & L2Is5 & 300\\
+L1Is16\texttildelow 18 & L2Is6 & 300\\
+L1Is19\texttildelow 21 & L2Is7 & 300\\
+L1Is22\texttildelow 24 & L2Is8 & 300\\
+\hline
+\end{tabular}
+\end{small}
+\end{center}
+\label{tab:validbw}
+\end{table}
+
+\subsection{Simulation and validation procedure}
+In order to validate the methodology, we will run the simulations of this case study to produce floorplans with 2 and 3 layers. First, we mimic the current design flow by performing a mono-objective optimization (minimizing the interconnection distance) for a 2-tiers circuit. Then we will compare the obtained solution to other 2 and 3-tiers circuits that have be produced with a multi-objective approach.
 
 \section{Conclusion}
 

@@ -7,7 +7,7 @@
 
 \section{Introduction}
 \label{sec:rol2.intro}
-In this chapter, we briefly present the basics of multi-objective optimization and multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing such problems, two main methods exist: the uni-criterion paradigm and the multi-criteria paradigm. For optimization problems, these paradigm will refer to the terminology mono-objective/multi-objective optimization while for decision aid, the terminology uni-criterion/multi-criteria will be used.
+In this chapter, we briefly present the basics of multi-objective optimization and multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing such problems, two main approches exist: the uni-criterion paradigm and the multi-criteria paradigm. For optimization problems, these paradigm will refer to the terminology mono-objective/multi-objective optimization while for decision aid, the terminology uni-criterion/multi-criteria will be used.
 
 In the following, we will briefly describe each paradigm, showing some of the main approaches alongside illustrative examples. We will first present the uni-criterion methodology, show why it can be limited in our contect and explain why a multi-criteria paradigm can be more suitable.
 
@@ -49,7 +49,7 @@ where $\mathbf{x}$ is a vector of continuous, integer or boolean variables to be
 Efficient exact methods for solving LP problem exist such as, among the most knowns, the simplex algorithm \cite{dantzig51} or the interior point method \cite{Karmarkar84}.
 
 \begin{example}[Linear programming]
-A given company produces two electronic boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and for each board $Board_i$ the used amount of memories and the profit, as shown in Table \ref{tab:ex_lp}. The decision variables are $x_1$ and $x_2$ that represent respectively the amount of $Board_1$ and $Board_2$. The objective is to maximize the profit.\\
+A given company produces two electronic boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and the amount of memory used as well as the profit per board, as shown in Table \ref{tab:ex_lp}. The decision variables are $x_1$ and $x_2$ that represent respectively the amount of $Board_1$ and $Board_2$ produced. The objective is to maximize the profit.\\
 The problem can be formulated as an LP:
 \begin{equation*}
 \text{max profit } = 5x_1 + 4x_2
@@ -87,13 +87,13 @@ subject to
 \begin{equation*}
 \begin{gathered}
 A\mathbf{x} \leq \mathbf{b}\\
-\mathbf{x} \geq \mathbf{0}\\
+%\mathbf{x} \geq \mathbf{0}\\
 \mathbf{x} \in \mathbb{N}
 \end{gathered}
 \end{equation*}
 where $\mathbf{c}$ and $\mathbf{b}$ are vectors and $A$ is a matrix of coefficients.
 
-When the decision variables are both discrete en continuous, the problem refers to \textbf{mixed integer programming} (MILP).
+When the set of decision variables contains both discrete and continuous variables, the problem refers to \textbf{mixed integer programs} (MILP).
 
 Other particular ILP problems which deals with variables that are restricted to be either 0 or 1 are called \textbf{0-1 linear programming}.
 
@@ -155,14 +155,14 @@ NLP are generally more difficult to solve than LP \cite{talbi09} and metaheurist
 \section{From the uni-criterion paradigm to the multi-criteria paradigm}
 \label{sec:rol2.unicritmulticrit}
 
-With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the characteristics of the problems or that the other criteria already satisfy an acceptable level. This methodology will try to give a solution which is supposed to be optimal according to this criterion. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Chapter \ref{cha:model}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached.
+With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the characteristics of the problems or that the other criteria already satisfy an acceptable level. This methodology will search for a solution which is supposed to be optimal according to this criterion. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Chapter \ref{cha:model}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached.
 %, there may be cases where several solutions share the same evaluations on all the criteria.
 
 For instance, when designing ICs, a manufacturer will try to simultaneously maximize the performance while minimize the cost of the circuit. However, we can already guess that those two objectives are conflicting. Also, producing high-end ICs can be subject to more difficulties in terms of thermal dissipation. In addition, a criterion based on ecological standards may have impacts on the cost and the performance of an IC.
 
-This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum as several criteria have to be simultaneously taken into account. A solution that optimizes one criterion will likely to affect another.
+This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum, as several criteria have to be simultaneously taken into account. A solution that optimizes one criterion will likely affect another.
 
-In order to deal with the multiple criteria of a problem, another paradigm consists in taking into account all the criteria simultaneously. This is the aim of the multi-criteria paradigm which aim to:
+In order to deal with the multiple criteria of a problem, another paradigm consists in taking into account all the criteria simultaneously. This is the goal of the multi-criteria paradigm which aims to:
 \begin{enumerate}
 \item find the solutions that are efficient on all the criteria simultaneously with the multi-objective optimization;
 \item provide support to a decision maker facing several conflicting solutions with multi-criteria decision aid (MCDA) that allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
@@ -201,7 +201,7 @@ Two approaches can be used to establish this set~\cite{Vin92}:
 \item \textit{Exact methods} which aims to compute the Pareto frontier directly~\cite{EhrgottGandibleuxbook02,steuer86a}.
 \item \textit{Approximate methods} which are based on metaheuristics to quickly explore the solution space and approach as best as possible the Pareto optimal frontier\cite{talbi09}.
 \end{itemize}
-As explained in Chapter \ref{cha:rol.icdesign}, designing 3D-SICs includes a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Chapter \ref{cha:model}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to show the applicability of a multi-criteria paradigm to the design of 3D circuits. Therefore developing exact methods has been kept out of the scope of this work.
+As explained in Chapter \ref{cha:rol.icdesign}, designing 3D-SICs involves a huge solution space to deal with in the optimization process. The solution (that is to say the most-suitable 3D-SIC architecture) is unknown and an exhaustive search would take a prohibitive time. Also, due to the nature of the criteria (discrete and continuous variables, linear and non-linear criteria) that will be defined in Chapter \ref{cha:model}, we have few hopes to be able to develop an exact method. For those reasons, approximate methods with metaheuristics for multi-objective optimization will be used. Let us also remind that the aim of this thesis is to evaluate the applicability of a multi-criteria paradigm to the design of 3D circuits. Therefore developing exact methods has been kept out of the scope of this work.
 
 \subsection{Metaheuristics for multi-objective optimization}
 \label{subsec:metaheuristics}
@@ -214,9 +214,9 @@ Numerous metaheuristics have been developed since the 50s. Among the most known,
 In this work, we will focus on genetic algorithms (GA) as they are quick to implement for a first approach and are suitable to heterogeneous variables problems. More details about other metaheuristics can be found in reference books such as \cite{talbi09,dreo06metaheuristics,8125462}.
 
 \subsubsection{General description of genetic algorithms}
-Genetic algorithms have been developed by Holland in the 1970s \cite{holland1975adaptation}. They are metaheuristics that reproduce the properties of a natural selection process as described by Charles Darwin. GAs are based on the principle of the improvement of the gene pool of a population over generations. GAs will mimic the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm).
+Genetic algorithms have been developed by Holland in the 1970s \cite{holland1975adaptation}. They are metaheuristics that reproduce the properties of a natural selection process as described by Charles Darwin. GAs are based on the principle of improvement of gene pool of a population over generations. GAs will mimic the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm).
 
-Genetic algorithms rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with a randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitutes the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied. The general pseudo-code for genetic algorithms is shown in Algorithm \ref{alg:ga}.
+Genetic algorithms rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitute the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when a certain fitness level has been satisfied. The general pseudo-code for genetic algorithms is shown in Algorithm \ref{alg:ga}.
 
 \begin{algorithm}[h!]
 \caption{General pseudo-code for genetic algorithms}
@@ -271,7 +271,7 @@ $y'$ & = & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 0
 \end{example}
 
 \paragraph{Mutation}
-Mutation is a genetic operation used to ensure diversity in the generated populations. It changes one or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Example \ref{ex:mutation}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Chapter \ref{cha:model}).
+Mutation is a genetic operation used to ensure diversity in the generated populations. It changes one piece or more information in the chromosome of an individual. This alteration depends on how the solution is encoded. If it is a bit string, the most common operation is to apply a bit flip (see Example \ref{ex:mutation}) while for float chromosomes, new values can be generated following user-defined rules (see detailed illustration in Chapter \ref{cha:model}).
 
 \begin{example}[Mutation example]
 \label{ex:mutation}
@@ -478,9 +478,9 @@ If the value of the Consistency Ratio is lower or equal to 10\%, the inconsisten
 The STEP Method has been proposed by Benayoun \cite{benayoun71}. STEM is an interactive and iterative exploration procedure that aims to reach the best compromise according the decision maker after a certain number of cycles. Each cycle is composed of a calculation phase and a decision-making phase (discussion with the decision maker):
 \begin{enumerate}
 \item An efficient compromise solution is determined.
-\item This solution is submitted to the decision maker. Three cases can then happen:
+\item \label{stem2} This solution is submitted to the decision maker. Three cases can then happen:
 	\begin{enumerate}
-	\item \label{stem2} The decision maker is satisfied and the procedure ends;
+	\item The decision maker is satisfied and the procedure ends;
 	\item The decision maker wants to simultaneously improve all the evaluations. This is impossible since the proposed solution is efficient. The procedure ends and cannot help the decision maker.
 	\item The decision maker identifies a particular criterion on which a concession can be made in order to improve other criteria. A new efficient solution can then be determined.
 	\item This new solution is submitted. Go to step \ref{stem2}.
@@ -517,7 +517,7 @@ Since the dominance relation is really poor (binary relation), a preference func
 Consequently, it is therefore possible to define several types of preference functions based on preference ($P$) or indifference ($Q$) thresholds, as shown in Table \ref{tab:pref_func}. Below the indifference threshold, the decision maker will consider having no preference while above the preference threshold, the decision maker will have no more difference in its preference.
 
 \begin{table}[h!]
-\caption{Preference functions}
+\caption{Preference functions (reproduced from \cite{BraMar2002})
 \begin{center}
 \begin{tabular}{|l|c|b{4.2cm}|}
 \hline Usual & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_usual_pdf} & Strict preference\\
@@ -625,10 +625,21 @@ While it is impossible to have a visual representation of the solution space whe
 The PCA allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
 
 This plan allows to have a visual descriptive analysis with several criteria. It can highlight the conflict between criteria and show the profiles of the alternatives. This will help to identify the potential compromise solutions.
+
+In order to illustrate the use of the GAIA plane, we will take a simple example taken from the PROMETHEE-based software D-Sight developed by Q. Hayez: the purchase of a car. Six vehicles are evaluated on 5 criteria: price, horse power, 0-100 km/h acceleration time, consumption and CO2 emission. The associated GAIA plane is given in Figure \ref{fig:gaiacar}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{gaiacar.png}
+\end{center}
+\caption{Purchase of a car - GAIA plane}
+\label{fig:gaiacar}
+\end{figure}
+
 \end{enumerate}
 
 \subsubsection{The ELECTRE methods}
-ELECTRE (\textit{ELimination Et Choix Traduisant la REalité}, or ELimination and Choice Expressing REality) has been developed by Roy \cite{Roy66}. In this section, we will only described the basics of ELECTRE. More details can be found in \cite{electre}.
+ELECTRE (\textit{ELimination Et Choix Traduisant la REalité}, or ELimination and Choice Translating REality) has been developed by Roy \cite{Roy66}. In this section, we will only describe the basics of ELECTRE. More details can be found in \cite{electre}.
 
 \begin{enumerate}
 \item \textit{\underline{ELECTRE I}}
@@ -746,4 +757,3 @@ A second complete preorder can be obtained by applying the opposite procedure wh
 \end{enumerate}
 
 \section{Conclusion}
-TODO

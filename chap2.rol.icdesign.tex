@@ -209,6 +209,8 @@ As explained previously, designing ICs implies numerous choices. At the moment, 
 
 The current design flows, which already showed their limits with conventional 2D-ICs, may thus need improvements to be able to deal with the increased complexity of emerging 3D-SICs \cite{vanderbiest06, PFF10}.
 
+For the moment, most 3D design flows adapt classical flows to include 3D specificities, in particular 3D partitioning and 3D place \& route (see Figure \ref{fig:designflow}). We can observe that these two steps are separated: the circuits are first (manually) partitioned, then the place \& route occurs for each layer. However, one can guess that the performances of a 3D-SIC will depend on the position of a component, considering simultaneously its position on a layer ((X,Y)-coordinates) and the layer where it lies (Z-coordinate). 3D design flows therefore need improvements to take into account these three coordinates at the same time.
+
 \section{Design space exploration tools}
 
 In order to cope with the increasing complexity of integrated circuits and the limitations of the current design flows, numerous tools have been proposed, in particular works about design space exploration (DSE) that have been developed to quickly suggest possible interesting solutions to a designer and speed up the design processes. In this section, we will describe different DSE tools that have been proposed in the literature.
@@ -283,6 +285,10 @@ The PathFinding flow is a project led by IMEC and Milojevic \textit{et al.} in c
 This work is also among the most integrated study in the literature. However, the criteria optimization is done following a uni-criterion approach which does not allow to explore quickly several possibilities.
 
 \section{Conclusion}
-To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses from a Pareto front. The goal of this research is to show that a more multicriteria-oriented optimization could be more suitable to take into account the many aspects of a design and provide more information.
+In this chapter, we have presented an overview of the evolution of IC design. Manufacturers have pushed back the limitations of the silicon for the past decades and are now facing new challenges due mainly to quantum effects. 3D-SICs have been proposed to face these problems and we have shown a quick review of this promising technology.
+
+With the 3D integration, design flows have evolved and integrate 3D partitioning and 3D place and route. However, these two steps are performed separately while they should be considered simultaneously as the circuits' performances will depend on the position of a component on a layer and the layer where it lies.
+
+We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses from a Pareto front. The goal of this research is to show that a more multi-criteria-oriented optimization could be more suitable to take into account the many aspects of a design and that a more globa multi-criteria analysis can provide more information.
 
 In the next chapter, we will describe a short overview of the tools coming from the operations research that will allow to take into account multiple criteria simultaneously.

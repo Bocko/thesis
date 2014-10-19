@@ -112,7 +112,7 @@ This criterion in its current development stage is difficult to integrate to the
 %where $\alpha$ represents the toggle rate, $C$ the capacitance, $V_{dd}$ the voltage, $f$ the frequency and $[tech]$ a rectification factor due to the technology assigned.
 \end{enumerate}
 
-At first, we will focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. Then we will analyse our methodology with the five first criteria that have been presented. As stated, the sixth criterion is currently unused. Actually, it has been simulated and tested but we need data from the manufacturers which are not easily available.
+At first, we will focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. Then we will analyse our methodology with the five criteria that have been presented.
 %As for the thermal dissipation, simulations are possible (see Figure~\ref{fig:thermalmap}) but due to its current development stage it is difficult to integrate it in the exploration process due to the computing time of finite elements.
 
 \section{Design methodology}
@@ -167,7 +167,9 @@ The combination of all the parameters described in the model are the possible al
 \end{figure}
 
 \section{Case study and implementation}
-In this section, we will briefly explain the implementation of our design method and show some experimental results based on this first approach. Due to the huge size of the design space, an explicit enumeration of the possible solutions will take considerable time. We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We consider a case study based on the 3MF MPSoC platform developed at IMEC~\cite{dmilojev08b}.
+In this section, we will briefly explain the implementation of our design method and show some experimental results based on this first approach. Due to the huge size of the design space, an explicit enumeration of the possible solutions will take considerable time. For instance, for a simplified problem of 3 tiers of 10x10 mm and 5 blocks of 2x2 mm to place, there are 75 possible positions for each block. The number of permutations is given by $\frac{n!}{(n-k)!}$, where $n$ is the number of possible positions and $k$ the number of blocks. For this simplified problem, there are therefore 2~071~126~800 combinations. For 10 blocks to place, the number of possibilities increases to more than 3.10$^{18}$. Besides, this small calculation does not take into account the numerous other possible choices.
+
+We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We consider a case study based on the 3MF MPSoC platform developed at IMEC \cite{dmilojev08b}.
 %This case study has been implemented using Matlab and all data were coded using matrices.
 
 \subsection{Description of the case study and modeling}
@@ -325,6 +327,7 @@ As explained earlier, we will use a metaheuristic to approximate the Pareto opti
 In the following section, we will present some details about the implementation of the NSGA-II algorithm.
 
 \subsection{Implementation of the exploration algorithm: NSGA-II}
+\label{sec:nsgaii-implement}
 As shown in Table \ref{tab:outputmat}, we choose to encode our data in real or integer values, so that they can be used directly by design tools:
 \begin{itemize}
 \item The component identification number (ID) is a fixed integer value linked to the component.
@@ -382,12 +385,12 @@ We implemented our design space exploration following the steps of the NSGA-II w
 \label{fig:ga_steps}
 \end{figure}
 
-\subsubsection*{Initialization (the initial population)}
+\subsubsection{Initialization (the initial population)}
 We will work with a minimum size of population, namely 50, which is a common value in GAs~\cite{Davis1989}. The initial population will be a set of at least 50 solutions with the best Pareto ranks from a randomly-generated set of 10~000 solutions. The produced set places the blocks randomly (using a uniform distribution) and does not allow overlapping between the blocks (these incorrect solutions are simply removed). We could of course use a greedy algorithm as well as a more advanced method such as GRASP (Greedy Randomized Adaptive Search Procedure)~\cite{HarSho87a}. This can be done as future work for comparison purposes.
 
 Of course, having at least 50 Pareto solutions does not always happen. Actually, the selection is based on the Pareto rank so it does not include only the Pareto solutions (rank 1), but also the solutions with lower ranks until there are enough solutions.
 
-\subsubsection*{Selection for crossover}
+\subsubsection{Selection for crossover}
 For the selection step, two solutions will be allowed to make a crossover depending on a roulette wheel where the probability is proportional to the normalized Euclidean distance between the solutions ordered by their Pareto rank in the objective space. The normalization is done as follows :
 \begin{equation}
 \frac{g_i(a_j)}{\max\limits_{a_j \in A} g_i(a_j)}
@@ -396,7 +399,7 @@ where $A$ is the set of alternatives in the Pareto front with $a_j \in A$ and $g
 
 %As we want to ensure that our algorithm has intensification properties, we vary the crossover probability between two solutions according to their distance. In particular, we choose a crossover probability proportional to the Euclidean distance between the solutions, as shown in Figure \ref{fig:cross_proba}. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This requires us to define a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) on the probabilities: $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
 
-The probability for two solutions to do a crossover will vary linearly with the Euclidean distance between them, as shown in Figure \ref{fig:cross_proba}. The distance between the two furthest alternatives ($d_furthest$) will be associated with a probability $P_{c, min}$ while the distance between the two closest alternatives ($d_closest$) will be associated with a probability $P_{c, max}$. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This is to ensure the intensification properties of our algorithm. Therefore, we will have to specify a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) for the crossover probability. $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
+The probability for two solutions to do a crossover will vary linearly with the Euclidean distance between them, as shown in Figure \ref{fig:cross_proba}. The distance between the two furthest alternatives ($d_{furthest}$) will be associated with a probability $P_{c, min}$ while the distance between the two closest alternatives ($d_{closest}$) will be associated with a probability $P_{c, max}$. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This is to ensure the intensification properties of our algorithm. Therefore, we will have to specify a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) for the crossover probability. $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
 
 These values will be fixed as $[P_{c, min} = 0.6; P_{c, max} = 1.0]$ since these seem to be common values~\cite{Davis1989}.
 
@@ -411,7 +414,7 @@ These values will be fixed as $[P_{c, min} = 0.6; P_{c, max} = 1.0]$ since these
 \label{fig:cross_proba}
 \end{figure}
 
-\subsubsection*{Crossover}
+\subsubsection{Crossover}
 
 Let us now see how does the crossover occur. First, let us remark that it does not have limitations for the exploration process since the information contained in the matrix spans the whole circuit.
 
@@ -621,7 +624,7 @@ ID: component identification number; L: assigned layer;\\
 \label{tab:childIDrow}
 \end{table}
 
-\subsubsection*{Mutation}
+\subsubsection{Mutation}
 A mutation cannot happen anywhere in the matrix. Indeed, if we take the conclusion about the choice of the crossover row indicator, all the elements except the ID column can mutate.
 
 The mutation used is a random uniform distribution $U([a, b])$, where $[a, b]$ is the interval of values allowed for the mutation. For the discrete values, we use equidistributed probabilities. The mutation probability of a child will be set as $P_{m} = 0.3$. Empirical observations have shown that smaller mutation probability can easily lead to a local optimum. This can be explained by the fact that we choose that only one single element of a line can mutate instead of the whole line. If a child is forced to mutate, then one randomly-chosen value of the whole matrix will mutate within the range of values it is allowed to take.
@@ -630,18 +633,18 @@ The mutation used is a random uniform distribution $U([a, b])$, where $[a, b]$ i
 A Gaussian mutation is also a common operator but it has not been chosen since it will produce a solution which is not far from the original one. This is not really interesting to have similar solutions when exploring the design space for integrated circuits. Of course, a large standard deviation value can be chosen but this will be likely to produce solution which are out of the feasible bounds.
 %Another option can be to use a beta distribution in order to stay inside the bounds.
 
-\subsubsection*{Consistency test}
+\subsubsection{Consistency test}
 Of course, infeasible solutions may appear after the crossover/mutation step, since these operations are made with randomness. In order to verify that, we perform a test on each new solution to check if there is overlapping between the blocks. Currently, the solutions which are infeasible will be discarded. Of course, it is possible to apply some repair mechanism but it is to be investigated as future work even if we already produce feasible solutions.
 % TODO: quantifier le nombre de solutions perdues
 
-\subsubsection*{Termination}
+\subsubsection{Termination}
 Three stop conditions have been implemented and are based on what is commonly used:
 \begin{itemize}
 \item Maximum number of iterations, set to 100.
-\item Maximum elapsed time, set to 30 minutes.
+\item Maximum elapsed time, set to 60 minutes.
 \item Maximum number of iterations with an unchanged population, set to 10.
 \end{itemize}
-The maximum elapsed time has been chosen arbitrarily for quick testing purposes. Having a simulation time of a few hours would not be a problem either. Indeed, in practice, the optimization of one single architecture can take from several hours to several days with the current design tools. Also, due to the approximation in the model, trying to find a really accurate Pareto front would not have real added value.
+The maximum elapsed time has been chosen arbitrarily for quick testing purposes. As illustrated in Section \ref{sec:nsgaii-implement}, the design space is huge and finding an accurate Pareto frontier can be time consuming. On other hand, NSGA-II has shown that it can quickly produce good approximations \cite{Deb00afast}. Having a simulation time of a few hours is therefore enough, considering that, in practice, the optimization of one single architecture can take from several days to several weeks with the current design tools. Also, due to the approximation in the model, trying to find a really accurate Pareto front would not have real added value either.
 
 \section{Results and their use for a designer}
 The optimization was done for three criteria (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
@@ -680,7 +683,7 @@ $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ 
 
 These results did not take into account the degree of freedom of aspect ratio. If we go further by releasing a degree of freedom and allowing varying aspect ratios, we can have the Pareto front shown in Figure \ref{fig:ilcview_ff}. This figure shows the Pareto front from Figure \ref{fig:ilcview} (without aspect ratio, symbol: $\cdot$) alongside with a new Pareto front (with aspect ratio, symbol: +).
 
-As expected, the Pareto front given when considering varying aspect ratios is globally better. Furthermore, by comparing the two graphs, we can see an interesting area where the two frontiers begin to merge at the cost value 350. This means that, in that area, it is not necessary to take the aspect ratio into account. Once again, these kind of information can be important in the design of an IC and yet they would not be available with the current design flows since only a small number of possibilities are explored. Indeed, due to the sequential nature of the current design flows, such degrees of freedom are not even tried since they dramatically increase the duration of each optimization loop.
+As expected, the Pareto front given when considering varying aspect ratios is globally better. Furthermore, by comparing the two graphs, we can see an interesting area where the two frontiers begin to merge at the cost value 350. This means that, in that area, it is not interesting to take the aspect ratio into account as the solutions will not necessarily be better. Once again, these kind of information can be important in the design of an IC and yet they would not be available with the current design flows since only a small number of possibilities are explored. Indeed, due to the sequential nature of the current design flows, such degrees of freedom are not even tried since they dramatically increase the duration of each optimization loop.
 
 \begin{figure}[h!]
 \begin{center}
@@ -767,30 +770,59 @@ In order to validate the methodology, we will run the simulations of this case s
 
 After simulations, we obtain the following results for the mono-objective optimization of a 2D-IC and a 2-tiers circuit (we will denote them by $A$, $B$ and $C$):
 \begin{center}
+\begin{small}
 \begin{tabular}{|c|c|c|}
 \hline
-Alternative & Layers & Interconnection length score\\
+Alternative & Number of layers & Interconnection length score\\
 \hline
-$A$ & 1 & \\
-$B$ & 2 & \\
+$A$ & 1 & 6.2737\\
+$B$ & 2 & 5.2357\\
 $C$ & 3 & 4.0438\\
 \hline
 \end{tabular}
+\end{small}
 \end{center}
 
-Without surprise, we observe that the 3D-SICs perform better on that criterion than a 2D-IC, which validate the consistency of the model compare to what is expected in reality.
+Without surprise, we observe that the 3D-SICs perform better on that criterion than a 2D-IC, which validates the consistency of the model compare to what is expected in reality.
 
-Now let us examine the alternative $A$ for all the criteria:
+Now let us compare $A$, $B$ and $C$ to the 2- and 3-tiers circuits (respectively denoted $D$ and $E$) obtained with a multi-objective optimization and that are the closest to $A$ with respect to the interconnection length criterion:
 \begin{center}
+\begin{footnotesize}
 \begin{tabular}{|c|c|ccccc|}
 \hline
-Alternative & Layers & Interconnection & Cost & Volume & Clock & Power\\
- & & length & & & position & \\
+Alternative & Number & Interconnection & Cost & Volume & Clock & Power\\
+ & of layers & length & & & position & \\
 \hline
-$A$ & 1 & & & & & \\
+$A$ & 1 & 6.2737 & 1.2178$\cdot10^9$ & 2.4356$\cdot 10^7$ & 3.3584$\cdot 10^4$ & 81 \\
+$B$ & 2 & 5.2357 & 1.2267$\cdot10^9$ & 2.4914$\cdot 10^7$ & 4.5687$\cdot 10^4$ & 351 \\
+$C$ & 3 & 4.0438 & 1.1495$\cdot10^9$ & 2.3681$\cdot 10^7$ & 6.7234$\cdot 10^4$ & 593 \\
+$D$ & 2 & 6.2099 & 1.2304$\cdot10^9$ & 2.4877$\cdot 10^7$ & 3.8250$\cdot 10^4$ & 280 \\
+$E$ & 3 & 6.2205 & 1.1495$\cdot10^9$ & 2.3589$\cdot 10^7$ & 3.1095$\cdot 10^4$ & 459 \\
 \hline
 \end{tabular}
+\end{footnotesize}
 \end{center}
+
+As expected, except on the interconnection length criterion, the alternative $D$ is dominated by $A$ on all the criteria. Analysing the circuit $E$ is more interesting though as we can observe that $E$ dominates $A$ on all criteria except for the thermal dissipation. This may seem surprising, especially for the cost and the volume criteria, however it can be explained by looking at the circuits themselves. In Figure \ref{fig:valid1lmandist}, we can see the alternative $A$ with a surface of \texttildelow 35x35~mm$^2$ whereas for $E$, in Figure \ref{fig:valid3lmandist}, the surface is \texttildelow 20x20~mm$^2$ on 3 layers which is in total less than 35x35~mm$^2$. The clock tree criterion is also better thanks to the smaller surface while the thermal dissipation is unsurprisingly worse due to the inherent greater power density of 3D-SICs. 
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{valid1lmandist.eps}
+\caption{Extended 3MF platform (1 layer)}
+\label{fig:valid1lmandist}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{valid3lmandist.eps}
+\caption{Extended 3MF platform (3 layers)}
+\label{fig:valid3lmandist}
+\end{center}
+\end{figure}
+
+On the other hand, by following a mono-objective optimization, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. Of course, $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. Of course, these analyses have to be moderated within the limits of our model. Nevertheless, the choice is not trivial and we will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process.
+
 \section{Conclusion}
 
 The results have thus shown interesting analyses that can be relevant for a designer. First, using a multi-objective optimization methodology does not only consider all the criteria at the same time but also proceed to an extensive design space exploration which is rarely done with current tools. Second, the qualitative results shown here can give relevant information to the designer and they can be quantified with a more accurate model. Third, the flexibility of MOO allows to easily consider new degrees of freedom without having to change the paradigm. Finally, this methodology and the associated algorithms has shown positive indicators of convergence and robustness as it will be shown in the next chapter.

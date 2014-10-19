@@ -2,41 +2,41 @@
 \label{cha:rol.icdesign}
 
 \begin{summary}
-In this chapter, we present an overview of the evolution of IC design. With the physical limitations
+In this chapter, we present an overview of the 3D-stacked integrated circuits (3D-SIC) that have been proposed by the industrial and academic communities to overcome 2D-IC's limitations. We show how 3D-SICs can be designed and manufactured and and explain why current design flows should be improved to deal these new challenges.
 \end{summary}
 
 \section{Introduction}
-
-\section{2D architecture and its limitations}
-
-In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Figure \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' integration each 18 months and therefore increasing logic capacity of the circuit per unit area. 
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.75\linewidth]{mooreslaw.png}
-\end{center}
-\vspace{-0.5cm}
-\caption{Moore's law \cite{mooreslawpic}}
-\label{fig:mooreslaw}
-\end{figure}
-
-The improvements of 2D architectures are primarily driven by the reduction of the transistor size. By reducing transistor dimensions, the switching speed is increased thanks to the shorter distance between the source and the drain, implying an improvement of the overall speed of the designs.
-
-However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly decrease the dynamic and increase the total delay (sum of gate and interconnection delays) at the level of the complete circuit. Also, power consumption is increased due to higher leakage and increasing interconnection wire length \cite{5227192}. In Figure \ref{fig:delaygateinterconnect} is shown the trends in transistor gate delay and interconnect delay with IC fabrication technology where the crossover point represents the interconnect bottleneck \cite{kirchain2007}.
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.75\linewidth]{delaygateinterconnect}
-\end{center}
-\caption{Trends in transistor gate delay and interconnect delay with IC fabrication technology \cite{kirchain2007}}
-\label{fig:delaygateinterconnect}
-\end{figure}
-
-With the miniaturization, quantum effects such as quantum tunnelling will significantly affect how a transistor behave \cite{1240081}.
-
-In addition to these physical aspects, economical considerations that will hinder the IC evolution beyond 20nm have to be taken into account \cite{5227192,PFF10}.
-
-In order to overcome these limitations, new technologies have been proposed such as the carbon nanotubes \cite{tans1998room}, the nanowire transistors \cite{doi:10.1021/nl025875l}, the single-electron transistors \cite{citeulike:4194929}, but also the 3D-Stacked Integrated Circuits (3D-SIC) proposed by the academic and industrial communities. The latter has been often cited as the most prominent one~\cite{659500}.
+In this chapter we will 
+%\section{2D architecture and its limitations}
+%
+%In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Figure \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' integration each 18 months and therefore increasing logic capacity of the circuit per unit area. 
+%
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{mooreslaw.png}
+%\end{center}
+%\vspace{-0.5cm}
+%\caption{Moore's law \cite{mooreslawpic}}
+%\label{fig:mooreslaw}
+%\end{figure}
+%
+%The improvements of 2D architectures are primarily driven by the reduction of the transistor size. By reducing transistor dimensions, the switching speed is increased thanks to the shorter distance between the source and the drain, implying an improvement of the overall speed of the designs.
+%
+%However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly decrease the dynamic and increase the total delay (sum of gate and interconnection delays) at the level of the complete circuit. Also, power consumption is increased due to higher leakage and increasing interconnection wire length \cite{5227192}. In Figure \ref{fig:delaygateinterconnect} is shown the trends in transistor gate delay and interconnect delay with IC fabrication technology where the crossover point represents the interconnect bottleneck \cite{kirchain2007}.
+%
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{delaygateinterconnect}
+%\end{center}
+%\caption{Trends in transistor gate delay and interconnect delay with IC fabrication technology \cite{kirchain2007}}
+%\label{fig:delaygateinterconnect}
+%\end{figure}
+%
+%With the miniaturization, quantum effects such as quantum tunnelling will significantly affect how a transistor behave \cite{1240081}.
+%
+%In addition to these physical aspects, economical considerations that will hinder the IC evolution beyond 20nm have to be taken into account \cite{5227192,PFF10}.
+%
+%In order to overcome these limitations, new technologies have been proposed such as the carbon nanotubes \cite{tans1998room}, the nanowire transistors \cite{doi:10.1021/nl025875l}, the single-electron transistors \cite{citeulike:4194929}, but also the 3D-Stacked Integrated Circuits (3D-SIC) proposed by the academic and industrial communities. The latter has been often cited as the most prominent one~\cite{659500}.
 
 \section{3D integration}
 

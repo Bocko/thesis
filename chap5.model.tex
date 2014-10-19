@@ -2,8 +2,13 @@
 \label{cha:model}
 
 \begin{summary}
-\lipsum[1]
+In this chapter, we define the design problem we tackle: the 3D floorplanning. We then define the criteria we consider and show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations are ran based on a 3MF MPSoC platform and the obtained results can provide qualitative and quantitative information to a designer that would not be available with current tools. Finally, the methodology is validated with a more realistic case study to show that a multi-criteria paradigm does give added value compared to a uni-criterion approach.
 \end{summary}
+
+Associated publications:
+\begin{itemize}
+\item 
+\end{itemize}
 
 \section{Introduction}
 In Chapter \ref{cha:rol.icdesign}, we have presented a review of the literature about the field of microelectronics design. We have highlighted some limitations of the current tools that already occur for 2D-ICs. In this chapter, we will define the 3D floorplanning problem, which is the issue we tackle and show how we model it in order to propose improvements to design flows.
@@ -218,7 +223,7 @@ ID: Component identification number
 
 The 3MF MPSoC can be configured for three use cases which have specific bandwidth requirements. For the following results, we will base our simulation on the "data split scenario" configuration which possesses the communication specifications shown in Table \ref{tab:3mfbw}. This information is implemented, as shown in Table \ref{tab:bwmatrix}, in an input matrix which is built by specifying the communication structure: the first column will contain the ID of the source block and each next pairs of columns will contain the ID of the target blocks and the bandwidth required.
 
-\begin{table*}[pt!]
+\begin{table}[h!]
 \caption{"Data split scenario" bandwidth requirements}
 \begin{center}
 \begin{scriptsize}
@@ -241,11 +246,11 @@ Index: $i, j, k \in \mathbb{N}^{+};$\\
 $1 \leq i \leq 6; 1\leq j \leq 3; 4 \leq k \leq 6$
 \end{center}
 \label{tab:3mfbw}
-\end{table*}
+\end{table}
 
 The input data are thus shown in Tables \ref{tab:scenarmat} and \ref{tab:bwmatrix}. The available technologies are also needed to take advantage of the heterogeneity. An example matrix for this input data is given in Table \ref{tab:tech}. Since no information is given about the ARM unit bandwidth usage, we will simplify our problem and not include it in the implementation. We consider therefore 12 blocks to assign.
 
-\begin{table*}[pt!]
+\begin{table}[h!]
 \caption{Bandwidth input matrix}
 \begin{center}
 \begin{scriptsize}
@@ -270,9 +275,9 @@ S: source block ID\\
 (T, B): target block ID and required bandwidth
 \end{center}
 \label{tab:bwmatrix}
-\end{table*}
+\end{table}
 
-\begin{table}[p]
+\begin{table}[h!]
 \caption{Available technologies input matrix example}
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
@@ -656,7 +661,7 @@ The optimization was done for three criteria (so that we can visualize the desig
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{ultiplot1.pdf}
-\begin{footnotetsize}
+\begin{footnotesize}
 $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ : 5 tiers\\
 \end{footnotesize}
 \caption{IL-cost projection view of the Pareto frontier}
@@ -671,7 +676,6 @@ $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ 
 $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ : 5 tiers
 \end{footnotesize}
 \caption{3D view (interconnection length-volume-cost) of the Pareto frontier}
-
 \end{center}
 \label{fig:ds3dview}
 \end{figure}
@@ -697,7 +701,7 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 \section{Validation with a more realistic case study}
 In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimisation and ran simulations based on the 3MF platform. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
 
-We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput} (the full matrix model can be found in Appendix \ref{}).
+We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput} (the full matrix model can be found in Appendix \ref{apdx:validinput}).
 
 \begin{table}[h!]
 \caption{Validation case input matrix}
@@ -723,7 +727,7 @@ ID: Component identification number
 \label{tab:validinput}
 \end{table}
 
-For the communication requirements, the only change compared to the original case is that the exchanges between the ADRES processors and the L2 cache memories will now transit through the L1 cache memories. In order to simplify the necessary bandwidth between the ADRES cores and the L1 memories, we will assume a bandwidth 64 times bigger than for the L2. These data are summarized in Table \ref{tab:validbw} (the full matrix model can be found in Appendix \ref{}).
+For the communication requirements, the only change compared to the original case is that the exchanges between the ADRES processors and the L2 cache memories will now transit through the L1 cache memories. In order to simplify the necessary bandwidth between the ADRES cores and the L1 memories, we will assume a bandwidth 64 times bigger than for the L2. These data are summarized in Table \ref{tab:validbw} (the full matrix model can be found in Appendix \ref{apdx:validbw}).
 
 \begin{table}[h!]
 \caption{Validation case bandwidth requirements}
@@ -820,4 +824,6 @@ On the other hand, by following a mono-objective optimization, only the intercon
 
 \section{Conclusion}
 
-The results have thus shown interesting analyses that can be relevant for a designer. First, using a multi-objective optimization methodology does not only consider all the criteria at the same time but also proceed to an extensive design space exploration which is rarely done with current tools. Second, the qualitative results shown here can give relevant information to the designer and they can be quantified with a more accurate model. Third, the flexibility of MOO allows to easily consider new degrees of freedom without having to change the paradigm. Finally, this methodology and the associated algorithms has shown positive indicators of convergence and robustness as it will be shown in the next chapter.
+The results have thus shown interesting analyses that can be relevant for a designer. First, using a multi-objective optimization methodology does not only consider all the criteria at the same time but also proceed to an extensive design space exploration which is rarely done with current tools. Second, the qualitative results shown here can give relevant information to the designer and they can be quantified with a more accurate model. Third, the flexibility of MOO allows to easily consider new degrees of freedom without having to change the paradigm. Finally, we have validated the methodology with a more realistic case study and shown that a multi-objective optimization gives added values compared to a mono-objective paradigm.
+
+In the next chapter, we will show that this methodology and the associated algorithms are robust as they show good indicators of convergence and diversity.

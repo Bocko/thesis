@@ -2,12 +2,12 @@
 \label{cha:rol.mcda}
 
 \begin{summary}
-\lipsum[1]
+In this chapter, we briefly present the basics of multi-objective optimization and multi-criteria decision aid, in order to justify our choice to use such a paradigm. We will explain when a multi-criteria approach should be used and present some of the most-used methods of the field.
 \end{summary}
 
 \section{Introduction}
 \label{sec:rol2.intro}
-In this chapter, we briefly present the basics of multi-objective optimization and multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing such problems, two main approches exist: the uni-criterion paradigm and the multi-criteria paradigm. For optimization problems, these paradigm will refer to the terminology mono-objective/multi-objective optimization while for decision aid, the terminology uni-criterion/multi-criteria will be used.
+In this chapter, we will briefly present the basics of multi-objective optimization and multi-criteria decision aid, in order to justify our choice to use such a paradigm. As stated in Chapter \ref{cha:rol.icdesign}, the 3D integration can offer new perspectives but designing 3D-SICs includes two major distinctive features: multiple criteria and a huge number of possible solutions. When facing such problems, two main approches exist: the uni-criterion paradigm and the multi-criteria paradigm. For optimization problems, these paradigm will refer to the terminology mono-objective/multi-objective optimization while for decision aid, the terminology uni-criterion/multi-criteria will be used.
 
 In the following, we will briefly describe each paradigm, showing some of the main approaches alongside illustrative examples. We will first present the uni-criterion methodology, show why it can be limited in our contect and explain why a multi-criteria paradigm can be more suitable.
 
@@ -517,15 +517,15 @@ Since the dominance relation is really poor (binary relation), a preference func
 Consequently, it is therefore possible to define several types of preference functions based on preference ($P$) or indifference ($Q$) thresholds, as shown in Table \ref{tab:pref_func}. Below the indifference threshold, the decision maker will consider having no preference while above the preference threshold, the decision maker will have no more difference in its preference.
 
 \begin{table}[h!]
-\caption{Preference functions (reproduced from \cite{BraMar2002})
+\caption{Preference functions (reproduced from \cite{BraMar2002})}
 \begin{center}
 \begin{tabular}{|l|c|b{4.2cm}|}
-\hline Usual & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_usual_pdf} & Strict preference\\
-\hline U-shape & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_ushape_pdf} & Q: indifference threshold\\
-\hline V-shape & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_vshape_pdf} & P: preference threshold\\
-\hline Level & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_level_pdf} & Q: indifference threshold \newline P: preference threshold\\
-\hline Linear & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_linear_pdf} & Q: indifference threshold \newline P: preference threshold\\
-\hline Gaussian & \includegraphics[page=2,trim=7.5cm 14cm 5cm 7cm,clip,scale=0.4]{prom_gaussian_pdf} & S: preference threshold\\
+\hline Usual & \includegraphics[page=2,trim=7.5cm 13.8cm 3.5cm 6.5cm,clip,scale=0.36]{prom_usual_pdf} & Strict preference\\
+\hline U-shape & \includegraphics[page=2,trim=7.5cm 13.8cm 3.5cm 6.5cm,clip,scale=0.36]{prom_ushape_pdf} & Q: indifference threshold\\
+\hline V-shape & \includegraphics[page=2,trim=7.5cm 13.8cm 3.5cm 6.5cm,clip,scale=0.36]{prom_vshape_pdf} & P: preference threshold\\
+\hline Level & \includegraphics[page=2,trim=7.5cm 13.8cm 3.5cm 6.5cm,clip,scale=0.36]{prom_level_pdf} & Q: indifference threshold \newline P: preference threshold\\
+\hline Linear & \includegraphics[page=2,trim=7.5cm 13.8cm 3.5cm 6.5cm,clip,scale=0.36]{prom_linear_pdf} & Q: indifference threshold \newline P: preference threshold\\
+\hline Gaussian & \includegraphics[page=2,trim=7.5cm 13.8cm 3.5cm 6.5cm,clip,scale=0.36]{prom_gaussian_pdf} & S: preference threshold\\
 \hline
 \end{tabular}
 \end{center}
@@ -628,13 +628,25 @@ This plan allows to have a visual descriptive analysis with several criteria. It
 
 In order to illustrate the use of the GAIA plane, we will take a simple example taken from the PROMETHEE-based software D-Sight developed by Q. Hayez: the purchase of a car. Six vehicles are evaluated on 5 criteria: price, horse power, 0-100 km/h acceleration time, consumption and CO2 emission. The associated GAIA plane is given in Figure \ref{fig:gaiacar}.
 
-\begin{figure}
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{gaiacar.png}
+\includegraphics[width=0.8\textwidth]{gaiacar.png}
 \end{center}
 \caption{Purchase of a car - GAIA plane}
 \label{fig:gaiacar}
 \end{figure}
+
+Four distinctive visual information are shown:
+\begin{enumerate}
+\item The green axes that represent the projections of each criterion's axis.
+\item The blue dots that represent the projection of each solution's uni-criterion net flow. The value of the uni-criterion net flow is read by projecting the point on the related criterion axis.
+\item The red axis that represents the \textit{decision stick} which is the projection of the set of weights and gives the decision direction.
+\item The \textit{delta} value that represents the percentage of kept information since there are projection errors.
+\end{enumerate}
+
+From the GAIA plane, we can observe how the criteria are related between each other. Indeed, criteria axes that have opposite directions are conflicting, whereas criteria with the same direction share the same optimisation trend. In this case, we can see that the price is conflicting with the power and the 0-100 km/h acceleration time, which is to be expected. Also, the CO2 and the consumption criteria have the same direction which also reflects the reality.
+
+As for the decision stick, it allows a decision maker to know in which direction is located his preferences. Indeed, the alternatives with the highest net flow score will have their furthest projection on that axis, in the direction of that axis. This visually represents the PROMETHEE II ranking, provided that the \textit{delta} value shows that enough information has been kept with the projection.
 
 \end{enumerate}
 
@@ -757,3 +769,6 @@ A second complete preorder can be obtained by applying the opposite procedure wh
 \end{enumerate}
 
 \section{Conclusion}
+In this chapter, we have given an overview of the basics of multi-objective optimization and multi-criteria decision aid. We have explained when a multi-criteria paradigm should be applied and have presented some of the commonly-used method in the field.
+
+In the next chapter, we will define the problem we tackle and show how a 3D-SIC can be modelled in order to apply multi-objective optimization.

@@ -2,12 +2,12 @@
 \label{cha:model}
 
 \begin{summary}
-In this chapter, we define the design problem we tackle: the 3D floorplanning. We then define the criteria we consider and show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations are ran based on a 3MF MPSoC platform and the obtained results can provide qualitative and quantitative information to a designer that would not be available with current tools. Finally, the methodology is validated with a more realistic case study to show that a multi-criteria paradigm does give added value compared to a uni-criterion approach.
+In this chapter, we define the design problem we tackle: the 3D floorplanning. We then define the criteria we consider and show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations are ran based on a 3MF MPSoC platform and the obtained results can provide qualitative and quantitative information to a designer that would not be available with current tools. Finally, the methodology is validated with a more realistic case study to show that a multi-criteria paradigm does give added value compared to a uni-criterion approach, in terms of design space analysis.
 \end{summary}
 
 Associated publications:
 \begin{itemize}
-\item 
+\item TO ADD
 \end{itemize}
 
 \section{Introduction}
@@ -699,7 +699,7 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 \end{figure}
 
 \section{Validation with a more realistic case study}
-In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and ran simulations based on the 3MF platform. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
+In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and run simulations based on the 3MF platform. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
 
 We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput} (the full matrix model can be found in Appendix \ref{apdx:validinput}).
 

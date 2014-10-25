@@ -7,7 +7,8 @@ In this chapter, we define the design problem we tackle: the 3D floorplanning. W
 
 Associated publications:
 \begin{itemize}
-\item TO ADD
+\item N.A.V. Doan, F. Robert, Y. De Smet, D. Milojevic, "MCDA-based methodology for efficient 3D-design space exploration and decision", \textit{International Symposium on System-on-Chip Proceedings (SOC 2010)}, Tampere (Finland), pp. 76-83, September 2010
+\item N.A.V. Doan, Y. De Smet, F. Robert, D. Milojevic, "On the use of multi-criteria decision aid tools for the efficient design of 3D-stacked integrated circuits: a preliminary study", \textit{Proceedings of IEEE International Conference on Industrial Engineering and Engineering Management (IEEM 2010)}, Macau (China), December 2010
 \end{itemize}
 
 \section{Introduction}
@@ -117,6 +118,27 @@ This criterion in its current development stage is difficult to integrate to the
 %where $\alpha$ represents the toggle rate, $C$ the capacitance, $V_{dd}$ the voltage, $f$ the frequency and $[tech]$ a rectification factor due to the technology assigned.
 \end{enumerate}
 
+A recap table containing the criteria is shown in Table \ref{tab:critrecap}.
+
+\begin{table}
+\caption{Recap table of the criteria}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Criterion & Unit\\
+\hline
+Interconnection length & mm or µm (bandwidth-weighted)\\
+Cost & cost unit\\
+Volume & mm$^3$ or µm$^3$\\
+Clock tree position & mm or µm\\
+Thermal dissipation & W\\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:critrecap}
+\end{table}
+
+
 At first, we will focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. Then we will analyse our methodology with the five criteria that have been presented.
 %As for the thermal dissipation, simulations are possible (see Figure~\ref{fig:thermalmap}) but due to its current development stage it is difficult to integrate it in the exploration process due to the computing time of finite elements.
 
@@ -189,10 +211,9 @@ The 3MF MPSoC is made of 13 blocks as shown on Figure \ref{fig:imec3mf}:
 \end{itemize}
 Details about the area required for each component is given in Table \ref{tab:scenarmat} for a 90 nm technology. This table is also the input matrix required to specify the scenario.
 
-\begin{table*}[pt!]
+\begin{table}[h!]
 \caption{Scenario input matrix example}
 \begin{center}
-\begin{scriptsize}
 \begin{tabular}{|c|c|c|c|c|}
 \hline Component & ID & Size (90 nm) & Min aspect ratio & Size variability\\
 \hline ADRES 1\texttildelow 6 & 1\texttildelow 6 & 18.6 mm$^2$ & 0.5 & $\pm20\%$\\
@@ -203,13 +224,12 @@ EMIF & 12 & 0.66 mm$^2$ & 0.5 & 0.1\\
 ARM & 13 & 0.89 mm$^2$ & 0.5 & 0\\
 \hline
 \end{tabular}
-\end{scriptsize}
 \end{center}
 \begin{center}
-ID: Component identification number
+{\small ID: Component identification number}
 \end{center}
 \label{tab:scenarmat}
-\end{table*}
+\end{table}
 
 \begin{figure}[h!]
 \begin{center}
@@ -701,7 +721,7 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 \section{Validation with a more realistic case study}
 In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and run simulations based on the 3MF platform. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
 
-We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput} (the full matrix model can be found in Appendix \ref{apdx:validinput}).
+We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput}.
 
 \begin{table}[h!]
 \caption{Validation case input matrix}
@@ -784,7 +804,7 @@ $C$ & 3 & 4.0438\\
 
 Without surprise, we observe that the 3D-SICs perform better on that criterion than a 2D-IC, which validates the consistency of the model compare to what is expected in reality.
 
-Now let us compare $A$, $B$ and $C$ to the 2- and 3-tiers circuits (respectively denoted $D$ and $E$) obtained with a multi-objective optimization and that are the closest to $A$ with respect to the interconnection length criterion:
+Now let us compare $A$, $B$ and $C$ to the 2- and 3-tiers circuits (respectively denoted $D$ and $E$) obtained with a multi-objective optimization. We will make the comparison with circuits that are the closest to $A$ with regards to the interconnection length criterion, in order to show the added value of working with a multi-criteria paradigm and simultaneously taking several criteria into account:
 \begin{center}
 \begin{footnotesize}
 \begin{tabular}{|c|c|ccccc|}
@@ -792,17 +812,17 @@ Now let us compare $A$, $B$ and $C$ to the 2- and 3-tiers circuits (respectively
 Alternative & Number & Interconnection & Cost & Volume & Clock & Power\\
  & of layers & length & & & position & \\
 \hline
-$A$ & 1 & 6.2737 & 1.2178$\cdot10^9$ & 2.4356$\cdot 10^7$ & 3.3584$\cdot 10^4$ & 81 \\
-$B$ & 2 & 5.2357 & 1.2267$\cdot10^9$ & 2.4914$\cdot 10^7$ & 4.5687$\cdot 10^4$ & 351 \\
-$C$ & 3 & 4.0438 & 1.1495$\cdot10^9$ & 2.3681$\cdot 10^7$ & 6.7234$\cdot 10^4$ & 593 \\
-$D$ & 2 & 6.2099 & 1.2304$\cdot10^9$ & 2.4877$\cdot 10^7$ & 3.8250$\cdot 10^4$ & 280 \\
-$E$ & 3 & 6.2205 & 1.1495$\cdot10^9$ & 2.3589$\cdot 10^7$ & 3.1095$\cdot 10^4$ & 459 \\
+$A$ & $1$ & $6.2737$ & $1.2178\cdot10^9$ & $2.4356\cdot 10^7$ & $3.3584\cdot 10^4$ & $81$ \\
+$B$ & $2$ & $5.2357$ & $1.2267\cdot10^9$ & $2.4914\cdot 10^7$ & $4.5687\cdot 10^4$ & $351$ \\
+$C$ & $3$ & $4.0438$ & $1.1495\cdot10^9$ & $2.3681\cdot 10^7$ & $6.7234\cdot 10^4$ & $593$ \\
+$D$ & $2$ & $6.2099$ & $1.2304\cdot10^9$ & $2.4877\cdot 10^7$ & $3.8250\cdot 10^4$ & $280$ \\
+$E$ & $3$ & $6.2205$ & $1.1495\cdot10^9$ & $2.3589\cdot 10^7$ & $3.1095\cdot 10^4$ & $459$ \\
 \hline
 \end{tabular}
 \end{footnotesize}
 \end{center}
 
-As expected, except on the interconnection length criterion, the alternative $D$ is dominated by $A$ on all the criteria. Analysing the circuit $E$ is more interesting though as we can observe that $E$ dominates $A$ on all criteria except for the thermal dissipation. This may seem surprising, especially for the cost and the volume criteria, however it can be explained by looking at the circuits themselves. In Figure \ref{fig:valid1lmandist}, we can see the alternative $A$ with a surface of \texttildelow 35x35~mm$^2$ whereas for $E$, in Figure \ref{fig:valid3lmandist}, the surface is \texttildelow 20x20~mm$^2$ on 3 layers which is in total less than 35x35~mm$^2$. The clock tree criterion is also better thanks to the smaller surface while the thermal dissipation is unsurprisingly worse due to the inherent greater power density of 3D-SICs. 
+As expected, except on the interconnection length criterion, the alternative $D$ is dominated by $A$ on all the criteria. Analysing the circuit $E$ is more interesting though as we can observe that $E$ dominates $A$ on all criteria except for the thermal dissipation. This may seem surprising, especially for the cost and the volume criteria, however it can be explained by looking at the circuits themselves. In Figure \ref{fig:valid1lmandist}, we can see the alternative $A$ with a surface of \texttildelow 35x35~mm$^2$ whereas for $E$, in Figure \ref{fig:valid3lmandist}, the surface is \texttildelow 20x20~mm$^2$ on 3 layers which is in total less than 35x35~mm$^2$. This is indeed not a big difference but it can show when it is interesting to design 3D circuits instead of 2D-ICs. The clock tree criterion is also better thanks to the smaller surface while the thermal dissipation is unsurprisingly worse due to the inherent greater power density of 3D-SICs. 
 
 \begin{figure}[h!]
 \begin{center}
@@ -820,7 +840,7 @@ As expected, except on the interconnection length criterion, the alternative $D$
 \end{center}
 \end{figure}
 
-On the other hand, by following a mono-objective optimization, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. Of course, $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. Of course, these analyses have to be moderated within the limits of our model. Nevertheless, the choice is not trivial and we will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process.
+On the other hand, by following a mono-objective optimization, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. Of course, $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. In a multi-criteria point of view, none of these circuits dominate the others so making a choice is not trivial and we will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model.
 
 \section{Conclusion}
 

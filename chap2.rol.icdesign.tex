@@ -2,11 +2,11 @@
 \label{cha:rol.icdesign}
 
 \begin{summary}
-In this chapter, we present an overview of the 3D-stacked integrated circuits (3D-SIC) that have been proposed by the industrial and academic communities to overcome 2D-IC's limitations. We show how 3D-SICs can be designed and manufactured and and explain why current design flows should be improved to deal these new challenges.
+In this chapter, we present a short overview of the 3D-stacked integrated circuits that have been proposed by the industrial and academic communities to overcome 2D-IC's limitations. We show how 3D-SICs can be designed and manufactured and and explain why current design flows should be improved to deal these new challenges.
 \end{summary}
 
 \section{Introduction}
-In this chapter we will 
+In this chapter we will present a short overview of the 3D-stacked integrated circuits: show how then can be manufactured, their advantages and drawbacks, the challenges when designing them. We will then discuss about the limitations of current design flows and why they should be improved in order to address the complexity of designing 3D-SICs.
 %\section{2D architecture and its limitations}
 %
 %In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Figure \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' integration each 18 months and therefore increasing logic capacity of the circuit per unit area. 
@@ -40,7 +40,7 @@ In this chapter we will
 
 \section{3D integration}
 
-Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar fashion~\cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV), micro bumps (µBump) or copper pads (CuPad) and they can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
+Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar way \cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV), micro bumps (µBump) or copper pads (CuPad) and they can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
 
 \begin{figure}[h!]
 \begin{center}
@@ -167,12 +167,12 @@ The power density has increased exponentially over the past decades for the 2D-I
 With the appearance of a new technology, the involvement of a high cost should often be expected. In the case of 3D technology, the cost is currently high due to the lack of infrastructure and the reluctance of manufacturers who do not want to risk to change to new technologies \cite{659500}.
 
 \paragraph{Design complexity and design software}
-A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist and they are mainly developed for and owned by particular manufacturers and are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally.
+A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist and they are mainly developed for and owned by particular manufacturers. In addition, they are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally as they do not take all 3D specificities into account. For example, as it will be shown in Section \ref{sec:currentflows}, 3D partitioning and floorplanning are considered separately (as it is done for 2D-ICs) whereas the 3D geometrical assignment should be taken as a whole.
 
 % In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits.
 
 \section{2.5D-ICs by Xilinx}
-Now that the 3D integration has been introduced, let us give some notes that are worth mentioning about the 2.5D-ICs introduced by Xilinx \cite{bolsens2011}. 2.5D integration can be considered as a stepping stone to 3D design, as illustrated in Figure \ref{fig:2d5xilinx}. Dies are placed on a silicon interposer where are located the interconnections required to bind the dies, as shown in Figure \ref{fig:siliconinterposer}. Compared to classical 2D-ICs, this allow higher interconnect density while being less challenging than 3D-SICs in terms of design flow, thermal issues, reliability, testing and cost as the technology is already existing.
+Now that the 3D integration has been introduced, let us give some notes that are worth mentioning about the 2.5D-ICs introduced by Xilinx \cite{bolsens2011}. 2.5D integration can be considered as a stepping stone to 3D design, as illustrated in Figure \ref{fig:2d5xilinx}. This technology is based on a silicon interposer where are placed the dies. The bindings required to connect the dies are located on this silicon interposer, as shown in Figure \ref{fig:siliconinterposer}. Compared to classical 2D-ICs, this allow higher interconnect density while being less challenging than 3D-SICs in terms of design flow, thermal issues, reliability, testing and cost as the technology is already existing.
 
 \begin{figure}[h!]
 \begin{center}
@@ -193,6 +193,7 @@ Now that the 3D integration has been introduced, let us give some notes that are
 In the following section, we will have an overview about these software tools and generally about the design flows used to design integrated circuits.
 
 \section{Current design flows and their limitations}
+\label{sec:currentflows}
 
 Design flows are the combination of electronic design automation (EDA) tools used to produce an integrated circuit. These flows can generally be summarized in 4 main steps \cite{coursefred}, as shown in Figure \ref{fig:designflow}.
 
@@ -205,7 +206,9 @@ Design flows are the combination of electronic design automation (EDA) tools use
 \label{fig:designflow}
 \end{figure}
 
-As one can observe, the design flows are sequential. The process goes from one step to the other with local optimization loops. In practice, it is not unusual to have several rollbacks to the previous steps due to inconsistency in the optimization process. As explained previously, designing ICs implies numerous choices. At the moment, with this growing complexity, the current design flows can already show their limits. For instance, most of the time, the designers will be likely to freeze a certain amount of choices on basis of their experience, and then begin the optimization process with the remaining parameters. This will therefore limit the exploration of the design space and other good solutions may be ignored. In addition, the fixed choices can be questionable since they are based on the designer's experience though they could also be based on more objective facts.
+As one can observe, the design flows are sequential. The process goes from one step to the other with local optimization loops. In practice, it is not unusual to have several rollbacks to the previous steps due to inconsistency in the optimization process. For instance, the optimization done in the logical design step might work in simulations but can be impractical for the physical design step so a rollback is needed in order to correct this inconsistency.
+
+As explained previously, designing ICs implies numerous choices. At the moment, with this growing complexity, the current design flows can already show their limits. For instance, most of the time, the designers will be likely to freeze a certain amount of choices on basis of their experience, and then begin the optimization process with the remaining parameters. This will therefore limit the exploration of the design space and other good solutions may be ignored. In addition, the fixed choices can be questionable since they are based on the designer's experience and it is difficult to master the whole complexity of the problem in terms of criteria and possibilities of design.
 
 The current design flows, which already showed their limits with conventional 2D-ICs, may thus need improvements to be able to deal with the increased complexity of emerging 3D-SICs \cite{vanderbiest06, PFF10}.
 
@@ -219,7 +222,7 @@ In order to cope with the increasing complexity of integrated circuits and the l
 
 \paragraph{MILAN}
 
-The MILAN (Model based Integrated simuLAtioN) framework \cite{Mohanty02rapidsystem-level} aims to simplify the optimization and the exploration of design spaces for SoC platforms. This tool works on the component level and allows the users to choose a compromise between the simulation speed and the results accuracy. The exploration and optimization process is done in two phases: first it searches for possible combinations between the architecture, the application and the mapping and second it estimates the performances (power, latency) depending the precision asked by the users.
+The MILAN (Model based Integrated simuLAtioN) framework \cite{Mohanty02rapidsystem-level} aims to simplify the optimization and the exploration of design spaces for System-on-Chip (SoC) platforms. This tool works on the component level and allows the users to choose a compromise between the simulation speed and the results accuracy. The exploration and optimization process is done in two phases: first it searches for possible combinations between the architecture, the application and the mapping and second it estimates the performances (power, latency) depending the precision asked by the users.
 
 \paragraph{SoC Architecture Explorer}
 
@@ -238,7 +241,7 @@ The MULTICUBE project (MULTI$^{3}$) \cite{multicube08, Silvanoetal09} is a Europ
 %http://home.dei.polimi.it/zaccaria/multicube_explorer_v1/Home.html
 \subparagraph{Multicube Explorer}
 
-Multicube Explorer \cite{m3explorer09} is a design space exploration framework for supporting platform-based design. This tools allows a fast optimization of a system with objective functions such as power, delays, surface, etc. by means of a system simulator. Multicube explorer proposes several multi-objective optimization methods that aim to propose the best compromises.
+Multicube Explorer \cite{m3explorer09} is a design space exploration framework for supporting platform-based design. This tool allows a fast optimization of a system with objective functions such as power, delays, surface, etc. by means of a system simulator. Multicube explorer proposes several multi-objective optimization methods that aim to propose the best compromises.
 
 %http://www.teisa.unican.es/gim/en/scope/multicube.html
 \subparagraph{Multicube-SCoPE}
@@ -289,6 +292,6 @@ In this chapter, we have presented an overview of the evolution of IC design. Ma
 
 With the 3D integration, design flows have evolved and integrate 3D partitioning and 3D place and route. However, these two steps are performed separately while they should be considered simultaneously as the circuits' performances will depend on the position of a component on a layer and the layer where it lies.
 
-We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses from a Pareto front. The goal of this research is to show that a more multi-criteria-oriented optimization could be more suitable to take into account the many aspects of a design and that a more globa multi-criteria analysis can provide more information.
+We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses from a Pareto front. The goal of this research is to show that a more multi-objective-oriented optimization could be more suitable to take into account the many aspects of a design and that a more globa multi-criteria analysis can provide more information.
 
 In the next chapter, we will describe a short overview of the tools coming from the operations research that will allow to take into account multiple criteria simultaneously.

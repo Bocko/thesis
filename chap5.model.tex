@@ -2,7 +2,7 @@
 \label{cha:model}
 
 \begin{summary}
-In this chapter, we define the design problem we tackle: the 3D floorplanning. We then define the criteria we consider and show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations are ran based on a 3MF MPSoC platform and the obtained results can provide qualitative and quantitative information to a designer that would not be available with current tools. Finally, the methodology is validated with a more realistic case study to show that a multi-criteria paradigm does give added value compared to a uni-criterion approach, in terms of design space analysis.
+In this chapter, we define the design problem we tackle: the 3D floorplanning. We then present the criteria we consider and show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations are ran based on a 3MF MPSoC platform and the obtained results can provide qualitative and quantitative information to a designer that would not be available with current tools. Finally, the methodology is tested with a more realistic case study to show that a multi-criteria paradigm does give added value compared to a uni-criterion approach, in terms of design space analysis.
 \end{summary}
 
 Associated publications:
@@ -57,7 +57,7 @@ The above mentioned parameters illustrate the numerous possibilities for designi
 \section{Model and criteria definition}
 \label{sec:crit}
 
-Typically, the criteria that have to be optimized simultaneously can be the performance, the power consumption, the cost, the package size, the heat dissipation, etc. In this model, we will define five criteria which are among the most important parameters while designing a circuit \cite{DBLP:conf/3dic/MilojevicCCRRSAPM09}:
+Typically, the criteria that have to be optimized simultaneously can be the performance, the power consumption, the cost, the package size, the heat dissipation, etc. In this model, we will decide to consider five criteria which are among the most important parameters while designing a circuit \cite{DBLP:conf/3dic/MilojevicCCRRSAPM09}:
 \begin{enumerate}
 \item \textit{The interconnection global length}: this parameter can reflect the global performance of a system. The objective is to minimize it in order to have, for instance, a short delay and low power consumption. It will be calculated using the Manhattan distance \cite{mandist06}:
 \begin{equation}
@@ -123,15 +123,15 @@ A recap table containing the criteria is shown in Table \ref{tab:critrecap}.
 \begin{table}
 \caption{Recap table of the criteria}
 \begin{center}
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|}
 \hline
-Criterion & Unit\\
+Criterion & Unit & Type\\
 \hline
-Interconnection length & mm or µm (bandwidth-weighted)\\
-Cost & cost unit\\
-Volume & mm$^3$ or µm$^3$\\
-Clock tree position & mm or µm\\
-Thermal dissipation & W\\
+Interconnection length & mm or µm (bandwidth-weighted) & Continuous\\
+Cost & cost unit & Mixed\\
+Volume & mm$^3$ or µm$^3$ & Mixed\\
+Clock tree position & mm or µm & Continuous\\
+Thermal dissipation & W & Continuous\\
 \hline
 \end{tabular}
 \end{center}
@@ -147,7 +147,7 @@ In summary, the problem we are facing is to place several blocks that have to be
 
 As explained in Chapter \ref{cha:rol.icdesign}, designing ICs implies numerous choices and designers are likely to freeze a certain amount of choices on basis of their experience. This will therefore limit the exploration of the design space and good solutions may be ignored.
 
-In order to enable an efficient design space exploration, we propose a method in four steps based on MCDA which is illustrated in Figure~\ref{fig:mcdaflow}. The implementation will be briefly presented in the next section.
+In order to enable a design space exploration, we propose a method in four steps based on MCDA which is illustrated in Figure~\ref{fig:mcdaflow}. The implementation will be briefly presented in the next section.
 
 \begin{figure}[h!]
 \begin{center}
@@ -194,9 +194,9 @@ The combination of all the parameters described in the model are the possible al
 \end{figure}
 
 \section{Case study and implementation}
-In this section, we will briefly explain the implementation of our design method and show some experimental results based on this first approach. Due to the huge size of the design space, an explicit enumeration of the possible solutions will take considerable time. For instance, for a simplified problem of 3 tiers of 10x10 mm and 5 blocks of 2x2 mm to place, there are 75 possible positions for each block. The number of permutations is given by $\frac{n!}{(n-k)!}$, where $n$ is the number of possible positions and $k$ the number of blocks. For this simplified problem, there are therefore 2~071~126~800 combinations. For 10 blocks to place, the number of possibilities increases to more than 3.10$^{18}$. Besides, this small calculation does not take into account the numerous other possible choices.
+In this section, we will briefly explain the implementation of our design method and show some experimental results based on this first approach. Due to the huge size of the design space, an explicit enumeration of the possible solutions will take considerable time. For instance, for a simplified problem of 3 tiers of 10x10 mm and 5 blocks of 2x2 mm to place, there are 75 possible positions for each block. The number of combinations is given by $\frac{n!}{k!(n-k)!}$, where $n$ is the number of possible positions and $k$ the number of blocks. For this simplified problem, there are therefore 17~259~390 combinations. For 10 blocks to place, the number of possibilities increases to more than 8.10$^{11}$. Besides, this small calculation does not take into account the numerous other possible choices.
 
-We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We consider a case study based on the 3MF MPSoC platform developed at IMEC \cite{dmilojev08b}.
+We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We chose to use NSGA-II as it is quick to implement which is convenient as proof of concept for our research purposes (show the applicability of MOO/MCDA for 3D-SIC design). In addition, this algorithm is flexible and is known for handling mixed variables which suits the nature of our problem well \cite{}. For the first case study we consider a circuit based on the 3MF MPSoC platform developed at IMEC \cite{dmilojev08b}.
 %This case study has been implemented using Matlab and all data were coded using matrices.
 
 \subsection{Description of the case study and modeling}
@@ -397,7 +397,7 @@ ID: component identification number; L: assigned layer;\\
 \label{tab:outputmat}
 \end{table}
 
-We implemented our design space exploration following the steps of the NSGA-II which can be summarized by the diagram shown in Figure \ref{fig:ga_steps}.
+We implemented our design space exploration following the steps of the NSGA-II which can be summarized by the diagram shown in Figure \ref{fig:ga_steps}. This implementation does not include an archive since through hundreds of test simulations, an alternative has never been explored twice for the considered case studies.
 
 \begin{figure}[h!]
 \begin{center}
@@ -411,7 +411,7 @@ We implemented our design space exploration following the steps of the NSGA-II w
 \end{figure}
 
 \subsubsection{Initialization (the initial population)}
-We will work with a minimum size of population, namely 50, which is a common value in GAs~\cite{Davis1989}. The initial population will be a set of at least 50 solutions with the best Pareto ranks from a randomly-generated set of 10~000 solutions. The produced set places the blocks randomly (using a uniform distribution) and does not allow overlapping between the blocks (these incorrect solutions are simply removed). We could of course use a greedy algorithm as well as a more advanced method such as GRASP (Greedy Randomized Adaptive Search Procedure)~\cite{HarSho87a}. This can be done as future work for comparison purposes.
+We will work with a minimum size of population, namely 50, which is a common value in GAs~\cite{Davis1989}. The initial population will be a set of at least 50 solutions with the best Pareto ranks from a randomly-generated set of 10~000 solutions. The produced set places the blocks randomly (using a uniform distribution) and does not allow overlapping between the blocks. These incorrect solutions are simply removed and it is difficult to estimate this proportion as it depends on the problem size (number of blocks). We could of course use a greedy algorithm as well as a more advanced method such as GRASP (Greedy Randomized Adaptive Search Procedure)~\cite{HarSho87a}. This can be done as future work for comparison purposes.
 
 Of course, having at least 50 Pareto solutions does not always happen. Actually, the selection is based on the Pareto rank so it does not include only the Pareto solutions (rank 1), but also the solutions with lower ranks until there are enough solutions.
 
@@ -426,7 +426,7 @@ where $A$ is the set of alternatives in the Pareto front with $a_j \in A$ and $g
 
 The probability for two solutions to do a crossover will vary linearly with the Euclidean distance between them, as shown in Figure \ref{fig:cross_proba}. The distance between the two furthest alternatives ($d_{furthest}$) will be associated with a probability $P_{c, min}$ while the distance between the two closest alternatives ($d_{closest}$) will be associated with a probability $P_{c, max}$. If two solutions are close to each other, they will have more chance to reproduce than if they are distant. This is to ensure the intensification properties of our algorithm. Therefore, we will have to specify a lower bound ($P_{c, min}$) and an upper bound ($P_{c, max}$) for the crossover probability. $P_{c, min}$ is set for the solutions which are the furthest to each other while $P_{c, max}$ is set for those which are the closest. In between, the probability will vary linearly inside these bounds.
 
-These values will be fixed as $[P_{c, min} = 0.6; P_{c, max} = 1.0]$ since these seem to be common values~\cite{Davis1989}.
+These values will be fixed as $[P_{c, min} = 0.6; P_{c, max} = 1.0]$ since these seem to be common values \cite{Davis1989} and we have empirically observed that intensification properties are ensured.
 
 \begin{figure}[h!]
 \begin{center}
@@ -443,7 +443,7 @@ These values will be fixed as $[P_{c, min} = 0.6; P_{c, max} = 1.0]$ since these
 
 Let us now see how does the crossover occur. First, let us remark that it does not have limitations for the exploration process since the information contained in the matrix spans the whole circuit.
 
-Second, we have to analyze how the chromosome is coded in order to see how we will apply the crossover step. For instance, let us choose the Layer (L) column as indicator for the crossover. If we order the matrix in Table \ref{tab:outputmat} following this column, we will have the Table \ref{tab:firstparentLrow} and the Table \ref{tab:secondparentLrow} for another solution that we will use for the crossover.
+Second, we have to analyse how the chromosome is coded in order to see how we will apply the crossover step. For instance, let us choose the Layer (L) column as indicator for the crossover. If we order the matrix in Table \ref{tab:outputmat} following this column, we will have the Table \ref{tab:firstparentLrow} and the Table \ref{tab:secondparentLrow} for another solution that we will use for the crossover.
 
 Now, without loss of generality, let us suppose that the crossover happens (randomly) on line 7. One of the child will be the Table \ref{tab:childLrow} and we see that the original scenario is not preserved since the first column (in bold) contains the same ID several times.
 
@@ -659,7 +659,7 @@ A Gaussian mutation is also a common operator but it has not been chosen since i
 %Another option can be to use a beta distribution in order to stay inside the bounds.
 
 \subsubsection{Consistency test}
-Of course, infeasible solutions may appear after the crossover/mutation step, since these operations are made with randomness. In order to verify that, we perform a test on each new solution to check if there is overlapping between the blocks. Currently, the solutions which are infeasible will be discarded. Of course, it is possible to apply some repair mechanism but it is to be investigated as future work even if we already produce feasible solutions.
+Of course, infeasible solutions (overlapping blocks or blocks outside of the tier's surface) may appear after the crossover/mutation step, since these operations are made with randomness. In order to verify that, we perform a test on each new solution to check if there is overlapping between the blocks. Currently, the solutions which are infeasible will be discarded. Of course, it is possible to apply some repair mechanism, for instance by moving the badly-placed blocks. This is still to be investigated as future work since moving these blocks is not trivial as this can create overlapping elsewhere on a layer.
 % TODO: quantifier le nombre de solutions perdues
 
 \subsubsection{Termination}
@@ -672,6 +672,7 @@ Three stop conditions have been implemented and are based on what is commonly us
 The maximum elapsed time has been chosen arbitrarily for quick testing purposes. As illustrated in Section \ref{sec:nsgaii-implement}, the design space is huge and finding an accurate Pareto frontier can be time consuming. On other hand, NSGA-II has shown that it can quickly produce good approximations \cite{Deb00afast}. Having a simulation time of a few hours is therefore enough, considering that, in practice, the optimization of one single architecture can take from several days to several weeks with the current design tools. Also, due to the approximation in the model, trying to find a really accurate Pareto front would not have real added value either.
 
 \section{Results and their use for a designer}
+\label{sec:results}
 The optimization was done for three criteria (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
 \begin{itemize}
 \item The [10; 20] range values for the IL criteria: a small enhancement of the IL value leads to a large increase of the cost so the interest for a design with more than 4 tiers seems low.
@@ -790,14 +791,12 @@ In order to validate the methodology, we will run the simulations of this case s
 After simulations, we obtain the following results for the mono-objective optimization of a 2D-IC and a 2-tiers circuit (we will denote them by $A$, $B$ and $C$):
 \begin{center}
 \begin{small}
-\begin{tabular}{|c|c|c|}
-\hline
+\begin{tabular}{c|c|c}
 Alternative & Number of layers & Interconnection length score\\
 \hline
 $A$ & 1 & 6.2737\\
 $B$ & 2 & 5.2357\\
 $C$ & 3 & 4.0438\\
-\hline
 \end{tabular}
 \end{small}
 \end{center}
@@ -807,17 +806,15 @@ Without surprise, we observe that the 3D-SICs perform better on that criterion t
 Now let us compare $A$, $B$ and $C$ to the 2- and 3-tiers circuits (respectively denoted $D$ and $E$) obtained with a multi-objective optimization. We will make the comparison with circuits that are the closest to $A$ with regards to the interconnection length criterion, in order to show the added value of working with a multi-criteria paradigm and simultaneously taking several criteria into account:
 \begin{center}
 \begin{footnotesize}
-\begin{tabular}{|c|c|ccccc|}
-\hline
-Alternative & Number & Interconnection & Cost & Volume & Clock & Power\\
- & of layers & length & & & position & \\
+\begin{tabular}{c|c|ccccc}
+Alt. & Number & Interconnection & Cost & Volume & Clock & Thermal\\
+ & of layers & length & & & position & dissipation\\
 \hline
 $A$ & $1$ & $6.2737$ & $1.2178\cdot10^9$ & $2.4356\cdot 10^7$ & $3.3584\cdot 10^4$ & $81$ \\
 $B$ & $2$ & $5.2357$ & $1.2267\cdot10^9$ & $2.4914\cdot 10^7$ & $4.5687\cdot 10^4$ & $351$ \\
 $C$ & $3$ & $4.0438$ & $1.1495\cdot10^9$ & $2.3681\cdot 10^7$ & $6.7234\cdot 10^4$ & $593$ \\
 $D$ & $2$ & $6.2099$ & $1.2304\cdot10^9$ & $2.4877\cdot 10^7$ & $3.8250\cdot 10^4$ & $280$ \\
 $E$ & $3$ & $6.2205$ & $1.1495\cdot10^9$ & $2.3589\cdot 10^7$ & $3.1095\cdot 10^4$ & $459$ \\
-\hline
 \end{tabular}
 \end{footnotesize}
 \end{center}

@@ -31,7 +31,7 @@ With the miniaturization, quantum effects such as quantum tunnelling will signif
 
 In addition to these physical aspects, economical considerations that will hinder the IC evolution beyond 20nm have to be taken into account \cite{5227192,PFF10}.
 
-In order to overcome these limitations, new technologies have been proposed such as the carbon nanotubes \cite{tans1998room}, the nanowire transistors \cite{doi:10.1021/nl025875l}, the single-electron transistors \cite{citeulike:4194929}, but also the 3D-Stacked Integrated Circuits (3D-SIC) proposed by the academic and industrial communities. The latter has been often cited as the most prominent one~\cite{659500}.
+In order to overcome these limitations, new technologies have been proposed such as the carbon nanotubes \cite{tans1998room}, the nanowire transistors \cite{doi:10.1021/nl025875l}, the single-electron transistors \cite{citeulike:4194929}, but also the 3D-Stacked Integrated Circuits (3D-SIC) proposed by the academic and industrial communities. The latter has been often cited as the most prominent one as it is based on the current technologies and still uses silicon as basis material; 3D-SICs can also allow shorter interconnection lengths, smaller footprint, larger bandwidth, heterogeneous circuits among their main advantages \cite{659500,1652906,981091,4299568}.
 
 Fast evolution of IC manufacturing technologies makes even the design of 2D-ICs a complex and tedious task with the growing number of design choices at the system level (e.g. number and type of functional units and memories, type and topology of the interconnection system, etc.) and physical level (respecting area/timing/power constraints). Using 3D-SICs introduces even more degrees of freedom: number of tiers, choices for manufacturing technology (e.g. full 3D integration, silicon interposer, face-to-face, back-to-face, etc.), 3D partitioning and placement strategies etc. These new degrees of freedom will contribute to the combinatorial explosion of already huge design spaces. Moreover, practice and 2D design experience cannot be fully exploited with 3D technology, since 3D-SICs change considerably the way ICs are implemented. The current design flows, which already showed their limits with conventional 2D-ICs, may thus need improvements to be able to deal with the increased complexity of emerging 3D-SICs \cite{vanderbiest06, PFF10}.
 
@@ -41,26 +41,28 @@ In addition, performance estimation/optimization and the selection of the most-s
 
 Currently, the design tools can be considered to follow a uni-criterion paradigm. Indeed, they have sequential development steps and each criterion is optimized without considering the impact on other criteria. This can lead to several rollbacks in the design flow since the achievement of the requirements can be time consuming (typical design iterations are measured in weeks).
 
-On the other hand, multi-criteria approaches have been developed to optimize all the criteria simultaneously. Designing 3D-SICs inherently implies a huge design space and numerous degrees of freedom and criteria. This is the reason why we propose to apply this paradigm for the design of 3D-SICs.
+On the other hand, multi-objective approaches have been developed to optimize all the criteria simultaneously. Designing 3D-SICs inherently implies a huge design space and numerous degrees of freedom and criteria. As it will be shown in Chapter \ref{cha:model}, it appears that the modelling a 3D circuit is not an easy task since numerous 3D specificities have to be taken into account. Also, defining and optimizing the criteria is not trivial as they are of heterogeneous nature. These are the reasons why we propose to apply a multi-criteria paradigm for the design of 3D-SICs.
 
 \section*{Research questions}
 Multi-objective optimization and multi-criteria decision aid were developed from the need of taking into account several criteria simultaneously. These tools from the operations research field have shown their abilities in solving similar problems in other fields, which also have a large solution space and applying metaheuristics have shown interesting results~\cite{talbi09}.
 
 In this thesis, we will show the applicability of a multi-criteria paradigm for the design of 3D-SICs:
 \begin{itemize}
-\item how a 3D circuit can be modelled to apply multi-objective optimization
-\item what kind of information can be provided to a designer
-\item how multi-criteria decision aid can exploit these results to assist a designer
+\item how a 3D circuit can be modelled to apply multi-objective optimization: 3D-SICs have numerous specificities and taking them into account in a model is not trivial. This will be developed in Section \ref{sec:crit}.
+\item how multi-objective optimization can be used to optimize a 3D circuit: the criteria are of heterogeneous nature which can increase the difficulty of optimizing them. This will be presented in Section \ref{sec:nsgaii-implement}.
+\item what kind of information can be provided to a designer: multi-objective optimization can provide qualitative and quantitative information that would not be available with current design tools. This will be illustrated in Section \ref{sec:results}.
+\item can MOO algorithms deal with the complexity of 3D-SICs: good properties of convergence and diversities can be shown. This will be studied in Chapter \ref{cha:robustness}.
+\item how multi-criteria decision aid can exploit these results to assist a designer: after the optimization process, making a choice among the possible designs is not trivial since several criteria are considered simultaneously and MCDA can assist a designer facing such situations. This will be introduced in Chapter \ref{cha:resultsexploit}.
 \end{itemize}
 
 \section*{Outline}
 In the first chapter, we will take an overview of the design and manufacturing of 3D-SICs. We will explain the limitations of current design flows and present the developments that have been carried out to overcome these problems. We will discuss why they should be improved and introduce how a multi-criteria paradigm can be useful.
 
-In the chapter two, we will present an overview of the main tools in the MCDA fields where some of the most-used methods will be presented.
+In the chapter two, we will present a short overview of the main tools in the MCDA fields where some of the most-used methods will be presented.
 
 In the third chapter, we will define the problem we tackle (the 3D floorplanning) with the considered criteria. We will then show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations will be run on a case study and show what kind of information can be provided to a designer. The methodology will then be validated with a realistic case study to show the added value of a multi-criteria paradigm compared to a uni-criterion approach.
 
-In the chapter four, we will show the robustness of the methodology and the associated algorithms. We will use classical indicators of the fields to analyse the convergence and diversity properties.
+In the chapter four, we will study the robustness of the methodology and the associated algorithms. We will use classical indicators of the fields to analyse the convergence and diversity properties.
 
 In the fifth chapter, we will explain how the obtained results can be exploited using multi-criteria decision aid. We will discuss on how such a paradigm can be used for designing circuits and what needs to be done in order to integrate it to actual design flows.
 

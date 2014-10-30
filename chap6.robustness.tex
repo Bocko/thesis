@@ -13,30 +13,13 @@ Associated publications:
 \section{Introduction}
 In Chapter \ref{cha:model}, we have shown how a 3D-SIC can be modelled as an optimization problem and we have applied a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
 
-In this chapter we will take a deeper look at the results of the multi-objective optimization steps. We will analyse the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use classical performance indicators such as the contribution indicator, the spread indicator, the binary $\epsilon$-indicator, the unary hypervolume indicator and the density of the Pareto-front which are presented in \cite{talbi09, 1197687}. These indicators can be grouped in 3 categories defined in \cite{talbi09}:
-\begin{enumerate}
-	\item The convergence-based indicators:
-	\begin{quote}
-		\emph{"The convergence metrics evaluate the effectiveness of the solutions in terms of the closeness to the optimal Pareto front."}
-	\end{quote}
-	\item The diversity-based indicators:
-	\begin{quote}
-		\emph{"Diversity indicators measure the uniformity of distribution of the obtained solutions in terms of dispersion and extension. In general, the diversity is researched in the objective space."}
-	\end{quote}
-	\item The hybrid indicators: that combine both convergence and diversity measures.
-\end{enumerate}
+In this chapter we will take a deeper look at the results of the multi-objective optimization steps. We will analyse the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use the classical performance indicators defined in Chapter \ref{cha:rol.mcda}.
 
-The following results have been obtained with an Intel Core i5 2.30 GHz, 4 GB DDR3 SDRAM for 5 independent experiments. The set of non-dominated solutions over all the runs will constitute the reference set $R$ for the \textit{epsilon} and the hypervolume indicators. Also, these results have been simulated with all the five criteria presented in Section \ref{sec:crit} instead of only the three first in the case study of Chapter \ref{cha:model}.
+The following results have been obtained with an Intel Core i5 2.30 GHz, 4 GB DDR3 SDRAM for 5 independent experiments. The set of non-dominated solutions over all the runs will constitute the reference set $R$ for the \textit{epsilon} and the hypervolume indicators. Also, these results have been simulated with all the five criteria presented in Section \ref{sec:crit} instead of only the three first in the case study of Section \ref{sec:casestudy}.
 
 % Other convergence-based indicators such as the generational distance, the $\epsilon$-indicator, a cardinality measure and a distance measure cannot currently be applied for our problem since we do not have a reference set to compare to.
 
 \section{Contribution indicator}
-\label{app:cont}
-The contribution is a convergence-based binary indicator. The contribution of an approximation $PO_1$ relatively to another approximation $PO_2$ is the ratio of non-dominated solutions produced by $PO_1$ in $PO^*$, which is the set of Pareto solutions of $PO_1 \cup PO_2$:
-\begin{equation}
-Cont(PO_1/PO_2) = \frac{\frac{\|PO\|}{2}+\|W_1\|+\|N_1\|}{\|PO^*\|}
-\end{equation}
-where $PO$ is the set of solutions in $PO_1 \cap PO_2$, $W_1$ the set of solutions in $PO_1$ that dominate some solutions of $PO_2$ and $N_1$ the set of non-comparable solutions of $PO_1$. This value has to be greater than 0.5 to indicate that $PO_1$ is better than $PO_2$ in terms of convergence to the Pareto front.
 
 The Table \ref{tab:contrib} and the Figure \ref{fig:contrib} show the evolution of the averaged contribution indicator over the iterations for the 5 experiments. We see that for the first iterations, $Cont(PO_i/PO_{i-1})$ is greater than 0.5, which means that the algorithm does indeed improve the solutions, then for the last iterations, the indicators are lower than 0.5 which means that there is a convergence.
 
@@ -81,13 +64,7 @@ The Table \ref{tab:contrib} and the Figure \ref{fig:contrib} show the evolution 
 \section{Spread indicator}
 \label{app:spread}
 
-The spread indicator $I_s$ combines the distribution and cardinality to measure the dispersion of the approximated Pareto set $A$:
-\begin{equation}
-I_s = \frac{\sum_{u \in A}|\{u' \in A: \|F(u)-F(u')\|>\sigma\}|}{|A|-1}
-\end{equation}
-where $F(u)$ is a fitness function and $\sigma > 0$ a neighborhood parameter. The closer is the measure to 1, the better is the spread of the approximated set $A$.
-
-The Figure \ref{fig:spread_indicator} shows the results of the spread indicator $I_s$ function of the neighborhood indicator $\sigma$ (all the 5 experiments share the same graph shape). We see that the Pareto front is well spread: if  we consider $I_s \geq 0.9$ we have $\sigma < 0.35$ in average for the 5 runs (normalized values), so we can consider that the algorithm produces a well-spread approximation of the Pareto front.
+The Figure \ref{fig:spread_indicator} shows the results of the spread indicator $I_s$ function of the neighbourhood indicator $\sigma$ (all the 5 experiments share the same graph shape). We see that the Pareto front is well spread: if  we consider $I_s \geq 0.9$ we have $\sigma < 0.35$ in average for the 5 runs (normalized values), so we can consider that the algorithm produces a well-spread approximation of the Pareto front.
 %Knowing that the extreme (Euclidean) distance between two solutions is equal to 332 (for normalized values), we can consider that the algorithm produces a well-spread approximation of the Pareto front.
 
 \begin{figure}[h!]
@@ -95,19 +72,14 @@ The Figure \ref{fig:spread_indicator} shows the results of the spread indicator 
 \includegraphics[width=1\linewidth]{spread_indicator_norm2.eps}
 \end{center}
 \vspace{-0.5cm}
-\caption{Spread indicator $I_s$ function of the neighborhood parameter $\sigma$}
+\caption{Spread indicator $I_s$ function of the neighbourhood parameter $\sigma$}
 \label{fig:spread_indicator}
 \end{figure}
 
 \section{Binary $\epsilon$-indicator}
-The binary $\epsilon$-indicator is a convergence-based indicator. It will give the quality of a solution front in comparison with a another set, with regards to all objectives. Let us consider a minimization problem with $n$ positive objectives. An objective vector $f^1 = (z_1^1, z_2^1, \dots, z_n^1)$ is said to $\epsilon$-dominate another objective vector $f^2 = (z_1^2, z_2^2, \dots, z_n^2)$ if $\forall 1 \leq i \leq n : \: z_i^1 \leq \epsilon \cdot z_i^2$, for a given $\epsilon > 0$. A binary $\epsilon$-indicator $I_\epsilon(A,B)$ gives the factor $\epsilon$ such that for any solution in $B$ there is at least one solution in $A$ that is not worse by a factor of $\epsilon$ in all objectives. $I_\epsilon(A,B)$ can be calculated as follows \cite{1197687}:
-\begin{equation}
-I_\epsilon(A,B) = \max\limits_{z^2 \in B} \: \min_{z^1 \in A} \: \max_{1 \leq i \leq n} \: \frac{z_i^1}{z_i^2}
-\end{equation}
+The non-dominated set computed from all the experiments will constitute the reference set $R$ that will serve to show the evolution of the $\epsilon$-indicator over time. This evolution is shown in Table \ref{tab:biepsref} (for averaged values after each 10 iterations). We can see that in the first iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) \approx 1$ which means that the front is improved while in the last iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) > 1$ which shows convergence.
 
-The reference set $R$ computed from all the experiments will serve to show the evolution of the $\epsilon$-indicator over time. This evolution is shown in Table \ref{tab:biepsref} (for averaged values after each 10 iterations). We can see that in the first iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) \approx 1$ which means that the front is improved while in the last iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) > 1$ which shows convergence.
-
-A comparison of the binary $\epsilon$-indicators between each experiment is also given, in Table \ref{tab:biepsxp}. We can see that $I_\epsilon(A,B) > 1$ and $I_\epsilon(B,A) > 1$ which indicates that neither $A$ weakly dominates $B$ nor $B$ weakly dominates $S$. This means that the generated front is consistent from one experiment to another.
+A comparison of the binary $\epsilon$-indicators between each experiment (after convergence) is also given, in Table \ref{tab:biepsxp}. We can see that $I_\epsilon(A,B) > 1$ and $I_\epsilon(B,A) > 1$ which indicates that neither $A$ weakly dominates $B$ nor $B$ weakly dominates $S$. This means that the generated front is consistent from one experiment to another.
 
 Also, in Table \ref{tab:biepsiter} are given the $\epsilon$-indicator between iterations of an experiment (the same observations apply for the other runs). We can see that in the first iterations, the front is always improved ($I_\epsilon(A_i, A_{i-1}) > 1$ and $I_\epsilon(A_{i-1}, A_i) \leq 1$) while in the last iterations, it begins to converge ($I_\epsilon(A_i, A_{i-1}) > 1$ and $I_\epsilon(A_{i-1}, A_i) > 1$).
 
@@ -173,9 +145,7 @@ Also, in Table \ref{tab:biepsiter} are given the $\epsilon$-indicator between it
 \end{table}
 
 \section{Unary hypervolume indicator}
-The hypervolume is an hybrid indicator. Since we already used a binary indicator (\textit{epsilon}), we will use the hypervolume indicator $I_H$ in its unary form. $I_H$, associated with an approximation set $A$ is given by the volume of the space portion that is weakly dominated by the set $A$ \cite{talbi09}.
-
-The evolution of the hypervolume (averaged values) is given in Table \ref{tab:hypervolref} and in Figure \ref{fig:hypervolref}. We can see that the value is (linearly) increasing over time.
+The evolution of the hypervolume (averaged values) is given in Table \ref{tab:hypervolref} and in Figure \ref{fig:hypervolref}. We can see that the value is (linearly) increasing over time, reaching convergence in the last iterations where the value stabilizes.
 
 The result for each experiment is also given, in Table \ref{tab:hypervol} and the used reference point is the worst point computed from all the sets for normalized data. As we can see, the values are rather consistent from one run to another.
 
@@ -197,7 +167,7 @@ The result for each experiment is also given, in Table \ref{tab:hypervol} and th
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=1\linewidth]{hypervolref.eps}
+\includegraphics[width=1\linewidth]{hypervolref2.eps}
 \end{center}
 \vspace{-0.5cm}
 \caption{Evolution of the unary hypervolume indicator (averaged values compared to the reference set $R$ over time}
@@ -226,7 +196,7 @@ The result for each experiment is also given, in Table \ref{tab:hypervol} and th
 \end{table}
 
 \section{Density of the Pareto front - gaps in the frontier}
-Another indicator of the Pareto front structure is its density. Here we will measure the density by finding gaps in the frontier. This will be done by counting the number of solutions in the neighborhood of another solution. Since the extreme distance between two solutions is 450.364 in average for the 5 runs (non-normalized), we consider that an acceptable neighborhood is twice the distance between two solutions if all the solutions were equidistant. We have thus a neighborhood of about 2. This test has shown that there was always at least one solution near another one, even for a neighborhood of 1, meaning that the algorithm can produce a sufficiently dense frontier.
+Another indicator of the Pareto front structure is its density. Here we will measure the density by finding gaps in the frontier. This will be done by counting the number of solutions in the neighbourhood of another solution. Since the extreme distance between two solutions is 450.364 in average for the 5 runs (non-normalized), we consider that an acceptable neighbourhood is twice the distance between two solutions if all the solutions were equidistant. We have thus a neighbourhood of about 2. This test has shown that there was always at least one solution near another one, even for a neighbourhood of 1, meaning that the algorithm can produce a sufficiently dense frontier.
 
 %\subsubsection*{Binary hypervolume indicator}
 %The binary hypervolume indicator $I_{H2}(A,B)$ is defined as the hypervolume of the subspace that is weakly dominated by $A$ but not by $B$. A value closer to 0 means that $B$ is a better approximation \cite{1197687}.
@@ -239,7 +209,7 @@ Another indicator of the Pareto front structure is its density. Here we will mea
 In this chapter, we have shown that the proposed methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With the several indicators that we have analysed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
 %For information purposes, we have also computed less state-of-the-art indicators: the contribution indicator and the spread indicator, as defined in \cite{talbi09}. These results are presented in Appendices \ref{app:cont} and \ref{app:spread} and we can see that they also reflects the good convergence and diversity of the algorithm.
 
-Also, analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect since the heterogeneous nature of the criteria. This is probably due to some correlation between the criteria but this is still to be investigated.
+Also, analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect given the heterogeneous nature of the criteria and correlation between them. Also, since this is an approximate algorithm, small gaps between solutions may exist that will not give a convex shape to the frontier.
 
 In the next chapter, we will show how these results can be exploited, with a multi-criteria point of view, to help a designer.
 

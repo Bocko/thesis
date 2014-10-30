@@ -26,7 +26,7 @@ x \in A
 where $f$ is a real-valued function evaluating the solutions denoted $x$, and $A$ is the set of solutions, $f$ is also called the \emph{criterion} on which $x$ is evaluated. A criterion can therefore be defined as follows:
 
 \begin{definition}[Criterion]
-A criterion is a way to evaluate and compare potential solutions. These are evaluated according to a criterion, which thus results in performance levels.
+A criterion is a way to evaluate and compare potential solutions. These are evaluated according to a specific point of view, which then results in performance levels.
 \end{definition}
 
 Let us note that the equation \ref{eqn:optiprob} expresses a \emph{minimization} problem. A \emph{maximization} problem can be seen as a minimization problem with the identity
@@ -160,14 +160,14 @@ NLP are generally more difficult to solve than LP \cite{talbi09} and metaheurist
 \section{From the uni-criterion paradigm to the multi-criteria paradigm}
 \label{sec:rol2.unicritmulticrit}
 
-With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the characteristics of the problems or that the other criteria already satisfy an acceptable level by changing them into constraints. This methodology will search for a solution which is supposed to be optimal according to this criterion. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Chapter \ref{cha:model}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached.
+With a uni-criterion paradigm, the optimization of one criterion is generally performed while considering that this single criterion synthesizes all the characteristics of the problems or that the other criteria already satisfy an acceptable level by considering them as constraints. This methodology will search for a solution which is supposed to be optimal according to this criterion. However, most problems encountered in the field of IC design, and more generally in other industrial fields, contains several conflicting criteria as it will be illustrated in Chapter \ref{cha:model}. Finding a solution that simultaneously optimizes all the criteria is only possible in rare cases and if optimality can be reached.
 %, there may be cases where several solutions share the same evaluations on all the criteria.
 
 For instance, when designing ICs, a manufacturer will try to simultaneously maximize the performance while minimize the cost of the circuit. However, we can already guess that those two objectives are conflicting. Also, producing high-end ICs can be subject to more difficulties in terms of thermal dissipation. In addition, a criterion based on ecological standards may have impacts on the cost and the performance of an IC.
 
 This example shows that a uni-criterion approach cannot always be applied since there is no achievable optimum, as several criteria have to be simultaneously taken into account. A solution that optimizes one criterion will likely affect another.
 
-In order to deal with the multiple criteria of a problem, another paradigm consists in taking into account all the criteria simultaneously. %This is the goal of the multi-criteria paradigm which aims to:
+In order to deal with the multiple criteria of a problem, another paradigm consists in taking into account all the criteria simultaneously: the multi-criteria paradigm. %This is the goal of the multi-criteria paradigm which aims to:
 %\begin{enumerate}
 %\item find the solutions that are efficient on all the criteria simultaneously with the multi-objective optimization;
 %\item provide support to a decision maker facing several conflicting solutions with multi-criteria decision aid (MCDA) that allows to highlight such conflicts and therefore obtain a compromise with a transparent process.
@@ -210,7 +210,7 @@ As explained in Chapter \ref{cha:rol.icdesign}, designing 3D-SICs involves a hug
 
 \subsection{Metaheuristics for multi-objective optimization}
 \label{subsec:metaheuristics}
-Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}. As stated previously, finding the optimal solution of a multi-objective optimization problem (MOP) is only possible in exceptional cases since encountering conflicting criteria is generally common. Therefore, multi-objective metaheuristics will not produce a single solution but a set of alternatives defined as Pareto optimal solutions. The main goal is then to obtain this set.
+Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}. As stated previously, finding the optimal solution for a multi-objective optimization problem (MOP) is only possible in exceptional cases since encountering conflicting criteria is generally common. Therefore, multi-objective metaheuristics will not produce a single solution but a set of alternatives defined as Pareto optimal solutions. The main goal is then to obtain this set.
 
 In our study, due to the heterogeneous nature of the criteria, there are few hopes to find the exact Pareto optimal solutions without performing an explicit enumeration. In such cases, metaheuristics are commonly used and the goal is then to find an approximation of this set. Two properties has to be respected in order to ensure good approximations: convergence to the Pareto optimal front and uniform diversity. The first property allows to have solutions that are closed to the Pareto set whereas the second property shows a good distribution around the Pareto front.
 
@@ -219,7 +219,7 @@ Numerous metaheuristics have been developed since the 50s. Among the most known,
 In this work, we will focus on genetic algorithms (GA) as they are quick to implement for a first approach and are suitable to heterogeneous variables problems. More details about other metaheuristics can be found in reference books such as \cite{talbi09,dreo06metaheuristics,8125462}.
 
 \subsubsection{General description of genetic algorithms}
-Genetic algorithms have been developed by Holland in the 1970s \cite{holland1975adaptation}. They are metaheuristics that reproduce the properties of a natural selection process as described by Charles Darwin. GAs are based on the principle of improvement of gene pool of a population over generations. GAs will mimic the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm).
+Genetic algorithms have been developed by Holland in the 1970s \cite{holland1975adaptation}. They are metaheuristics that reproduce the properties of a natural selection process as described by Charles Darwin. GAs are based on the principle of improvement of gene pool of a population over generations. GAs will mimic the natural evolution with techniques such as selection, crossover and mutation. In the following, we will briefly describe the general methodology of a GA without considering a multi-objective case since the key steps are similar. Afterwards, we will describe one of the most popular multi-objective genetic algorithms: NSGA-II (Non-dominated Sorting Genetic Algorithm) \cite{Deb00afast}.
 
 Genetic algorithms rely on a population that is evolved toward better solutions or individuals. The evolution is an iterative process and starts usually with randomly-generated solutions. At each iteration, every individual is evaluated to define its fitness. The fitter ones are more likely to be selected for genetic modifications (crossover and possibly mutation). The produced solutions constitute the new generation that will be used for the next iteration. The algorithm is commonly terminated when a maximum number of generations has been produced or when no better solution has been produced after a several iterations. The general pseudo-code for genetic algorithms is shown in Algorithm \ref{alg:ga}.
 
@@ -241,7 +241,7 @@ EVALUATE each individual's fitness;\\
 The representation or encoding of a solution is called a chromosome and depends on the problem. Several examples of problems show binary encodings however, in our study we will use a real-valued matrix that will be detailed in Chapter \ref{cha:model}. Nevertheless, without loss of generality, we will illustrate the principles of a genetic algorithm by using binary-coded solutions.
 
 \paragraph{Initialization}
-Initially many solutions are generated, usually randomly to form the initial population. Depending on the problem, the generation of the initial population can be guided (seeded) to areas where optimal solutions are likely to be found. Another way to generate solutions can be to use building mechanisms, for instance with a GRASP-like algorithm.
+Initially many solutions are generated, usually randomly to form the initial population. Depending on the problem, the generation of the initial population can be guided (seeded) to areas where optimal solutions are likely to be found. Another way to generate solutions can be to use building mechanisms, for instance with a greedy-like algorithm.
 
 \paragraph{Selection}
 The selection is a stochastic process usually planned so that the fitter solutions have a higher probability of being selected. This aims to ensure the convergence of the algorithm.
@@ -365,6 +365,48 @@ $l = |A|$;\\
 \end{algorithm}
 
 The number of solutions per generation is fixed as constant. Between two solutions with different Pareto ranks, the lower rank will be preferred. Otherwise, if both solutions have the same Pareto rank then the one located in a less-crowded region will be preferred.
+
+\subsubsection{Performance evaluation of a metaheuristic}
+In order to evaluate the performance of a metaheuristic, several metrics have been defined in the literature to assess the convergence and diversity properties of an algorithm \cite{talbi09}. Among the classical indicators, one can cite the contribution indicator, the spread indicator, the binary $\epsilon$-indicator, the unary hypervolume indicator and the density of the Pareto-front which are presented in \cite{talbi09, 1197687}. These indicators can be grouped in 3 categories defined in \cite{talbi09}:
+\begin{enumerate}
+	\item The convergence-based indicators:
+	\begin{quote}
+		\emph{"The convergence metrics evaluate the effectiveness of the solutions in terms of the closeness to the optimal Pareto front."}
+	\end{quote}
+	\item The diversity-based indicators:
+	\begin{quote}
+		\emph{"Diversity indicators measure the uniformity of distribution of the obtained solutions in terms of dispersion and extension. In general, the diversity is researched in the objective space."}
+	\end{quote}
+	\item The hybrid indicators: that combine both convergence and diversity measures.
+\end{enumerate}
+
+% Other convergence-based indicators such as the generational distance, the $\epsilon$-indicator, a cardinality measure and a distance measure cannot currently be applied for our problem since we do not have a reference set to compare to.
+
+\paragraph{Contribution indicator}
+%\label{app:cont}
+The contribution is a convergence-based binary indicator. The contribution of an approximation $PO_1$ relatively to another approximation $PO_2$ is the ratio of non-dominated solutions produced by $PO_1$ in $PO^*$, which is the set of Pareto solutions of $PO_1 \cup PO_2$:
+\begin{equation}
+Cont(PO_1/PO_2) = \frac{\frac{\|PO\|}{2}+\|W_1\|+\|N_1\|}{\|PO^*\|}
+\end{equation}
+where $PO$ is the set of solutions in $PO_1 \cap PO_2$, $W_1$ the set of solutions in $PO_1$ that dominate some solutions of $PO_2$ and $N_1$ the set of non-comparable solutions of $PO_1$. This value has to be greater than 0.5 to indicate that $PO_1$ is better than $PO_2$ in terms of convergence to the Pareto front.
+
+\paragraph{Spread indicator}
+%\label{app:spread}
+
+The spread indicator $I_s$ combines the distribution and cardinality to measure the dispersion of the approximated Pareto set $A$:
+\begin{equation}
+I_s = \frac{\sum_{u \in A}|\{u' \in A: \|F(u)-F(u')\|>\sigma\}|}{|A|-1}
+\end{equation}
+where $F(u)$ is a fitness function and $\sigma > 0$ a neighborhood parameter. The closer is the measure to 1, the better is the spread of the approximated set $A$.
+
+\paragraph{Binary $\epsilon$-indicator}
+The binary $\epsilon$-indicator is a convergence-based indicator. It will give the quality of a solution front in comparison with a another set, with regards to all objectives. Let us consider a minimization problem with $n$ positive objectives. An objective vector $f^1 = (z_1^1, z_2^1, \dots, z_n^1)$ is said to $\epsilon$-dominate another objective vector $f^2 = (z_1^2, z_2^2, \dots, z_n^2)$ if $\forall 1 \leq i \leq n : \: z_i^1 \leq \epsilon \cdot z_i^2$, for a given $\epsilon > 0$. A binary $\epsilon$-indicator $I_\epsilon(A,B)$ gives the factor $\epsilon$ such that for any solution in $B$ there is at least one solution in $A$ that is not worse by a factor of $\epsilon$ in all objectives. $I_\epsilon(A,B)$ can be calculated as follows \cite{1197687}:
+\begin{equation}
+I_\epsilon(A,B) = \max\limits_{z^2 \in B} \: \min_{z^1 \in A} \: \max_{1 \leq i \leq n} \: \frac{z_i^1}{z_i^2}
+\end{equation}
+
+\paragraph{Unary hypervolume indicator}
+The hypervolume is an hybrid indicator. Since we already cited a binary indicator (\textit{epsilon}), we will define the hypervolume indicator $I_H$ in its unary form. $I_H$, associated with an approximation set $A$ is given by the volume of the space portion that is weakly dominated by the set $A$ \cite{talbi09}.
 
 \subsection{Multi-criteria decision aid}
 \label{subsec:mcda}
@@ -536,7 +578,7 @@ STOM can be summarized in four steps:
 \begin{enumerate}
 \item The first step is to set the ideal point.
 \item Then the aspiration level for each criterion is asked to the decision maker; this is the reference point for each criterion of the decision maker. Note that the aspiration level should be lower than the ideal point.
-\item \label{stom3} A Pareto solution nearest to the aspiration level is determined.
+\item \label{stom3} A Pareto solution nearest to the ideal point and in the direction of the aspiration level is determined.
 \item This solution is submitted to the decision maker. If it is satisfactory, the procedure ends. Otherwise, the decision maker is asked to trade off to define another aspiration level. Go to step \ref{stom3}.
 \end{enumerate}
 
@@ -658,19 +700,19 @@ Let us note that, unlike PROMETHEE I, PROMETHEE II does not give place to incomp
 
 \item \textit{\underline{The GAIA plane}}
 
-When working with more than three criteria, it is impossible to have a perfect visual representation of the solutions. The GAIA (Geometrical Analysis for Interactive Assistance) plane can give a visualization even if there are more than three criteria, by means of the principal component analysis (PCA) of the net flows on the decision maker's preferences for each criterion.
+When working with more than three criteria, it is impossible to have a perfect visual representation of the solutions space. The GAIA (Geometrical Analysis for Interactive Assistance) plane can give a visualization even if there are more than three criteria, by means of the principal component analysis (PCA) of the net flows on the decision maker's preferences for each criterion.
 
 The PCA allows a projection of the alternatives on a plane that minimizes the loss of information induced by this projection.
 
 This plan allows to have a visual descriptive analysis with several criteria. It can highlight the conflict and synergy between criteria and show the profiles of the alternatives. This will help to identify the potential compromise solutions.
 
-In order to illustrate the use of the GAIA plane, we will take a simple example taken from the PROMETHEE-based software D-Sight developed by Q. Hayez: the purchase of a car. Six vehicles are evaluated on 5 criteria: price, horse power, 0-100 km/h acceleration time, consumption and CO2 emission. The associated GAIA plane is given in Figure \ref{fig:gaiacar}.
+In order to illustrate the use of the GAIA plane, we will take a simple example: six alternatives evaluated on 5 criteria. The associated GAIA plane is given in Figure \ref{fig:gaiacar}.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{gaiacar.png}
 \end{center}
-\caption{Purchase of a car - GAIA plane}
+\caption{Example of a GAIA plane}
 \label{fig:gaiacar}
 \end{figure}
 
@@ -678,13 +720,13 @@ Four distinctive visual information are shown:
 \begin{enumerate}
 \item The green axes that represent the projections of each criterion's axis.
 \item The blue dots that represent the projection of each solution's uni-criterion net flow. The value of the uni-criterion net flow is read by projecting the point on the related criterion axis.
-\item The red axis that represents the \textit{decision stick} which is the projection of the set of weights and gives the decision direction.
+\item The red axis that represents the \textit{decision axis} which is the projection of the set of weights and gives the decision direction.
 \item The \textit{delta} value that represents the percentage of kept information since there are projection errors.
 \end{enumerate}
 
-From the GAIA plane, we can observe how the criteria are related between each other. Indeed, criteria axes that have opposite directions are conflicting, whereas criteria with the same direction share the same optimization trend. In this case, we can see that the price is conflicting with the power and the 0-100 km/h acceleration time, which is to be expected. Also, the CO2 and the consumption criteria have the same direction which also reflects the reality.
+From the GAIA plane, we can observe how the criteria are related between each other. Indeed, criteria axes that have opposite directions are conflicting, whereas criteria with the same direction are in synergy. In this case, we can see that C1 is conflicting with C2 and C3, which is to be expected. Also, C4 and C5a have the same direction.
 
-As for the decision stick, it allows a decision maker to know in which direction is located his criteria weights. Indeed, the alternatives with the highest net flow score will have their furthest projection on that axis, in the direction of that axis. This visually represents the PROMETHEE II ranking, provided that the \textit{delta} value shows that enough information has been kept with the projection.
+As for the decision axis, it allows a decision maker to know in which direction the best compromise solutions are located based on the criteria weights. Indeed, the alternatives with the highest net flow score will have their furthest projection on that axis, in the direction of that axis. This visually represents the PROMETHEE II ranking, provided that the \textit{delta} value shows that enough information has been kept with the projection.
 
 \end{enumerate}
 
@@ -754,7 +796,7 @@ Let us note that a second complete pre-order can be obtained by applying the pro
 
 \item \textit{\underline{ELECTRE III}}
 
-This method takes into account the indifference and preference thresholds. It is based on a valued outranking relation that is less sensible to data and parameters variabilities but at the cost of arbitrary choice for threshold functions values and an increased complexity for the decision maker.
+This method takes into account the indifference and preference thresholds. It is based on a valued outranking relation that is less sensible to data and parameters variabilities.% but at the cost of arbitrary choice for threshold functions values and an increased complexity for the decision maker.
 
 In ELECTRE III, an outranking degree $S(a_i, a_j)$ associated to each pair $(a_i, a_j)$ of alternatives is defined. It can be understood as an \og degree of credibility of outranking \fg of $a_i$ over $a_j$.
 

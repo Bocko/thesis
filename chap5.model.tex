@@ -194,10 +194,10 @@ The combination of all the parameters described in the model are the possible al
 \end{figure}
 
 \section{Case study and implementation}
+\label{sec:casestudy}
 In this section, we will briefly explain the implementation of our design method and show some experimental results based on this first approach. Due to the huge size of the design space, an explicit enumeration of the possible solutions will take considerable time. For instance, for a simplified problem of 3 tiers of 10x10 mm and 5 blocks of 2x2 mm to place, there are 75 possible positions for each block. The number of combinations is given by $\frac{n!}{k!(n-k)!}$, where $n$ is the number of possible positions and $k$ the number of blocks. For this simplified problem, there are therefore 17~259~390 combinations. For 10 blocks to place, the number of possibilities increases to more than 8.10$^{11}$. Besides, this small calculation does not take into account the numerous other possible choices.
 
-We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We chose to use NSGA-II as it is quick to implement which is convenient as proof of concept for our research purposes (show the applicability of MOO/MCDA for 3D-SIC design). In addition, this algorithm is flexible and is known for handling mixed variables which suits the nature of our problem well \cite{}. For the first case study we consider a circuit based on the 3MF MPSoC platform developed at IMEC \cite{dmilojev08b}.
-%This case study has been implemented using Matlab and all data were coded using matrices.
+We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We chose to use NSGA-II as it is quick to implement which is convenient as proof of concept for our research purposes (show the applicability of MOO/MCDA for 3D-SIC design). In addition, this algorithm is flexible and is known for handling mixed variables since they are only involved for evaluations of the alternatives in the selection step. For the first case study we consider a circuit based on the 3MF MPSoC platform developed at IMEC \cite{dmilojev08b}. This case study has been implemented using Matlab and all data were coded using matrices.
 
 \subsection{Description of the case study and modeling}
 The 3MF MPSoC is made of 13 blocks as shown on Figure \ref{fig:imec3mf}:
@@ -673,7 +673,8 @@ The maximum elapsed time has been chosen arbitrarily for quick testing purposes.
 
 \section{Results and their use for a designer}
 \label{sec:results}
-The optimization was done for three criteria (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
+The simulations have been carried out on an Intel Core i5 2.30 GHz, 4 GB
+DDR3 SDRAM and the presented results are the synthesis of 5 independent experiments. The optimization was done for three objectives (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
 \begin{itemize}
 \item The [10; 20] range values for the IL criteria: a small enhancement of the IL value leads to a large increase of the cost so the interest for a design with more than 4 tiers seems low.
 \item The [260; 280] range values for the cost criteria: a small increase of the price can give a large enhancement of the performance. A designer might consider accepting a slightly higher price for a sensitively better performance, knowing that this information can be quantified with an accurate model. Indeed, with the estimate model that we propose, a small 10\% increase of the cost can decrease the IL by 60\%.
@@ -786,7 +787,9 @@ L1Is22\texttildelow 24 & L2Is8 & 300\\
 \end{table}
 
 \subsection{Simulation and validation procedure}
-In order to validate the methodology, we will run the simulations of this case study to produce floorplans with 1 to 3 layers. First, we will mimic the current design flow by performing a mono-objective optimization (minimizing the interconnection length). Then we will compare the obtained solution to other 2- and 3-tiers 3D-SIC that have been produced with a multi-objective approach.
+In order to validate the methodology, we will run the simulations of this case study to produce floorplans with 1 to 3 layers. These have been carried out on an Intel Core i5 2.30 GHz, 4 GB DDR3 SDRAM and the presented results are the synthesis of 5 independent experiments.
+
+First, we will mimic the current design flow by performing a mono-objective optimization (minimizing the interconnection length). Then we will compare the obtained solution to other 2- and 3-tiers 3D-SIC that have been produced with a multi-objective approach.
 
 After simulations, we obtain the following results for the mono-objective optimization of a 2D-IC and a 2-tiers circuit (we will denote them by $A$, $B$ and $C$):
 \begin{center}
@@ -837,7 +840,7 @@ As expected, except on the interconnection length criterion, the alternative $D$
 \end{center}
 \end{figure}
 
-On the other hand, by following a mono-objective optimization, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. Of course, $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. In a multi-criteria point of view, none of these circuits dominate the others so making a choice is not trivial and we will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model.
+On the other hand, by following a mono-objective optimization, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. Of course, $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. In a multi-criteria point of view, none of these circuits dominate the others so making a choice is not trivial and we will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model as, even if the criteria evaluation is consistent in an ordinal point of view, it is not physically accurate.
 
 \section{Conclusion}
 

@@ -40,7 +40,7 @@ In this chapter we will present a short overview of the 3D-stacked integrated ci
 
 \section{3D integration}
 
-Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since the interconnections are predominantly made in a planar way \cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. Different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV), micro bumps (µBump) or copper pads (CuPad) and they can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
+Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since both device and interconnect are predominantly made in a planar way \cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. In face to back configuration, different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV) and if a face to face configuration is used micro bumps (µBump) or copper pads (CuPad) can also be used. They can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
 
 \begin{figure}[h!]
 \begin{center}
@@ -169,28 +169,28 @@ With the appearance of a new technology, the involvement of a high cost should o
 \paragraph{Design complexity and design software}
 A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist and they are mainly developed for and owned by particular manufacturers. In addition, they are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally as they do not take all 3D specificities into account. For example, as it will be shown in Section \ref{sec:currentflows}, 3D partitioning and floorplanning are considered separately (as it is done for 2D-ICs) whereas the 3D geometrical assignment should be taken as a whole.
 
-% In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits.
+In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits.
 
-\section{2.5D-ICs by Xilinx}
-Now that the 3D integration has been introduced, let us give some notes that are worth mentioning about the 2.5D-ICs introduced by Xilinx \cite{bolsens2011}. 2.5D integration can be considered as a stepping stone to 3D design, as illustrated in Figure \ref{fig:2d5xilinx}. This technology is based on a silicon interposer where are placed the dies. The bindings required to connect the dies are located on this silicon interposer, as shown in Figure \ref{fig:siliconinterposer}. Compared to classical 2D-ICs, this allow higher interconnect density while being less challenging than 3D-SICs in terms of design flow, thermal issues, reliability, testing and cost as the technology is already existing.
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=0.8\linewidth]{2d5xilinx}
-\end{center}
-\caption{2.5D as a stepping stone to 3D integration \cite{bolsens2011}}
-\label{fig:2d5xilinx}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=0.8\linewidth]{siliconinterposer}
-\end{center}
-\caption{Illustration of the 2.5D integration with a silicon interposer \cite{bolsens2011}}
-\label{fig:siliconinterposer}
-\end{figure}
-
-In the following section, we will have an overview about these software tools and generally about the design flows used to design integrated circuits.
+%\section{2.5D-ICs by Xilinx}
+%Now that the 3D integration has been introduced, let us give some notes that are worth mentioning about the 2.5D-ICs introduced by Xilinx \cite{bolsens2011}. 2.5D integration can be considered as a stepping stone to 3D design, as illustrated in Figure \ref{fig:2d5xilinx}. This technology is based on a silicon interposer where are placed the dies. The bindings required to connect the dies are located on this silicon interposer, as shown in Figure \ref{fig:siliconinterposer}. Compared to classical 2D-ICs, this allow higher interconnect density while being less challenging than 3D-SICs in terms of design flow, thermal issues, reliability, testing and cost as the technology is already existing.
+%
+%\begin{figure}[h!]
+%\begin{center}
+%\includegraphics[width=0.8\linewidth]{2d5xilinx}
+%\end{center}
+%\caption{2.5D as a stepping stone to 3D integration \cite{bolsens2011}}
+%\label{fig:2d5xilinx}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\begin{center}
+%\includegraphics[width=0.8\linewidth]{siliconinterposer}
+%\end{center}
+%\caption{Illustration of the 2.5D integration with a silicon interposer \cite{bolsens2011}}
+%\label{fig:siliconinterposer}
+%\end{figure}
+%
+%In the following section, we will have an overview about these software tools and generally about the design flows used to design integrated circuits.
 
 \section{Current design flows and their limitations}
 \label{sec:currentflows}
@@ -202,7 +202,7 @@ Design flows are the combination of electronic design automation (EDA) tools use
 \includegraphics[width=\linewidth]{designflow2.eps}
 \end{center}
 \vspace{-0.5cm}
-\caption{General classical design flow}
+\caption{Classical design flow}
 \label{fig:designflow}
 \end{figure}
 
@@ -236,7 +236,7 @@ modeFRONTIER \cite{esteco01} is a proprietary development environment developed 
 %http://www.multicube.eu/
 \paragraph{MULTICUBE}
 
-The MULTICUBE project (MULTI$^{3}$) \cite{multicube08, Silvanoetal09} is a European project started in 2008 and dedicated to the multi-objective exploration of MPSoC architectures for multimedia embedded systems. The aims is to developed a framework that allows a quick and automated exploration of the design space to improve the performances of a MPSoC with metrics such as power, latency, computing performance, bandwidth, QoS, etc. This project is based on several heuristics and optimization algorithms that reduce the exploration time and allow a quick selection of the best solutions of a Pareto-optimal frontier. In addition, MULTICUBE also aims to define an application-oriented framework based on the results of the multi-objective exploration to optimize the resources allocation and the tasks scheduling of the applications. The exploration is done at the system level, using the SystemC language. The project includes proprietary and open-source tools whose development targets the industry. Among the developed prototyping tools, Multicube explorer and Multicube-SCoPE can be cited.
+The MULTICUBE project (MULTI$^{3}$) \cite{multicube08, Silvanoetal09} is a European project started in 2008 and dedicated to the multi-objective exploration of MPSoC architectures for multimedia embedded systems. The aims is to developed a framework that allows a quick and automated exploration of the design space to improve the performances of a MPSoC with metrics such as power, latency, computing performance, bandwidth, QoS, etc. This project is based on several heuristics and optimization algorithms that reduce the exploration time and allow a quick selection of the best solutions. In addition, MULTICUBE also aims to define an application-oriented framework based on the results of the multi-objective exploration to optimize the resources allocation and the tasks scheduling of the applications. The exploration is done at the system level, using the SystemC language. The project includes proprietary and open-source tools whose development targets the industry. Among the developed prototyping tools, Multicube explorer and Multicube-SCoPE can be cited.
 
 %http://home.dei.polimi.it/zaccaria/multicube_explorer_v1/Home.html
 \subparagraph{Multicube Explorer}
@@ -292,6 +292,6 @@ In this chapter, we have presented an overview of the evolution of IC design. Ma
 
 With the 3D integration, design flows have evolved and integrate 3D partitioning and 3D place and route. However, these two steps are performed separately while they should be considered simultaneously as the circuits' performances will depend on the position of a component on a layer and the layer where it lies.
 
-We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses from a Pareto front. The goal of this research is to show that a more multi-objective-oriented optimization could be more suitable to take into account the many aspects of a design and that a more globa multi-criteria analysis can provide more information.
+We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses. The goal of this research is to show that a more multi-objective-oriented optimization could be more suitable to take into account the many aspects of a design and that a more globa multi-criteria analysis can provide more information.
 
 In the next chapter, we will describe a short overview of the tools coming from the operations research that will allow to take into account multiple criteria simultaneously.

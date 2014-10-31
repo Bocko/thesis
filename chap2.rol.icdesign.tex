@@ -145,16 +145,17 @@ Shorter interconnections generally translates into lower capacitance and inducta
 
 \paragraph{Heterogeneous circuits}
 
-The 3D technologies allow truly heterogeneous designs. For instance, it is possible to integrate, in addition to traditional digital circuits of different technologies, analogical circuits such as sensors or antennas, as well as power supply, which give 3D-SIC a high degree diversity \cite{4299568}. The Fig. \ref{fig:heterogeneity} shows a schematic view of a 3D-SIC developed by IMEC for biomedical purposes that contains antennas, DSPs, EEG/ECG sensors, a power supply and solar cells \cite{4198870}.
+The 3D technologies allow truly heterogeneous designs. For instance, it is possible to integrate, in addition to traditional digital circuits of different technologies, analogical circuits such as sensors or antennas, as well as power supply, which give 3D-SIC a high degree diversity. It is also possible to mix old and new generations technologies to lower the cost of future circuits.\cite{4299568}.
+%The Fig. \ref{fig:heterogeneity} shows a schematic view of a 3D-SIC developed by IMEC for biomedical purposes that contains antennas, DSPs, EEG/ECG sensors, a power supply and solar cells \cite{4198870}.
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=0.5\linewidth]{heterogeneity.png}
-\end{center}
-\vspace{-0.5cm}
-\caption{Schematic illustration of an heterogeneous 3D-SIC (developed by IMEC) \cite{4198870}}
-\label{fig:heterogeneity}
-\end{figure}
+%\begin{figure}[h!]
+%\begin{center}
+%\includegraphics[width=0.5\linewidth]{heterogeneity.png}
+%\end{center}
+%\vspace{-0.5cm}
+%\caption{Schematic illustration of an heterogeneous 3D-SIC (developed by IMEC) \cite{4198870}}
+%\label{fig:heterogeneity}
+%\end{figure}
 
 \subsection{3D-SIC design challenges}
 
@@ -164,10 +165,10 @@ As explained, 3D-SICs offer numerous design perspectives thanks to their advanta
 The power density has increased exponentially over the past decades for the 2D-ICs and it appears that this trend will continue in the near future. As for 3D-SICs, due to their higher component density, they will also be subject to higher power density so thermal management should be considered carefully \cite{659500}. A simplified model of thermal dissipation has been developed in this thesis and will presented in Chapter \ref{cha:model}.
 
 \paragraph{Cost}
-With the appearance of a new technology, the involvement of a high cost should often be expected. In the case of 3D technology, the cost is currently high due to the lack of infrastructure and the reluctance of manufacturers who do not want to risk to change to new technologies \cite{659500}.
+With the appearance of a new technology, the involvement of a high cost should often be expected. In the case of 3D technology, in addition of the cost of the technology itself, there are the lack of infrastructure and the reluctance of manufacturers who do not want to risk to change to new technologies \cite{659500}.
 
 \paragraph{Design complexity and design software}
-A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist and they are mainly developed for and owned by particular manufacturers. In addition, they are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally as they do not take all 3D specificities into account. For example, as it will be shown in Section \ref{sec:currentflows}, 3D partitioning and floorplanning are considered separately (as it is done for 2D-ICs) whereas the 3D geometrical assignment should be taken as a whole.
+A large number of systems have been implemented using the 2D technologies which means that current tools can cope with 2D design complexity even if they show more and more their limits \cite{vanderbiest06, PFF10}. As for 3D-SICs, the increased complexity can be tackled by developing adapted software \cite{659500}. However, to the best of our knowledge, few 3D dedicated software currently exist. One can nevertheless cite the works in \cite{1112292,1594713,Xie:2006:DSE:1148015.1148016,4735042}. Most of other tools are mainly developed for and owned by particular manufacturers. In addition, they are based on 2D design tools which does not allow to tackle the complexity of 3D designs integrally as they do not take all 3D specificities into account. For example, as it will be shown in Section \ref{sec:currentflows}, 3D partitioning and floorplanning are considered separately (as it is done for 2D-ICs) whereas the 3D geometrical assignment should be taken as a whole.
 
 In the following section, we will have an overview about these software tools and generally about the design flow used to design integrated circuits.
 
@@ -206,9 +207,9 @@ Design flows are the combination of electronic design automation (EDA) tools use
 \label{fig:designflow}
 \end{figure}
 
-As one can observe, the design flows are sequential. The process goes from one step to the other with local optimization loops. In practice, it is not unusual to have several rollbacks to the previous steps due to inconsistency in the optimization process. For instance, the optimization done in the logical design step might work in simulations but can be impractical for the physical design step so a rollback is needed in order to correct this inconsistency.
+As one can observe, the design flows are sequential. The process goes from one step to the other with local optimization loops. In practice, it is not unusual to have several rollbacks to the previous steps due to the need of manual intervention to adjust the constraints and reach good solutions. %For instance, the optimization done in the logical design step might work in simulations but can be impractical for the physical design step so a rollback is needed in order to correct this inconsistency.
 
-As explained previously, designing ICs implies numerous choices. At the moment, with this growing complexity, the current design flows can already show their limits. For instance, most of the time, the designers will be likely to freeze a certain amount of choices on basis of their experience, and then begin the optimization process with the remaining parameters. This will therefore limit the exploration of the design space and other good solutions may be ignored. In addition, the fixed choices can be questionable since they are based on the designer's experience and it is difficult to master the whole complexity of the problem in terms of criteria and possibilities of design.
+As explained previously, designing ICs implies numerous choices. At the moment, with this growing complexity, the current design flows can already show their limits. Indeed, these tools are developed to only take into account particular specificities of a circuit (area, timing) whereas other characteristics also have to be optimized. Besides, most of the time, the designers will be likely to freeze a certain amount of choices on basis of their experience, and then begin the optimization process with the remaining parameters. This will therefore limit the exploration of the design space and other good solutions may be ignored. In addition, the fixed choices can be questionable since they are based on the designer's experience and it is difficult to master the whole complexity of the problem in terms of criteria and possibilities of design.
 
 The current design flows, which already showed their limits with conventional 2D-ICs, may thus need improvements to be able to deal with the increased complexity of emerging 3D-SICs \cite{vanderbiest06, PFF10}.
 
@@ -277,7 +278,7 @@ An automated design flow for 3D microarchitecture evaluation has been proposed b
 This work is worth mentioning as it proposes a quick way to evaluate temperature issues. However, it only deals with the thermal criterion.
 
 \paragraph{PathFinding flow}
-The PathFinding flow is a project led by IMEC and Milojevic \textit{et al.} in collaboration with Atrenta \cite{5335663,DBLP:conf/3dic/MilojevicCCRRSAPM09}. The aim of this work is to be able to produce a specification for the architecture and for the technology with assessment of performance, power and cost. The methodology is divided in 3 steps:
+The PathFinding flow is a project proposed by IMEC and Atrenta \cite{5335663,DBLP:conf/3dic/MilojevicCCRRSAPM09} to deal with design exploration of advanced packaging integration. The aim of this work is to be able to produce a specification for the architecture and for the technology with assessment of performance, power and cost. The methodology is divided in 3 steps:
 \begin{enumerate}
 \item 3D system level design exploration with a rough estimation of the performance, power and cost parameters. The designer will be able to focus on the 2D design issues while manually considering the 3D specificities.
 \item RTL (Register Transfer Level) elaboration, which links the system level to the physical design by producing RTL models.

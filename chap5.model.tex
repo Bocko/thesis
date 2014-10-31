@@ -694,9 +694,9 @@ $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{ultiplot.eps}
-\begin{footnotesize}
+\begin{small}
 $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ : 5 tiers
-\end{footnotesize}
+\end{small}
 \caption{3D view (interconnection length-volume-cost) of the Pareto frontier}
 \end{center}
 \label{fig:ds3dview}
@@ -713,9 +713,9 @@ As expected, the Pareto front given when considering varying aspect ratios is gl
 \vspace{-0.5cm}
 \caption{IL-cost projection view of the Pareto frontier (with and without aspect ratio)}
 \begin{center}
-\begin{scriptsize}
+\begin{small}
 $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\\
-\end{scriptsize}
+\end{small}
 \end{center}
 \label{fig:ilcview_ff}
 \end{figure}
@@ -795,7 +795,7 @@ After simulations, we obtain the following results for the mono-objective optimi
 \begin{center}
 \begin{small}
 \begin{tabular}{c|c|c}
-Alternative & Number of layers & Interconnection length score\\
+Alternative & Number of layers & Interconnection length\\
 \hline
 $A$ & 1 & 6.2737\\
 $B$ & 2 & 5.2357\\
@@ -803,10 +803,9 @@ $C$ & 3 & 4.0438\\
 \end{tabular}
 \end{small}
 \end{center}
-
 Without surprise, we observe that the 3D-SICs perform better on that criterion than a 2D-IC, which validates the consistency of the model compare to what is expected in reality.
 
-Now let us compare $A$, $B$ and $C$ to the 2- and 3-tiers circuits (respectively denoted $D$ and $E$) obtained with a multi-objective optimization. We will make the comparison with circuits that are the closest to $A$ with regards to the interconnection length criterion, in order to show the added value of working with a multi-criteria paradigm and simultaneously taking several criteria into account:
+Let us compare $A$, to the 2- and 3-tiers circuits (respectively denoted $D$ and $E$) obtained with a multi-objective optimization. We will make the comparison with circuits that are the closest to $A$ with regards to the interconnection length criterion, in order to show the added value of working with a multi-criteria paradigm and simultaneously taking several criteria into account:
 \begin{center}
 \begin{footnotesize}
 \begin{tabular}{c|c|ccccc}
@@ -814,19 +813,16 @@ Alt. & Number & Interconnection & Cost & Volume & Clock & Thermal\\
  & of layers & length & & & position & dissipation\\
 \hline
 $A$ & $1$ & $6.2737$ & $1.2178\cdot10^9$ & $2.4356\cdot 10^7$ & $3.3584\cdot 10^4$ & $81$ \\
-$B$ & $2$ & $5.2357$ & $1.2267\cdot10^9$ & $2.4914\cdot 10^7$ & $4.5687\cdot 10^4$ & $351$ \\
-$C$ & $3$ & $4.0438$ & $1.1495\cdot10^9$ & $2.3681\cdot 10^7$ & $6.7234\cdot 10^4$ & $593$ \\
 $D$ & $2$ & $6.2099$ & $1.2304\cdot10^9$ & $2.4877\cdot 10^7$ & $3.8250\cdot 10^4$ & $280$ \\
 $E$ & $3$ & $6.2205$ & $1.1495\cdot10^9$ & $2.3589\cdot 10^7$ & $3.1095\cdot 10^4$ & $459$ \\
 \end{tabular}
 \end{footnotesize}
 \end{center}
-
-As expected, except on the interconnection length criterion, the alternative $D$ is dominated by $A$ on all the criteria. Analysing the circuit $E$ is more interesting though as we can observe that $E$ dominates $A$ on all criteria except for the thermal dissipation. This may seem surprising, especially for the cost and the volume criteria, however it can be explained by looking at the circuits themselves. In Figure \ref{fig:valid1lmandist}, we can see the alternative $A$ with a surface of \texttildelow 35x35~mm$^2$ whereas for $E$, in Figure \ref{fig:valid3lmandist}, the surface is \texttildelow 20x20~mm$^2$ on 3 layers which is in total less than 35x35~mm$^2$. This is indeed not a big difference but it can show when it is interesting to design 3D circuits instead of 2D-ICs. The clock tree criterion is also better thanks to the smaller surface while the thermal dissipation is unsurprisingly worse due to the inherent greater power density of 3D-SICs. 
+As expected, except on the interconnection length criterion, the alternative $D$ is dominated by $A$ on all the criteria. Analysing the circuit $E$ is more interesting though as we can observe that $E$ dominates $A$ on all criteria except for the thermal dissipation. This may seem surprising, especially for the cost and the volume criteria, however it can be explained by looking at the circuits themselves. In Figure \ref{fig:valid1lmandist}, we can see the alternative $A$ with a surface of \texttildelow 35x35~mm$^2$ whereas for $E$, in Figure \ref{fig:valid3lmandist}, the surface is \texttildelow 20x20~mm$^2$ on 3 layers which is in total less than 35x35~mm$^2$. This is not a big difference but it can show when it is interesting to design 3D circuits instead of 2D-ICs since the cost and the volume depend on the surface of a circuit. So this explains why $E$ might perform better on these criteria. The clock tree criterion is also better thanks to the smaller surface while the thermal dissipation is unsurprisingly worse due to the inherent greater power density of 3D-SICs. 
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{valid1lmandist.eps}
+\includegraphics[width=\textwidth]{valid1lmandist.eps}
 \caption{Extended 3MF platform (1 layer)}
 \label{fig:valid1lmandist}
 \end{center}
@@ -834,13 +830,31 @@ As expected, except on the interconnection length criterion, the alternative $D$
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{valid3lmandist.eps}
+\includegraphics[width=\textwidth]{valid3lmandist.eps}
 \caption{Extended 3MF platform (3 layers)}
 \label{fig:valid3lmandist}
 \end{center}
 \end{figure}
 
-On the other hand, by following a mono-objective optimization, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. Of course, $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. In a multi-criteria point of view, none of these circuits dominate the others so making a choice is not trivial and we will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model as, even if the criteria evaluation is consistent in an ordinal point of view, it is not physically accurate.
+Now let us compare $B$ and $C$ to $D$ and $E$ with a multi-criteria point of view:
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{c|c|ccccc}
+Alt. & Number & Interconnection & Cost & Volume & Clock & Thermal\\
+ & of layers & length & & & position & dissipation\\
+\hline
+$B$ & $2$ & $5.2357$ & $1.2267\cdot10^9$ & $2.4914\cdot 10^7$ & $4.5687\cdot 10^4$ & $351$ \\
+$C$ & $3$ & $4.0438$ & $1.1495\cdot10^9$ & $2.3681\cdot 10^7$ & $6.7234\cdot 10^4$ & $593$ \\
+$D$ & $2$ & $6.2099$ & $1.2304\cdot10^9$ & $2.4877\cdot 10^7$ & $3.8250\cdot 10^4$ & $280$ \\
+$E$ & $3$ & $6.2205$ & $1.1495\cdot10^9$ & $2.3589\cdot 10^7$ & $3.1095\cdot 10^4$ & $459$ \\
+\end{tabular}
+\end{footnotesize}
+\end{center}
+$B$ and $C$ are the best uni-criterion 2- and 3-tiers circuits for the interconnection length while $D$ and $E$ are solutions close to $A$ for that criterion. We can see that none of these alternatives dominate any other. Let us analyse these alternatives criterion per criterion. $C$ is the best circuit for the interconnection length but if that criterion was not taken into consideration, $C$ would be dominated since it is the only criterion where it performs well compared to the others. For the cost and the volume, $C$ and $E$ are the better than $B$ and $D$ for the reasons explained previously (smaller surface). As for the thermal dissipation the 2-tiers circuits $B$ and $D$ unsurprisingly perform better than the 3-tiers circuits. 
+
+If a mono-objective optimization was used, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. If the thermal dissipation was the main criterion, the 2D circuit $A$ would be the best choice though it can have a higher cost
+
+In a multi-criteria point of view, none of these circuits dominate any others so making a choice is not trivial. It would depend on the importance of each criterion compared to the others. We will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model as, even if the criteria evaluation is consistent in an ordinal point of view, it is not physically accurate so quantitative comparisons would be imprecise compared to what would be expected in reality.
 
 \section{Conclusion}
 

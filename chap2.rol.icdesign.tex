@@ -40,15 +40,26 @@ In this chapter we will present a short overview of the 3D-stacked integrated ci
 
 \section{3D integration}
 
-Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since both device and interconnect are predominantly made in a planar way \cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. In face to back configuration, different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. These connections can be Through Silicon Vias (TSV) and if a face to face configuration is used micro bumps (µBump) or copper pads (CuPad) can also be used. They can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure~\ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected. An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2).
+Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since both device and interconnect are predominantly made in a planar way \cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. In face to back configuration, different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. In face to face configuration, the chip communicate with their respective front sides. These connections can be Through Silicon Vias (TSV) and if a face to face configuration is used micro bumps (µBump) or copper pads (CuPad) can also be used. These binding technologies can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure \ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected (Figure \ref{fig:backtoface}). An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2). The corresponding face to face configuration is shown in Figure \ref{fig:facetoface}.
 
 \begin{figure}[h!]
-\begin{center}
 %\includegraphics[width=1\linewidth]{3D_SIC_SOC2010.png}
-\includegraphics[width=0.5\linewidth]{3DSIC.pdf}
-\end{center}
-\vspace{-0.5cm}
-\caption{Illustration of the wiring properties of a 3D-SIC}
+%\includegraphics[width=0.5\linewidth]{3DSIC.pdf}
+\begin{subfigure}{0.5\textwidth}
+	\begin{center}
+	\includegraphics[width=0.95\textwidth]{backtoface}
+	\caption{Back to face configuration}
+	\label{fig:backtoface}
+	\end{center}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\begin{center}
+	\includegraphics[width=\textwidth]{facetoface}
+	\caption{Face to face configuration}
+	\label{fig:facetoface}
+	\end{center}
+\end{subfigure}
+\caption{Illustration of the wiring properties of a 3D-SIC \cite{noice2010}}
 \label{fig:3D_SIC_SOC2010}
 \end{figure}
 
@@ -289,10 +300,12 @@ The PathFinding flow is a project proposed by IMEC and Atrenta \cite{5335663,DBL
 This work is also among the most integrated study in the literature. However, the criteria optimization is done following a uni-criterion approach which does not allow to explore quickly several possibilities.
 
 \section{Conclusion}
-In this chapter, we have presented an overview of the evolution of IC design. Manufacturers have pushed back the limitations of the silicon for the past decades and are now facing new challenges due mainly to quantum effects. 3D-SICs have been proposed to face these problems and we have shown a quick review of this promising technology.
+In this chapter, we have presented a short overview of the evolution of IC design. Manufacturers have pushed back the limitations of the silicon for the past decades and are now facing new challenges due mainly to quantum effects. 3D-SICs have been proposed to face these problems and we have shown a quick review of this promising technology.
 
 With the 3D integration, design flows have evolved and integrate 3D partitioning and 3D place and route. However, these two steps are performed separately while they should be considered simultaneously as the circuits' performances will depend on the position of a component on a layer and the layer where it lies.
 
-We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses. The goal of this research is to show that a more multi-objective-oriented optimization could be more suitable to take into account the many aspects of a design and that a more globa multi-criteria analysis can provide more information.
+We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses. The goal of this research is to show that a more multi-objective-oriented optimization could be more suitable to take into account the many aspects of a design.
 
-In the next chapter, we will describe a short overview of the tools coming from the operations research that will allow to take into account multiple criteria simultaneously.
+To achieve this, we will present in the next chapter the tools related to the multi-criteria field. We will then detail how a 3D-SIC can be modelled to apply multi-objective optimization and show that a more multi-criteria is able to provide qualitative and quantitative information that would not be available with current tools.
+
+%In the next chapter, we will describe a short overview of the tools coming from the operations research that will allow to take into account multiple criteria simultaneously.

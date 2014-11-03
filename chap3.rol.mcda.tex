@@ -384,7 +384,7 @@ In order to evaluate the performance of a metaheuristic, several metrics have be
 
 \paragraph{Contribution indicator}
 %\label{app:cont}
-The contribution is a convergence-based binary indicator. The contribution of an approximation $PO_1$ relatively to another approximation $PO_2$ is the ratio of non-dominated solutions produced by $PO_1$ in $PO^*$, which is the set of Pareto solutions of $PO_1 \cup PO_2$:
+The contribution is a convergence-based binary indicator. The contribution of an approximation $PO_1$ relatively to another approximation $PO_2$ is the ratio of non-dominated solutions produced by $PO_1$ in $PO^*$, which is the set of Pareto solutions of $PO_1 \cup PO_2$ \cite{talbi09}:
 \begin{equation}
 Cont(PO_1/PO_2) = \frac{\frac{\|PO\|}{2}+\|W_1\|+\|N_1\|}{\|PO^*\|}
 \end{equation}
@@ -393,7 +393,7 @@ where $PO$ is the set of solutions in $PO_1 \cap PO_2$, $W_1$ the set of solutio
 \paragraph{Spread indicator}
 %\label{app:spread}
 
-The spread indicator $I_s$ combines the distribution and cardinality to measure the dispersion of the approximated Pareto set $A$:
+The spread indicator $I_s$ combines the distribution and cardinality to measure the dispersion of the approximated Pareto set $A$ \cite{talbi09}:
 \begin{equation}
 I_s = \frac{\sum_{u \in A}|\{u' \in A: \|F(u)-F(u')\|>\sigma\}|}{|A|-1}
 \end{equation}

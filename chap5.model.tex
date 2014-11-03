@@ -1,18 +1,19 @@
-\chapter{Problem definition and 3D-stacked integrated circuit model}
+\chapter{Problem definition, modelling and simulations}
 \label{cha:model}
 
 \begin{summary}
-In this chapter, we define the design problem we tackle: the 3D partitioning/floorplanning. We then present the criteria we consider and show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations are ran based on an existing platform and the obtained results can provide qualitative and quantitative information to a designer such as trade-off analysis or what would be the advantages of using 3D-SICs with respect to some criteria, and those analyses would not be available with current tools. Finally, since the first case study was limited, the methodology is tested with a more realistic case study that contains more functional components, to show that a multi-criteria paradigm does give added value compared to a uni-criterion approach, in terms of design space analysis.
+In this chapter, we define the design problem we tackle: the 3D partitioning with floorplanning estimation. We then present the criteria we consider and show how a 3D-SIC can be modelled in order to apply multi-objective optimization. Simulations are ran based on an existing platform and the obtained results can provide qualitative and quantitative information to a designer such as trade-off analysis or what would be the advantages of using 3D-SICs with respect to some criteria, and those analyses would not be available with current tools. Then, since the first case study was limited, the methodology is tested with a more realistic case study that contains more functional components, to show that a multi-criteria paradigm does give added value compared to a uni-criterion approach, in terms of design space analysis. Finally, the robustness of the algorithm is studied in order to show that it can have good convergence and diversity properties despite the complexity of the problem.
 \end{summary}
 
 Associated publications:
 \begin{itemize}
 \item N.A.V. Doan, F. Robert, Y. De Smet, D. Milojevic, "MCDA-based methodology for efficient 3D-design space exploration and decision", \textit{International Symposium on System-on-Chip Proceedings (SOC 2010)}, Tampere (Finland), pp. 76-83, September 2010
 \item N.A.V. Doan, Y. De Smet, F. Robert, D. Milojevic, "On the use of multi-criteria decision aid tools for the efficient design of 3D-stacked integrated circuits: a preliminary study", \textit{Proceedings of IEEE International Conference on Industrial Engineering and Engineering Management (IEEM 2010)}, Macau (China), December 2010
+\item N.A.V. Doan, D. Milojevic, F. Robert, Y. De Smet, "A MOO-based methodology for designing 3D-stacked integrated circuits", \textit{Journal of Multi-Criteria Decision Analysis}, vol.21, no. 1-2, pp. 43-63, January-April 2014
 \end{itemize}
 
 \section{Introduction}
-In Chapter \ref{cha:rol.icdesign}, we have presented a review of the literature about the field of microelectronics design. We have highlighted some limitations of the current tools that already occur for 2D-ICs. In this chapter, we will define the 3D floorplanning problem, which is the issue we tackle and show how we model it in order to propose improvements to design flows.
+In Chapter \ref{cha:rol.icdesign}, we have presented a review of the literature about the field of microelectronics design. We have highlighted some limitations of the current tools that already occur for 2D-ICs. In this chapter, we will define the 3D partitioning problem, which is the issue we tackle and show how we model it in order to propose improvements to design flows.
 
 \section{Problem definition}
 As stated in Chapter \ref{cha:rol.icdesign}, the limitations of the current design flows can be summarized in three points:
@@ -23,7 +24,7 @@ As stated in Chapter \ref{cha:rol.icdesign}, the limitations of the current desi
 \end{itemize}
 In order to address these limitations, we propose in this thesis a methodology based on multi-objective/criteria tools and taking into account 3D-SIC specificities to explore the design space.
 
-While this methodology could be applied at different levels in a design flow, we have focused our development in the logical design step and the virtual prototyping flow, more specifically the floorplanning with performance assessments.
+While this methodology could be applied at different levels in a design flow, we have focused our development in the logical design step and the virtual prototyping flow, more specifically the partitioning with floorplanning estimation and performance assessments.
 
 \subsection{Designing an IC}
 In order to meet the specifications, a design has first to make a choice at a physical level:
@@ -93,7 +94,7 @@ P_{diss} = P_{comp} \sum_{i=1}^{n} \frac{1}{R_{th, i} \cdot r}
 \label{eqn:pdiss}
 \end{equation}
 where $r$ the distance to the heat source and $R_{th, i}$ the thermal resistance depending on whether the dissipation is intra- or inter- tiers.
-This criterion is still on early development stage in our research and we can generate thermal maps of a floorplan as shown in Figure \ref{fig:thermalmap} but this is currently based on finite elements \cite{4263187} which require quite a long computational time even for a simplified thermal model.
+This criterion is still on early development stage in our research and we can generate thermal maps of a partition as shown in Figure \ref{fig:thermalmap} but this is currently based on finite elements \cite{4263187} which require quite a long computational time even for a simplified thermal model.
 This criterion in its current development stage is difficult to integrate to the exploration process, due to the computation time of finite elements methods. In the current work, we will simply compute the peak power of a circuit which can be done more quickly.
 
 \begin{figure}[h!]
@@ -101,7 +102,7 @@ This criterion in its current development stage is difficult to integrate to the
 \includegraphics[width=1\linewidth]{heatmapex_gray2.pdf}
 \end{center}
 \vspace{-0.5cm}
-\caption{Power grid and thermal map of a floorplan (3 tiers)}
+\caption{Power grid and thermal map of a partition (3 tiers)}
 \label{fig:thermalmap}
 \end{figure}
 
@@ -158,7 +159,7 @@ In order to enable a design space exploration, we propose a method in four steps
 \includegraphics[width=0.5\linewidth]{MCDA_Method.pdf}
 \end{center}
 \vspace{-0.5cm}
-\caption{MCDA-based design methodology for 3D DSE floorplanning}
+\caption{MCDA-based design methodology for 3D DSE partitioning}
 \label{fig:mcdaflow}
 \end{figure}
 
@@ -180,7 +181,7 @@ In addition, the bandwidth requirements are needed as they will indicate which a
 \label{fig:ff_ex}
 \end{figure}
 
-The combination of all the parameters described in the model are the possible alternatives for a 3D-SIC design and will provide output data after design space exploration. For a floorplanning problem the required output data are generally the geometrical layout of the circuit~\cite{DBLP:conf/3dic/MilojevicCCRRSAPM09}:
+The combination of all the parameters described in the model are the possible alternatives for a 3D-SIC design and will provide output data after design space exploration. For a partition problem the required output data are generally the geometrical layout of the circuit~\cite{DBLP:conf/3dic/MilojevicCCRRSAPM09}:
 \begin{itemize}
 \item The geometrical coordinates for each block and the assigned layer.
 \item The size of each block (if it can vary from the specified size).
@@ -516,6 +517,7 @@ Of course, infeasible solutions (overlapping blocks or blocks outside of the tie
 % TODO: quantifier le nombre de solutions perdues
 
 \subsubsection{Termination}
+\label{sec:termination}
 Three stop conditions have been implemented and are based on what is commonly used:
 \begin{itemize}
 \item Maximum number of iterations, set to 100.
@@ -636,7 +638,7 @@ S: source block ID\\
 \label{tab:tech}
 \end{table}
 
-In summary, the problem we consider is to place 12 blocks while taking into account several (5) criteria. We will also consider a scenario where the blocks can be placed on 1 up to 5 tiers. The input data will be processed to generate floorplans. Those output data will be encoded using the matrix model following the example shown in Table \ref{tab:outputmat}. They will be generated through a multi-objective optimization.
+In summary, the problem we consider is to place 12 blocks while taking into account several (5) criteria. We will also consider a scenario where the blocks can be placed on 1 up to 5 tiers. The input data will be processed to generate partitions. Those output data will be encoded using the matrix model following the example shown in Table \ref{tab:outputmat}. They will be generated through a multi-objective optimization.
 
 %\begin{table}[p]
 %\caption{Output matrix template}
@@ -681,7 +683,7 @@ In the following section, we will present some details about the implementation 
 \subsubsection{Results and their use for a designer}
 \label{sec:results}
 The simulations have been carried out on an Intel Core i5 2.30 GHz, 4 GB
-DDR3 SDRAM and the presented results are the synthesis of 5 independent experiments. The optimization was done for three objectives (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
+DDR3 SDRAM (runtime of 60 minutes, as explained in Section \ref{sec:termination}) and the presented results are the synthesis of 5 independent experiments. The optimization was done for three objectives (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
 \begin{itemize}
 \item The [10; 20] range values for the IL criteria: a small enhancement of the IL value leads to a large increase of the cost so the interest for a design with more than 4 tiers seems low.
 \item The [260; 280] range values for the cost criteria: a small increase of the price can give a large enhancement of the performance. A designer might consider accepting a slightly higher price for a sensitively better performance, knowing that this information can be quantified with an accurate model. Indeed, with the estimate model that we propose, a small 10\% increase of the cost can decrease the IL by 60\%.
@@ -728,6 +730,7 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 \end{figure}
 
 \subsection{Case study 2: scalability}
+\label{sec:casestudyscale}
 In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and run simulations based on the 3MF platform. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
 
 We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput}.
@@ -794,7 +797,7 @@ L1Is22\texttildelow 24 & L2Is8 & 300\\
 \end{table}
 
 \subsubsection{Simulation and validation procedure}
-In order to validate the methodology, we will run the simulations of this case study to produce floorplans with 1 to 3 layers. These have been carried out on an Intel Core i5 2.30 GHz, 4 GB DDR3 SDRAM and the presented results are the synthesis of 5 independent experiments.
+In order to validate the methodology, we will run the simulations of this case study to produce partitions with 1 to 3 layers. These have been carried out on an Intel Core i5 2.30 GHz, 4 GB DDR3 SDRAM (runtime of 60 minutes) and the presented results are the synthesis of 5 independent experiments.
 
 First, we will mimic the current design flow by performing a mono-objective optimization (minimizing the interconnection length). Then we will compare the obtained solution to other 2- and 3-tiers 3D-SIC that have been produced with a multi-objective approach.
 
@@ -863,8 +866,8 @@ If a mono-objective optimization was used, only the interconnection length would
 
 In a multi-criteria point of view, none of these circuits dominate any others so making a choice is not trivial. It would depend on the importance of each criterion compared to the others. We will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model as, even if the criteria evaluation is consistent in an ordinal point of view, it is not physically accurate so quantitative comparisons would be imprecise compared to what would be expected in reality.
 
-\section{Conclusion}
+%\section{Conclusion}
 
-The results have thus shown interesting analyses that can be relevant for a designer. First, using a multi-objective optimization methodology does not only consider all the criteria at the same time but also proceed to an extensive design space exploration which is rarely done with current tools. Second, the qualitative results shown here can give relevant information to the designer and they can be quantified with a more accurate model. Third, the flexibility of MOO allows to easily consider new degrees of freedom without having to change the paradigm. Finally, we have validated the methodology with a more realistic case study and shown that a multi-objective optimization gives added values compared to a mono-objective paradigm.
+%The results have thus shown interesting analyses that can be relevant for a designer. First, using a multi-objective optimization methodology does not only consider all the criteria at the same time but also proceed to an extensive design space exploration which is rarely done with current tools. Second, the qualitative results shown here can give relevant information to the designer and they can be quantified with a more accurate model. Third, the flexibility of MOO allows to easily consider new degrees of freedom without having to change the paradigm. Finally, we have validated the methodology with a more realistic case study and shown that a multi-objective optimization gives added values compared to a mono-objective paradigm.
 
-In the next chapter, we will show that this methodology and the associated algorithms are robust as they show good indicators of convergence and diversity.
+%In the next chapter, we will show that this methodology and the associated algorithms are robust as they show good indicators of convergence and diversity.

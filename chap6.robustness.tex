@@ -1,27 +1,27 @@
-\chapter{Robustness of the methodology}
-\label{cha:robustness}
+\section{Robustness of the methodology}
+\label{sec:robustness}
 
-\begin{summary}
-In this chapter, we will show that the proposed methodology with the associated algorithms are robust. We will use classical indicator of the field to show that convergence and diversity properties are respected despite the complexity of designing 3D-SIC and the heterogeneous nature of the criteria.
-\end{summary}
+%\begin{summary}
+%In this chapter, we will show that the proposed methodology with the associated algorithms are robust. We will use classical indicator of the field to show that convergence and diversity properties are respected despite the complexity of designing 3D-SIC and the heterogeneous nature of the criteria.
+%\end{summary}
 
-Associated publications:
-\begin{itemize}
-\item N.A.V. Doan, D. Milojevic, F. Robert, Y. De Smet, "A MOO-based methodology for designing 3D-stacked integrated circuits", \textit{Journal of Multi-Criteria Decision Analysis}, vol.21, no. 1-2, pp. 43-63, January-April 2014
-\end{itemize}
+%Associated publications:
+%\begin{itemize}
+%\item N.A.V. Doan, D. Milojevic, F. Robert, Y. De Smet, "A MOO-based methodology for designing 3D-stacked integrated circuits", \textit{Journal of Multi-Criteria Decision Analysis}, vol.21, no. 1-2, pp. 43-63, January-April 2014
+%\end{itemize}
 
-\section{Introduction}
-In Chapter \ref{cha:model}, we have shown how a 3D-SIC can be modelled as an optimization problem and we have applied a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
+%\section{Introduction}
+In the previous section, we have shown how a 3D-SIC can be modelled as an optimization problem and we have applied a NSGA-II metaheuristic. The obtained results indicate that multi-objective optimization can give qualitative and quantitative information to a designer that would not be available with current design tools.
 
-In this chapter we will take a deeper look at the results of the multi-objective optimization steps. We will analyse the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use the classical performance indicators defined in Chapter \ref{cha:rol.mcda}.
+In this section we will take a deeper look at the results of the multi-objective optimization steps. We will analyse the properties of the design space in order to have the view over the convergence and the robustness of our methodology. We will use the classical performance indicators defined in Chapter \ref{cha:rol.mcda}.
 
-The following results have been obtained with an Intel Core i5 2.30 GHz, 4 GB DDR3 SDRAM for 5 independent experiments. The set of non-dominated solutions over all the runs will constitute the reference set $R$ for the \textit{epsilon} and the hypervolume indicators. Also, these results have been simulated with all the five criteria presented in Section \ref{sec:crit} instead of only the three first in the case study of Section \ref{sec:casestudy}.
+The following results have been obtained with 5 independent runs. The set of non-dominated solutions over all the simulations will constitute the reference set $R$ for the \textit{epsilon} and the hypervolume indicators. Also, these results have been simulated with all the five criteria presented in Section \ref{sec:crit} instead of only the three first for the case study of Section \ref{sec:casestudy}.
 
 % Other convergence-based indicators such as the generational distance, the $\epsilon$-indicator, a cardinality measure and a distance measure cannot currently be applied for our problem since we do not have a reference set to compare to.
 
-\section{Contribution indicator}
+\subsection{Contribution indicator}
 
-The Table \ref{tab:contrib} and the Figure \ref{fig:contrib} show the evolution of the averaged contribution indicator over the iterations for the 5 experiments. We see that for the first iterations, $Cont(PO_i/PO_{i-1})$ is greater than 0.5, which means that the algorithm does indeed improve the solutions, then for the last iterations, the indicators are lower than 0.5 which means that there is a convergence.
+The Table \ref{tab:contrib} and the Figure \ref{fig:contrib} show the evolution of the averaged contribution indicator over the iterations for the 5 runs. We see that for the first iterations, $Cont(PO_i/PO_{i-1})$ is greater than 0.5, which means that the algorithm does indeed improve the solutions, then for the last iterations, the indicators are lower than 0.5 which means that there is a convergence.
 
 \begin{table}[h!]
 \begin{center}
@@ -61,10 +61,10 @@ The Table \ref{tab:contrib} and the Figure \ref{fig:contrib} show the evolution 
 \label{fig:contrib}
 \end{figure}
 
-\section{Spread indicator}
+\subsection{Spread indicator}
 \label{app:spread}
 
-The Figure \ref{fig:spread_indicator} shows the results of the spread indicator $I_s$ function of the neighbourhood indicator $\sigma$ (all the 5 experiments share the same graph shape). We see that the Pareto front is well spread: if  we consider $I_s \geq 0.9$ we have $\sigma < 0.35$ in average for the 5 runs (normalized values), so we can consider that the algorithm produces a well-spread approximation of the Pareto front.
+The Figure \ref{fig:spread_indicator} shows the results of the spread indicator $I_s$ function of the neighbourhood indicator $\sigma$ (all the 5 runs share the same graph shape). We see that the Pareto front is well spread: if  we consider $I_s \geq 0.9$ we have $\sigma < 0.35$ in average for the 5 runs (normalized values), so we can consider that the algorithm produces a well-spread approximation of the Pareto front.
 %Knowing that the extreme (Euclidean) distance between two solutions is equal to 332 (for normalized values), we can consider that the algorithm produces a well-spread approximation of the Pareto front.
 
 \begin{figure}[h!]
@@ -76,8 +76,8 @@ The Figure \ref{fig:spread_indicator} shows the results of the spread indicator 
 \label{fig:spread_indicator}
 \end{figure}
 
-\section{Binary $\epsilon$-indicator}
-The non-dominated set computed from all the experiments will constitute the reference set $R$ that will serve to show the evolution of the $\epsilon$-indicator over time. This evolution is shown in Table \ref{tab:biepsref} (for averaged values after each 10 iterations). We can see that in the first iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) \approx 1$ which means that the front is improved while in the last iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) > 1$ which shows convergence.
+\subsection{Binary $\epsilon$-indicator}
+The non-dominated set computed from all the runs will constitute the reference set $R$ that will serve to show the evolution of the $\epsilon$-indicator over time. This evolution is shown in Table \ref{tab:biepsref} (for averaged values after each 10 iterations). We can see that in the first iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) \approx 1$ which means that the front is improved while in the last iterations, $I_\epsilon(A,R) > 1$ and $I_\epsilon(R,A) > 1$ which shows convergence.
 
 A comparison of the binary $\epsilon$-indicators between each experiment (after convergence) is also given, in Table \ref{tab:biepsxp}. We can see that $I_\epsilon(A,B) > 1$ and $I_\epsilon(B,A) > 1$ which indicates that neither $A$ weakly dominates $B$ nor $B$ weakly dominates $S$. This means that the generated front is consistent from one experiment to another.
 
@@ -144,7 +144,7 @@ Also, in Table \ref{tab:biepsiter} are given the $\epsilon$-indicator between it
 \label{tab:biepsiter}
 \end{table}
 
-\section{Unary hypervolume indicator}
+\subsection{Unary hypervolume indicator}
 The evolution of the hypervolume (averaged values) is given in Table \ref{tab:hypervolref} and in Figure \ref{fig:hypervolref}. We can see that the value is (linearly) increasing over time, reaching convergence in the last iterations where the value stabilizes.
 
 The result for each experiment is also given, in Table \ref{tab:hypervol} and the used reference point is the worst point computed from all the sets for normalized data. As we can see, the values are rather consistent from one run to another.
@@ -195,7 +195,7 @@ The result for each experiment is also given, in Table \ref{tab:hypervol} and th
 \label{tab:hypervol}
 \end{table}
 
-\section{Density of the Pareto front - gaps in the frontier}
+\subsection{Density of the Pareto front - gaps in the frontier}
 Another indicator of the Pareto front structure is its density. Here we will measure the density by finding gaps in the frontier. This will be done by counting the number of solutions in the neighbourhood of another solution. Since the extreme distance between two solutions is 450.364 in average for the 5 runs (non-normalized), we consider that an acceptable neighbourhood is twice the distance between two solutions if all the solutions were equidistant. We have thus a neighbourhood of about 2. This test has shown that there was always at least one solution near another one, even for a neighbourhood of 1, meaning that the algorithm can produce a sufficiently dense frontier.
 
 %\subsubsection*{Binary hypervolume indicator}
@@ -205,11 +205,18 @@ Another indicator of the Pareto front structure is its density. Here we will mea
 %The convexity is also an indicator of the structure. Globally, the Pareto front is not convex, as one may expect since the heterogeneous nature of the criteria. However, the frontier appear to be partially convex and this convexity also depends on the set of criteria that are considered. This is probably due to some correlation between the criteria but this is still to be investigated more deeply since the convexity properties can have an impact on the choice of the multicriteria method to use.
 
 %\section{General properties of the algorithm}
+
+\subsection{A word on the scalability of the method}
+The previous results have been obtained with the case study shown in Section \ref{sec:casestudy}. Similar results can be obtained for the scaled case study of Section \ref{sec:casestudyscale} which contains about a hundred blocks. Above a few hundreds of blocks, the algorithm starts to take tens of minutes per iteration which shows its limits in terms of scalability even though convergence can still be shown.
+
 \section{Conclusion}
-In this chapter, we have shown that the proposed methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With the several indicators that we have analysed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
+
+In this chapter, we have shown interesting analyses that can be relevant for a designer. First, using a multi-objective optimization methodology does not only consider all the criteria at the same time but also proceed to an extensive design space exploration which is rarely done with current tools. Second, the qualitative results shown here can give relevant information to the designer and they can be quantified with a more accurate model. Third, the flexibility of MOO allows to easily consider new degrees of freedom without having to change the paradigm. Finally, we have validated the methodology with a more realistic case study and shown that a multi-objective optimization gives added values compared to a mono-objective paradigm.
+
+We have then shown that the proposed methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With the several indicators that we have analysed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
 %For information purposes, we have also computed less state-of-the-art indicators: the contribution indicator and the spread indicator, as defined in \cite{talbi09}. These results are presented in Appendices \ref{app:cont} and \ref{app:spread} and we can see that they also reflects the good convergence and diversity of the algorithm.
 
-Also, analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect given the heterogeneous nature of the criteria and correlation between them. Also, since this is an approximate algorithm, small gaps between solutions may exist that will not give a convex shape to the frontier.
+Also, analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect given the heterogeneous nature of the criteria and correlation between them. Since this is an approximate algorithm, small gaps between solutions may exist that will not give a convex shape to the frontier.
 
 In the next chapter, we will show how these results can be exploited, with a multi-criteria point of view, to help a designer.
 

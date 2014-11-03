@@ -201,8 +201,9 @@ Another indicator of the Pareto front structure is its density. Here we will mea
 %\subsubsection*{Binary hypervolume indicator}
 %The binary hypervolume indicator $I_{H2}(A,B)$ is defined as the hypervolume of the subspace that is weakly dominated by $A$ but not by $B$. A value closer to 0 means that $B$ is a better approximation \cite{1197687}.
 
-%\subsection{Convexity indicator}
+\subsection{Convexity indicator}
 %The convexity is also an indicator of the structure. Globally, the Pareto front is not convex, as one may expect since the heterogeneous nature of the criteria. However, the frontier appear to be partially convex and this convexity also depends on the set of criteria that are considered. This is probably due to some correlation between the criteria but this is still to be investigated more deeply since the convexity properties can have an impact on the choice of the multicriteria method to use.
+The convexity is also an indicator of the structure, so analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect given the heterogeneous nature of the criteria and correlation between them. Also, since an approximate algorithm has been used, small gaps between solutions may exist that will not give a convex shape to the frontier.
 
 %\section{General properties of the algorithm}
 
@@ -216,9 +217,7 @@ In this chapter, we have shown interesting analyses that can be relevant for a d
 We have then shown that the proposed methodology has proved to be robust even if the problem contains criteria of heterogeneous nature. With the several indicators that we have analysed, we can conclude that the algorithm we used can show good properties of convergence, spread and density.
 %For information purposes, we have also computed less state-of-the-art indicators: the contribution indicator and the spread indicator, as defined in \cite{talbi09}. These results are presented in Appendices \ref{app:cont} and \ref{app:spread} and we can see that they also reflects the good convergence and diversity of the algorithm.
 
-Also, analyses have been performed to determine the shape of the Pareto front. Globally, the Pareto front is not convex, as one may expect given the heterogeneous nature of the criteria and correlation between them. Since this is an approximate algorithm, small gaps between solutions may exist that will not give a convex shape to the frontier.
-
-In the next chapter, we will show how these results can be exploited, with a multi-criteria point of view, to help a designer.
+In the next chapter, we will show how these results can be exploited, with a multi-criteria point of view, to help a designer make a choice among a set of efficient solutions.
 
 %\section{Conclusion}
 %

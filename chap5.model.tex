@@ -139,7 +139,6 @@ Thermal dissipation & W & Continuous\\
 \label{tab:critrecap}
 \end{table}
 
-
 We will first focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. These analyses will be done with a first limited case study to show the applicability of the multi-criteria paradigm
 
 Then will analyse our methodology with the five criteria that have been presented with a second case study which is more realistic in term of functional components and show the added value of a multi-criteria analysis.
@@ -152,7 +151,7 @@ In summary, the problem we are facing is to place several blocks that have to be
 
 As explained in Chapter \ref{cha:rol.icdesign}, designing ICs implies numerous choices and designers are likely to freeze a certain amount of choices on basis of their experience. This will therefore limit the exploration of the design space and good solutions may be ignored.
 
-In order to enable a design space exploration, we propose a method in four steps based on MCDA which is illustrated in Figure~\ref{fig:mcdaflow}. The implementation will be briefly presented in the next section.
+In order to enable a design space exploration, we propose a method in four steps based on MCDA which is illustrated in Figure \ref{fig:mcdaflow}. The implementation will be briefly presented in the next section.
 
 \begin{figure}[h!]
 \begin{center}
@@ -673,12 +672,12 @@ In summary, the problem we consider is to place 12 blocks while taking into acco
 %\end{table}
 
 %As explained earlier, the exploration process implies the issue of establishing the Pareto frontier. For that purpose, we choose to use NSGA-II~\cite{Deb00afast}. This algorithm allows the design space exploration as well as the establishment of the Pareto frontier at the same time. 
-As explained earlier, we will use a metaheuristic to approximate the Pareto optimal frontier. For that purpose, we choose to use NSGA-II \cite{Deb00afast} as a proof of concept. The algorithm was run from a sample of 10~000 generated solutions from 1 up to 5 tiers. This size of random solutions is chosen arbitrarily since it is actually quite difficult to estimate the size of solution space, due to the heterogeneous nature of the criteria. Also, taking too few solutions (e.g. 100) is not interesting since we have empirically observed that our algorithm will take a longer time to begin to converge. 10~000 randomly-generated solutions seems to us a good compromise of time and workable solutions.
+As explained earlier, we will use a metaheuristic to approximate the Pareto optimal frontier. For that purpose, we choose to use NSGA-II \cite{Deb00afast} as a proof of concept. The algorithm was run from a sample of 10~000 generated solutions from 1 up to 5 tiers. This size of random solutions is chosen arbitrarily since it is actually quite difficult to estimate the size of solution space, due to the number of degrees of freedom and the heterogeneous nature of the criteria. Also, taking too few solutions (e.g. 100) is not interesting since we have empirically observed that our algorithm will take a longer time to begin to converge. 10~000 randomly-generated solutions seems to us a good compromise of time and workable solutions.
 %As stated in Section 2, even for a really simplified problem, the solution space is huge (more than 10$^{18}$) so, taking 10~000, 100~000 or 1~000~000 randomly-generated solutions does not really imply any difference. 
 
 %which makes us choose arbitrarily the number of random solutions for the first population of our algorithm.
 
-In the following section, we will present some details about the implementation of the NSGA-II algorithm.
+%In the following section, we will present some details about the implementation of the NSGA-II algorithm.
 
 \subsubsection{Results and their use for a designer}
 \label{sec:results}
@@ -865,6 +864,10 @@ $B$ and $C$ are the best uni-criterion 2- and 3-tiers circuits for the interconn
 If a mono-objective optimization was used, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. If the thermal dissipation was the main criterion, the 2D circuit $A$ would be the best choice though it can have a higher cost
 
 In a multi-criteria point of view, none of these circuits dominate any others so making a choice is not trivial. It would depend on the importance of each criterion compared to the others. We will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model as, even if the criteria evaluation is consistent in an ordinal point of view, it is not physically accurate so quantitative comparisons would be imprecise compared to what would be expected in reality.
+
+With these two case studies, we have shown that the proposed methodology can provide qualitative and quantitative information that would not be available with classical tools and that it can be applied for scaled problems that include degrees of freedom that are usually not considered, such as the form factor of the blocks and the heterogeneity. We have then analysed the solutions with a more global multi-criteria point of view and have shown that additional information is available to compare the solutions and making a choice among this small set of 5 alternatives is not a trivial task as it would seem to be when applying a uni-criterion paradigm.
+
+In the next section we will analyse how robust the proposed methodology is by computing its performance with the indicators presented in Chapter \ref{cha:rol.mcda} and in the next chapter, we will show how the obtained results can be exploited by using multi-criteria decision aid that would ease the choice of a designer.
 
 %\section{Conclusion}
 

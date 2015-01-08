@@ -202,7 +202,7 @@ The combination of all the parameters described in the model are the possible al
 %\label{sec:casestudy}
 In this section, we will briefly explain the implementation of our design method and show some experimental results based on this first approach. Due to the huge size of the design space, an explicit enumeration of the possible solutions will take considerable time. For instance, for a simplified problem of 3 tiers of 10x10 mm and 5 blocks of 2x2 mm to place, there are 75 possible positions for each block. The number of combinations is given by $\frac{n!}{k!(n-k)!}$, where $n$ is the number of possible positions and $k$ the number of blocks. For this simplified problem, there are therefore 17~259~390 combinations. For 10 blocks to place, the number of possibilities increases to more than 8.10$^{11}$. Besides, this small calculation does not take into account the numerous other possible choices.
 
-We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We chose to use NSGA-II as it is quick to implement which is convenient as proof of concept for our research purposes (show the applicability of MOO/MCDA for 3D-SIC design). In addition, this algorithm is flexible and is known for handling mixed variables since they are only involved for evaluations of the alternatives in the selection step. For the first case study we consider a circuit based on the 3MF MPSoC platform developed at IMEC \cite{dmilojev08b}. This case study has been implemented using Matlab and all data were coded using matrices.
+We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We chose to use NSGA-II as it is quick to implement which is convenient as proof of concept for our research purposes (show the applicability of MOO/MCDA for 3D-SIC design). In addition, this algorithm is flexible and is known for handling mixed variables since they are only involved for evaluations of the alternatives in the selection step. For the first case study we consider a circuit based on a MPSoC platform developed at IMEC \cite{dmilojev08b}. This case study has been implemented using Matlab and all data were coded using matrices.
 
 %\subsection{Implementation of the exploration algorithm: NSGA-II}
 %\label{sec:nsgaii-implement}
@@ -528,14 +528,14 @@ The maximum elapsed time has been chosen arbitrarily for quick testing purposes.
 \section{Experimental set-up and results}
 \subsection{Case study 1: basic MPSoc analysis}
 \label{sec:casestudy}
-The 3MF MPSoC is made of 13 blocks as shown on Figure \ref{fig:imec3mf}:
+The considered MPSoC is made of 13 blocks as shown on Figure \ref{fig:imec3mf}:
 \begin{itemize}
-\item 6 ADRES processors (\cite{conf/fpl/VeredasSMM05})
+\item 6 processors (CPU, based on \cite{conf/fpl/VeredasSMM05})
 \item 2 data memories (L2D\#)
 \item 2 instruction memories (L2Is\#)
 \item 1 external memory interface (EMIF)
-\item 1 input/output processor (FIFO)
-\item 1 ARM processor (ARM)
+\item 1 input/output control processor (FIFO)
+%\item 1 ARM processor (ARM)
 \end{itemize}
 Details about the area required for each component is given in Table \ref{tab:scenarmat} for a 90 nm technology. This table is also the input matrix required to specify the scenario.
 
@@ -544,7 +544,7 @@ Details about the area required for each component is given in Table \ref{tab:sc
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline Component & ID & Size (90 nm) & Min aspect ratio & Size variability\\
-\hline ADRES 1\texttildelow 6 & 1\texttildelow 6 & 18.6 mm$^2$ & 0.5 & $\pm20\%$\\
+\hline CPU 1\texttildelow 6 & 1\texttildelow 6 & 18.6 mm$^2$ & 0.5 & $\pm20\%$\\
 FIFO & 7 & 0.54 mm$^2$ & 0.5 & 0\\
 L2D1-2 & 8-9 & 6.74 mm$^2$ & 0.5 & $+30\%$\\
 L2Is1-2 & 10-11 & 6.62 mm$^2$ & 0.5 & $+30\%$\\
@@ -562,14 +562,15 @@ ARM & 13 & 0.89 mm$^2$ & 0.5 & 0\\
 \begin{figure}[h!]
 \begin{center}
 %\includegraphics[width=7cm]{imec3mf.png}
-\includegraphics[width=0.7\textwidth]{3MFMPSoC.pdf}
+%\includegraphics[width=0.7\textwidth]{3MFMPSoC.pdf}
+\includegraphics[width=0.7\textwidth]{mpsoc.eps}
 \end{center}
 \vspace{-0.3cm}
-\caption{Architecture of the 3MF MPSoC platform~\cite{dmilojev08b}}
+\caption{Architecture of the MPSoC platform~\cite{dmilojev08b}}
 \label{fig:imec3mf}
 \end{figure}
 
-The 3MF MPSoC can be configured for three use cases which have specific bandwidth requirements. For the following results, we will base our simulation on the "data split scenario" configuration which possesses the communication specifications shown in Table \ref{tab:3mfbw}. This information is implemented, as shown in Table \ref{tab:bwmatrix}, in an input matrix which is built by specifying the communication structure: the first column will contain the ID of the source block and each next pairs of columns will contain the ID of the target blocks and the bandwidth required.
+The MPSoC can be configured for three use cases which have specific bandwidth requirements. For the following results, we will base our simulation on the "data split scenario" configuration which possesses the communication specifications shown in Table \ref{tab:3mfbw}. This information is implemented, as shown in Table \ref{tab:bwmatrix}, in an input matrix which is built by specifying the communication structure: the first column will contain the ID of the source block and each next pairs of columns will contain the ID of the target blocks and the bandwidth required.
 
 \begin{table}[h!]
 \caption{"Data split scenario" bandwidth requirements}
@@ -578,13 +579,13 @@ The 3MF MPSoC can be configured for three use cases which have specific bandwidt
 \begin{tabular}{|c|c|c|}
 \hline Source & Target & Bandwidth (MB/s)\\
 \hline FIFO & EMIF & 39.6\\
-EMIF & ADRES$i$ & 6.6\\
-L2D1 & ADRES$i$ & 26.4\\
+EMIF & CPU$i$ & 6.6\\
+L2D1 & CPU$i$ & 26.4\\
 L2D2 & L2D1 & 52.7\\
-ADRES$i$ & FIFO & 1.2\\
-ADRES$i$ & L2D2 & 6.6\\
-ADRES$j$ & L2Is1 & 300\\
-ADRES$k$ & L2Is2 & 300\\
+CPU$i$ & FIFO & 1.2\\
+CPU$i$ & L2D2 & 6.6\\
+CPU$j$ & L2Is1 & 300\\
+CPU$k$ & L2Is2 & 300\\
 \hline
 \end{tabular}
 \end{scriptsize}
@@ -730,9 +731,9 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 
 \subsection{Case study 2: scalability}
 \label{sec:casestudyscale}
-In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and run simulations based on the 3MF platform. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the 3MF platform where we will apply a scalability effect.
+In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and run simulations based on a MPSoC platform developed by IMEC. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the previous MPSoC platform where we will apply a scalability effect.
 
-We will consider 24 ADRES processors instead of 6 and also separate the L1 cache memory from each ADRES core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the ADRES cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput}.
+We will consider 24 processors instead of 6 and also separate the L1 cache memory from each CPU core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the CPU cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput}.
 
 \begin{table}[h!]
 \caption{Scalability case input matrix}
@@ -740,7 +741,7 @@ We will consider 24 ADRES processors instead of 6 and also separate the L1 cache
 \begin{small}
 \begin{tabular}{|c|c|c|c|c|}
 \hline Component & ID & Size (90 nm) & Min aspect ratio & Size variability\\
-\hline ADRES core 1\texttildelow 24 & 1\texttildelow 24 & 17.27 mm$^2$ & 0.5 & $\pm30\%$\\
+\hline CPU core 1\texttildelow 24 & 1\texttildelow 24 & 17.27 mm$^2$ & 0.5 & $\pm30\%$\\
 L1D & 25\texttildelow 48 & 0.67 mm$^2$ & 0.5 & $+100\%$\\
 L1Is & 49\texttildelow 72 & 0.66 mm$^2$ & 0.5 & $+100\%$\\
 L2D1\#1\texttildelow 4 & 73\texttildelow 76 & 6.74 mm$^2$ & 0.5 & $+100\%$\\
@@ -758,7 +759,7 @@ ID: Component identification number
 \label{tab:validinput}
 \end{table}
 
-For the communication requirements, the only change compared to the original case is that the exchanges between the ADRES processors and the L2 cache memories will now transit through the L1 cache memories. In order to simplify the necessary bandwidth between the ADRES cores and the L1 memories, we will assume a bandwidth 64 times bigger than for the L2. These data are summarized in Table \ref{tab:validbw} (the full matrix model can be found in Appendix \ref{apdx:validbw}).
+For the communication requirements, the only change compared to the original case is that the exchanges between the CPU processors and the L2 cache memories will now transit through the L1 cache memories. In order to simplify the necessary bandwidth between the CPU cores and the L1 memories, we will assume a bandwidth 64 times bigger than for the L2. These data are summarized in Table \ref{tab:validbw} (the full matrix model can be found in Appendix \ref{apdx:validbw}).
 
 \begin{table}[h!]
 \caption{Scalability case bandwidth requirements}
@@ -767,15 +768,15 @@ For the communication requirements, the only change compared to the original cas
 \begin{tabular}{|c|c|c|}
 \hline Source & Target & Bandwidth (MB/s)\\
 \hline FIFO & EMIF & 39.6\\
-EMIF & ADRES core 1\texttildelow 24 & 6.6\\
-ADRES core 1\texttildelow 24 & L1D1\texttildelow 24 & 1690\\
-ADRES core 1\texttildelow 24 & L1Is1\texttildelow 24 & 19200\\
+EMIF & CPU core 1\texttildelow 24 & 6.6\\
+CPU core 1\texttildelow 24 & L1D1\texttildelow 24 & 1690\\
+CPU core 1\texttildelow 24 & L1Is1\texttildelow 24 & 19200\\
 L2D1\#1 & L1D1\texttildelow 6 & 26.4\\
 L2D1\#2 & L1D7\texttildelow 12 & 26.4\\
 L2D1\#3 & L1D13\texttildelow 18 & 26.4\\
 L2D1\#4 & L1D19\texttildelow 24 & 26.4\\
 L2D2\#1\texttildelow 4 & L2D1\#1\texttildelow 4 & 52.7\\
-ADRES core 1\texttildelow 24 & FIFO & 1.2\\
+CPU core 1\texttildelow 24 & FIFO & 1.2\\
 L1D1\texttildelow 6 & L2D2\#1 & 6.6\\
 L1D7\texttildelow 12 & L2D2\#2 & 6.6\\
 L1D13\texttildelow 18 & L2D2\#3 & 6.6\\
@@ -832,7 +833,7 @@ As expected, except on the interconnection length criterion, the alternative $D$
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{valid1lmandist.eps}
-\caption{Extended 3MF platform (1 layer)}
+\caption{Scaled-up MPSoC platform (1 layer)}
 \label{fig:valid1lmandist}
 \end{center}
 \end{figure}
@@ -840,7 +841,7 @@ As expected, except on the interconnection length criterion, the alternative $D$
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{valid3lmandist.eps}
-\caption{Extended 3MF platform (3 layers)}
+\caption{Scaled-up MPSoC platform (3 layers)}
 \label{fig:valid3lmandist}
 \end{center}
 \end{figure}

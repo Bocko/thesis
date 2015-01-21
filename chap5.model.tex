@@ -84,18 +84,18 @@ Let us note that this criterion includes both discrete and continuous variables.
 volume=largest~layer~size~*~stack~thickness~*~number~of~tiers
 \label{eqn:volume}
 \end{equation}
-A large approximation of 20 $\mu$m will be made for the thickness of one tiers.
+A large approximation of 20 $\mu$m will be made for the thickness of one tier.
 Let us note that this criterion includes both discrete (number of tiers) and continuous variables (layer size).
 \item \textit{The clock source position}: in this model, we consider a synchronous system so the objective is to minimize the distance between each block and the clock source in order to have a high frequency. We choose arbitrarily to approximate the reference point as a fixed point located at the upper left corner of the middle tier of the 3D-SIC.
 % Another solution being worked on is to determine the best position for the clock tree for a given floorplan.
-\item \textit{The thermal dissipation}: thermal dissipation is one of the major issues when designing 3D-SICs. It can be more appropriate to place two blocks underneath each other in successive tiers but a high heat dissipation may happen in intensive computational process. This criterion is a research topic on its own \cite{1112292, 1486402}. Here we will use a simplified evaluation model with finite elements. This model will consider that the dissipated power, intra- or inter- tiers, is inversely proportional to the distance to the heat source:
+\item \textit{The thermal dissipation}: thermal dissipation is one of the major issues when designing 3D-SICs. It can be more appropriate to place two blocks underneath each other in successive tiers but a high heat dissipation may happen in intensive computational process. This criterion is a research topic on its own \cite{1112292, 1486402}. Here we will use a simplified evaluation model with finite elements. This model will consider that the dissipated power of the component $i$ (function of the distance to the component), intra- or inter- tiers, is inversely proportional to the distance to the heat source:
 \begin{equation}
-P_{diss} = P_{comp} \sum_{i=1}^{n} \frac{1}{R_{th, i} \cdot r}
+P_{diss,i}(r) = P_{comp,i} \frac{1}{R_{th} \cdot r}
 \label{eqn:pdiss}
 \end{equation}
-where $r$ the distance to the heat source and $R_{th, i}$ the thermal resistance depending on whether the dissipation is intra- or inter- tiers.
+where $P_{comp,i}$ is the given power to be dissipated by the component $i$, $r$ the distance to the heat source (the component) and $R_{th}$ the thermal resistance coefficient per length unit that depends on whether the dissipation is intra- or inter- tiers.
 This criterion is still on early development stage in our research and we can generate thermal maps of a partition as shown in Figure \ref{fig:thermalmap} but this is currently based on finite elements \cite{4263187} which require quite a long computational time even for a simplified thermal model.
-This criterion in its current development stage is difficult to integrate to the exploration process, due to the computation time of finite elements methods. In the current work, we will simply compute the peak power of a circuit which can be done more quickly.
+This criterion in its current development stage is difficult to integrate to the exploration process, due to the computation time of finite elements methods. In the current work, we will simply compute the peak thermal power of a circuit by taking the maximum vertical sum of the power the be dissipated in each tier, which can be done more quickly.
 
 \begin{figure}[h!]
 \begin{center}
@@ -691,7 +691,7 @@ DDR3 SDRAM (runtime of 60 minutes, as explained in Section \ref{sec:termination}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{ultiplot1.pdf}
+\includegraphics[width=\textwidth]{ultiplot1_color.eps}
 \begin{footnotesize}
 $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ : 5 tiers\\
 \end{footnotesize}
@@ -702,7 +702,7 @@ $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ 
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{ultiplot.eps}
+\includegraphics[width=\textwidth]{ultiplot_color.eps}
 \begin{small}
 $\cdot$ : 1 tier; $\times$ : 2 tiers; + : 3 tiers; * : 4 tiers; $\triangledown$ : 5 tiers
 \end{small}
@@ -807,9 +807,9 @@ After simulations, we obtain the following results for the mono-objective optimi
 \begin{tabular}{c|c|c}
 Alternative & Number of layers & Interconnection length\\
 \hline
-$A$ & 1 & 6.2737\\
-$B$ & 2 & 5.2357\\
-$C$ & 3 & 4.0438\\
+$A$ & 1 & 6.27\\
+$B$ & 2 & 5.24\\
+$C$ & 3 & 4.04\\
 \end{tabular}
 \end{small}
 \end{center}
@@ -822,13 +822,13 @@ Let us compare $A$, to the 2- and 3-tiers circuits (respectively denoted $D$ and
 Alt. & Number & Interconnection & Cost & Volume & Clock & Thermal\\
  & of layers & length & & & position & dissipation\\
 \hline
-$A$ & $1$ & $6.2737$ & $1.2178\cdot10^9$ & $2.4356\cdot 10^7$ & $3.3584\cdot 10^4$ & $81$ \\
-$D$ & $2$ & $6.2099$ & $1.2304\cdot10^9$ & $2.4877\cdot 10^7$ & $3.8250\cdot 10^4$ & $280$ \\
-$E$ & $3$ & $6.2205$ & $1.1495\cdot10^9$ & $2.3589\cdot 10^7$ & $3.1095\cdot 10^4$ & $459$ \\
+$A$ & $1$ & $6.27$ & $1.22\cdot10^9$ & $2.44\cdot 10^7$ & $3.36\cdot 10^4$ & $81$ \\
+$D$ & $2$ & $6.21$ & $1.23\cdot10^9$ & $2.49\cdot 10^7$ & $3.83\cdot 10^4$ & $280$ \\
+$E$ & $3$ & $6.22$ & $1.15\cdot10^9$ & $2.36\cdot 10^7$ & $3.11\cdot 10^4$ & $459$ \\
 \end{tabular}
 \end{footnotesize}
 \end{center}
-As expected, except on the interconnection length criterion, the alternative $D$ is dominated by $A$ on all the criteria. Analysing the circuit $E$ is more interesting though as we can observe that $E$ dominates $A$ on all criteria except for the thermal dissipation. This may seem surprising, especially for the cost and the volume criteria, however it can be explained by looking at the circuits themselves. In Figure \ref{fig:valid1lmandist}, we can see the alternative $A$ with a surface of \texttildelow 35x35~mm$^2$ whereas for $E$, in Figure \ref{fig:valid3lmandist}, the surface is \texttildelow 20x20~mm$^2$ on 3 layers which is in total less than 35x35~mm$^2$. This is not a big difference but it can show when it is interesting to design 3D circuits instead of 2D-ICs since the cost and the volume depend on the surface of a circuit. So this explains why $E$ might perform better on these criteria. The clock source criterion is also better thanks to the smaller surface while the thermal dissipation is unsurprisingly worse due to the inherent greater power density of 3D-SICs. 
+As expected, except on the interconnection length criterion, the alternative $D$ is dominated by $A$ on all the criteria. Analysing the circuit $E$ is more interesting though as we can observe that $E$ dominates $A$ on all criteria except for the thermal dissipation. This may seem surprising, especially for the cost and the volume criteria, however it can be explained by looking at the circuits themselves. In Figure \ref{fig:valid1lmandist}, we can see the alternative $A$ with a surface of \texttildelow 35x35~mm$^2$ whereas for $E$, in Figure \ref{fig:valid3lmandist}, the surface is \texttildelow 20x20~mm$^2$ on 3 layers which is in total less than 35x35~mm$^2$. This is not a big difference in terms of total surface but it can give information about when it can be interesting to design 3D circuits instead of 2D-ICs since the cost and the volume depend on the surface of a circuit. So this explains why $E$ might perform better on these criteria. The clock source criterion is also better thanks to the smaller surface while the thermal dissipation is unsurprisingly worse due to the inherent greater power density of 3D-SICs. 
 
 \begin{figure}[h!]
 \begin{center}
@@ -853,10 +853,10 @@ Now let us compare $B$ and $C$ to $D$ and $E$ with a multi-criteria point of vie
 Alt. & Number & Interconnection & Cost & Volume & Clock & Thermal\\
  & of layers & length & & & position & dissipation\\
 \hline
-$B$ & $2$ & $5.2357$ & $1.2267\cdot10^9$ & $2.4914\cdot 10^7$ & $4.5687\cdot 10^4$ & $351$ \\
-$C$ & $3$ & $4.0438$ & $1.1495\cdot10^9$ & $2.3681\cdot 10^7$ & $6.7234\cdot 10^4$ & $593$ \\
-$D$ & $2$ & $6.2099$ & $1.2304\cdot10^9$ & $2.4877\cdot 10^7$ & $3.8250\cdot 10^4$ & $280$ \\
-$E$ & $3$ & $6.2205$ & $1.1495\cdot10^9$ & $2.3589\cdot 10^7$ & $3.1095\cdot 10^4$ & $459$ \\
+$B$ & $2$ & $5.26$ & $1.23\cdot10^9$ & $2.49\cdot 10^7$ & $4.57\cdot 10^4$ & $351$ \\
+$C$ & $3$ & $4.04$ & $1.15\cdot10^9$ & $2.37\cdot 10^7$ & $6.72\cdot 10^4$ & $593$ \\
+$D$ & $2$ & $6.21$ & $1.23\cdot10^9$ & $2.49\cdot 10^7$ & $3.83\cdot 10^4$ & $280$ \\
+$E$ & $3$ & $6.22$ & $1.15\cdot10^9$ & $2.36\cdot 10^7$ & $3.11\cdot 10^4$ & $459$ \\
 \end{tabular}
 \end{footnotesize}
 \end{center}

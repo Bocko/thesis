@@ -40,7 +40,7 @@ In the introduction, we have quickly presented to state of the field of microele
 
 \section{3D integration}
 
-Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since both device and interconnect are predominantly made in a planar way \cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. In face to back configuration, different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. In face to face configuration, the chip communicate with their respective front sides. These connections can be Through Silicon Vias (TSV) and if it is in a face to face configuration, micro bumps (µBump) or copper pads (CuPad) can also be used. These binding technologies can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure \ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected (Figure \ref{fig:backtoface}). An active component (i.e. logic gate) of the T1 is connected to the T2 using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2). The corresponding face to face configuration is shown in Figure \ref{fig:facetoface}.
+Most of the current ICs are designed with electronic components (i.e. transistors) that are planar (although multi-gate transistors, such as finFETs tends to extend in the 3rd dimension) interconnected using up to a maximum of 12 (also planar) wiring (metal) layers per circuit. Those conventional ICs can thus be considered to be two-dimensional (2D)-ICs since both device and interconnect are predominantly made in a planar way \cite{1393404,fujitsu08}. As a major evolution of 2D-ICs, 3D-SICs are designed with multiple traditional 2D-ICs (that are manufactured independently, using standard CMOS technology) that are assembled (stacked) vertically in 3D-tiers. In face to back configuration (see Figure \ref{fig:backtoface}), different 2D circuits communicate between tiers using vertical interconnections that need to connect front side of the chip and the backside, i.e. they need to traverse bulk silicon. In face to face configuration (see Figure \ref{fig:facetoface}), the chip communicate with their respective front sides. These connections can be Through Silicon Vias (TSV) and if it is in a face to face configuration, micro bumps (µBump) or copper pads (CuPad) can also be used. These binding technologies can be today manufactured with satisfactory geometrical properties, namely their diameter, pitch and height, allowing efficient integration of real-world systems~\cite{1705326,5746413}. This is shown in Figure \ref{fig:3D_SIC_SOC2010}, where 2 dies, oriented face down are connected (Figure \ref{fig:backtoface}). An active component (i.e. logic gate) of the tier 1 (T1, bottom die) is connected to the tier 2 (T2, top die) using a TSV, back side metallization layer (to enable TSV placement anywhere in the T1 die), and µbump on the top layer of the T2, that is then connected, through a series of metal layers of the T2, to the active component of the top tier (T2). The corresponding face to face configuration is shown in Figure \ref{fig:facetoface}.
 
 \begin{figure}[h!]
 %\includegraphics[width=1\linewidth]{3D_SIC_SOC2010.png}
@@ -84,15 +84,31 @@ This methods consists in stacking components that have been designed and tested 
 
 \paragraph{Die-on-wafer stacking}
 
-In this method, known good dies (KGD), which are functional tested chips, are connected to a host wafer containing other KGDs. These KGDs can be interconnected with organic glues, oxide or metal bonding. The wafer and the bonded KGDs are then shaped to create the interconnections. Different substrates can be combined if the required temperature is low enough to minimize non-homogeneous expansion effects \cite{659500}.
+In this method, known good dies (KGD), which are functional tested chips, are connected to a host wafer containing other KGDs. These KGDs can be interconnected with organic glues, oxide or metal bonding. The wafer and the bonded KGDs are then shaped to create the interconnections. This is illustrated in Figure \ref{fig:dieonwafer}. Different substrates can be combined if the required temperature is low enough to minimize non-homogeneous expansion effects \cite{659500}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{dieonwafer.jpg}
+\end{center}
+\caption{Die-on-wafer stacking \cite{tezzaron14}}
+\label{fig:dieonwafer}
+\end{figure}
 
 The die-on-wafer stacking can use interconnections on the edges of the chips or through-die. Depending on the interconnection type, this method can produce a better integration level than the chip stacking, with a better cost per connection ratio and a higher interconnection density, while holding the advantages of the KGDs.
 
 The quality of the stacking depends on the pick-and-place equipment which is used to position the dies on the wafer. The placement accuracy will determine the possible interconnection density. Also, current equipments are supposed to handle fully buffered chips, not naked circuits so it does not provide protection to static discharge \cite{659500}. 
 
-\paragraph{Wafer-level stacking}
+\paragraph{Wafer-on-wafer stacking}
 
-This methods consists in bonding entire wafers into a stack. The vertical through-wafer connections are made directly trough each substrate to the next wafer and it transistors layer. Similarly to the previous method, the interconnection density rely on the precision of the alignment, which is however currently better than the die-on-wafer stacking. This greater accuracy implies a better cost per connection ratio and a higher interconnection density compared to the die-on-wafer stacking \cite{659500}.
+This methods consists in bonding entire wafers into a stack as illustrated in Figure \ref{fig:waferonwafer}. The vertical through-wafer connections are made directly trough each substrate to the next wafer and it transistors layer. Similarly to the previous method, the interconnection density rely on the precision of the alignment, which is however currently better than the die-on-wafer stacking. This greater accuracy implies a better cost per connection ratio and a higher interconnection density compared to the die-on-wafer stacking \cite{659500}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{waferonwafer.jpg}
+\end{center}
+\caption{Wafer-on-wafer stacking \cite{tezzaron14}}
+\label{fig:waferonwafer}
+\end{figure}
 
 The use of mixed substrates is also possible, only limited by the process temperatures. All the processing is done at the wafer level so wafer handling equipments are used. Since these provide protection to static discharge so there is no need to include buffering between the layers. The methods to bind two wafers are the same that are available for the die-on-wafer method.
 
@@ -126,7 +142,7 @@ Adding a vertical dimension allows to increase the integration density. It is th
 \label{fig:footprint}
 \end{figure}
 
-In addition, the 3D integration allows a better accessibility for the components, as shown in Figure \ref{fig:accessibility}. Indeed, for a 2D structure, 8 accessible neighbours can be considered for a central element (Figure \ref{fig:accessibility}a), whereas for a 3D structure, the number of accessible neighbours can reach 116 with through-tiers interconnections (Figure \ref{fig:accessibility}b) \cite{659500}.
+In addition, the 3D integration allows a better accessibility for the components, as shown in Figure \ref{fig:accessibility}. Indeed, for a 2D structure, 8 accessible neighbours can be considered for a central element (Figure \ref{fig:accessibility}a), whereas for a 3D structure, depending on the number of layers, up to 116 accessible neighbours can be reached with through-tiers interconnections (Figure \ref{fig:accessibility}b) \cite{659500}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -152,11 +168,11 @@ The use of TSVs on 3D-SIC can significantly increase the bandwidth of a circuit.
 
 \paragraph{Consumption and noise}
 
-Shorter interconnections generally translates into lower capacitance and inductance parasitics. This means a decrease of the numbers of repeaters, hence a better consumption, less noise and less jittern hence lower delays and power consumption.
+Shorter interconnections generally translates into lower capacitance and inductance parasitics. This means a decrease of the numbers of repeaters, hence a better consumption, less noise and less jitter hence lower delays and power consumption. Of course, the 3D integration has to address the noise accordingly. For instance, if the interconnects are not spaced enough, there is a potential for crosstalk noise.
 
 \paragraph{Heterogeneous circuits}
 
-The 3D technologies allow truly heterogeneous designs. For instance, it is possible to integrate, in addition to traditional digital circuits of different technologies, analogical circuits such as sensors or antennas, as well as power supply, which give 3D-SIC a high degree diversity. It is also possible to mix old and new generations technologies to lower the cost of future circuits.\cite{4299568}.
+The 3D technologies allow truly heterogeneous designs. For instance, it is possible to integrate, in addition to traditional digital circuits of different technologies, analog circuits such as sensors or antennas, as well as power supply, which give 3D-SIC a high degree diversity. It is also possible to mix old and new generations technologies to lower the cost of future circuits.\cite{4299568}.
 %The Fig. \ref{fig:heterogeneity} shows a schematic view of a 3D-SIC developed by IMEC for biomedical purposes that contains antennas, DSPs, EEG/ECG sensors, a power supply and solar cells \cite{4198870}.
 
 %\begin{figure}[h!]
@@ -207,7 +223,7 @@ In the following section, we will have an overview about these software tools an
 \section{Current design flows and their limitations}
 \label{sec:currentflows}
 
-Design flows are the combination of electronic design automation (EDA) tools used to produce an integrated circuit. These flows can generally be summarized in 4 main steps \cite{coursefred}, as shown in Figure \ref{fig:designflow}.
+Design flows are the combination of electronic design automation (EDA) tools used to produce an integrated circuit. These flows can generally be summarized in 4 main steps \cite{coursefred}: specification, logical design, physical design and the actual integrated circuit, as shown in Figure \ref{fig:designflow}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -220,7 +236,7 @@ Design flows are the combination of electronic design automation (EDA) tools use
 
 As one can observe, the design flows are sequential. The process goes from one step to the other with local optimization loops. In practice, it is not unusual to have several rollbacks to the previous steps due to the need of manual intervention to adjust the constraints and reach good solutions and this can last few days for a complex chip for one iteration. %For instance, the optimization done in the logical design step might work in simulations but can be impractical for the physical design step so a rollback is needed in order to correct this inconsistency.
 
-As explained previously, designing ICs implies numerous choices. At the moment, with this growing complexity, the current design flows can already show their limits. Indeed, these tools are developed to only take into account particular specificities of a circuit (area, timing) whereas other characteristics also have to be optimized. Besides, most of the time, the designers will be likely to freeze a certain amount of choices on basis of their experience, and then begin the optimization process with the remaining parameters. This will therefore limit the exploration of the design space and other good solutions may be ignored. In addition, the fixed choices can be questionable since they are based on the designer's experience and it is difficult to master the whole complexity of the problem in terms of criteria and possibilities of design.
+As explained previously, designing ICs implies numerous choices. At the moment, with this growing complexity, the current design flows can already show their limits. Indeed, these tools are developed to only take into account particular specificities of a circuit (area, timing) whereas other characteristics also have to be optimized. Besides, most of the time, the designers will be likely to freeze a certain amount of choices on basis of their experience, and then begin the optimization process with the remaining parameters. This will therefore limit the exploration of the design space and other good solutions might be ignored. In addition, the fixed choices can be questionable since they are based on the designer's experience and it is difficult to master the whole complexity of the problem in terms of criteria and possibilities of design.
 
 The current design flows, which are not developed to cope with the needs of 3D-SICs, may thus need improvements to be able to deal with the increased complexity \cite{vanderbiest06, PFF10}.
 
@@ -303,7 +319,7 @@ This work is also among the most integrated study in the literature. However, th
 \section{Conclusion}
 In this chapter, we have presented a short overview of the evolution of IC design. Manufacturers have pushed back the limitations of the silicon for the past decades and are now facing new challenges due mainly to quantum effects. 3D-SICs have been proposed to face these problems and we have shown a quick review of this promising technology.
 
-With the 3D integration, design flows have evolved and integrate 3D partitioning and 3D place-and-route. However, these two steps are performed separately while they should be considered simultaneously as the circuits' performances will depend on the position of a component on a layer and the layer where it lies.
+With the 3D integration, design flows have evolved and integrate 3D partitioning and 3D place-and-route. However, these two steps are performed separately while they should be considered simultaneously as the performances of the circuit will depend on the position of a component on a layer and the layer where it lies.
 
 We have then presented researches that aim to deal with these challenges by making use of multi-objective optimization. To the best of our knowledge, all these tools use a uni-criterion approach or deal with a limited set of criteria while performing only trade-off analyses. This therefore lacks a more global view on all the criteria simultaneously and interesting information about a design space could be missed. The goal of this research is to show that a more multi-objective-oriented optimization could be more suitable to take into account the many aspects of a design.
 

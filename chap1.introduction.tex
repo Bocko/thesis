@@ -4,7 +4,7 @@
 \fancyhead[LO]{} 
 
 \section*{2D architecture, current design flows and their limitations}
-In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Figure \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' integration each 18 months and therefore increasing logic capacity of the circuit per unit area. 
+In order to continuously improve the performance of integrated circuits (IC), technologists deploy enormous efforts to produce IC manufacturing process that is compelling to follow the well-known Moore's Law (see Figure \ref{fig:mooreslaw}). This empirical law predicts a doubling of the transistors' density each 18 months and therefore increasing logic capacity of the circuit per unit area. 
 
 \begin{figure}
 \begin{center}
@@ -15,11 +15,11 @@ In order to continuously improve the performance of integrated circuits (IC), te
 \label{fig:mooreslaw}
 \end{figure}
 
-The improvements of 2D architectures are primarily driven by the reduction of the transistor size. By reducing transistor dimensions, the switching speed is increased thanks to the shorter distance between the source and the drain, implying an improvement of the overall speed of the designs.
+The improvements of 2D architectures are primarily driven by the reduction of the transistor size. By reducing transistor dimensions, the switching speed is increased thanks to a shorter length of the gate so that the resistance of the channel and the gate/source/drain capacitance are reduced, which can imply an improvement of the overall speed of the designs.
 
 However, as the transistor size is decreasing, the observed improvement is also getting smaller. Indeed, a smaller transistor allows higher device density but will slightly increase the total delay (sum of gate and interconnection delays) at the level of the complete circuit.
 
-Also, the total power consumption is increased due to higher leakage and increasing interconnection wire length \cite{5227192}. Figure \ref{fig:delaygateinterconnect} shows the trends in transistor gate delay and interconnect delay with IC fabrication technology where the crossover point represents the interconnect bottleneck. As transistor gate dimensions decrease, designs stretch the limits of the metal interconnection lines that bind the devices, and interconnect performance has become the main limit to IC performance \cite{kirchain2007}.
+Also, with the transistors shrinking, the total power consumption is increased due to higher leakage and increasing interconnection wire length (and thus higher capacitance and resistance) \cite{5227192}. The power leakage results from higher interactions of depletion regions near the channel surface caused by the reduction of the channel length and the lower threshold voltage. Figure \ref{fig:delaygateinterconnect} shows the trends in transistor gate delay and interconnect delay with IC fabrication technology where the crossover point represents the interconnect bottleneck. As transistor gate dimensions decrease, designs stretch the limits of the metal interconnection lines that bind the devices, and interconnect performance has become the main limit to IC performance \cite{kirchain2007}.
 
 \begin{figure}
 \begin{center}

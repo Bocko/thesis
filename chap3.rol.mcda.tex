@@ -55,7 +55,7 @@ where $\mathbf{x}$ is a vector of continuous, integer or boolean variables to be
 Efficient exact methods for solving LP problem exist such as, among the most knowns, the simplex algorithm \cite{dantzig51} or the interior point method \cite{Karmarkar84}.
 
 \begin{example}[Linear programming]
-A given company produces two electronic boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and the amount of memory used as well as the profit per board, as shown in Table \ref{tab:ex_lp}. The decision variables are $x_1$ and $x_2$ that represent respectively the amount of $Board_1$ and $Board_2$ produced. The objective is to maximize the profit.\\
+A given company produces two electronic boards $Board_1$ and $Board_2$ based on two kinds of memories $M_1$ and $M_2$. The objective consists in finding the most profitable product mix, given the availability of each memory $M_1$ and $M_2$, and the amount of memory used as well as the profit per board. The decision variables are $x_1$ and $x_2$ that represent respectively the amount of $Board_1$ and $Board_2$ produced. The data are given in Table \ref{tab:ex_lp}. The objective is to maximize the profit.\\
 The problem can be formulated as an LP:
 \begin{equation}
 \text{max profit } = 5x_1 + 4x_2
@@ -63,7 +63,7 @@ The problem can be formulated as an LP:
 subject to the constraints
 \begin{eqnarray*}
 192x_1 + 128 x_2 &\leq& 1024\\
-32x_1 + 64_x2 &\leq& 192\\
+32x_1 + 64 x_2 &\leq& 192\\
 x_1, x_2 &\geq& 0
 \end{eqnarray*}
 \end{example}
@@ -73,7 +73,7 @@ x_1, x_2 &\geq& 0
 \caption{Data associated with the LP problem}
 \begin{tabular}{|l|c|c|c|}
 \hline
-& Usage for $Board_1$ & Usage for $Board_2$ & Availability\\
+& Usage for $Board_1$ & Usage for $Board_2$ & Stock\\
 \hline
 $M_1$ & 192 & 128 & 1024 \\
 $M_2$ & 32 & 64 & 192 \\
@@ -212,7 +212,7 @@ As explained in Chapter \ref{cha:rol.icdesign}, designing 3D-SICs involves a hug
 \label{subsec:metaheuristics}
 Metaheuristics are a family of approximate optimization methods. They aim to provide "acceptable" solutions in reasonable time for solving complex problems \cite{talbi09}. As stated previously, finding the optimal solution for a multi-objective optimization problem (MOP) is only possible in exceptional cases since encountering conflicting criteria is generally common. Therefore, multi-objective metaheuristics will not produce a single solution but a set of alternatives defined as Pareto optimal solutions. The main goal is then to obtain this set.
 
-In our study, due to the heterogeneous nature of the criteria, there are few hopes to find the exact Pareto optimal solutions without performing an explicit enumeration. In such cases, metaheuristics are commonly used and the goal is then to find an approximation of this set. Two properties has to be respected in order to ensure good approximations: convergence to the Pareto optimal front and uniform diversity. The first property allows to have solutions that are closed to the Pareto set whereas the second property shows a good distribution around the Pareto front.
+In our study, due to the heterogeneous nature of the criteria, there are few hopes to find the exact Pareto optimal solutions without performing an explicit enumeration. In such cases, metaheuristics are commonly used and the goal is then to find an approximation of this set. Two properties have to be respected in order to ensure good approximations: convergence to the Pareto optimal front and uniform diversity. The first property allows to have solutions that are closed to the Pareto set whereas the second property shows a good distribution around the Pareto front.
 
 Numerous metaheuristics have been developed since the 50s. Among the most known, let us cite genetic algorithm \cite{holland1975adaptation}, scatter search \cite{Glover77}, simulated annealing \cite{KirkpatrickGelattVecchi83}, tabu search \cite{Glover86}, memetic algorithms \cite{moscato89on} and ant colony optimization \cite{Dor92a.phd}.
 

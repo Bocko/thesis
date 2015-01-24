@@ -53,7 +53,7 @@ In addition to those options and degrees of freedom coming from 2D-ICs, numerous
 \item ...
 \end{itemize}
 
-The above mentioned parameters illustrate the numerous possibilities for designing a circuit and how the design space for 2D-ICs becomes much larger when considering 3D-SICs. The main issue is therefore to choose the most efficient combination among all those options. This can thus be compared to a combinatorial optimization problem. Also, given the multi-criteria nature of designing 3D-SIC, we choose to take into account all the criteria simultaneously for the optimization. In our case, due to the heterogeneous nature of the criteria (see Section \ref{sec:crit}), we have few hopes to successfully adopt an exact method and we will therefore use metaheuristics which are commonly-used tools for such kinds of problems. In the next section will define the criteria that a designer can consider.
+The above mentioned parameters illustrate the numerous possibilities for designing a circuit and how the design space for 2D-ICs becomes much larger when considering 3D-SICs. The main issue is therefore to choose the most efficient combination among all those options. This can thus similar to a combinatorial optimization problem. Also, given the multi-criteria nature of designing 3D-SIC, we choose to take into account all the criteria simultaneously for the optimization. In our case, due to the heterogeneous nature of the criteria (see Section \ref{sec:crit}), we have few hopes to successfully adopt an exact method and we will therefore use metaheuristics which are commonly-used tools for such kinds of problems. In the next section we will define the criteria that a designer can consider.
 
 \section{Model and criteria definition}
 \label{sec:crit}
@@ -64,7 +64,7 @@ Typically, the criteria that have to be optimized simultaneously can be the perf
 \begin{equation}
 d_{i,j}=|x_i-x_j|+|y_i-y_j|
 \end{equation}
-where $(x_k, y_k)$ is the geometrical coordinates of the $k^{th}$ block. As a first approximation, the center point of each block will be selected as reference coordinate. Also, since it is more interesting to place close to each other two blocks that require a large bandwidth ($BW$) to communicate, we will balance the values as follows:
+where $(x_k, y_k)$ is the geometrical coordinates of the $k^{th}$ block. As a first approximation, the center point of each block will be selected as reference coordinates. Also, since it is more interesting to place close to each other two blocks that require a large bandwidth ($BW$) to communicate, we will balance the values as follows:
 \begin{equation}
 d_{i,j}'=\frac{d_{i,j}}{BW_{ij}}
 \end{equation}
@@ -72,14 +72,19 @@ where $BW_{ij}$ is the bandwidth required between the block $i$ and the block $j
 \begin{equation}
 D=\sum d'_{i,j}
 \end{equation}
-\item \textit{The cost}: an economical factor is obviously an important criteria for a design. This criteria has been estimated with the aid of an expert in 3D-SIC manufacturing. While a circuit can be more efficient with many layers, it will also be more expensive. This criteria has to be minimized. Due to the confidential nature of the cost of a 3D-SIC, we will consider a simplified model where the cost is proportional to the area and increasing exponentially with the number of tiers:
+\item \textit{The cost}: an economical factor is obviously an important criterion for a design. This criteria has been estimated with the aid of an expert in 3D-SIC manufacturing. While a circuit can be more efficient with many layers, it will also be more expensive. This criteria has to be minimized. Due to the confidential nature of the cost of a 3D-SIC, we will consider a simplified model where the cost is the sum of a surface cost ($cost_{surf}$) which is proportional to the area and a layer cost ($cost_{layer}$) which is increasing exponentially with the number of tiers:
 \begin{equation}
-cost=a(tech).S+b(tech)^{layer~number}
+cost = cost_{surf} + cost_{layer}
 \label{eqn:cost}
 \end{equation}
+with
+\begin{eqnarray}
+cost_{suf} &=& a(tech)\cdot S\\
+cost_{layer} &=& b(tech)^{number~of~tiers}
+\end{eqnarray}
 where $a(tech)$ and $b(tech)$ are coefficient depending on the technology assigned.
 Let us note that this criterion includes both discrete and continuous variables.
-\item \textit{The package volume}: this can be an important criteria when designing embedded circuits. The package volume is calculated as follows:
+\item \textit{The package volume}: this can be an important criterion when designing embedded circuits. The package volume is calculated as follows:
 \begin{equation}
 volume=largest~layer~size~*~stack~thickness~*~number~of~tiers
 \label{eqn:volume}
@@ -95,7 +100,7 @@ P_{diss,i}(r) = P_{comp,i} \frac{1}{R_{th} \cdot r}
 \end{equation}
 where $P_{comp,i}$ is the given power to be dissipated by the component $i$, $r$ the distance to the heat source (the component) and $R_{th}$ the thermal resistance coefficient per length unit that depends on whether the dissipation is intra- or inter- tiers.
 This criterion is still on early development stage in our research and we can generate thermal maps of a partition as shown in Figure \ref{fig:thermalmap} but this is currently based on finite elements \cite{4263187} which require quite a long computational time even for a simplified thermal model.
-This criterion in its current development stage is difficult to integrate to the exploration process, due to the computation time of finite elements methods. In the current work, we will simply compute the peak thermal power of a circuit by taking the maximum vertical sum of the power the be dissipated in each tier, which can be done more quickly.
+This criterion in its present development stage is difficult to integrate to the exploration process, due to the computation time of finite elements methods. In this work, we will simply compute the peak thermal power of a circuit by taking the maximum vertical sum of the power the be dissipated in each tier, which can be done more quickly.
 
 \begin{figure}[h!]
 \begin{center}
@@ -139,7 +144,7 @@ Thermal dissipation & W & Continuous\\
 \label{tab:critrecap}
 \end{table}
 
-We will first focus on the three first criteria in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. These analyses will be done with a first limited case study to show the applicability of the multi-criteria paradigm
+We will first focus on the three first criteria (total interconnection length, cost, volume) in order to be able to have a visualization of the design space. We will also arbitrarily introduce some limitations in term of degrees of freedom to analyse what happens if we release a constraint. This will be done while considering the three same criteria, in order to keep a visualization and show how the flexibility of MOO will improve the information and the results. These analyses will be done with a first limited case study to show the applicability of the multi-criteria paradigm
 
 Then will analyse our methodology with the five criteria that have been presented with a second case study which is more realistic in term of functional components and show the added value of a multi-criteria analysis.
 %As for the thermal dissipation, simulations are possible (see Figure~\ref{fig:thermalmap}) but due to its current development stage it is difficult to integrate it in the exploration process due to the computing time of finite elements.
@@ -149,7 +154,7 @@ Then will analyse our methodology with the five criteria that have been presente
 \subsection{Overview of the method}
 In summary, the problem we are facing is to place several blocks that have to be assigned in many tiers while considering multiple conflicting criteria. Now that the criteria have been defined, we will present a proposition of a new design methodology based on multi-objective optimization, with the related model.
 
-As explained in Chapter \ref{cha:rol.icdesign}, designing ICs implies numerous choices and designers are likely to freeze a certain amount of choices on basis of their experience. This will therefore limit the exploration of the design space and good solutions may be ignored.
+As explained in Chapter \ref{cha:rol.icdesign}, designing ICs implies numerous choices and designers are likely to freeze a certain amount of possibilities on basis of their experience. This will therefore limit the exploration of the design space and interesting solutions may be ignored.
 
 In order to enable a design space exploration, we propose a method in four steps based on MCDA which is illustrated in Figure \ref{fig:mcdaflow}. The implementation will be briefly presented in the next section.
 
@@ -202,7 +207,8 @@ The combination of all the parameters described in the model are the possible al
 %\label{sec:casestudy}
 In this section, we will briefly explain the implementation of our design method and show some experimental results based on this first approach. Due to the huge size of the design space, an explicit enumeration of the possible solutions will take considerable time. For instance, for a simplified problem of 3 tiers of 10x10 mm and 5 blocks of 2x2 mm to place, there are 75 possible positions for each block. The number of combinations is given by $\frac{n!}{k!(n-k)!}$, where $n$ is the number of possible positions and $k$ the number of blocks. For this simplified problem, there are therefore 17~259~390 combinations. For 10 blocks to place, the number of possibilities increases to more than 8.10$^{11}$. Besides, this small calculation does not take into account the numerous other possible choices.
 
-We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We chose to use NSGA-II as it is quick to implement which is convenient as proof of concept for our research purposes (show the applicability of MOO/MCDA for 3D-SIC design). In addition, this algorithm is flexible and is known for handling mixed variables since they are only involved for evaluations of the alternatives in the selection step. For the first case study we consider a circuit based on a MPSoC platform developed at IMEC \cite{dmilojev08b}. This case study has been implemented using Matlab and all data were coded using matrices.
+We will therefore apply a metaheuristic and more specifically a NSGA-II algorithm. We chose to use NSGA-II as it is quick to implement which is convenient as proof of concept for our research purposes (show the applicability of MOO/MCDA for 3D-SIC design). In addition, this algorithm is flexible and is known for handling mixed variables since they are only involved for evaluations of the alternatives in the selection step. For the first case study we consider a circuit based on a MPSoC platform developed at IMEC \cite{dmilojev08b}. This case study has been implemented using Matlab on an Intel Core i5 2.30 GHz, 4 GB
+DDR3 SDRAM and all data were coded using matrices.
 
 %\subsection{Implementation of the exploration algorithm: NSGA-II}
 %\label{sec:nsgaii-implement}
@@ -266,7 +272,7 @@ We implemented our design space exploration following the steps of the NSGA-II w
 \subsubsection{Initialization (the initial population)}
 We will work with a minimum size of population, namely 50, which is a common value in GAs~\cite{Davis1989}. The initial population will be a set of at least 50 solutions with the best Pareto ranks from a randomly-generated set of 10~000 solutions. The produced set places the blocks randomly (using a uniform distribution) and does not allow overlapping between the blocks. These incorrect solutions are simply removed and it is difficult to estimate this proportion as it depends on the problem size (number of blocks). We could of course use a greedy algorithm as well as a more advanced method such as GRASP (Greedy Randomized Adaptive Search Procedure)~\cite{HarSho87a}. This can be done as future work for comparison purposes.
 
-Of course, having at least 50 Pareto solutions does not always happen. Actually, the selection is based on the Pareto rank so it does not include only the Pareto solutions (rank 1), but also the solutions with lower ranks until there are enough solutions.
+Of course, having at least 50 Pareto solutions does not always happen. Actually, the selection is based on the Pareto rank so it does not include only the Pareto solutions (rank 1), but also the solutions with higher ranks until there are enough solutions.
 
 \subsubsection{Selection for crossover}
 For the selection step, two solutions will be allowed to make a crossover depending on a roulette wheel where the probability is proportional to the normalized Euclidean distance between the solutions ordered by their Pareto rank in the objective space. The normalization is done as follows :
@@ -508,7 +514,7 @@ A mutation cannot happen anywhere in the matrix. Indeed, if we take the conclusi
 The mutation used is a random uniform distribution $U([a, b])$, where $[a, b]$ is the interval of values allowed for the mutation. For the discrete values, we use equidistributed probabilities. The mutation probability of a child will be set as $P_{m} = 0.3$. Empirical observations have shown that smaller mutation probability can easily lead to a local optimum. This can be explained by the fact that we choose that only one single element of a line can mutate instead of the whole line. If a child is forced to mutate, then one randomly-chosen value of the whole matrix will mutate within the range of values it is allowed to take.
 %This value might seem high since common values are rather between $0.01$ and $0.1$~\cite{Davis1989}.
 
-A Gaussian mutation is also a common operator but it has not been chosen since it will produce a solution which is not far from the original one. This is not really interesting to have similar solutions when exploring the design space for integrated circuits. Of course, a large standard deviation value can be chosen but this will be likely to produce solution which are out of the feasible bounds.
+A Gaussian mutation is also a common operator but it has not been chosen since it will produce a solution which is not far from the original one. This is not really interesting to have similar solutions when exploring the design space for integrated circuits. Of course, a large standard deviation value can be chosen but this will be likely to produce solutions which are out of the feasible bounds.
 %Another option can be to use a beta distribution in order to stay inside the bounds.
 
 \subsubsection{Consistency test}
@@ -549,7 +555,7 @@ FIFO & 7 & 0.54 mm$^2$ & 0.5 & 0\\
 L2D1-2 & 8-9 & 6.74 mm$^2$ & 0.5 & $+30\%$\\
 L2Is1-2 & 10-11 & 6.62 mm$^2$ & 0.5 & $+30\%$\\
 EMIF & 12 & 0.66 mm$^2$ & 0.5 & 0.1\\
-ARM & 13 & 0.89 mm$^2$ & 0.5 & 0\\
+%ARM & 13 & 0.89 mm$^2$ & 0.5 & 0\\
 \hline
 \end{tabular}
 \end{center}
@@ -597,7 +603,7 @@ $1 \leq i \leq 6; 1\leq j \leq 3; 4 \leq k \leq 6$
 \label{tab:3mfbw}
 \end{table}
 
-The input data are thus shown in Tables \ref{tab:scenarmat} and \ref{tab:bwmatrix}. The available technologies are also needed to take advantage of the heterogeneity. An example matrix for this input data is given in Table \ref{tab:tech}. Since no information is given about the ARM unit bandwidth usage, we will simplify our problem and not include it in the implementation. We consider therefore 12 blocks to assign.
+The input data are thus shown in Tables \ref{tab:scenarmat} and \ref{tab:bwmatrix}. The available technologies are also needed to take advantage of the heterogeneity. An example matrix for this input data is given in Table \ref{tab:tech}. We consider therefore 12 blocks to assign.
 
 \begin{table}[h!]
 \caption{Bandwidth input matrix}
@@ -686,7 +692,7 @@ The simulations have been carried out on an Intel Core i5 2.30 GHz, 4 GB
 DDR3 SDRAM (runtime of 60 minutes, as explained in Section \ref{sec:termination}) and the presented results are the synthesis of 5 independent experiments. The optimization was done for three objectives (so that we can visualize the design space) and the main results are given in Figure \ref{fig:ilcview} (interconnection length-cost projection) and Figure \ref{fig:ds3dview} (3D plot). Two conclusions can be drawn from that figure:
 \begin{itemize}
 \item The [10; 20] range values for the IL criteria: a small enhancement of the IL value leads to a large increase of the cost so the interest for a design with more than 4 tiers seems low.
-\item The [260; 280] range values for the cost criteria: a small increase of the price can give a large enhancement of the performance. A designer might consider accepting a slightly higher price for a sensitively better performance, knowing that this information can be quantified with an accurate model. Indeed, with the estimate model that we propose, a small 10\% increase of the cost can decrease the IL by 60\%.
+\item The [260; 280] range values for the cost criteria: a small increase of the price can give a large enhancement of the performance. A designer might consider accepting a slightly higher price for a noticeably better performance, knowing that this information can be quantified with an accurate model. Indeed, with the estimate model that we propose, a small 10\% increase of the cost can decrease the IL by 60\%.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -731,7 +737,7 @@ $\cdot$ : Pareto front without aspect ratio; + : Pareto front with aspect ratio\
 
 \subsection{Case study 2: scalability}
 \label{sec:casestudyscale}
-In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and run simulations based on a MPSoC platform developed by IMEC. This case study remains however limited as it contains only 12 blocks. In order to validate the results obtained previously, we will use a more realistic case study. It will be based on the previous MPSoC platform where we will apply a scalability effect.
+In the previous section, we have shown how a circuit can be modelled in 3D-SIC to apply a multi-objective optimization and run simulations based on a MPSoC platform developed by IMEC. This case study remains however limited as it contains only 12 blocks. In order to further investigate the validity of the results obtained previously, we will use a more realistic case study. It will be based on the previous MPSoC platform where we will apply a scalability effect.
 
 We will consider 24 processors instead of 6 and also separate the L1 cache memory from each CPU core into L1 data cache memories and L1 instruction memories (total of 48 L1 memories blocks), assuming their size will be 10\% of the related L2 memories. Since there is one L2D1 and one L2D2 data cache memory for 6 cores and one L2Is instruction memory for 3 cores in the original design, we will have 16 blocks of L2 memories. We will keep the FIFO and EMIF blocks from the original model. This will thus increase the total number of functional blocks to 90, which is a realistic number to work with. In addition, we will also consider size variability that will bring a form of functional heterogeneity to the circuit: $\pm30\%$ for the CPU cores and $+100\%$ for the L1 and L2 memories. This will give the input matrix given in Table \ref{tab:validinput}.
 
@@ -821,7 +827,7 @@ $C$ & 3 & 4.04\\
 \label{tab:validabc}
 \end{table}
 
-Without surprise, we observe that the 3D-SICs perform better on that criterion than a 2D-IC, which validates the consistency of the model compare to what is expected in reality.
+Without surprise, we observe that the 3D-SICs perform better on that criterion than a 2D-IC, which validates the consistency of the model compared to what is expected in reality.
 
 Let us compare $A$, to the 2- and 3-tiers circuits (respectively denoted $D$ and $E$) obtained with a multi-objective optimization (see Table \ref{tab:validade}). We will make the comparison with circuits that are the closest to $A$ with regards to the interconnection length criterion, in order to show the added value of working with a multi-criteria paradigm and simultaneously taking several criteria into account.
 
@@ -884,11 +890,11 @@ $E$ & $3$ & $6.22$ & $1.15\cdot10^9$ & $2.36\cdot 10^7$ & $3.11\cdot 10^4$ & $45
 \label{tab:validbcde}
 \end{table}
 
-$B$ and $C$ are the best uni-criterion 2- and 3-tiers circuits for the interconnection length while $D$ and $E$ are solutions close to $A$ for that criterion. We can see that none of these alternatives dominate any other. Let us analyse these alternatives criterion per criterion. $C$ is the best circuit for the interconnection length but if that criterion was not taken into consideration, $C$ would be dominated since it is the only criterion where it performs well compared to the others. For the cost and the volume, $C$ and $E$ are the better than $B$ and $D$ for the reasons explained previously (smaller surface). As for the thermal dissipation the 2-tiers circuits $B$ and $D$ unsurprisingly perform better than the 3-tiers circuits. 
+$B$ and $C$ are the best uni-criterion 2- and 3-tiers circuits for the interconnection length while $D$ and $E$ are solutions close to $A$ for that criterion. We can see that none of these alternatives dominate any other. Let us analyse these alternatives criterion per criterion. $C$ is the best circuit for the interconnection length but if that criterion was not taken into consideration, $C$ would be dominated since it is the only criterion where it performs well compared to the others. For the cost and the volume, $C$ and $E$ are better than $B$ and $D$ for the reasons explained previously (smaller surface). As for the thermal dissipation the 2-tiers circuits $B$ and $D$ unsurprisingly perform better than the 3-tiers circuits. 
 
 If a mono-objective optimization was used, only the interconnection length would be considered and one would choose the circuit $C$ as it holds the best score for this criterion while it performs rather badly on the clock position and thermal dissipation. $E$ has better score in terms of volume, clock position and thermal dissipation but is not as good on the interconnection length criterion. If the thermal dissipation was the main criterion, the 2D circuit $A$ would be the best choice though it can have a higher cost
 
-In a multi-criteria point of view, none of these circuits dominate any others so making a choice is not trivial. It would depend on the importance of each criterion compared to the others. We will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model as, even if the criteria evaluation is consistent in an ordinal point of view, it is not physically accurate so quantitative comparisons would be imprecise compared to what would be expected in reality.
+In a multi-criteria point of view, none of these circuits dominate any other so making a choice is not trivial. It would depend on the importance of each criterion compared to the others. We will show in Chapter \ref{cha:resultsexploit} how these results can be exploited in order to help a designer choose in a transparent process. Let us finally note that these analyses have to be moderated within the limits of our model as, even if the criteria evaluation is consistent in an ordinal point of view, it is not physically accurate so quantitative comparisons would be imprecise compared to what would be expected in reality.
 
 With these two case studies, we have shown that the proposed methodology can provide qualitative and quantitative information that would not be available with classical tools and that it can be applied for scaled-up problems that include degrees of freedom that are usually not considered, such as the form factor of the blocks and the heterogeneity. We have then analysed the solutions with a more global multi-criteria point of view and have shown that additional information is available to compare the solutions and making a choice among this small set of 5 alternatives is not a trivial task as it would seem to be when applying a uni-criterion paradigm.
 
